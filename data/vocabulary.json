@@ -1,566 +1,89 @@
 [
   {
-    "english": "sculptor",
-    "uzbek": "haykaltarosh",
-    "id": "169e134f-a4ec-4263-a62b-83260be649de",
+    "english": "on the television",
+    "uzbek": "televizorda",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456701",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5
   },
   {
-    "english": "each",
-    "uzbek": "har bir",
-    "id": "59fee192-0c5f-4400-9191-5fc59af21002",
+    "english": "in front of",
+    "uzbek": "oldida / qarshisida",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456702",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5
   },
   {
-    "english": "unique",
-    "uzbek": "betakror",
-    "id": "bc2b23dd-6aa1-45a5-a56a-c972d37df3e8",
+    "english": "beside",
+    "uzbek": "yonida",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456703",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5
   },
   {
-    "english": "shelter",
-    "uzbek": "boshpana",
-    "id": "8d39cae1-20b8-4e0f-b9c5-1e14f4622935",
+    "english": "above",
+    "uzbek": "tepasida / ustida",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456704",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5
   },
   {
-    "english": "piece",
-    "uzbek": "bo‘lak / dona",
-    "id": "8f9b1b8c-f1d1-4707-9c04-636dc92811c2",
+    "english": "behind",
+    "uzbek": "orqasida",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456705",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5
   },
   {
-    "english": "miniature",
-    "uzbek": "kichik nusxa",
-    "id": "f7e51044-e209-4ea9-9e7c-06694d4fc928",
+    "english": "over",
+    "uzbek": "ustidan (qoplagan holda)",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456706",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5
   },
   {
-    "english": "skyscraper",
-    "uzbek": "osmono‘par bino",
-    "id": "e199ac12-97c0-43ac-88b1-f0b1e13c2d53",
+    "english": "under",
+    "uzbek": "ostida / tagida",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456707",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5
   },
   {
-    "english": "interior",
-    "uzbek": "ichki makon",
-    "id": "3ba0baf2-810d-43b0-8722-674a1a2d8663",
+    "english": "below",
+    "uzbek": "pastroqda / quyiroqda",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456708",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5
   },
   {
-    "english": "efficient",
-    "uzbek": "samarali",
-    "id": "b5901300-5a9c-47ed-9103-c8135aa75595",
+    "english": "famous for",
+    "uzbek": "biror narsa bilan mashhur",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456709",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5
   },
   {
-    "english": "solar",
-    "uzbek": "quyosh (energiyasi)",
-    "id": "d55bed26-6f23-4c88-a708-b865a023c0f1",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "reject",
-    "uzbek": "rad etmoq",
-    "id": "5be29a6b-1dd4-4098-8901-f3a7ef511f6f",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "studio flat",
-    "uzbek": "studiya kvartira",
-    "id": "78f3d328-467c-44e7-90f2-e913c458ebf1",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "desire",
-    "uzbek": "istak",
-    "id": "1cd60c00-775d-48cd-a886-abd0dd065420",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "stack",
-    "uzbek": "ustma-ust joylashtirmoq",
-    "id": "29b5f4ff-9a83-4671-b07b-890a56e5e144",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "renewable",
-    "uzbek": "qayta tiklanuvchi",
-    "id": "b6859384-8495-443a-97fe-bbff06281a21",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "bunk bed",
-    "uzbek": "ikki qavatli karavot",
-    "id": "5bc5c0e7-cbb1-4c9f-a3c2-18ab8e8763b7",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "cushion",
-    "uzbek": "yostiqcha",
-    "id": "ebd73aa3-e4f6-4a65-a7d1-579ddcf74853",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "curtains",
-    "uzbek": "parda",
-    "id": "ed2d2f11-9ba2-463b-9b0a-b35ea87ed24f",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "duvet",
-    "uzbek": "adyo‘l",
-    "id": "9dd7e73b-618e-4c8b-8679-9011b128c695",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "hook",
-    "uzbek": "ilgak",
-    "id": "cb492a6a-e95d-4c47-a8cd-2b378a1c794c",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "pillow",
-    "uzbek": "yostiq",
-    "id": "8d71e93f-1b47-4b49-a5fb-df4c8ef2d22a",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "freezer",
-    "uzbek": "muzlatkich",
-    "id": "08064422-7d79-44cf-9385-c750461283ec",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "cot",
-    "uzbek": "bolalar to‘shagi",
-    "id": "80829b2d-3aca-4bd7-9766-c27ca6cfc6f0",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "chandelier",
-    "uzbek": "lyustra",
-    "id": "885aa7fd-bcc7-4c86-a628-eab8add4d329",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "kettle",
-    "uzbek": "choynak",
-    "id": "b1439f43-fed7-49a0-ba79-2021cfd09457",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "call off",
-    "uzbek": "bekor qilmoq",
-    "id": "056f88a8-cdbc-4722-b17f-cebdecde81f2",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "give back",
-    "uzbek": "qaytarib bermoq",
-    "id": "f992d3e4-ccee-41b4-a4b6-9942bbf32910",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "go on",
-    "uzbek": "davom etmoq / sodir bo‘lmoq",
-    "id": "6f158c3e-21b7-4797-952b-44379eddd529",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "put off",
-    "uzbek": "keyinga qoldirmoq",
-    "id": "c7f0d5c8-5e02-4c0f-89ae-8036bf179082",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "set up",
-    "uzbek": "tashkil etmoq",
-    "id": "5f5e34f0-25a2-4f58-8ba3-4a6a01498cb7",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "stay up",
-    "uzbek": "uyquga ketmasdan qolmoq",
-    "id": "0d4b0fa5-8d9c-40e6-a608-22342961ed8c",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "take away",
-    "uzbek": "olib ketmoq",
-    "id": "e994d06b-8e0a-4fa5-a751-909952513162",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "take over",
-    "uzbek": "boshqaruvni o‘z zimmasiga olmoq",
-    "id": "636d171a-27f2-40d0-8ab1-1d8d356a6e51",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "at the moment",
-    "uzbek": "hozirda",
-    "id": "96bf7ffe-51ef-4144-85c4-a6ae11d37f00",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "in charge (of)",
-    "uzbek": "mas'ul bo‘lmoq",
-    "id": "9c7d42a6-6cea-425f-87b0-1d841735116b",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "on business",
-    "uzbek": "ish yuzasidan",
-    "id": "93b93292-fd03-4982-a26d-23e573a178be",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "on strike",
-    "uzbek": "ish tashlashda",
-    "id": "129e213f-65ca-443e-a134-18d7f7c5fb5b",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "on time",
-    "uzbek": "o‘z vaqtida",
-    "id": "eb637a02-ef0d-49b2-a232-cd1fe11225a1",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "on/off duty",
-    "uzbek": "navbatchilikda / navbatchilikdan tashqari",
-    "id": "f3e32701-435e-47e6-b8fb-86ba17c7e0c3",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "assist",
-    "uzbek": "yordam bermoq",
-    "id": "dee4e17c-58b3-44c4-aa26-5ae521bd6bcc",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "assistant",
-    "uzbek": "yordamchi",
-    "id": "58b821f9-90d2-424c-9466-7bf2b7116439",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "assistance",
-    "uzbek": "yordam",
-    "id": "6885a89a-d21a-4c24-a0a8-5cf612b5eea4",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "beg",
-    "uzbek": "tilanmoq",
-    "id": "01caba6d-535d-413c-85c5-57e302fcf0c8",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "beggar",
-    "uzbek": "tilanchi",
-    "id": "84018b68-948a-451c-986e-81d4ef893a85",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "bossy",
-    "uzbek": "buyruqboz",
-    "id": "7dabc06f-26ee-4408-880c-34a2883789f5",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "employ",
-    "uzbek": "ishga olmoq",
-    "id": "a66c5cf6-c82c-4a0b-a462-d8c7dc5a7df8",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "employer",
-    "uzbek": "ish beruvchi",
-    "id": "e0ac6b41-b152-4616-a3ed-df8736e55e34",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "fame",
-    "uzbek": "shon-shuhrat",
-    "id": "442670ea-cdf6-410d-a03a-b32a47388c47",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "famous",
-    "uzbek": "mashhur",
-    "id": "3410a022-ef9a-4b71-b16b-5c1e2eaa969f",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "occupy",
-    "uzbek": "egallamoq",
-    "id": "752cc553-0782-460b-8ce8-6d41c961c47d",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "occupation",
-    "uzbek": "kasb",
-    "id": "48b95ba1-a120-4603-a345-3c58003d315e",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "officer",
-    "uzbek": "xodim",
-    "id": "b319e748-4dbf-4670-bb89-4567bc71394e",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "official",
-    "uzbek": "rasmiy",
-    "id": "4ad3fc29-3aee-42d2-880c-bc65cd0d0bda",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "unofficial",
-    "uzbek": "norasmiy",
-    "id": "141e4b75-7ddf-4dfc-adf8-abd0cd3a1799",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "retire",
-    "uzbek": "nafaqaga chiqmoq",
-    "id": "08449bd9-8364-4bce-aa95-744c77fca240",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "retired",
-    "uzbek": "nafaqadagi",
-    "id": "4236bff0-bd45-449e-a8b3-75c1ab7a5d99",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "retirement",
-    "uzbek": "nafaqa",
-    "id": "a4947f14-0d0a-4f1b-9b66-5c2ba885c570",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "safe",
-    "uzbek": "xavfsiz",
-    "id": "79805904-e948-4598-85f5-3bc8492c19c7",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "unsafe",
-    "uzbek": "xavfli",
-    "id": "0234753d-bbe3-4c83-be7a-8db8cc05fa2f",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "succeed",
-    "uzbek": "muvaffaqiyat qozonmoq",
-    "id": "23aa06f6-ca9a-4dfb-afdc-7aad248925c1",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "success",
-    "uzbek": "muvaffaqiyat",
-    "id": "b4b31bb7-223d-467f-8c62-530e13f933b1",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "careful with",
-    "uzbek": "ehtiyot bo‘lmoq",
-    "id": "d3301c5e-d314-4264-bab4-d5663bc5218c",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5
-  },
-  {
-    "english": "difficult for",
-    "uzbek": "qiyin bo‘lmoq",
-    "id": "6f9c522d-a593-41cd-a59e-8a09e5bcb65d",
+    "english": "proud of",
+    "uzbek": "biror narsa / kishi bilan faxrlanmoq",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456710",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
@@ -568,89 +91,179 @@
   },
   {
     "english": "interested in",
-    "uzbek": "qiziqmoq",
-    "id": "1b34ee95-e3e0-4600-a781-c36480a51e8f",
+    "uzbek": "biror narsaga qiziqmoq",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456711",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5
   },
   {
-    "english": "serious about",
-    "uzbek": "jiddiy bo'lmoq",
-    "id": "d6c7081c-4a3b-448b-b222-dd9160dba923",
+    "english": "pleased with",
+    "uzbek": "biror narsadan mamnun bo'lmoq",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456712",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5
   },
   {
-    "english": "responsible for",
-    "uzbek": "mas'ul bo‘lmoq",
-    "id": "2156aed0-fb4d-4d5d-afb1-54e85697f5dc",
+    "english": "bad at",
+    "uzbek": "biror narsada yomon bo'lmoq",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456713",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5
   },
   {
-    "english": "apply for",
-    "uzbek": "ariza bermoq",
-    "id": "6ee8aba1-d11f-49f1-82bc-c0b720e58d35",
+    "english": "good at",
+    "uzbek": "biror narsada yaxshi bo'lmoq",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456714",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5
   },
   {
-    "english": "depend on",
-    "uzbek": "bog‘liq bo‘lmoq",
-    "id": "580d35da-5d8e-4cf8-acc6-864957122f47",
+    "english": "married to",
+    "uzbek": "biror kishiga uylangan / turmushga chiqqan",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456715",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5
   },
   {
-    "english": "inform sb about",
-    "uzbek": "kimnidir xabardor qilmoq",
-    "id": "44147c4f-2987-42d9-a246-a7472abacb2e",
+    "english": "excited about",
+    "uzbek": "biror narsadan hayajonlanmoq",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456716",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5
   },
   {
-    "english": "refer to",
-    "uzbek": "murojaat qilmoq / taalluqli bo‘lmoq",
-    "id": "1f9780cd-e999-4960-8136-9e06b12176ab",
+    "english": "different from",
+    "uzbek": "biror narsadan farq qilmoq",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456717",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5
   },
   {
-    "english": "work for",
-    "uzbek": "... uchun ishlamoq",
-    "id": "ee2bb319-f982-4b2d-9a52-b91e6a0f089b",
+    "english": "afraid of",
+    "uzbek": "biror narsadan qo'rqmoq",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456718",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5
   },
   {
-    "english": "a kind of",
-    "uzbek": "turi",
-    "id": "a2ea2a37-69a1-44c2-a2e3-7b0ae6c5a067",
+    "english": "similar to",
+    "uzbek": "biror narsaga o'xshash",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456719",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5
   },
   {
-    "english": "cosy",
-    "uzbek": "shinam",
-    "id": "97c7afd7-612b-4e89-92fb-7f552400516b",
+    "english": "arrive at (place)",
+    "uzbek": "aniq joyga yetib kelmoq",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456720",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5
+  },
+  {
+    "english": "arrive in (city/country)",
+    "uzbek": "shahar / mamlakatga yetib kelmoq",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456721",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5
+  },
+  {
+    "english": "belong to somebody",
+    "uzbek": "biror kishiga tegishli bo'lmoq",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456722",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5
+  },
+  {
+    "english": "borrow something from somebody",
+    "uzbek": "biror kishidan biror narsa qarzga olmoq",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456723",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5
+  },
+  {
+    "english": "concentrate on something / doing something",
+    "uzbek": "biror narsaga e'tiborni qaratmoq",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456724",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5
+  },
+  {
+    "english": "depend on something / somebody",
+    "uzbek": "biror narsa / kishiga bog'liq bo'lmoq",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456725",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5
+  },
+  {
+    "english": "explain something to somebody",
+    "uzbek": "biror kishiga biror narsani tushuntirmoq",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456726",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5
+  },
+  {
+    "english": "listen to something / somebody",
+    "uzbek": "biror narsa / kishini tinglamoq",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456727",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5
+  },
+  {
+    "english": "pay somebody for something",
+    "uzbek": "biror kishiga biror narsa uchun pul to'lamoq",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456728",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5
+  },
+  {
+    "english": "wait for somebody / something",
+    "uzbek": "biror kishi / narsani kutmoq",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456729",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5
+  },
+  {
+    "english": "worry about somebody / something",
+    "uzbek": "biror kishi / narsa haqida tashvishlanmoq",
+    "id": "a1b2c3d4-e5f6-4789-0abc-def123456730",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,

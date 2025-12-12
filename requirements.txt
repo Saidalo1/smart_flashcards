@@ -1,4 +1,13 @@
-PyQt6
-sentence-transformers
-torch
-pyinstaller
+# Core dependencies with pinned versions for reproducibility
+PyQt6==6.10.1
+sentence-transformers==5.1.2
+torch==2.8.0
+pyinstaller==6.17.0
+
+# Main transitive dependencies (pinned for stability)
+transformers==4.57.3
+huggingface-hub==0.36.0
+tokenizers==0.22.1
+numpy==2.0.2
+scikit-learn==1.6.1
+scipy==1.13.1

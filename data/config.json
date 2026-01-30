@@ -1,0 +1,11 @@
+{
+  "timer_interval": 35,
+  "show_notifications": true,
+  "theme": "dark",
+  "hotkey": "F7",
+  "active_topics": [
+    "Gerunds",
+    "Infinitives"
+  ],
+  "topic_weights": {}
+}

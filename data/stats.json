@@ -1,1 +1,170 @@
-{}
+{
+    "interested in": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "under": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "behind": {
+        "correct": 3,
+        "incorrect": 0
+    },
+    "arrive in (city/country)": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "depend on something / somebody": {
+        "correct": 1,
+        "incorrect": 3
+    },
+    "famous for": {
+        "correct": 1,
+        "incorrect": 2
+    },
+    "beside": {
+        "correct": 4,
+        "incorrect": 0
+    },
+    "listen to something / somebody": {
+        "correct": 6,
+        "incorrect": 0
+    },
+    "worry about somebody / something": {
+        "correct": 1,
+        "incorrect": 2
+    },
+    "proud of": {
+        "correct": 3,
+        "incorrect": 0
+    },
+    "different from": {
+        "correct": 5,
+        "incorrect": 0
+    },
+    "similar to": {
+        "correct": 5,
+        "incorrect": 0
+    },
+    "concentrate on something / doing something": {
+        "correct": 2,
+        "incorrect": 3
+    },
+    "excited about": {
+        "correct": 4,
+        "incorrect": 1
+    },
+    "bad at": {
+        "correct": 5,
+        "incorrect": 0
+    },
+    "on the television": {
+        "correct": 4,
+        "incorrect": 0
+    },
+    "over": {
+        "correct": 3,
+        "incorrect": 2
+    },
+    "belong to somebody": {
+        "correct": 2,
+        "incorrect": 1
+    },
+    "afraid of": {
+        "correct": 5,
+        "incorrect": 0
+    },
+    "arrive at (place)": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "borrow something from somebody": {
+        "correct": 5,
+        "incorrect": 0
+    },
+    "pay somebody for something": {
+        "correct": 4,
+        "incorrect": 0
+    },
+    "below": {
+        "correct": 1,
+        "incorrect": 3
+    },
+    "explain something to somebody": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "above": {
+        "correct": 1,
+        "incorrect": 3
+    },
+    "good at": {
+        "correct": 4,
+        "incorrect": 0
+    },
+    "married to": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "pleased with": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "wait for somebody / something": {
+        "correct": 3,
+        "incorrect": 1
+    },
+    "in front of": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "demand + to-inf": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "offer + to-inf": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "discuss + v-ing": {
+        "correct": 1,
+        "incorrect": 1
+    },
+    "plan + to-inf": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "admit + v-ing": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "expect + to-inf": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "can afford + to-inf": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "postpone + v-ing": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "choose + to-inf": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "wait + to-inf": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "understand + v-ing": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "claim + to-inf": {
+        "correct": 0,
+        "incorrect": 1
+    }
+}

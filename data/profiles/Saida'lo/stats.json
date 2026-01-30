@@ -1,0 +1,258 @@
+{
+    "enjoy + v-ing": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "deny + v-ing": {
+        "correct": 1,
+        "incorrect": 1
+    },
+    "arrange + to-inf": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "involve + v-ing": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "consider + v-ing": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "plan + to-inf": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "pretend + to-inf": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "appear + to-inf": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "tolerate + v-ing": {
+        "correct": 1,
+        "incorrect": 1
+    },
+    "tend + to-inf": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "claim + to-inf": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "ask + to-inf": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "risk + v-ing": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "recommend + v-ing": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "deserve + to-inf": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "decide + to-inf": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "seem + to-inf": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "want + to-inf": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "agree + to-inf": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "avoid + v-ing": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "mention + v-ing": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "can't stand + v-ing": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "behind": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "under": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "understand + v-ing": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "delay + v-ing": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "report": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "fancy": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "appear": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "exalt": {
+        "correct": 1,
+        "incorrect": 1
+    },
+    "admonish": {
+        "correct": 1,
+        "incorrect": 1
+    },
+    "erratic": {
+        "correct": 1,
+        "incorrect": 1
+    },
+    "mired": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "distinguish": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "abrupt": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "inevitable": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "vexing": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "sophisticated": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "to stress": {
+        "correct": 1,
+        "incorrect": 1
+    },
+    "eloquent": {
+        "correct": 1,
+        "incorrect": 1
+    },
+    "coerce": {
+        "correct": 1,
+        "incorrect": 1
+    },
+    "adept": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "dread": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "fluctuate": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "reconcile": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "enfranchise": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "eccentric": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "skeptical": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "attest": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "tangible": {
+        "correct": 2,
+        "incorrect": 4
+    },
+    "renounce": {
+        "correct": 5,
+        "incorrect": 3
+    },
+    "secular": {
+        "correct": 3,
+        "incorrect": 4
+    },
+    "unprecedented": {
+        "correct": 4,
+        "incorrect": 0
+    },
+    "delegate": {
+        "correct": 4,
+        "incorrect": 0
+    },
+    "spawn": {
+        "correct": 5,
+        "incorrect": 1
+    },
+    "speculate": {
+        "correct": 5,
+        "incorrect": 2
+    },
+    "broach": {
+        "correct": 4,
+        "incorrect": 1
+    },
+    "disseminate": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "innovative": {
+        "correct": 4,
+        "incorrect": 0
+    },
+    "detrimental": {
+        "correct": 3,
+        "incorrect": 2
+    },
+    "apparent": {
+        "correct": 4,
+        "incorrect": 2
+    },
+    "postulate": {
+        "correct": 5,
+        "incorrect": 2
+    },
+    "proxy": {
+        "correct": 6,
+        "incorrect": 1
+    },
+    "bazaar": {
+        "correct": 3,
+        "incorrect": 1
+    }
+}

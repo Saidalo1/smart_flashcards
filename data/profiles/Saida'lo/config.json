@@ -1,0 +1,12 @@
+{
+  "timer_interval": 30,
+  "hotkey": "shift",
+  "active_topics": [
+    "SAT Vocabulary (31-45)",
+    "SAT Vocabulary (46-60)"
+  ],
+  "show_notifications": true,
+  "topic_weights": {},
+  "theme": "dark",
+  "card_position": "bottom_right"
+}

@@ -16,13 +16,15 @@ class Vocabulary:
     """Manages loading and providing vocabulary words from a shuffled deck."""
 
     def __init__(self, data_path=DATA_PATH):
-        """Initializes the vocabulary, loads words, and creates the first deck."""
+        """Initializes the vocabulary and loads words."""
         self.words = []
         self.deck = []
         self.data_path = data_path
+        self._stats_manager = None
+        self._active_topics = None
         self.load_words()
-        self.migrate_vocabulary() # Ensure all words have the new format
-        self.shuffle_deck()  # Create the initial deck
+        self.migrate_vocabulary()
+        # Note: shuffle_deck() should be called from main.py with stats_manager
 
     def load_words(self):
         """Loads words from the JSON file."""
@@ -34,29 +36,83 @@ class Vocabulary:
             self.words = []
             print("Vocabulary file not found or corrupted. Starting with an empty list.")
 
-    def shuffle_deck(self):
-        """Creates a new shuffled deck for a study session using an adaptive size."""
-        if not self.words:
+    def shuffle_deck(self, stats_manager=None, active_topics=None):
+        """Creates a shuffled deck using weighted selection, filtered by topic."""
+        # Remember settings for auto-reshuffle
+        if stats_manager is not None:
+            self._stats_manager = stats_manager
+        if active_topics is not None:
+            self._active_topics = active_topics
+        
+        print(f"[SHUFFLE] === SHUFFLE_DECK CALLED ===")
+        print(f"[SHUFFLE] Active topics: {self._active_topics}")
+        print(f"[SHUFFLE] Total words in vocabulary: {len(self.words)}")
+        
+        # Filter by active topics
+        if self._active_topics:
+            filtered_words = [w for w in self.words if w.get('category') in self._active_topics]
+            print(f"[SHUFFLE] Words matching active topics: {len(filtered_words)}")
+            for w in filtered_words[:5]:
+                print(f"[SHUFFLE]   - {w['english']} (category: {w.get('category')})")
+            if len(filtered_words) > 5:
+                print(f"[SHUFFLE]   ... and {len(filtered_words) - 5} more")
+        else:
+            filtered_words = self.words
+            print(f"[SHUFFLE] No topic filter - using all words")
+        
+        if not filtered_words:
             self.deck = []
-            print("Vocabulary is empty. No deck created.")
+            print("[SHUFFLE] No words match active topics. Deck is empty.")
             return
 
-        print("Shuffling a new session deck...")
-        total_words = len(self.words)
+        print(f"Creating smart session deck from {len(filtered_words)} words...")
+        total_words = len(filtered_words)
 
-        # --- Smart Session Sizing Formula ---
-        # 1. Calculate a proportional size (e.g., one-third of the vocabulary).
+        # --- Smart Session Sizing ---
         desired_size = total_words // SESSION_SIZE_DIVISOR
-        # 2. Clamp it between a practical minimum and maximum.
         clamped_size = max(MIN_SESSION_SIZE, min(MAX_SESSION_SIZE, desired_size))
-        # 3. Ensure the deck isn't larger than the available words (for small vocabularies).
         session_size = min(clamped_size, total_words)
-        # ---
 
-        # Create the session deck by sampling from the main word list
-        self.deck = random.sample(self.words, session_size)
+        # --- Weighted Selection Based on Stats ---
+        if self._stats_manager:
+            weights = []
+            for word in filtered_words:
+                stats = self._stats_manager.get_stats_for_word(word)
+                correct = stats.get('correct', 0)
+                incorrect = stats.get('incorrect', 0)
+                total = correct + incorrect
 
-        print(f"Created a new session deck with {len(self.deck)} random cards (out of {total_words} total).")
+                if total == 0:
+                    weight = 1.5  # Never shown
+                else:
+                    error_rate = incorrect / total
+                    weight = 0.5 + (error_rate * 2.0)
+                
+                weights.append(weight)
+
+            self.deck = random.choices(filtered_words, weights=weights, k=session_size)
+            # Remove duplicates
+            seen = set()
+            unique_deck = []
+            for card in self.deck:
+                if card['id'] not in seen:
+                    seen.add(card['id'])
+                    unique_deck.append(card)
+            self.deck = unique_deck[:session_size]
+        else:
+            self.deck = random.sample(filtered_words, session_size)
+
+        print(f"[SHUFFLE] Created session deck with {len(self.deck)} cards:")
+        for card in self.deck:
+            print(f"[SHUFFLE]   - {card['english']} (category: {card.get('category')})")
+
+    def get_all_topics(self):
+        """Returns a list of all unique topic/category names."""
+        topics = set()
+        for word in self.words:
+            if 'category' in word and word['category']:
+                topics.add(word['category'])
+        return sorted(list(topics))
 
     def save_words(self):
         """Saves the current list of words back to the JSON file."""
@@ -147,26 +203,44 @@ class Vocabulary:
             self.shuffle_deck()
 
         card = self.deck.pop(0)
+        print(f"[CARD] === SHOWING CARD ===")
+        print(f"[CARD] Word: {card['english']} -> {card.get('uzbek', 'N/A')}")
+        print(f"[CARD] Category: {card.get('category')}")
         return card
 
     def get_options_for_card(self, correct_card, language='uzbek'):
-        """Generates multiple choice options for a given card."""
-        if len(self.words) < 4:
-            return []  # Not enough words to generate options
+        """Generates multiple choice options for a given card (from same category only)."""
+        # Filter words by the same category as the correct card
+        card_category = correct_card.get('category')
+        print(f"[OPTIONS] Generating options for: {correct_card['english']}")
+        print(f"[OPTIONS] Card category: {card_category}")
+        
+        if card_category:
+            same_category_words = [w for w in self.words if w.get('category') == card_category]
+            print(f"[OPTIONS] Words in same category: {len(same_category_words)}")
+        else:
+            same_category_words = self.words
+            print(f"[OPTIONS] No category - using all {len(same_category_words)} words")
+        
+        if len(same_category_words) < 4:
+            # Fall back to all words if not enough in category
+            print(f"[OPTIONS] WARNING: Falling back to all words!")
+            same_category_words = self.words
+            if len(same_category_words) < 4:
+                return []
 
         correct_answer = correct_card[language]
         options = {correct_answer}
 
-        # To get distractors, we can just pick random words from the full list
-        while len(options) < 4:
-            # Make sure we don't get stuck in an infinite loop if all words have same translation
-            if len(options) >= len(self.words):
-                break
-            random_word = random.choice(self.words)
-            # Ensure we don't add the same option text if different words have the same translation
+        # Get distractors only from the same category
+        attempts = 0
+        while len(options) < 4 and attempts < 50:
+            attempts += 1
+            random_word = random.choice(same_category_words)
             if random_word[language] not in options:
                 options.add(random_word[language])
 
         shuffled_options = list(options)
         random.shuffle(shuffled_options)
+        print(f"[OPTIONS] Generated options: {shuffled_options}")
         return shuffled_options

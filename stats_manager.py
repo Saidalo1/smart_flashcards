@@ -2,31 +2,34 @@ import json
 from pathlib import Path
 
 DATA_DIR = Path(__file__).parent / 'data'
-STATS_FILE = DATA_DIR / 'stats.json'
+DEFAULT_STATS_FILE = DATA_DIR / 'stats.json'
+
 
 class StatsManager:
     """Manages loading, saving, and updating user statistics."""
-    def __init__(self):
+    
+    def __init__(self, stats_path=None):
+        self.stats_path = Path(stats_path) if stats_path else DEFAULT_STATS_FILE
         self.stats = {}
         self._load_stats()
 
     def _load_stats(self):
         """Loads stats from the JSON file, or creates it if it doesn't exist."""
-        if not STATS_FILE.exists():
-            DATA_DIR.mkdir(exist_ok=True)
+        if not self.stats_path.exists():
+            self.stats_path.parent.mkdir(parents=True, exist_ok=True)
             self.stats = {}
             self.save_stats()
         else:
-            with open(STATS_FILE, 'r', encoding='utf-8') as f:
+            with open(self.stats_path, 'r', encoding='utf-8') as f:
                 try:
                     self.stats = json.load(f)
                 except json.JSONDecodeError:
-                    # Handle cases where the file is empty or corrupted
                     self.stats = {}
 
     def save_stats(self):
         """Saves the current stats to the JSON file."""
-        with open(STATS_FILE, 'w', encoding='utf-8') as f:
+        self.stats_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(self.stats_path, 'w', encoding='utf-8') as f:
             json.dump(self.stats, f, indent=4, ensure_ascii=False)
 
     def _get_word_key(self, card):
@@ -56,4 +59,4 @@ class StatsManager:
     def reset_stats(self):
         """Resets all statistics and saves the empty state."""
         self.stats = {}
-        self._save_stats()
+        self.save_stats()

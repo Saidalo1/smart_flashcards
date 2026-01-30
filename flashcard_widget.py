@@ -2,7 +2,7 @@ import random
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton, QGroupBox, QRadioButton
 )
-from PyQt6.QtCore import Qt, pyqtSignal, QTimer
+from PyQt6.QtCore import Qt, pyqtSignal, QTimer, QPoint
 
 class FlashcardWidget(QWidget):
     """A widget to display a flashcard question and handle user input."""
@@ -10,25 +10,40 @@ class FlashcardWidget(QWidget):
     card_delete_requested = pyqtSignal(dict)
 
     def __init__(self, card, stats_manager, vocabulary, similarity_checker, is_multiple_choice=False, parent=None):
-        """Initializes the flashcard view."""
         super().__init__(parent)
         self.card = card
         self.vocabulary = vocabulary
         self.stats_manager = stats_manager
         self.similarity_checker = similarity_checker
-
-        # Determine language direction and question type
-        if random.choice([True, False]):
-            self.question_lang, self.answer_lang = 'english', 'uzbek'
+        self._drag_pos = None
+        
+        # Question type: 'translation' or 'grammar'
+        has_grammar = card.get('grammar_pattern') is not None
+        self.question_type = 'grammar' if has_grammar and random.random() < 0.4 else 'translation'
+        
+        # For translation questions - determine language direction
+        if self.question_type == 'translation':
+            if random.choice([True, False]):
+                self.question_lang, self.answer_lang = 'english', 'uzbek'
+            else:
+                self.question_lang, self.answer_lang = 'uzbek', 'english'
         else:
-            self.question_lang, self.answer_lang = 'uzbek', 'english'
+            # Grammar questions: show english verb, ask for pattern
+            self.question_lang, self.answer_lang = 'english', 'grammar_pattern'
 
-        # --- Smart Mode Selection ---
-        # Use text input for complex phrases (containing '/') or longer answers.
-        is_complex_phrase = '/' in self.card['english'] or '/' in self.card['uzbek']
+        # Smart mode selection
+        is_complex_phrase = '/' in self.card['english'] or '/' in self.card.get('uzbek', '')
         is_short_answer = len(self.card['english'].split()) <= 3
-        self.is_multiple_choice = not is_complex_phrase and is_short_answer and is_multiple_choice
-        # --------------------------
+        
+        word_stats = self.stats_manager.get_stats_for_word(self.card)
+        correct_count = word_stats.get('correct', 0)
+        is_learning_phase = correct_count < 2
+        
+        # Grammar questions always use multiple choice (only 2 options: V-ing or to+V)
+        if self.question_type == 'grammar':
+            self.is_multiple_choice = True
+        else:
+            self.is_multiple_choice = is_learning_phase or (not is_complex_phrase and is_short_answer and is_multiple_choice)
 
         self.init_ui()
         self.set_question()
@@ -52,27 +67,43 @@ class FlashcardWidget(QWidget):
 
         # --- Main Layout ---
         main_layout = QVBoxLayout()
-        main_layout.setContentsMargins(20, 20, 20, 20)
-        main_layout.setSpacing(15)
+        main_layout.setContentsMargins(0, 0, 0, 0)
+        main_layout.setSpacing(0)
+        
+        # --- Drag Bar (for moving the widget) ---
+        self.drag_bar = QLabel("⋮⋮ Перетащи меня ⋮⋮")
+        self.drag_bar.setObjectName("dragBar")
+        self.drag_bar.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.drag_bar.setFixedHeight(28)
+        self.drag_bar.setCursor(Qt.CursorShape.SizeAllCursor)
+        main_layout.addWidget(self.drag_bar)
+        
+        # --- Content Layout ---
+        content_layout = QVBoxLayout()
+        content_layout.setContentsMargins(20, 15, 20, 20)
+        content_layout.setSpacing(15)
 
         # --- Top layout for question and delete button ---
         top_layout = QHBoxLayout()
         self.question_label = QLabel()
         top_layout.addWidget(self.question_label, 1)
         top_layout.addWidget(self._create_delete_button(), 0, Qt.AlignmentFlag.AlignTop)
-        main_layout.addLayout(top_layout)
+        content_layout.addLayout(top_layout)
+        
+        main_layout.addLayout(content_layout)
+        self.content_layout = content_layout  # Save reference
 
         # --- Answer Area ---
         if self.is_multiple_choice:
-            self.setup_multiple_choice_ui(main_layout)
+            self.setup_multiple_choice_ui(content_layout)
         else:
-            self.setup_text_input_ui(main_layout)
+            self.setup_text_input_ui(content_layout)
 
         # --- Button ---
         self.check_button = QPushButton("Check Answer")
         self.check_button.clicked.connect(self.check_answer)
-        self.check_button.setDefault(True)  # *** CRITICAL FIX: Prevents Enter from triggering delete ***
-        main_layout.addWidget(self.check_button)
+        self.check_button.setDefault(True)
+        content_layout.addWidget(self.check_button)
 
         self.apply_stylesheet()
         self.setLayout(main_layout)
@@ -89,25 +120,108 @@ class FlashcardWidget(QWidget):
         return delete_button
 
     def apply_stylesheet(self):
-        """Applies a modern, dark-themed stylesheet to the widget."""
+        """Applies a modern glassmorphism-themed stylesheet."""
         self.setStyleSheet("""
-            QWidget#main_widget { background-color: #2c3e50; border: 1px solid #34495e; border-radius: 15px; color: #ecf0f1; }
-            QLabel { font-size: 22px; font-weight: bold; color: #ecf0f1; border: none; padding: 10px; }
-            QPushButton { background-color: #3498db; color: white; border-radius: 8px; padding: 10px; font-size: 16px; font-weight: bold; border: none; }
-            QPushButton:hover { background-color: #2980b9; }
-            QLineEdit { padding: 10px; border: 1px solid #34495e; border-radius: 8px; font-size: 18px; background-color: #34495e; color: #ecf0f1; }
-            QRadioButton { font-size: 16px; padding: 5px; border: none; }
-            QGroupBox { border: 1px solid #34495e; border-radius: 8px; margin-top: 10px; }
-
-            /* --- DEFINITIVE FIX: Style the delete button by its unique name --- */
-            QPushButton#deleteButton {
-                background-color: transparent;
-                border: none;
-                font-size: 18px;
-                color: #e74c3c; /* Red */
-                padding: 0;
+            QWidget#main_widget {
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+                    stop:0 #1a1a2e, stop:0.5 #16213e, stop:1 #0f3460);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 20px;
+                color: #ecf0f1;
             }
-            QPushButton#deleteButton:hover { color: #c0392b; }
+            
+            QLabel#dragBar {
+                background: rgba(255, 255, 255, 0.08);
+                border: none;
+                border-top-left-radius: 20px;
+                border-top-right-radius: 20px;
+                color: #666;
+                font-size: 12px;
+                font-weight: normal;
+                padding: 4px;
+            }
+            
+            QLabel#dragBar:hover {
+                background: rgba(255, 255, 255, 0.15);
+                color: #999;
+            }
+            
+            QLabel {
+                font-size: 24px;
+                font-weight: bold;
+                color: #fff;
+                border: none;
+                padding: 12px;
+            }
+            
+            QPushButton {
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                    stop:0 #667eea, stop:1 #764ba2);
+                color: white;
+                border-radius: 12px;
+                padding: 14px 28px;
+                font-size: 16px;
+                font-weight: bold;
+                border: none;
+            }
+            
+            QPushButton:hover {
+                background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
+                    stop:0 #764ba2, stop:1 #667eea);
+            }
+            
+            QLineEdit {
+                padding: 14px 18px;
+                border: 2px solid rgba(255, 255, 255, 0.15);
+                border-radius: 12px;
+                font-size: 18px;
+                background: rgba(255, 255, 255, 0.08);
+                color: #fff;
+            }
+            
+            QLineEdit:focus {
+                border: 2px solid #00d9ff;
+                background: rgba(255, 255, 255, 0.12);
+            }
+            
+            QRadioButton {
+                font-size: 16px;
+                padding: 10px 16px;
+                border: none;
+                color: #ddd;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 8px;
+                margin: 4px 0;
+            }
+            
+            QRadioButton:hover {
+                background: rgba(255, 255, 255, 0.1);
+                color: #fff;
+            }
+            
+            QRadioButton:checked {
+                background: rgba(0, 217, 255, 0.2);
+                color: #00d9ff;
+            }
+            
+            QGroupBox {
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 12px;
+                margin-top: 10px;
+                padding-top: 5px;
+            }
+            
+            QPushButton#deleteButton {
+                background: transparent;
+                border: none;
+                font-size: 20px;
+                color: rgba(231, 76, 60, 0.7);
+                padding: 4px;
+            }
+            
+            QPushButton#deleteButton:hover {
+                color: #e74c3c;
+            }
         """)
 
     def setup_text_input_ui(self, layout):
@@ -123,7 +237,14 @@ class FlashcardWidget(QWidget):
         self.options_group = QGroupBox()
         self.options_layout = QVBoxLayout()
         self.radio_buttons = []
-        options = self.vocabulary.get_options_for_card(self.card, self.answer_lang)
+        
+        if self.question_type == 'grammar':
+            # Grammar questions: only 2 options
+            options = ['V-ing', 'to + V']
+            random.shuffle(options)
+        else:
+            options = self.vocabulary.get_options_for_card(self.card, self.answer_lang)
+        
         for option in options:
             radio = QRadioButton(option)
             self.radio_buttons.append(radio)
@@ -133,7 +254,10 @@ class FlashcardWidget(QWidget):
 
     def set_question(self):
         """Sets the question word on the label."""
-        self.question_label.setText(f"Translate: <b>{self.card[self.question_lang]}</b>")
+        if self.question_type == 'grammar':
+            self.question_label.setText(f"Grammar pattern for: <b>{self.card['english']}</b>")
+        else:
+            self.question_label.setText(f"Translate: <b>{self.card[self.question_lang]}</b>")
 
     def check_answer(self):
         """Checks the answer and provides dynamic visual feedback."""
@@ -162,6 +286,16 @@ class FlashcardWidget(QWidget):
 
         self.stats_manager.record_answer(self.card, is_correct)
 
+        # Highlight correct and wrong answers in multiple choice
+        if self.is_multiple_choice:
+            for radio in self.radio_buttons:
+                radio_text = self._normalize_answer(radio.text())
+                is_this_correct = radio_text in [self._normalize_answer(ans) for ans in possible_answers]
+                if is_this_correct:
+                    radio.setStyleSheet("background: #2ecc71; color: white; font-weight: bold;")
+                elif radio.isChecked() and not is_correct:
+                    radio.setStyleSheet("background: #e74c3c; color: white;")
+
         if is_correct:
             self.setStyleSheet(self.styleSheet() + "QWidget#main_widget { border: 2px solid #2ecc71; }")
             self.check_button.setText("Correct! 👍")
@@ -171,7 +305,7 @@ class FlashcardWidget(QWidget):
             self.check_button.setText(f"Correct: {correct_answer_string}")
             self.check_button.setStyleSheet("background-color: #e74c3c;")
 
-        QTimer.singleShot(2000, self.close)
+        QTimer.singleShot(4000, self.close)  # 4 seconds to see the answer
 
     def request_delete(self):
         """Emits the signal to request card deletion and closes the widget."""
@@ -180,13 +314,36 @@ class FlashcardWidget(QWidget):
         self.close()
 
     def keyPressEvent(self, event):
-        """Handles key presses for Enter (check answer) and Escape (close)."""
+        """Handles key presses for Enter (check answer), Escape (close), and 1-4 (MC options)."""
         # --- CRITICAL FIX: Explicitly handle Enter/Return keys to prevent accidental deletion ---
         if event.key() == Qt.Key.Key_Return or event.key() == Qt.Key.Key_Enter:
             if self.check_button.isEnabled():
                 self.check_button.click()
         elif event.key() == Qt.Key.Key_Escape:
             self.close()
+        # --- Hotkeys for multiple choice (1-4) ---
+        elif self.is_multiple_choice and event.key() in (Qt.Key.Key_1, Qt.Key.Key_2, Qt.Key.Key_3, Qt.Key.Key_4):
+            index = event.key() - Qt.Key.Key_1  # 0, 1, 2, or 3
+            if index < len(self.radio_buttons):
+                self.radio_buttons[index].setChecked(True)
+                self.check_answer()
+
+    def mousePressEvent(self, event):
+        """Start drag when mouse pressed."""
+        if event.button() == Qt.MouseButton.LeftButton:
+            self._drag_pos = event.globalPosition().toPoint() - self.frameGeometry().topLeft()
+            event.accept()
+
+    def mouseMoveEvent(self, event):
+        """Move widget while dragging."""
+        if event.buttons() == Qt.MouseButton.LeftButton and self._drag_pos is not None:
+            self.move(event.globalPosition().toPoint() - self._drag_pos)
+            event.accept()
+
+    def mouseReleaseEvent(self, event):
+        """End drag when mouse released."""
+        self._drag_pos = None
+        event.accept()
 
     def closeEvent(self, event):
         """Emits a signal when the widget is closed."""

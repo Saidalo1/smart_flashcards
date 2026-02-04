@@ -124,22 +124,39 @@ class FlashcardApp:
         QTimer.singleShot(0, self.show_flashcard)
 
     def setup_global_hotkey(self):
-        """Sets up global hotkey listener using pynput with full modifier support."""
+        """Sets up global hotkey listener using pynput with L/R modifier support."""
         if not HOTKEY_AVAILABLE:
             return
         
         hotkey_config = self.config_manager.hotkey.lower()
         
-        # Parse hotkey (e.g., "ctrl+alt+k", "f7", or just "ctrl")
+        # L/R specific modifiers
+        LR_MODIFIERS = {
+            'ctrl_l', 'ctrl_r', 'alt_l', 'alt_r', 
+            'shift_l', 'shift_r', 'win_l', 'win_r'
+        }
+        # Generic modifiers
+        GENERIC_MODIFIERS = {'ctrl', 'alt', 'shift', 'win'}
+        
+        # Parse hotkey (e.g., "ctrl+alt+k", "f7", "ctrl_l", "shift_r")
         parts = hotkey_config.split('+')
         required_modifiers = set()
         target_key = None
         is_single_modifier = False
+        is_lr_modifier = False
         
-        # Check if hotkey is single modifier
-        if len(parts) == 1 and parts[0] in ('ctrl', 'alt', 'shift', 'win'):
-            is_single_modifier = True
-            target_key = parts[0]
+        # Check if hotkey is a single L/R or generic modifier
+        if len(parts) == 1:
+            single_part = parts[0].strip()
+            if single_part in LR_MODIFIERS:
+                is_single_modifier = True
+                is_lr_modifier = True
+                target_key = single_part
+            elif single_part in GENERIC_MODIFIERS:
+                is_single_modifier = True
+                target_key = single_part
+            else:
+                target_key = single_part
         else:
             for part in parts:
                 part = part.strip()
@@ -157,32 +174,78 @@ class FlashcardApp:
         
         def on_press(key):
             try:
-                # Track modifier state
-                is_ctrl = key == keyboard.Key.ctrl_l or key == keyboard.Key.ctrl_r
-                is_alt = key == keyboard.Key.alt_l or key == keyboard.Key.alt_r or key == keyboard.Key.alt_gr
-                is_shift = key == keyboard.Key.shift_l or key == keyboard.Key.shift_r
+                # Detect specific L/R modifiers
+                is_ctrl_l = key == keyboard.Key.ctrl_l
+                is_ctrl_r = key == keyboard.Key.ctrl_r
+                is_alt_l = key == keyboard.Key.alt_l
+                is_alt_r = key == keyboard.Key.alt_r or key == keyboard.Key.alt_gr
+                is_shift_l = key == keyboard.Key.shift_l
+                is_shift_r = key == keyboard.Key.shift_r
                 
+                is_ctrl = is_ctrl_l or is_ctrl_r
+                is_alt = is_alt_l or is_alt_r
+                is_shift = is_shift_l or is_shift_r
+                
+                # Track generic modifier state
                 if is_ctrl:
                     self._pressed_modifiers.add('ctrl')
-                elif is_alt:
+                if is_alt:
                     self._pressed_modifiers.add('alt')
-                elif is_shift:
+                if is_shift:
                     self._pressed_modifiers.add('shift')
                 
-                # Handle single modifier hotkey (e.g., just "ctrl")
-                if is_single_modifier:
+                # Handle single L/R modifier hotkey (e.g., "shift_l", "ctrl_r")
+                if is_single_modifier and is_lr_modifier:
+                    if (target_key == 'ctrl_l' and is_ctrl_l) or \
+                       (target_key == 'ctrl_r' and is_ctrl_r) or \
+                       (target_key == 'alt_l' and is_alt_l) or \
+                       (target_key == 'alt_r' and is_alt_r) or \
+                       (target_key == 'shift_l' and is_shift_l) or \
+                       (target_key == 'shift_r' and is_shift_r):
+                        self.hotkey_signal.triggered.emit()
+                    return
+                
+                # Handle generic single modifier hotkey (e.g., just "ctrl")
+                if is_single_modifier and not is_lr_modifier:
                     if (target_key == 'ctrl' and is_ctrl) or \
                        (target_key == 'alt' and is_alt) or \
                        (target_key == 'shift' and is_shift):
                         self.hotkey_signal.triggered.emit()
                     return
                 
-                # Check if target key pressed for combo hotkeys
+                # Get key name for combo hotkeys
                 key_name = None
                 if hasattr(key, 'name'):
                     key_name = key.name.lower()
                 elif hasattr(key, 'char') and key.char:
                     key_name = key.char.lower()
+                
+                # Special key name mappings
+                KEY_MAP = {
+                    'space': 'space',
+                    'tab': 'tab', 
+                    'enter': 'enter',
+                    'return': 'enter',
+                    'backspace': 'backspace',
+                    'delete': 'delete',
+                    'insert': 'insert',
+                    'home': 'home',
+                    'end': 'end',
+                    'page_up': 'page_up',
+                    'page_down': 'page_down',
+                    'up': 'up',
+                    'down': 'down',
+                    'left': 'left',
+                    'right': 'right',
+                    'caps_lock': 'caps_lock',
+                    'num_lock': 'num_lock',
+                    'scroll_lock': 'scroll_lock',
+                    'pause': 'pause',
+                    'print_screen': 'print_screen',
+                }
+                
+                if key_name in KEY_MAP:
+                    key_name = KEY_MAP[key_name]
                 
                 if key_name and key_name == target_key:
                     # Check all required modifiers are pressed

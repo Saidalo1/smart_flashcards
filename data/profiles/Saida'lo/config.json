@@ -1,7 +1,9 @@
 {
   "timer_interval": 30,
-  "hotkey": "shift",
+  "hotkey": "shift_r",
   "active_topics": [
+    "SAT Vocabulary (1-15)",
+    "SAT Vocabulary (16-30)",
     "SAT Vocabulary (31-45)",
     "SAT Vocabulary (46-60)"
   ],

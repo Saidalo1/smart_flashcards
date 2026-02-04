@@ -542,20 +542,24 @@ class ManagementWindow(QDialog):
         self.grabKeyboard()
 
     def keyPressEvent(self, event):
-        """Captures key for hotkey setting with full modifier support."""
+        """Captures key for hotkey setting with L/R modifier support."""
         if hasattr(self, '_capturing_hotkey') and self._capturing_hotkey:
             from PyQt6.QtCore import Qt
             key = event.key()
+            scan_code = event.nativeScanCode()
             modifiers = event.modifiers()
             
-            # Build current modifiers list
-            current_mods = []
-            if modifiers & Qt.KeyboardModifier.ControlModifier:
-                current_mods.append("ctrl")
-            if modifiers & Qt.KeyboardModifier.AltModifier:
-                current_mods.append("alt")
-            if modifiers & Qt.KeyboardModifier.ShiftModifier:
-                current_mods.append("shift")
+            # Windows scan codes for L/R modifiers
+            SCAN_CODES = {
+                29: 'ctrl_l',      # Left Ctrl
+                285: 'ctrl_r',     # Right Ctrl (29 + 256)
+                42: 'shift_l',     # Left Shift
+                54: 'shift_r',     # Right Shift
+                56: 'alt_l',       # Left Alt
+                312: 'alt_r',      # Right Alt (56 + 256)
+                91: 'win_l',       # Left Win
+                92: 'win_r',       # Right Win
+            }
             
             # Escape to cancel
             if key == Qt.Key.Key_Escape:
@@ -565,9 +569,14 @@ class ManagementWindow(QDialog):
                 self.hotkey_btn.setEnabled(True)
                 return
             
-            # Handle single modifier keys — save them directly!
+            # Build key name
             key_name = None
-            if key == Qt.Key.Key_Control:
+            
+            # Check for L/R modifiers via scan code first
+            if scan_code in SCAN_CODES:
+                key_name = SCAN_CODES[scan_code]
+            # Fallback to generic modifiers
+            elif key == Qt.Key.Key_Control:
                 key_name = "ctrl"
             elif key == Qt.Key.Key_Alt:
                 key_name = "alt"
@@ -575,6 +584,7 @@ class ManagementWindow(QDialog):
                 key_name = "shift"
             elif key == Qt.Key.Key_Meta:
                 key_name = "win"
+            # Special keys
             elif key == Qt.Key.Key_CapsLock:
                 key_name = "caps_lock"
             elif key == Qt.Key.Key_Tab:
@@ -624,6 +634,39 @@ class ManagementWindow(QDialog):
             # Number keys 0-9
             elif Qt.Key.Key_0 <= key <= Qt.Key.Key_9:
                 key_name = chr(key)
+            # Numpad keys
+            elif scan_code == 82:   # Numpad 0
+                key_name = "num_0"
+            elif scan_code == 79:   # Numpad 1
+                key_name = "num_1"
+            elif scan_code == 80:   # Numpad 2
+                key_name = "num_2"
+            elif scan_code == 81:   # Numpad 3
+                key_name = "num_3"
+            elif scan_code == 75:   # Numpad 4
+                key_name = "num_4"
+            elif scan_code == 76:   # Numpad 5
+                key_name = "num_5"
+            elif scan_code == 77:   # Numpad 6
+                key_name = "num_6"
+            elif scan_code == 71:   # Numpad 7
+                key_name = "num_7"
+            elif scan_code == 72:   # Numpad 8
+                key_name = "num_8"
+            elif scan_code == 73:   # Numpad 9
+                key_name = "num_9"
+            elif scan_code == 83:   # Numpad .
+                key_name = "num_decimal"
+            elif scan_code == 309:  # Numpad /
+                key_name = "num_divide"
+            elif scan_code == 55:   # Numpad *
+                key_name = "num_multiply"
+            elif scan_code == 74:   # Numpad -
+                key_name = "num_subtract"
+            elif scan_code == 78:   # Numpad +
+                key_name = "num_add"
+            elif scan_code == 284:  # Numpad Enter
+                key_name = "num_enter"
             # Symbols
             elif key == Qt.Key.Key_Minus:
                 key_name = "minus"
@@ -649,28 +692,38 @@ class ManagementWindow(QDialog):
                 key_name = "`"
             
             if key_name:
-                # For single modifiers, use just the modifier name
-                # For combos (like Ctrl+K), add modifiers only if key isn't a modifier itself
-                if key_name in ('ctrl', 'alt', 'shift', 'win'):
+                # Check if it's a modifier key (single modifier hotkey)
+                is_modifier = key_name in ('ctrl', 'alt', 'shift', 'win', 
+                                          'ctrl_l', 'ctrl_r', 'alt_l', 'alt_r',
+                                          'shift_l', 'shift_r', 'win_l', 'win_r')
+                
+                if is_modifier:
+                    # Single modifier - just use the key name
                     full_hotkey = key_name
                 else:
-                    # Add modifiers prefix for combo
-                    parts = current_mods.copy()
+                    # Build combo with modifiers
+                    parts = []
+                    if modifiers & Qt.KeyboardModifier.ControlModifier:
+                        parts.append("ctrl")
+                    if modifiers & Qt.KeyboardModifier.AltModifier:
+                        parts.append("alt")
+                    if modifiers & Qt.KeyboardModifier.ShiftModifier:
+                        parts.append("shift")
                     parts.append(key_name)
                     full_hotkey = "+".join(parts)
                 
                 old_hotkey = self.config_manager.hotkey
                 self.config_manager.hotkey = full_hotkey
                 self.hotkey_label.setText(f"Текущая: {full_hotkey}")
-                print(f"Hotkey saved: {full_hotkey}")
+                print(f"Hotkey saved: {full_hotkey} (scan_code: {scan_code})")
                 
-                # Ask to restart if hotkey changed
+                # Always ask to restart since hotkey requires restart
+                self._capturing_hotkey = False
+                self.releaseKeyboard()
+                self.hotkey_btn.setText("🎹 Назначить клавишу")
+                self.hotkey_btn.setEnabled(True)
+                
                 if old_hotkey != full_hotkey:
-                    self._capturing_hotkey = False
-                    self.releaseKeyboard()
-                    self.hotkey_btn.setText("🎹 Назначить клавишу")
-                    self.hotkey_btn.setEnabled(True)
-                    
                     reply = QMessageBox.question(
                         self, 
                         "Перезапустить?",
@@ -679,8 +732,10 @@ class ManagementWindow(QDialog):
                     )
                     if reply == QMessageBox.StandardButton.Yes:
                         self._request_restart()
-                    return
+                return
             
+            # Unknown key - show scan code for debugging
+            print(f"Unknown key: Qt.Key={key}, scan_code={scan_code}")
             self._capturing_hotkey = False
             self.releaseKeyboard()
             self.hotkey_btn.setText("🎹 Назначить клавишу")

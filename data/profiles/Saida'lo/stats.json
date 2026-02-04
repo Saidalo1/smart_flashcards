@@ -196,63 +196,123 @@
         "incorrect": 1
     },
     "tangible": {
-        "correct": 2,
+        "correct": 8,
         "incorrect": 4
     },
     "renounce": {
-        "correct": 5,
+        "correct": 9,
         "incorrect": 3
     },
     "secular": {
-        "correct": 3,
+        "correct": 9,
         "incorrect": 4
     },
     "unprecedented": {
-        "correct": 4,
-        "incorrect": 0
-    },
-    "delegate": {
-        "correct": 4,
-        "incorrect": 0
-    },
-    "spawn": {
-        "correct": 5,
-        "incorrect": 1
-    },
-    "speculate": {
-        "correct": 5,
-        "incorrect": 2
-    },
-    "broach": {
-        "correct": 4,
-        "incorrect": 1
-    },
-    "disseminate": {
-        "correct": 2,
-        "incorrect": 0
-    },
-    "innovative": {
-        "correct": 4,
-        "incorrect": 0
-    },
-    "detrimental": {
-        "correct": 3,
-        "incorrect": 2
-    },
-    "apparent": {
-        "correct": 4,
-        "incorrect": 2
-    },
-    "postulate": {
-        "correct": 5,
-        "incorrect": 2
-    },
-    "proxy": {
         "correct": 6,
         "incorrect": 1
     },
-    "bazaar": {
-        "correct": 3,
+    "delegate": {
+        "correct": 7,
+        "incorrect": 0
+    },
+    "spawn": {
+        "correct": 9,
         "incorrect": 1
+    },
+    "speculate": {
+        "correct": 7,
+        "incorrect": 2
+    },
+    "broach": {
+        "correct": 7,
+        "incorrect": 2
+    },
+    "disseminate": {
+        "correct": 5,
+        "incorrect": 1
+    },
+    "innovative": {
+        "correct": 5,
+        "incorrect": 0
+    },
+    "detrimental": {
+        "correct": 7,
+        "incorrect": 3
+    },
+    "apparent": {
+        "correct": 10,
+        "incorrect": 5
+    },
+    "postulate": {
+        "correct": 10,
+        "incorrect": 2
+    },
+    "proxy": {
+        "correct": 7,
+        "incorrect": 2
+    },
+    "bazaar": {
+        "correct": 7,
+        "incorrect": 1
+    },
+    "suffrage": {
+        "correct": 9,
+        "incorrect": 2
+    },
+    "allude": {
+        "correct": 5,
+        "incorrect": 0
+    },
+    "ephemeral": {
+        "correct": 8,
+        "incorrect": 4
+    },
+    "phenomenon": {
+        "correct": 6,
+        "incorrect": 2
+    },
+    "reverence": {
+        "correct": 11,
+        "incorrect": 2
+    },
+    "boast": {
+        "correct": 5,
+        "incorrect": 3
+    },
+    "paucity": {
+        "correct": 10,
+        "incorrect": 1
+    },
+    "conflate": {
+        "correct": 2,
+        "incorrect": 1
+    },
+    "incredulous": {
+        "correct": 10,
+        "incorrect": 3
+    },
+    "prompt": {
+        "correct": 9,
+        "incorrect": 3
+    },
+    "dispassionate": {
+        "correct": 5,
+        "incorrect": 4
+    },
+    "sporadic": {
+        "correct": 7,
+        "incorrect": 5
+    },
+    "irksome": {
+        "correct": 5,
+        "incorrect": 2
+    },
+    "idealistic": {
+        "correct": 5,
+        "incorrect": 0
+    },
+    "disparity": {
+        "correct": 5,
+        "incorrect": 3
     }
 }

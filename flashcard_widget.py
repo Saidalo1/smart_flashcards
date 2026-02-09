@@ -125,13 +125,13 @@ class FlashcardWidget(QWidget):
             QWidget#main_widget {
                 background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
                     stop:0 #1a1a2e, stop:0.5 #16213e, stop:1 #0f3460);
-                border: 1px solid rgba(255, 255, 255, 0.1);
+                border: 1px solid #2a2e45;
                 border-radius: 20px;
                 color: #ecf0f1;
             }
             
             QLabel#dragBar {
-                background: rgba(255, 255, 255, 0.08);
+                background: #222740;
                 border: none;
                 border-top-left-radius: 20px;
                 border-top-right-radius: 20px;
@@ -142,7 +142,7 @@ class FlashcardWidget(QWidget):
             }
             
             QLabel#dragBar:hover {
-                background: rgba(255, 255, 255, 0.15);
+                background: #2a3050;
                 color: #999;
             }
             
@@ -172,16 +172,16 @@ class FlashcardWidget(QWidget):
             
             QLineEdit {
                 padding: 14px 18px;
-                border: 2px solid rgba(255, 255, 255, 0.15);
+                border: 2px solid #2a3050;
                 border-radius: 12px;
                 font-size: 18px;
-                background: rgba(255, 255, 255, 0.08);
+                background: #1e2235;
                 color: #fff;
             }
             
             QLineEdit:focus {
                 border: 2px solid #00d9ff;
-                background: rgba(255, 255, 255, 0.12);
+                background: #222740;
             }
             
             QRadioButton {
@@ -189,23 +189,23 @@ class FlashcardWidget(QWidget):
                 padding: 10px 16px;
                 border: none;
                 color: #ddd;
-                background: rgba(255, 255, 255, 0.05);
+                background: #1e2235;
                 border-radius: 8px;
                 margin: 4px 0;
             }
             
             QRadioButton:hover {
-                background: rgba(255, 255, 255, 0.1);
+                background: #252a40;
                 color: #fff;
             }
             
             QRadioButton:checked {
-                background: rgba(0, 217, 255, 0.2);
+                background: #1a3a4a;
                 color: #00d9ff;
             }
             
             QGroupBox {
-                border: 1px solid rgba(255, 255, 255, 0.1);
+                border: 1px solid #2a2e45;
                 border-radius: 12px;
                 margin-top: 10px;
                 padding-top: 5px;
@@ -215,7 +215,7 @@ class FlashcardWidget(QWidget):
                 background: transparent;
                 border: none;
                 font-size: 20px;
-                color: rgba(231, 76, 60, 0.7);
+                color: #c0392b;
                 padding: 4px;
             }
             

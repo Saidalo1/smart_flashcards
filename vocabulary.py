@@ -2,8 +2,9 @@ import json
 import random
 import uuid
 from pathlib import Path
+from app_paths import get_data_dir
 
-DATA_PATH = Path(__file__).parent / "data" / "vocabulary.json"
+DATA_PATH = get_data_dir() / "vocabulary.json"
 # --- Adaptive Session Deck Constants ---
 # The ideal session size will be total_words / SESSION_SIZE_DIVISOR
 SESSION_SIZE_DIVISOR = 3

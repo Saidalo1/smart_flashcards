@@ -4,8 +4,9 @@ Each user has their own config, stats, and active topics.
 """
 import json
 from pathlib import Path
+from app_paths import get_data_dir
 
-DATA_DIR = Path(__file__).parent / 'data'
+DATA_DIR = get_data_dir()
 PROFILES_DIR = DATA_DIR / 'profiles'
 LAST_USER_FILE = DATA_DIR / 'last_user.txt'
 

@@ -32,7 +32,7 @@ QTabWidget::pane {
 }
 
 QTabBar::tab {
-    background: rgba(255, 255, 255, 0.05);
+    background: #1e2235;
     color: #888;
     padding: 12px 24px;
     margin-right: 4px;
@@ -43,37 +43,43 @@ QTabBar::tab {
 }
 
 QTabBar::tab:selected {
-    background: rgba(255, 255, 255, 0.1);
+    background: #252a40;
     color: #00d9ff;
 }
 
 QTabBar::tab:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: #222740;
     color: #fff;
 }
 
 /* Tables */
 QTableWidget {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #1c1f33;
+    border: 1px solid #2a2e45;
     border-radius: 12px;
-    gridline-color: rgba(255, 255, 255, 0.05);
+    gridline-color: #252840;
     color: #eee;
-    selection-background-color: rgba(0, 217, 255, 0.2);
+    selection-background-color: #1a3a4a;
+    alternate-background-color: #20243a;
 }
 
 QTableWidget::item {
     padding: 8px;
     border: none;
+    background: #1c1f33;
+}
+
+QTableWidget::item:alternate {
+    background: #20243a;
 }
 
 QTableWidget::item:selected {
-    background: rgba(0, 217, 255, 0.3);
+    background: #1a4a5a;
     color: #fff;
 }
 
 QHeaderView::section {
-    background: rgba(255, 255, 255, 0.05);
+    background: #1e2235;
     color: #00d9ff;
     padding: 12px;
     border: none;
@@ -114,8 +120,8 @@ QPushButton#dangerButton:hover {
 
 /* Input Fields */
 QLineEdit {
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: #1e2235;
+    border: 2px solid #2a2e45;
     border-radius: 8px;
     padding: 10px 16px;
     color: #eee;
@@ -130,23 +136,28 @@ QLineEdit:focus {
 QLabel {
     color: #ccc;
     font-size: 14px;
+    background: transparent;
+    border: none;
 }
 
 QLabel#titleLabel {
     color: #00d9ff;
     font-size: 18px;
     font-weight: 700;
+    background: transparent;
+    border: none;
 }
 
 QLabel#valueLabel {
     color: #fff;
     font-size: 24px;
     font-weight: 700;
+    background: transparent;
 }
 
 /* Slider */
 QSlider::groove:horizontal {
-    background: rgba(255, 255, 255, 0.1);
+    background: #2a2e45;
     height: 8px;
     border-radius: 4px;
 }
@@ -168,8 +179,8 @@ QSlider::sub-page:horizontal {
 
 /* SpinBox */
 QSpinBox {
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: #1e2235;
+    border: 2px solid #2a2e45;
     border-radius: 8px;
     padding: 8px 12px;
     color: #fff;
@@ -181,10 +192,57 @@ QSpinBox:focus {
     border: 2px solid #00d9ff;
 }
 
+/* ComboBox */
+QComboBox {
+    background: #1e2235;
+    border: 2px solid #2a2e45;
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: #fff;
+    font-size: 14px;
+}
+
+QComboBox:focus {
+    border: 2px solid #00d9ff;
+}
+
+QComboBox::drop-down {
+    border: none;
+    width: 30px;
+}
+
+QComboBox QAbstractItemView {
+    background: #1e2235;
+    border: 1px solid #2a2e45;
+    color: #fff;
+    selection-background-color: #1a4a5a;
+}
+
+/* CheckBox */
+QCheckBox {
+    color: #ccc;
+    font-size: 14px;
+    spacing: 8px;
+    background: transparent;
+}
+
+QCheckBox::indicator {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #2a2e45;
+    border-radius: 4px;
+    background: #1e2235;
+}
+
+QCheckBox::indicator:checked {
+    background: #00d9ff;
+    border-color: #00d9ff;
+}
+
 /* Frame for cards */
 QFrame#card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #1c1f33;
+    border: 1px solid #2a2e45;
     border-radius: 16px;
     padding: 20px;
 }

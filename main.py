@@ -1,11 +1,60 @@
 import sys
+import os
+import logging
 import threading
 from pathlib import Path
+from datetime import datetime
 from PyQt6.QtWidgets import QApplication, QSystemTrayIcon, QMenu
 import base64
 from PyQt6.QtGui import QIcon, QPixmap, QAction
 from PyQt6.QtCore import QTimer, pyqtSignal, QObject
 import signal
+
+from app_paths import get_data_dir
+
+
+def setup_logging():
+    """Sets up file logging in the data directory next to the exe."""
+    log_dir = get_data_dir()
+    log_dir.mkdir(parents=True, exist_ok=True)
+    log_file = log_dir / 'app.log'
+
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s [%(levelname)s] %(message)s',
+        handlers=[
+            logging.FileHandler(str(log_file), encoding='utf-8'),
+            logging.StreamHandler(sys.stdout),
+        ]
+    )
+
+    # Redirect print statements to logger
+    sys.stdout = LoggerWriter(logging.getLogger(), logging.INFO)
+    sys.stderr = LoggerWriter(logging.getLogger(), logging.ERROR)
+
+    logging.info("=" * 60)
+    logging.info(f"Smart Flashcards started at {datetime.now()}")
+    logging.info(f"Data directory: {log_dir}")
+    logging.info(f"Frozen: {getattr(sys, 'frozen', False)}")
+    logging.info(f"Python: {sys.version}")
+    logging.info(f"OS: {os.name} / {sys.platform}")
+    logging.info("=" * 60)
+
+
+class LoggerWriter:
+    """Redirects print() output to both log file and console."""
+    def __init__(self, logger, level):
+        self._logger = logger
+        self._level = level
+        self._original = sys.__stdout__ if level == logging.INFO else sys.__stderr__
+
+    def write(self, message):
+        if message and message.strip():
+            self._logger.log(self._level, message.strip())
+
+    def flush(self):
+        if self._original:
+            self._original.flush()
 
 from vocabulary import Vocabulary
 from flashcard_widget import FlashcardWidget
@@ -38,6 +87,7 @@ class FlashcardApp:
 
     def __init__(self):
         self.app = QApplication(sys.argv)
+        self.app.setStyle("Fusion")  # Required: WindowsVista style breaks border-radius rendering
         self.app.setQuitOnLastWindowClosed(False)
 
         # Load vocabulary first (needed for startup dialog)
@@ -422,5 +472,6 @@ class FlashcardApp:
 
 
 if __name__ == '__main__':
+    setup_logging()
     flashcard_app = FlashcardApp()
     flashcard_app.run()

@@ -1,7 +1,8 @@
 import json
 from pathlib import Path
+from app_paths import get_data_dir
 
-DATA_DIR = Path(__file__).parent / 'data'
+DATA_DIR = get_data_dir()
 DEFAULT_STATS_FILE = DATA_DIR / 'stats.json'
 
 

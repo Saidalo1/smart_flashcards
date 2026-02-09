@@ -4,8 +4,9 @@ Persists user settings to a JSON file.
 """
 import json
 from pathlib import Path
+from app_paths import get_data_dir
 
-DATA_DIR = Path(__file__).parent / 'data'
+DATA_DIR = get_data_dir()
 DEFAULT_CONFIG_FILE = DATA_DIR / 'config.json'
 
 # Default settings

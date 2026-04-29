@@ -124,7 +124,7 @@
         "incorrect": 1
     },
     "erratic": {
-        "correct": 1,
+        "correct": 2,
         "incorrect": 1
     },
     "mired": {
@@ -156,7 +156,7 @@
         "incorrect": 1
     },
     "eloquent": {
-        "correct": 1,
+        "correct": 2,
         "incorrect": 1
     },
     "coerce": {
@@ -184,7 +184,7 @@
         "incorrect": 0
     },
     "eccentric": {
-        "correct": 1,
+        "correct": 2,
         "incorrect": 0
     },
     "skeptical": {
@@ -329,14 +329,14 @@
     },
     "invoke": {
         "correct": 1,
-        "incorrect": 0
+        "incorrect": 1
     },
     "anecdote": {
         "correct": 2,
         "incorrect": 0
     },
     "mutable": {
-        "correct": 2,
+        "correct": 3,
         "incorrect": 0
     },
     "inherent": {
@@ -345,7 +345,7 @@
     },
     "omnipotence": {
         "correct": 2,
-        "incorrect": 1
+        "incorrect": 2
     },
     "inquisition": {
         "correct": 1,
@@ -356,7 +356,7 @@
         "incorrect": 0
     },
     "anomaly": {
-        "correct": 2,
+        "correct": 3,
         "incorrect": 0
     },
     "inhibit": {
@@ -364,7 +364,7 @@
         "incorrect": 1
     },
     "petty": {
-        "correct": 2,
+        "correct": 3,
         "incorrect": 0
     },
     "entrenched": {
@@ -372,7 +372,307 @@
         "incorrect": 0
     },
     "avid": {
+        "correct": 2,
+        "incorrect": 1
+    },
+    "vanity": {
+        "correct": 10,
+        "incorrect": 2
+    },
+    "venerable": {
+        "correct": 13,
+        "incorrect": 5
+    },
+    "yield": {
+        "correct": 8,
+        "incorrect": 0
+    },
+    "inexorable": {
+        "correct": 8,
+        "incorrect": 1
+    },
+    "conjecture": {
+        "correct": 12,
+        "incorrect": 7
+    },
+    "compel": {
+        "correct": 13,
+        "incorrect": 4
+    },
+    "feasible": {
+        "correct": 13,
+        "incorrect": 2
+    },
+    "quarrel": {
+        "correct": 10,
+        "incorrect": 8
+    },
+    "contemplate": {
+        "correct": 14,
+        "incorrect": 3
+    },
+    "reinforce": {
+        "correct": 15,
+        "incorrect": 2
+    },
+    "tenacity": {
+        "correct": 12,
+        "incorrect": 5
+    },
+    "equivocal": {
+        "correct": 10,
+        "incorrect": 2
+    },
+    "endeavor": {
+        "correct": 6,
+        "incorrect": 7
+    },
+    "intuition": {
+        "correct": 9,
+        "incorrect": 0
+    },
+    "brevity": {
+        "correct": 10,
+        "incorrect": 3
+    },
+    "insurrection": {
+        "correct": 8,
+        "incorrect": 1
+    },
+    "imprudent": {
+        "correct": 5,
+        "incorrect": 7
+    },
+    "authoritarian": {
+        "correct": 6,
+        "incorrect": 2
+    },
+    "ambivalent": {
+        "correct": 8,
+        "incorrect": 0
+    },
+    "arbitrary": {
+        "correct": 10,
+        "incorrect": 0
+    },
+    "stronghold": {
+        "correct": 6,
+        "incorrect": 0
+    },
+    "substantiate": {
+        "correct": 12,
+        "incorrect": 2
+    },
+    "tentative": {
+        "correct": 2,
+        "incorrect": 3
+    },
+    "crux": {
+        "correct": 10,
+        "incorrect": 1
+    },
+    "temperament": {
+        "correct": 11,
+        "incorrect": 5
+    },
+    "abundant": {
+        "correct": 14,
+        "incorrect": 4
+    },
+    "tact": {
+        "correct": 8,
+        "incorrect": 0
+    },
+    "to temper": {
+        "correct": 6,
+        "incorrect": 0
+    },
+    "upheaval": {
+        "correct": 13,
+        "incorrect": 1
+    },
+    "tumult": {
+        "correct": 1,
+        "incorrect": 2
+    },
+    "emigration": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "sluggish": {
+        "correct": 10,
+        "incorrect": 5
+    },
+    "irate": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "engender": {
+        "correct": 9,
+        "incorrect": 1
+    },
+    "viable": {
+        "correct": 10,
+        "incorrect": 0
+    },
+    "scorn": {
+        "correct": 15,
+        "incorrect": 2
+    },
+    "embrace": {
+        "correct": 10,
+        "incorrect": 2
+    },
+    "depiction": {
+        "correct": 2,
+        "incorrect": 2
+    },
+    "recollection": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "construe": {
+        "correct": 0,
+        "incorrect": 3
+    },
+    "transgress": {
+        "correct": 14,
+        "incorrect": 7
+    },
+    "conceive": {
+        "correct": 7,
+        "incorrect": 2
+    },
+    "sovereignty": {
+        "correct": 15,
+        "incorrect": 0
+    },
+    "evoke": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "analogy": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "burden": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "concede": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "superficial": {
+        "correct": 13,
+        "incorrect": 3
+    },
+    "demeanor": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "decree": {
+        "correct": 9,
+        "incorrect": 0
+    },
+    "indifference": {
+        "correct": 10,
+        "incorrect": 2
+    },
+    "lavish": {
+        "correct": 10,
+        "incorrect": 0
+    },
+    "obstinacy": {
+        "correct": 0,
+        "incorrect": 2
+    },
+    "labyrinthine": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "proliferate": {
+        "correct": 0,
+        "incorrect": 2
+    },
+    "objection": {
+        "correct": 0,
+        "incorrect": 2
+    },
+    "trifling": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "unwieldy": {
+        "correct": 2,
+        "incorrect": 1
+    },
+    "procure": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "corroborate": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "aesthetic": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "merely": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "dilemma": {
         "correct": 1,
         "incorrect": 1
+    },
+    "deceive": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "prominent": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "confinement": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "conventional": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "degrade": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "decrepit": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "protractor": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "detractor": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "consequential": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "monetize": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "dismiss": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "pugnacious": {
+        "correct": 1,
+        "incorrect": 0
     }
 }

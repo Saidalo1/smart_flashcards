@@ -108,12 +108,45 @@ class Vocabulary:
             print(f"[SHUFFLE]   - {card['english']} (category: {card.get('category')})")
 
     def get_all_topics(self):
-        """Returns a list of all unique topic/category names."""
+        """Returns a list of all unique topic/category names, sorted numerically."""
+        import re
         topics = set()
         for word in self.words:
             if 'category' in word and word['category']:
                 topics.add(word['category'])
-        return sorted(list(topics))
+
+        def sort_key(topic):
+            """Extracts the first number from category name for numerical sorting."""
+            match = re.search(r'\((\d+)', topic)
+            return int(match.group(1)) if match else 0
+
+        return sorted(list(topics), key=sort_key)
+
+    def get_grouped_topics(self):
+        """Returns topics grouped by prefix, e.g. {'SAT Vocabulary': ['SAT Vocabulary (1-15)', ...]}."""
+        import re
+        from collections import OrderedDict
+
+        all_topics = self.get_all_topics()
+        groups = OrderedDict()
+
+        for topic in all_topics:
+            # Split "SAT Vocabulary (1-15)" → group="SAT Vocabulary", sub="1-15"
+            match = re.match(r'^(.+?)\s*\((.+)\)$', topic)
+            if match:
+                group_name = match.group(1).strip()
+            else:
+                group_name = topic
+
+            if group_name not in groups:
+                groups[group_name] = []
+            groups[group_name].append(topic)
+
+        return groups
+
+    def get_word_count_for_topic(self, topic):
+        """Returns the number of words in a specific topic/category."""
+        return len([w for w in self.words if w.get('category') == topic])
 
     def save_words(self):
         """Saves the current list of words back to the JSON file."""

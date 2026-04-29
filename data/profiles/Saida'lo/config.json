@@ -2,11 +2,7 @@
   "timer_interval": 30,
   "hotkey": "shift_r",
   "active_topics": [
-    "SAT Vocabulary (1-15)",
-    "SAT Vocabulary (16-30)",
-    "SAT Vocabulary (31-45)",
-    "SAT Vocabulary (46-60)",
-    "SAT Vocabulary (61-75)"
+    "TOP 195 Digital SAT Vocabulary"
   ],
   "show_notifications": true,
   "topic_weights": {},

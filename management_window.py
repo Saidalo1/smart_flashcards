@@ -3,11 +3,12 @@
 Modern management window with vocabulary, statistics, and settings tabs.
 """
 
+import re
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QPushButton, QTableWidget, QTableWidgetItem, 
     QHeaderView, QAbstractItemView, QDialog, QLineEdit, QDialogButtonBox, 
     QMessageBox, QTabWidget, QHBoxLayout, QLabel, QSlider, QSpinBox,
-    QFrame, QGraphicsDropShadowEffect
+    QFrame, QGraphicsDropShadowEffect, QTreeWidget, QTreeWidgetItem
 )
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QColor, QFont
@@ -475,21 +476,40 @@ class ManagementWindow(QDialog):
         topics_desc.setWordWrap(True)
         topics_layout.addWidget(topics_desc)
 
-        # Create checkboxes for each topic
-        self.topic_checkboxes = {}
-        all_topics = self.vocabulary.get_all_topics()
-        active_topics = self.config_manager.active_topics
+        # Hierarchical topics tree
+        self.topics_tree = QTreeWidget()
+        self.topics_tree.setHeaderHidden(True)
+        self.topics_tree.setRootIsDecorated(True)
+        self.topics_tree.setAnimated(True)
+        self.topics_tree.setIndentation(24)
+        self.topics_tree.setStyleSheet("""
+            QTreeWidget {
+                background: #1e2235;
+                border: 1px solid #2a2e45;
+                border-radius: 8px;
+                color: #eee;
+                font-size: 14px;
+                padding: 4px;
+            }
+            QTreeWidget::item { padding: 5px 4px; border: none; }
+            QTreeWidget::item:hover { background: #252a40; }
+            QTreeWidget::item:selected { background: #1a4a5a; }
+            QTreeWidget::branch { background: transparent; }
+            QTreeWidget::indicator {
+                width: 16px; height: 16px;
+                border: 2px solid #2a2e45; border-radius: 4px;
+                background: #1e2235;
+            }
+            QTreeWidget::indicator:checked { background: #00d9ff; border-color: #00d9ff; }
+            QTreeWidget::indicator:indeterminate { background: #1a4a5a; border-color: #00d9ff; }
+            QHeaderView::section { background: transparent; border: none; }
+        """)
+        self.topics_tree.itemChanged.connect(self._on_settings_topic_changed)
 
-        from PyQt6.QtWidgets import QCheckBox
-        for topic in all_topics:
-            # Count words in this topic
-            word_count = len([w for w in self.vocabulary.words if w.get('category') == topic])
-            cb = QCheckBox(f"{topic} ({word_count} слов)")
-            cb.setChecked(topic in active_topics if active_topics else False)
-            cb.stateChanged.connect(self.save_topics_setting)
-            topics_layout.addWidget(cb)
-            self.topic_checkboxes[topic] = cb
+        self._topic_items = {}  # Maps full category name → QTreeWidgetItem
+        self._build_settings_topics_tree()
 
+        topics_layout.addWidget(self.topics_tree)
         layout.addWidget(topics_card)
 
         # Position selection card
@@ -575,11 +595,86 @@ class ManagementWindow(QDialog):
             self.config_manager.timer_interval = value
             print(f"Timer interval saved: {value} seconds")
 
+    def _build_settings_topics_tree(self):
+        """Builds the hierarchical topic tree for settings."""
+        self.topics_tree.blockSignals(True)
+        self.topics_tree.clear()
+        self._topic_items = {}
+
+        grouped = self.vocabulary.get_grouped_topics()
+        active_topics = self.config_manager.active_topics
+
+        for group_name, categories in grouped.items():
+            total_words = sum(
+                self.vocabulary.get_word_count_for_topic(cat) for cat in categories
+            )
+
+            parent = QTreeWidgetItem(self.topics_tree)
+            parent.setText(0, f"📁 {group_name} ({total_words} слов)")
+            parent.setFlags(
+                parent.flags()
+                | Qt.ItemFlag.ItemIsUserCheckable
+                | Qt.ItemFlag.ItemIsAutoTristate
+            )
+            parent.setExpanded(True)
+
+            for cat in categories:
+                word_count = self.vocabulary.get_word_count_for_topic(cat)
+                match = re.match(r'^.+?\s*\((.+)\)$', cat)
+                display_name = match.group(1) if match else cat
+
+                child = QTreeWidgetItem(parent)
+                child.setText(0, f"{display_name} ({word_count} слов)")
+                child.setFlags(child.flags() | Qt.ItemFlag.ItemIsUserCheckable)
+                is_checked = cat in active_topics if active_topics else False
+                child.setCheckState(0, Qt.CheckState.Checked if is_checked else Qt.CheckState.Unchecked)
+                child.setData(0, Qt.ItemDataRole.UserRole, cat)
+                self._topic_items[cat] = child
+
+            # Set parent state based on children
+            checked = sum(1 for c in categories if self._topic_items[c].checkState(0) == Qt.CheckState.Checked)
+            if checked == len(categories):
+                parent.setCheckState(0, Qt.CheckState.Checked)
+            elif checked == 0:
+                parent.setCheckState(0, Qt.CheckState.Unchecked)
+            else:
+                parent.setCheckState(0, Qt.CheckState.PartiallyChecked)
+
+        self.topics_tree.blockSignals(False)
+
+    def _on_settings_topic_changed(self, item, column):
+        """Handles tri-state checkbox logic and saves topics."""
+        self.topics_tree.blockSignals(True)
+
+        if item.childCount() > 0:
+            state = item.checkState(0)
+            if state != Qt.CheckState.PartiallyChecked:
+                for i in range(item.childCount()):
+                    item.child(i).setCheckState(0, state)
+        else:
+            parent = item.parent()
+            if parent:
+                checked = sum(
+                    1 for i in range(parent.childCount())
+                    if parent.child(i).checkState(0) == Qt.CheckState.Checked
+                )
+                total = parent.childCount()
+                if checked == 0:
+                    parent.setCheckState(0, Qt.CheckState.Unchecked)
+                elif checked == total:
+                    parent.setCheckState(0, Qt.CheckState.Checked)
+                else:
+                    parent.setCheckState(0, Qt.CheckState.PartiallyChecked)
+
+        self.topics_tree.blockSignals(False)
+        self.save_topics_setting()
+
     def save_topics_setting(self):
-        """Saves the active topics setting from checkboxes."""
-        if self.config_manager and hasattr(self, 'topic_checkboxes'):
+        """Saves the active topics setting from the tree widget."""
+        if self.config_manager and hasattr(self, '_topic_items'):
             active_topics = [
-                topic for topic, cb in self.topic_checkboxes.items() if cb.isChecked()
+                cat for cat, item in self._topic_items.items()
+                if item.checkState(0) == Qt.CheckState.Checked
             ]
             self.config_manager.active_topics = active_topics
             print(f"Active topics saved: {active_topics if active_topics else 'All topics'}")

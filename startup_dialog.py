@@ -2,10 +2,11 @@
 Startup dialog for selecting user profile and initial setup.
 """
 
+import re
 from PyQt6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, 
-    QListWidget, QListWidgetItem, QLineEdit, QMessageBox, QCheckBox,
-    QFrame, QWidget
+    QListWidget, QListWidgetItem, QLineEdit, QMessageBox,
+    QFrame, QWidget, QTreeWidget, QTreeWidgetItem
 )
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
@@ -24,22 +25,26 @@ QDialog {
 QLabel {
     color: #ccc;
     font-size: 14px;
+    background: transparent;
+    border: none;
 }
 
 QLabel#titleLabel {
     color: #00d9ff;
     font-size: 24px;
     font-weight: 700;
+    background: transparent;
 }
 
 QLabel#subtitleLabel {
     color: #888;
     font-size: 12px;
+    background: transparent;
 }
 
 QListWidget {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #1e2235;
+    border: 1px solid #2a2e45;
     border-radius: 12px;
     color: #fff;
     font-size: 16px;
@@ -53,11 +58,11 @@ QListWidget::item {
 }
 
 QListWidget::item:selected {
-    background: rgba(0, 217, 255, 0.3);
+    background: #1a4a5a;
 }
 
 QListWidget::item:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: #252a40;
 }
 
 QPushButton {
@@ -77,16 +82,16 @@ QPushButton:hover {
 }
 
 QPushButton#secondaryButton {
-    background: rgba(255, 255, 255, 0.1);
+    background: #252a40;
 }
 
 QPushButton#secondaryButton:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: #2a3050;
 }
 
 QLineEdit {
-    background: rgba(255, 255, 255, 0.08);
-    border: 2px solid rgba(255, 255, 255, 0.15);
+    background: #1e2235;
+    border: 2px solid #2a2e45;
     border-radius: 10px;
     padding: 12px 16px;
     color: #fff;
@@ -97,29 +102,79 @@ QLineEdit:focus {
     border: 2px solid #00d9ff;
 }
 
-QCheckBox {
-    color: #ccc;
+QFrame#card {
+    background: #1c1f33;
+    border: 1px solid #2a2e45;
+    border-radius: 16px;
+}
+
+/* Tree Widget for hierarchical topics */
+QTreeWidget {
+    background: #1c1f33;
+    border: 1px solid #2a2e45;
+    border-radius: 12px;
+    color: #eee;
     font-size: 14px;
-    spacing: 8px;
+    padding: 4px;
+    outline: none;
 }
 
-QCheckBox::indicator {
-    width: 20px;
-    height: 20px;
+QTreeWidget::item {
+    padding: 6px 4px;
+    border: none;
+}
+
+QTreeWidget::item:hover {
+    background: #252a40;
+    border-radius: 6px;
+}
+
+QTreeWidget::item:selected {
+    background: #1a4a5a;
+    border-radius: 6px;
+}
+
+QTreeWidget::branch {
+    background: transparent;
+}
+
+QTreeWidget::branch:has-children:!has-siblings:closed,
+QTreeWidget::branch:closed:has-children:has-siblings {
+    image: none;
+    border-image: none;
+}
+
+QTreeWidget::branch:open:has-children:!has-siblings,
+QTreeWidget::branch:open:has-children:has-siblings {
+    image: none;
+    border-image: none;
+}
+
+QTreeWidget::indicator {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #2a2e45;
     border-radius: 4px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.05);
+    background: #1e2235;
 }
 
-QCheckBox::indicator:checked {
+QTreeWidget::indicator:checked {
     background: #00d9ff;
     border-color: #00d9ff;
 }
 
-QFrame#card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
+QTreeWidget::indicator:indeterminate {
+    background: #1a4a5a;
+    border-color: #00d9ff;
+}
+
+QHeaderView {
+    background: transparent;
+}
+
+QHeaderView::section {
+    background: transparent;
+    border: none;
 }
 """
 
@@ -134,7 +189,7 @@ class StartupDialog(QDialog):
         self.selected_topics = []
         
         self.setWindowTitle("Smart Flashcards — Добро пожаловать!")
-        self.setMinimumSize(500, 600)
+        self.setMinimumSize(500, 700)
         self.setStyleSheet(STARTUP_STYLE)
         
         self.init_ui()
@@ -186,7 +241,7 @@ class StartupDialog(QDialog):
         new_profile_layout.addLayout(input_layout)
         layout.addWidget(new_profile_frame)
         
-        # Topics selection (for new users)
+        # Topics selection with hierarchical tree
         if self.vocabulary:
             topics_frame = QFrame()
             topics_frame.setObjectName("card")
@@ -198,21 +253,94 @@ class StartupDialog(QDialog):
             topics_label.setFont(QFont("Segoe UI", 14))
             topics_layout.addWidget(topics_label)
             
-            self.topic_checkboxes = {}
-            all_topics = self.vocabulary.get_all_topics()
-            for topic in all_topics:
-                word_count = len([w for w in self.vocabulary.words if w.get('category') == topic])
-                cb = QCheckBox(f"{topic} ({word_count} слов)")
-                cb.setChecked(True)  # All checked by default for new users
-                topics_layout.addWidget(cb)
-                self.topic_checkboxes[topic] = cb
+            self.topics_tree = QTreeWidget()
+            self.topics_tree.setHeaderHidden(True)
+            self.topics_tree.setRootIsDecorated(True)
+            self.topics_tree.setAnimated(True)
+            self.topics_tree.setIndentation(24)
+            self.topics_tree.itemChanged.connect(self._on_topic_item_changed)
             
+            self._build_topics_tree()
+            
+            topics_layout.addWidget(self.topics_tree)
             layout.addWidget(topics_frame)
         
         # Continue button
         continue_btn = QPushButton("▶️ Продолжить")
         continue_btn.clicked.connect(self.select_and_continue)
         layout.addWidget(continue_btn)
+    
+    def _build_topics_tree(self):
+        """Builds the hierarchical topic tree from vocabulary groups."""
+        self.topics_tree.blockSignals(True)
+        self.topics_tree.clear()
+        self._topic_items = {}  # Maps full category name → QTreeWidgetItem
+
+        grouped = self.vocabulary.get_grouped_topics()
+
+        for group_name, categories in grouped.items():
+            # Calculate total words in group
+            total_words = sum(
+                self.vocabulary.get_word_count_for_topic(cat) for cat in categories
+            )
+
+            # Create parent item
+            parent = QTreeWidgetItem(self.topics_tree)
+            parent.setText(0, f"📁 {group_name} ({total_words} слов)")
+            parent.setFlags(
+                parent.flags()
+                | Qt.ItemFlag.ItemIsUserCheckable
+                | Qt.ItemFlag.ItemIsAutoTristate
+            )
+            parent.setCheckState(0, Qt.CheckState.Checked)
+            parent.setExpanded(True)
+
+            # Create child items for each sub-category
+            for cat in categories:
+                word_count = self.vocabulary.get_word_count_for_topic(cat)
+                # Extract the range part from "SAT Vocabulary (1-15)" → "1-15"
+                match = re.match(r'^.+?\s*\((.+)\)$', cat)
+                display_name = match.group(1) if match else cat
+
+                child = QTreeWidgetItem(parent)
+                child.setText(0, f"{display_name} ({word_count} слов)")
+                child.setFlags(
+                    child.flags() | Qt.ItemFlag.ItemIsUserCheckable
+                )
+                child.setCheckState(0, Qt.CheckState.Checked)
+                child.setData(0, Qt.ItemDataRole.UserRole, cat)  # Store full category name
+                self._topic_items[cat] = child
+
+        self.topics_tree.blockSignals(False)
+
+    def _on_topic_item_changed(self, item, column):
+        """Handles tri-state checkbox logic for parent/child items."""
+        self.topics_tree.blockSignals(True)
+
+        # If parent changed → update all children
+        if item.childCount() > 0:
+            state = item.checkState(0)
+            if state != Qt.CheckState.PartiallyChecked:
+                for i in range(item.childCount()):
+                    item.child(i).setCheckState(0, state)
+        else:
+            # Child changed → update parent tri-state
+            parent = item.parent()
+            if parent:
+                checked = 0
+                total = parent.childCount()
+                for i in range(total):
+                    if parent.child(i).checkState(0) == Qt.CheckState.Checked:
+                        checked += 1
+
+                if checked == 0:
+                    parent.setCheckState(0, Qt.CheckState.Unchecked)
+                elif checked == total:
+                    parent.setCheckState(0, Qt.CheckState.Checked)
+                else:
+                    parent.setCheckState(0, Qt.CheckState.PartiallyChecked)
+
+        self.topics_tree.blockSignals(False)
     
     def load_profiles(self):
         """Loads existing profiles into the list."""
@@ -261,10 +389,11 @@ class StartupDialog(QDialog):
         self.selected_username = current_item.data(Qt.ItemDataRole.UserRole)
         profile_manager.set_last_user(self.selected_username)
         
-        # Get selected topics
-        if hasattr(self, 'topic_checkboxes'):
+        # Get selected topics from tree
+        if hasattr(self, '_topic_items'):
             self.selected_topics = [
-                topic for topic, cb in self.topic_checkboxes.items() if cb.isChecked()
+                cat for cat, item in self._topic_items.items()
+                if item.checkState(0) == Qt.CheckState.Checked
             ]
         
         self.accept()

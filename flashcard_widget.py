@@ -92,8 +92,25 @@ class FlashcardWidget(QWidget):
         top_layout = QHBoxLayout()
         self.question_label = QLabel()
         top_layout.addWidget(self.question_label, 1)
+        
+        # --- Hint Button (💡) ---
+        self.hint_button = QPushButton("💡")
+        self.hint_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.hint_button.setObjectName("hintButton")
+        self.hint_button.setFixedSize(32, 32)
+        self.hint_button.setToolTip("Показать подсказку / смысл слова")
+        self.hint_button.clicked.connect(self.toggle_hint)
+        top_layout.addWidget(self.hint_button, 0, Qt.AlignmentFlag.AlignTop)
+        
         top_layout.addWidget(self._create_delete_button(), 0, Qt.AlignmentFlag.AlignTop)
         content_layout.addLayout(top_layout)
+        
+        # --- Hint Label (hidden by default) ---
+        self.hint_label = QLabel()
+        self.hint_label.setObjectName("hintLabel")
+        self.hint_label.setWordWrap(True)
+        self.hint_label.hide()
+        content_layout.addWidget(self.hint_label)
         
         main_layout.addLayout(content_layout)
         self.content_layout = content_layout  # Save reference
@@ -227,6 +244,29 @@ class FlashcardWidget(QWidget):
             QPushButton#deleteButton:hover {
                 color: #e74c3c;
             }
+            
+            QPushButton#hintButton {
+                background: transparent;
+                border: none;
+                font-size: 20px;
+                color: #e67e22;
+                padding: 4px;
+            }
+            
+            QPushButton#hintButton:hover {
+                color: #f1c40f;
+            }
+            
+            QLabel#hintLabel {
+                font-size: 15px;
+                color: #f1c40f;
+                background: rgba(241, 196, 15, 0.08);
+                border: 1px dashed rgba(241, 196, 15, 0.4);
+                border-radius: 8px;
+                padding: 10px 14px;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
         """)
 
     def setup_text_input_ui(self, layout):
@@ -313,6 +353,28 @@ class FlashcardWidget(QWidget):
             self.check_button.setStyleSheet("background-color: #e74c3c;")
 
         QTimer.singleShot(4000, self.close)  # 4 seconds to see the answer
+
+    def toggle_hint(self):
+        """Toggles the visibility of the word's hint/meaning."""
+        if self.hint_label.isVisible():
+            self.hint_label.hide()
+            self.hint_button.setText("💡")
+            self.adjustSize()
+        else:
+            custom_hint = self.card.get('hint')
+            if custom_hint:
+                hint_text = custom_hint
+            else:
+                if self.question_lang == 'english':
+                    opposite_val = self.card.get('uzbek')
+                else:
+                    opposite_val = self.card.get('english')
+                hint_text = f"Перевод: {opposite_val}"
+            
+            self.hint_label.setText(f"💡 <i>{hint_text}</i>")
+            self.hint_label.show()
+            self.hint_button.setText("✨")
+            self.adjustSize()
 
     def request_delete(self):
         """Emits the signal to request card deletion and closes the widget."""

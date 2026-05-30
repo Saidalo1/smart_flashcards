@@ -21,8 +21,13 @@ class FlashcardWidget(QWidget):
         has_grammar = card.get('grammar_pattern') is not None
         self.question_type = 'grammar' if has_grammar and random.random() < 0.4 else 'translation'
         
+        # Check if it's the new Transition category
+        self.is_transition_card = (self.card.get('category') == 'SAT Transitions & Grammar')
+
         # For translation questions - determine language direction
-        if self.question_type == 'translation':
+        if self.is_transition_card:
+            self.question_lang, self.answer_lang = 'english', 'uzbek'
+        elif self.question_type == 'translation':
             if random.choice([True, False]):
                 self.question_lang, self.answer_lang = 'english', 'uzbek'
             else:
@@ -256,6 +261,8 @@ class FlashcardWidget(QWidget):
         """Sets the question word on the label."""
         if self.question_type == 'grammar':
             self.question_label.setText(f"Grammar pattern for: <b>{self.card['english']}</b>")
+        elif getattr(self, 'is_transition_card', False):
+            self.question_label.setText(f"Select Category for: <b>{self.card[self.question_lang]}</b>")
         else:
             self.question_label.setText(f"Translate: <b>{self.card[self.question_lang]}</b>")
 

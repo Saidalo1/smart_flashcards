@@ -136,7 +136,7 @@
         "incorrect": 0
     },
     "abrupt": {
-        "correct": 2,
+        "correct": 3,
         "incorrect": 0
     },
     "inevitable": {
@@ -212,7 +212,7 @@
         "incorrect": 1
     },
     "delegate": {
-        "correct": 7,
+        "correct": 9,
         "incorrect": 1
     },
     "spawn": {
@@ -252,7 +252,7 @@
         "incorrect": 2
     },
     "bazaar": {
-        "correct": 10,
+        "correct": 11,
         "incorrect": 1
     },
     "suffrage": {
@@ -672,6 +672,194 @@
         "incorrect": 0
     },
     "pugnacious": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "for example, for instance, to illustrate": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "indeed, in fact": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "notably, particularly, specifically": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "despite this, although, even though": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "as a result, hence, accordingly": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "furthermore, moreover, in addition": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "imminent": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "proclaim": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "irrelevant to": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "latent": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "doubt": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "tenuous": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "compose": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "waive": {
+        "correct": 2,
+        "incorrect": 1
+    },
+    "unbiased": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "repudiate": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "disorienting": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "secretive": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "impartial": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "exemplify": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "persistent": {
+        "correct": 1,
+        "incorrect": 2
+    },
+    "elusive": {
+        "correct": 2,
+        "incorrect": 1
+    },
+    "hibernation": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "recant": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "predetermined": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "careful": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "catastrophic": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "refute": {
+        "correct": 1,
+        "incorrect": 1
+    },
+    "straightforward": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "demand": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "unpredictable": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "mandatory": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "circumvent": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "eclipse": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "interpret": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "representative of": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "prediction": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "replicable": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "overshadowed by": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "synchronization": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "ordinary": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "operative": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "therefore": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "on the other hand": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "however": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "besides": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "for example": {
         "correct": 1,
         "incorrect": 0
     }

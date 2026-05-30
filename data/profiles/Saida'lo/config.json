@@ -2,10 +2,10 @@
   "timer_interval": 30,
   "hotkey": "shift_r",
   "active_topics": [
-    "TOP 195 Digital SAT Vocabulary"
+    "SAT Transitions & Grammar"
   ],
   "show_notifications": true,
   "topic_weights": {},
   "theme": "dark",
-  "card_position": "bottom_right"
+  "card_position": "mouse"
 }

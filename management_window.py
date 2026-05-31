@@ -616,7 +616,7 @@ class ManagementWindow(QDialog):
                 | Qt.ItemFlag.ItemIsUserCheckable
                 | Qt.ItemFlag.ItemIsAutoTristate
             )
-            parent.setExpanded(True)
+            parent.setExpanded(False)
 
             for cat in categories:
                 word_count = self.vocabulary.get_word_count_for_topic(cat)

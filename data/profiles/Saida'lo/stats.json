@@ -844,22 +844,218 @@
         "incorrect": 0
     },
     "therefore": {
-        "correct": 0,
-        "incorrect": 1
+        "correct": 3,
+        "incorrect": 2
     },
     "on the other hand": {
-        "correct": 0,
-        "incorrect": 1
+        "correct": 1,
+        "incorrect": 2
     },
     "however": {
-        "correct": 0,
-        "incorrect": 1
+        "correct": 2,
+        "incorrect": 2
     },
     "besides": {
+        "correct": 1,
+        "incorrect": 5
+    },
+    "for example": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "effectively": {
+        "correct": 1,
+        "incorrect": 3
+    },
+    "just as": {
         "correct": 0,
         "incorrect": 1
     },
-    "for example": {
+    "that being said": {
+        "correct": 1,
+        "incorrect": 2
+    },
+    "likewise": {
+        "correct": 1,
+        "incorrect": 1
+    },
+    "indeed": {
+        "correct": 3,
+        "incorrect": 2
+    },
+    "still": {
+        "correct": 0,
+        "incorrect": 4
+    },
+    "and": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "specifically": {
+        "correct": 0,
+        "incorrect": 2
+    },
+    "instead": {
+        "correct": 1,
+        "incorrect": 1
+    },
+    "to this end": {
+        "correct": 0,
+        "incorrect": 5
+    },
+    "that said": {
+        "correct": 0,
+        "incorrect": 2
+    },
+    "alternatively": {
+        "correct": 2,
+        "incorrect": 1
+    },
+    "in other words": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "in sum": {
+        "correct": 0,
+        "incorrect": 2
+    },
+    "whereas": {
+        "correct": 1,
+        "incorrect": 1
+    },
+    "in spite of": {
+        "correct": 0,
+        "incorrect": 3
+    },
+    "nonetheless": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "since": {
+        "correct": 0,
+        "incorrect": 2
+    },
+    "next": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "although": {
+        "correct": 2,
+        "incorrect": 1
+    },
+    "yet": {
+        "correct": 0,
+        "incorrect": 4
+    },
+    "with this in mind": {
+        "correct": 0,
+        "incorrect": 2
+    },
+    "in any case": {
+        "correct": 0,
+        "incorrect": 3
+    },
+    "lastly": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "alternately": {
+        "correct": 2,
+        "incorrect": 2
+    },
+    "moreover": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "elsewhere": {
+        "correct": 0,
+        "incorrect": 5
+    },
+    "conversely": {
+        "correct": 1,
+        "incorrect": 1
+    },
+    "even so": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "hence": {
+        "correct": 0,
+        "incorrect": 1
+    },
+    "ultimately": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "but": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "so": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "despite": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "essentially": {
+        "correct": 3,
+        "incorrect": 1
+    },
+    "as a result": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "because": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "consequently": {
+        "correct": 1,
+        "incorrect": 1
+    },
+    "furthermore": {
+        "correct": 1,
+        "incorrect": 1
+    },
+    "afterward": {
+        "correct": 0,
+        "incorrect": 2
+    },
+    "as such": {
+        "correct": 0,
+        "incorrect": 2
+    },
+    "finally": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "additionally": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "even though": {
+        "correct": 1,
+        "incorrect": 1
+    },
+    "in contrast": {
+        "correct": 2,
+        "incorrect": 0
+    },
+    "accordingly": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "previously": {
+        "correct": 1,
+        "incorrect": 0
+    },
+    "regardless": {
+        "correct": 0,
+        "incorrect": 2
+    },
+    "on the contrary": {
         "correct": 1,
         "incorrect": 0
     }

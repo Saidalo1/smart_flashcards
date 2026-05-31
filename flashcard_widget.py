@@ -1,8 +1,55 @@
 import random
 from PyQt6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton, QGroupBox, QRadioButton
+    QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton, QGroupBox, QRadioButton, QFrame
 )
 from PyQt6.QtCore import Qt, pyqtSignal, QTimer, QPoint
+from PyQt6.QtGui import QCursor
+
+class HintPopupWindow(QFrame):
+    """A floating popover window that displays the word's hint/meaning."""
+    def __init__(self, text, parent=None):
+        super().__init__(parent, Qt.WindowType.ToolTip | Qt.WindowType.FramelessWindowHint)
+        self.setObjectName("hintPopup")
+        
+        layout = QHBoxLayout(self)
+        layout.setContentsMargins(10, 8, 10, 8)
+        layout.setSpacing(6)
+        
+        self.label = QLabel(f"💡 <i>{text}</i>")
+        self.label.setObjectName("hintPopupLabel")
+        self.label.setWordWrap(True)
+        self.label.setStyleSheet("font-size: 14px; color: #f1c40f; background: transparent; border: none; padding: 0;")
+        layout.addWidget(self.label)
+        
+        self.close_btn = QPushButton("×")
+        self.close_btn.setObjectName("hintPopupClose")
+        self.close_btn.setFixedSize(16, 16)
+        self.close_btn.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.close_btn.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.close_btn.clicked.connect(self.close)
+        self.close_btn.setStyleSheet("""
+            QPushButton#hintPopupClose {
+                background: transparent;
+                border: none;
+                color: #888;
+                font-size: 14px;
+                font-weight: bold;
+                padding: 0;
+            }
+            QPushButton#hintPopupClose:hover {
+                color: #e74c3c;
+            }
+        """)
+        layout.addWidget(self.close_btn, 0, Qt.AlignmentFlag.AlignTop)
+        
+        self.setStyleSheet("""
+            QFrame#hintPopup {
+                background: rgba(26, 26, 46, 0.95);
+                border: 1px solid #f1c40f;
+                border-radius: 8px;
+            }
+        """)
+        self.adjustSize()
 
 class FlashcardWidget(QWidget):
     """A widget to display a flashcard question and handle user input."""
@@ -91,26 +138,12 @@ class FlashcardWidget(QWidget):
         # --- Top layout for question and delete button ---
         top_layout = QHBoxLayout()
         self.question_label = QLabel()
+        self.question_label.setTextInteractionFlags(Qt.TextInteractionFlag.LinksAccessibleByMouse)
+        self.question_label.linkActivated.connect(self.toggle_hint)
         top_layout.addWidget(self.question_label, 1)
-        
-        # --- Hint Button (💡) ---
-        self.hint_button = QPushButton("💡")
-        self.hint_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
-        self.hint_button.setObjectName("hintButton")
-        self.hint_button.setFixedSize(32, 32)
-        self.hint_button.setToolTip("Показать подсказку / смысл слова")
-        self.hint_button.clicked.connect(self.toggle_hint)
-        top_layout.addWidget(self.hint_button, 0, Qt.AlignmentFlag.AlignTop)
         
         top_layout.addWidget(self._create_delete_button(), 0, Qt.AlignmentFlag.AlignTop)
         content_layout.addLayout(top_layout)
-        
-        # --- Hint Label (hidden by default) ---
-        self.hint_label = QLabel()
-        self.hint_label.setObjectName("hintLabel")
-        self.hint_label.setWordWrap(True)
-        self.hint_label.hide()
-        content_layout.addWidget(self.hint_label)
         
         main_layout.addLayout(content_layout)
         self.content_layout = content_layout  # Save reference
@@ -245,28 +278,6 @@ class FlashcardWidget(QWidget):
                 color: #e74c3c;
             }
             
-            QPushButton#hintButton {
-                background: transparent;
-                border: none;
-                font-size: 20px;
-                color: #e67e22;
-                padding: 4px;
-            }
-            
-            QPushButton#hintButton:hover {
-                color: #f1c40f;
-            }
-            
-            QLabel#hintLabel {
-                font-size: 15px;
-                color: #f1c40f;
-                background: rgba(241, 196, 15, 0.08);
-                border: 1px dashed rgba(241, 196, 15, 0.4);
-                border-radius: 8px;
-                padding: 10px 14px;
-                margin-top: 5px;
-                margin-bottom: 5px;
-            }
         """)
 
     def setup_text_input_ui(self, layout):
@@ -299,12 +310,14 @@ class FlashcardWidget(QWidget):
 
     def set_question(self):
         """Sets the question word on the label."""
+        hint_html = " <a href='hint' style='text-decoration:none; color:#f1c40f;'><sup>💡</sup></a>"
+        
         if self.question_type == 'grammar':
-            self.question_label.setText(f"Grammar pattern for: <b>{self.card['english']}</b>")
+            self.question_label.setText(f"Grammar pattern for: <b>{self.card['english']}</b>{hint_html}")
         elif getattr(self, 'is_transition_card', False):
-            self.question_label.setText(f"Select Category for: <b>{self.card[self.question_lang]}</b>")
+            self.question_label.setText(f"Transition: <b>{self.card[self.question_lang]}</b>{hint_html}")
         else:
-            self.question_label.setText(f"Translate: <b>{self.card[self.question_lang]}</b>")
+            self.question_label.setText(f"Translate: <b>{self.card[self.question_lang]}</b>{hint_html}")
 
     def check_answer(self):
         """Checks the answer and provides dynamic visual feedback."""
@@ -354,27 +367,26 @@ class FlashcardWidget(QWidget):
 
         QTimer.singleShot(4000, self.close)  # 4 seconds to see the answer
 
-    def toggle_hint(self):
-        """Toggles the visibility of the word's hint/meaning."""
-        if self.hint_label.isVisible():
-            self.hint_label.hide()
-            self.hint_button.setText("💡")
-            self.adjustSize()
-        else:
-            custom_hint = self.card.get('hint')
-            if custom_hint:
-                hint_text = custom_hint
-            else:
-                if self.question_lang == 'english':
-                    opposite_val = self.card.get('uzbek')
-                else:
-                    opposite_val = self.card.get('english')
-                hint_text = f"Перевод: {opposite_val}"
+    def toggle_hint(self, link=None):
+        """Toggles the visibility of the custom hint/meaning popover."""
+        if hasattr(self, 'hint_popup') and self.hint_popup and self.hint_popup.isVisible():
+            self.hint_popup.close()
+            self.hint_popup = None
+            return
             
-            self.hint_label.setText(f"💡 <i>{hint_text}</i>")
-            self.hint_label.show()
-            self.hint_button.setText("✨")
-            self.adjustSize()
+        hint_text = self.card.get('hint', '').strip()
+        if hint_text:
+            self.hint_popup = HintPopupWindow(hint_text, self)
+            
+            # Position at top-right of the mouse click position (near the lamp icon)
+            cursor_pos = QCursor.pos()
+            popup_size = self.hint_popup.sizeHint()
+            
+            x = cursor_pos.x() + 10
+            y = cursor_pos.y() - popup_size.height() - 10
+            
+            self.hint_popup.move(x, y)
+            self.hint_popup.show()
 
     def request_delete(self):
         """Emits the signal to request card deletion and closes the widget."""

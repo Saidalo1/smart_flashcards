@@ -2949,695 +2949,758 @@
   },
   {
     "english": "Also",
-    "uzbek": "add info",
+    "uzbek": "add info -> add info",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-001",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "shuningdek"
   },
   {
     "english": "And",
-    "uzbek": "add info",
+    "uzbek": "add info -> add info",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-002",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "va"
   },
   {
     "english": "Furthermore",
-    "uzbek": "add info",
+    "uzbek": "add info -> add info",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-003",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "bundan tashqari"
   },
   {
     "english": "Moreover",
-    "uzbek": "add info",
+    "uzbek": "add info -> add info",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-004",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "qolaversa"
   },
   {
     "english": "Additionally",
-    "uzbek": "add info",
+    "uzbek": "add info -> add info",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-005",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "qo'shimcha ravishda"
   },
   {
     "english": "Besides",
-    "uzbek": "add info",
+    "uzbek": "add info -> add info",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-006",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "bundan tashqari"
   },
   {
     "english": "For example",
-    "uzbek": "add info",
+    "uzbek": "add info -> give examples",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-007",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "masalan"
   },
   {
     "english": "For instance",
-    "uzbek": "add info",
+    "uzbek": "add info -> give examples",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-008",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "misol uchun"
   },
   {
     "english": "Specifically",
-    "uzbek": "add info",
+    "uzbek": "add info -> give examples",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-009",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "xususan"
   },
   {
     "english": "Effectively",
-    "uzbek": "add info",
+    "uzbek": "add info -> define, clarify",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-010",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "amalda"
   },
   {
     "english": "Essentially",
-    "uzbek": "add info",
+    "uzbek": "add info -> define, clarify",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-011",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "mohiyatan"
   },
   {
     "english": "In other words",
-    "uzbek": "add info",
+    "uzbek": "add info -> define, clarify",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-012",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "boshqacha aytganda"
   },
   {
     "english": "That is",
-    "uzbek": "add info",
+    "uzbek": "add info -> define, clarify",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-013",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "ya'ni"
   },
   {
     "english": "In fact",
-    "uzbek": "add info",
+    "uzbek": "add info -> emphasize",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-014",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "aslida"
   },
   {
     "english": "Indeed",
-    "uzbek": "add info",
+    "uzbek": "add info -> emphasize",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-015",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "haqiqatdan ham"
   },
   {
     "english": "Likewise",
-    "uzbek": "add info",
+    "uzbek": "add info -> compare",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-016",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "xuddi shunday"
   },
   {
     "english": "Similarly",
-    "uzbek": "add info",
+    "uzbek": "add info -> compare",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-017",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "o'xshash tarzda"
   },
   {
     "english": "Just as",
-    "uzbek": "add info",
+    "uzbek": "add info -> compare",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-018",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "xuddi...dek"
   },
   {
     "english": "In the same way",
-    "uzbek": "add info",
+    "uzbek": "add info -> compare",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-019",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "xuddi shu tarzda"
   },
   {
     "english": "Alternatively",
-    "uzbek": "contradict",
+    "uzbek": "contradict -> contradict",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-020",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "muqobil ravishda"
   },
   {
     "english": "Alternately",
-    "uzbek": "contradict",
+    "uzbek": "contradict -> contradict",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-021",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "galma-galdan"
   },
   {
     "english": "Although",
-    "uzbek": "contradict",
+    "uzbek": "contradict -> contradict",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-022",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "garchi"
   },
   {
     "english": "Even though",
-    "uzbek": "contradict",
+    "uzbek": "contradict -> contradict",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-023",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "garchi"
   },
   {
     "english": "But",
-    "uzbek": "contradict",
+    "uzbek": "contradict -> contradict",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-024",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "ammo"
   },
   {
     "english": "Conversely",
-    "uzbek": "contradict",
+    "uzbek": "contradict -> contradict",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-025",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "aksincha"
   },
   {
     "english": "Despite",
-    "uzbek": "contradict",
+    "uzbek": "contradict -> contradict",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-026",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "qaramasdan"
   },
   {
     "english": "In spite of",
-    "uzbek": "contradict",
+    "uzbek": "contradict -> contradict",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-027",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "bunga qaramay"
   },
   {
     "english": "Even so",
-    "uzbek": "contradict",
+    "uzbek": "contradict -> contradict",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-028",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "shunday bo'lsa ham"
   },
   {
     "english": "However",
-    "uzbek": "contradict",
+    "uzbek": "contradict -> contradict",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-029",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "biroq"
   },
   {
     "english": "That said",
-    "uzbek": "contradict",
+    "uzbek": "contradict -> contradict",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-030",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "shunday bo'lsa-da"
   },
   {
     "english": "In contrast",
-    "uzbek": "contradict",
+    "uzbek": "contradict -> contradict",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-031",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "farqli o'laroq"
   },
   {
     "english": "Instead",
-    "uzbek": "contradict",
+    "uzbek": "contradict -> contradict",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-032",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "buning o'rniga"
   },
   {
     "english": "Nonetheless",
-    "uzbek": "contradict",
+    "uzbek": "contradict -> contradict",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-033",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "shunga qaramay"
   },
   {
     "english": "On the contrary",
-    "uzbek": "contradict",
+    "uzbek": "contradict -> contradict",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-034",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "aksincha"
   },
   {
     "english": "On the other hand",
-    "uzbek": "contradict",
+    "uzbek": "contradict -> contradict",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-035",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "boshqa tomondan"
   },
   {
     "english": "Still",
-    "uzbek": "contradict",
+    "uzbek": "contradict -> contradict",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-036",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "shunga qaramay"
   },
   {
     "english": "Yet",
-    "uzbek": "contradict",
+    "uzbek": "contradict -> contradict",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-037",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "lekin"
   },
   {
     "english": "Regardless",
-    "uzbek": "contradict",
+    "uzbek": "contradict -> contradict",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-038",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "baribir"
   },
   {
     "english": "While",
-    "uzbek": "contradict",
+    "uzbek": "contradict -> contradict",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-039",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "holbuki"
   },
   {
     "english": "Whereas",
-    "uzbek": "contradict",
+    "uzbek": "contradict -> contradict",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-040",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "holbuki"
   },
   {
     "english": "Accordingly",
-    "uzbek": "cause and effect",
+    "uzbek": "cause and effect -> cause and effect",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-041",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "shunga ko'ra"
   },
   {
     "english": "As a result",
-    "uzbek": "cause and effect",
+    "uzbek": "cause and effect -> cause and effect",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-042",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "natijada"
   },
   {
     "english": "As such",
-    "uzbek": "cause and effect",
+    "uzbek": "cause and effect -> cause and effect",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-043",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "shunday qilib"
   },
   {
     "english": "Because",
-    "uzbek": "cause and effect",
+    "uzbek": "cause and effect -> cause and effect",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-044",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "chunki"
   },
   {
     "english": "Consequently",
-    "uzbek": "cause and effect",
+    "uzbek": "cause and effect -> cause and effect",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-045",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "oqibatda"
   },
   {
     "english": "Hence",
-    "uzbek": "cause and effect",
+    "uzbek": "cause and effect -> cause and effect",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-046",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "shu sababli"
   },
   {
     "english": "Since",
-    "uzbek": "cause and effect",
+    "uzbek": "cause and effect -> cause and effect",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-047",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "sababli"
   },
   {
     "english": "So",
-    "uzbek": "cause and effect",
+    "uzbek": "cause and effect -> cause and effect",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-048",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "shu sababdan"
   },
   {
     "english": "Thus",
-    "uzbek": "cause and effect",
+    "uzbek": "cause and effect -> cause and effect",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-049",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "shu tarzda"
   },
   {
     "english": "Therefore",
-    "uzbek": "cause and effect",
+    "uzbek": "cause and effect -> cause and effect",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-050",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "shuning uchun"
   },
   {
     "english": "To this end",
-    "uzbek": "cause and effect",
+    "uzbek": "cause and effect -> cause and effect",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-051",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "shu maqsadda"
   },
   {
     "english": "Previously",
-    "uzbek": "sequence",
+    "uzbek": "sequence -> sequence of events",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-052",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "ilgari"
   },
   {
     "english": "Subsequently",
-    "uzbek": "sequence",
+    "uzbek": "sequence -> sequence of events",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-053",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "keyinchalik"
   },
   {
     "english": "Afterward",
-    "uzbek": "sequence",
+    "uzbek": "sequence -> sequence of events",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-054",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "keyin"
   },
   {
     "english": "Finally",
-    "uzbek": "sequence",
+    "uzbek": "sequence -> sequence of events",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-055",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "nihoyat"
   },
   {
     "english": "Next",
-    "uzbek": "sequence",
+    "uzbek": "sequence -> sequence of events",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-056",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "so'ng"
   },
   {
     "english": "Lastly",
-    "uzbek": "sequence",
+    "uzbek": "sequence -> sequence of events",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-057",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "oxirida"
   },
   {
     "english": "In sum",
-    "uzbek": "sequence",
+    "uzbek": "sequence -> conclusion",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-058",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "xulosa qilib"
   },
   {
     "english": "ultimately",
-    "uzbek": "cause and effect",
+    "uzbek": "cause and effect -> conclusion",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-059",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "oxir-oqibat"
   },
   {
     "english": "Elsewhere",
-    "uzbek": "sequence",
+    "uzbek": "sequence -> sequence of events",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-060",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "boshqa joyda"
   },
   {
     "english": "In any case",
-    "uzbek": "contradict",
+    "uzbek": "contradict -> conclusion",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-061",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "har qanday holatda"
   },
   {
     "english": "That being said",
-    "uzbek": "contradict",
+    "uzbek": "contradict -> contradict",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-062",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "shunday bo'lsa-da"
   },
   {
     "english": "With this in mind",
-    "uzbek": "cause and effect",
+    "uzbek": "cause and effect -> cause and effect",
     "category": "SAT Transitions & Grammar",
     "id": "grammar-063",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "hint": "shuni hisobga olib"
   }
 ]

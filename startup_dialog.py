@@ -214,6 +214,7 @@ class StartupDialog(QDialog):
         # Profile list
         self.profile_list = QListWidget()
         self.profile_list.itemDoubleClicked.connect(self.select_and_continue)
+        self.profile_list.currentItemChanged.connect(self._on_profile_selection_changed)
         layout.addWidget(self.profile_list)
         
         # New profile section
@@ -293,7 +294,7 @@ class StartupDialog(QDialog):
                 | Qt.ItemFlag.ItemIsAutoTristate
             )
             parent.setCheckState(0, Qt.CheckState.Checked)
-            parent.setExpanded(True)
+            parent.setExpanded(False)
 
             # Create child items for each sub-category
             for cat in categories:
@@ -398,6 +399,48 @@ class StartupDialog(QDialog):
         
         self.accept()
     
+    def _on_profile_selection_changed(self, current, previous):
+        """Loads and updates active topics for the selected profile."""
+        if not current:
+            return
+        username = current.data(Qt.ItemDataRole.UserRole)
+        
+        # Load user config
+        user_profile_path = profile_manager.get_profile_path(username)
+        config_path = user_profile_path / 'config.json'
+        
+        import json
+        active_topics = None
+        if config_path.exists():
+            try:
+                with open(config_path, 'r', encoding='utf-8') as f:
+                    config = json.load(f)
+                    active_topics = config.get('active_topics')
+            except Exception:
+                pass
+
+        # Update check states in tree
+        self.topics_tree.blockSignals(True)
+        for cat, item in self._topic_items.items():
+            is_checked = (cat in active_topics) if active_topics is not None else True
+            item.setCheckState(0, Qt.CheckState.Checked if is_checked else Qt.CheckState.Unchecked)
+            
+        # Update parent states
+        for i in range(self.topics_tree.topLevelItemCount()):
+            parent = self.topics_tree.topLevelItem(i)
+            checked = 0
+            for j in range(parent.childCount()):
+                if parent.child(j).checkState(0) == Qt.CheckState.Checked:
+                    checked += 1
+            if checked == parent.childCount():
+                parent.setCheckState(0, Qt.CheckState.Checked)
+            elif checked == 0:
+                parent.setCheckState(0, Qt.CheckState.Unchecked)
+            else:
+                parent.setCheckState(0, Qt.CheckState.PartiallyChecked)
+                
+        self.topics_tree.blockSignals(False)
+
     def get_result(self):
         """Returns the selected username and topics."""
         return self.selected_username, self.selected_topics

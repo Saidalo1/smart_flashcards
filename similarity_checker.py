@@ -37,26 +37,49 @@ class SimilarityChecker:
     def are_similar(self, text1, text2, threshold=0.6):
         """
         Calculates the semantic similarity between two texts and checks if it's above a threshold.
-
-        Args:
-            text1 (str): The first text.
-            text2 (str): The second text.
-            threshold (float): The similarity threshold (between 0 and 1).
-
-        Returns:
-            bool: True if the similarity is >= threshold, False otherwise.
+        Handles hierarchical structures (with '->') by evaluating components independently.
         """
         if not text1 or not text2:
             return False
 
-        # Encode the texts into embeddings
-        embedding1 = self.model.encode(text1, convert_to_tensor=True)
-        embedding2 = self.model.encode(text2, convert_to_tensor=True)
+        text1_clean = text1.strip()
+        text2_clean = text2.strip()
 
-        # Compute cosine similarity
+        # 1. Если оба текста содержат структуру категорий '->'
+        if "->" in text1_clean and "->" in text2_clean:
+            parts1 = [p.strip().lower() for p in text1_clean.split("->")]
+            parts2 = [p.strip().lower() for p in text2_clean.split("->")]
+
+            # Если в структуре разное количество уровней, они сразу не равны
+            if len(parts1) != len(parts2):
+                print(f"Structure mismatch: '{text1_clean}' vs '{text2_clean}'")
+                return False
+
+            # Покомпонентная проверка, чтобы убрать префиксный шум
+            for p1, p2 in zip(parts1, parts2):
+                if p1 == p2:
+                    continue  # Компоненты идентичны, проверяем следующий уровень
+
+                # Если компоненты разные, проверяем их изолированную семантику
+                emb1 = self.model.encode(p1, convert_to_tensor=True)
+                emb2 = self.model.encode(p2, convert_to_tensor=True)
+                component_similarity = util.cos_sim(emb1, emb2).item()
+
+                # Если хоть один уровень иерархии не прошел порог — ответ неверный
+                if component_similarity < threshold:
+                    print(f"Component mismatch ('{p1}' vs '{p2}'). Score: {component_similarity:.4f}")
+                    return False
+
+            print(f"Hierarchical match successful for: '{text1_clean}' and '{text2_clean}'")
+            return True
+
+        # 2. Фолбек (стандартное поведение) для обычных примеров без '->'
+        embedding1 = self.model.encode(text1_clean, convert_to_tensor=True)
+        embedding2 = self.model.encode(text2_clean, convert_to_tensor=True)
+
         cosine_scores = util.cos_sim(embedding1, embedding2)
         similarity = cosine_scores.item()
 
-        print(f"Comparing '{text1}' and '{text2}'. Similarity score: {similarity:.4f}")
+        print(f"Comparing '{text1_clean}' and '{text2_clean}'. Similarity score: {similarity:.4f}")
 
         return similarity >= threshold

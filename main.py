@@ -1,14 +1,13 @@
-import sys
-import os
-import logging
-import threading
-from pathlib import Path
-from datetime import datetime
-from PyQt6.QtWidgets import QApplication, QSystemTrayIcon, QMenu
 import base64
-from PyQt6.QtGui import QIcon, QPixmap, QAction
-from PyQt6.QtCore import QTimer, pyqtSignal, QObject
+import logging
+import os
 import signal
+import sys
+from datetime import datetime
+
+from PyQt6.QtCore import QTimer, pyqtSignal, QObject
+from PyQt6.QtGui import QIcon, QPixmap, QAction
+from PyQt6.QtWidgets import QApplication, QSystemTrayIcon, QMenu
 
 from app_paths import get_data_dir
 
@@ -43,6 +42,7 @@ def setup_logging():
 
 class LoggerWriter:
     """Redirects print() output to both log file and console."""
+
     def __init__(self, logger, level):
         self._logger = logger
         self._level = level
@@ -55,6 +55,7 @@ class LoggerWriter:
     def flush(self):
         if self._original:
             self._original.flush()
+
 
 from vocabulary import Vocabulary
 from flashcard_widget import FlashcardWidget
@@ -69,6 +70,7 @@ import profile_manager
 # Global hotkey support
 try:
     from pynput import keyboard
+
     HOTKEY_AVAILABLE = True
 except ImportError:
     HOTKEY_AVAILABLE = False
@@ -97,7 +99,7 @@ class FlashcardApp:
         startup = StartupDialog(vocabulary=self.vocabulary)
         if startup.exec() != startup.DialogCode.Accepted:
             sys.exit(0)
-        
+
         username, selected_topics = startup.get_result()
         self.current_user = username
         print(f"User profile: {username}")
@@ -111,11 +113,11 @@ class FlashcardApp:
         # Set active topics from startup if provided
         if selected_topics:
             self.config_manager.active_topics = selected_topics
-        
+
         # Create initial deck with topic filtering
         active_topics = self.config_manager.active_topics
         self.vocabulary.shuffle_deck(self.stats_manager, active_topics if active_topics else None)
-        
+
         self.flashcard_widget = None
         self.management_window = None
         self.next_question_is_mc = True
@@ -137,7 +139,7 @@ class FlashcardApp:
 
         self.shuffle_action = QAction("🔀 Перемешать колоду")
         self.shuffle_action.triggered.connect(self.shuffle_deck)
-        
+
         self.next_card_action = QAction(f"▶️ Следующая карточка ({hotkey})")
         self.next_card_action.triggered.connect(self.force_show_flashcard)
 
@@ -177,24 +179,24 @@ class FlashcardApp:
         """Sets up global hotkey listener using pynput with L/R modifier support."""
         if not HOTKEY_AVAILABLE:
             return
-        
+
         hotkey_config = self.config_manager.hotkey.lower()
-        
+
         # L/R specific modifiers
         LR_MODIFIERS = {
-            'ctrl_l', 'ctrl_r', 'alt_l', 'alt_r', 
+            'ctrl_l', 'ctrl_r', 'alt_l', 'alt_r',
             'shift_l', 'shift_r', 'win_l', 'win_r'
         }
         # Generic modifiers
         GENERIC_MODIFIERS = {'ctrl', 'alt', 'shift', 'win'}
-        
+
         # Parse hotkey (e.g., "ctrl+alt+k", "f7", "ctrl_l", "shift_r")
         parts = hotkey_config.split('+')
         required_modifiers = set()
         target_key = None
         is_single_modifier = False
         is_lr_modifier = False
-        
+
         # Check if hotkey is a single L/R or generic modifier
         if len(parts) == 1:
             single_part = parts[0].strip()
@@ -218,10 +220,10 @@ class FlashcardApp:
                     required_modifiers.add('shift')
                 else:
                     target_key = part
-        
+
         # Track currently pressed modifiers
         self._pressed_modifiers = set()
-        
+
         def on_press(key):
             try:
                 # Detect specific L/R modifiers
@@ -231,11 +233,11 @@ class FlashcardApp:
                 is_alt_r = key == keyboard.Key.alt_r or key == keyboard.Key.alt_gr
                 is_shift_l = key == keyboard.Key.shift_l
                 is_shift_r = key == keyboard.Key.shift_r
-                
+
                 is_ctrl = is_ctrl_l or is_ctrl_r
                 is_alt = is_alt_l or is_alt_r
                 is_shift = is_shift_l or is_shift_r
-                
+
                 # Track generic modifier state
                 if is_ctrl:
                     self._pressed_modifiers.add('ctrl')
@@ -243,37 +245,37 @@ class FlashcardApp:
                     self._pressed_modifiers.add('alt')
                 if is_shift:
                     self._pressed_modifiers.add('shift')
-                
+
                 # Handle single L/R modifier hotkey (e.g., "shift_l", "ctrl_r")
                 if is_single_modifier and is_lr_modifier:
                     if (target_key == 'ctrl_l' and is_ctrl_l) or \
-                       (target_key == 'ctrl_r' and is_ctrl_r) or \
-                       (target_key == 'alt_l' and is_alt_l) or \
-                       (target_key == 'alt_r' and is_alt_r) or \
-                       (target_key == 'shift_l' and is_shift_l) or \
-                       (target_key == 'shift_r' and is_shift_r):
+                            (target_key == 'ctrl_r' and is_ctrl_r) or \
+                            (target_key == 'alt_l' and is_alt_l) or \
+                            (target_key == 'alt_r' and is_alt_r) or \
+                            (target_key == 'shift_l' and is_shift_l) or \
+                            (target_key == 'shift_r' and is_shift_r):
                         self.hotkey_signal.triggered.emit()
                     return
-                
+
                 # Handle generic single modifier hotkey (e.g., just "ctrl")
                 if is_single_modifier and not is_lr_modifier:
                     if (target_key == 'ctrl' and is_ctrl) or \
-                       (target_key == 'alt' and is_alt) or \
-                       (target_key == 'shift' and is_shift):
+                            (target_key == 'alt' and is_alt) or \
+                            (target_key == 'shift' and is_shift):
                         self.hotkey_signal.triggered.emit()
                     return
-                
+
                 # Get key name for combo hotkeys
                 key_name = None
                 if hasattr(key, 'name'):
                     key_name = key.name.lower()
                 elif hasattr(key, 'char') and key.char:
                     key_name = key.char.lower()
-                
+
                 # Special key name mappings
                 KEY_MAP = {
                     'space': 'space',
-                    'tab': 'tab', 
+                    'tab': 'tab',
                     'enter': 'enter',
                     'return': 'enter',
                     'backspace': 'backspace',
@@ -293,17 +295,17 @@ class FlashcardApp:
                     'pause': 'pause',
                     'print_screen': 'print_screen',
                 }
-                
+
                 if key_name in KEY_MAP:
                     key_name = KEY_MAP[key_name]
-                
+
                 if key_name and key_name == target_key:
                     # Check all required modifiers are pressed
                     if required_modifiers <= self._pressed_modifiers:
                         self.hotkey_signal.triggered.emit()
             except AttributeError:
                 pass
-        
+
         def on_release(key):
             try:
                 if key == keyboard.Key.ctrl_l or key == keyboard.Key.ctrl_r:
@@ -314,7 +316,7 @@ class FlashcardApp:
                     self._pressed_modifiers.discard('shift')
             except AttributeError:
                 pass
-        
+
         self.hotkey_listener = keyboard.Listener(on_press=on_press, on_release=on_release)
         self.hotkey_listener.daemon = True
         self.hotkey_listener.start()
@@ -364,9 +366,12 @@ class FlashcardApp:
         self.next_question_is_mc = not self.next_question_is_mc
         self.flashcard_widget.closed.connect(self.on_widget_closed)
         self.flashcard_widget.card_delete_requested.connect(self.handle_card_deletion)
-        self.flashcard_widget.adjustSize()
-        self.position_widget(self.flashcard_widget)
-        self.flashcard_widget.show()
+
+        # --- ИСПРАВЛЕННЫЙ ПОРЯДОК ТУТ ---
+        self.flashcard_widget.show()  # 1. Сначала показываем (Qt инициализирует метрики)
+        self.flashcard_widget.adjustSize()  # 2. Подгоняем размер под реальный текст
+        self.position_widget(self.flashcard_widget)  # 3. Двигаем в нужный угол экрана
+
         self.flashcard_widget.activateWindow()
         self.flashcard_widget.raise_()
 
@@ -401,8 +406,8 @@ class FlashcardApp:
         self.timer.stop()
 
         dialog = ManagementWindow(
-            self.vocabulary, 
-            self.stats_manager, 
+            self.vocabulary,
+            self.stats_manager,
             self.config_manager
         )
         dialog.exec()
@@ -417,10 +422,10 @@ class FlashcardApp:
         print("Switching user...")
         self.stats_manager.save_stats()
         self.timer.stop()
-        
+
         # Clear last user to force profile selection
         profile_manager.set_last_user("")
-        
+
         # Restart the app
         import subprocess
         subprocess.Popen([sys.executable] + sys.argv)
@@ -429,13 +434,13 @@ class FlashcardApp:
     def position_widget(self, widget):
         """Positions widget based on config setting."""
         from PyQt6.QtGui import QCursor
-        
+
         screen_geometry = QApplication.primaryScreen().availableGeometry()
         widget_size = widget.frameGeometry().size()
         padding = 20
-        
+
         position = self.config_manager.card_position
-        
+
         if position == 'mouse':
             # Position at mouse cursor
             cursor_pos = QCursor.pos()
@@ -459,7 +464,7 @@ class FlashcardApp:
         else:  # bottom_right (default)
             x = screen_geometry.right() - widget_size.width() - padding
             y = screen_geometry.bottom() - widget_size.height() - padding
-        
+
         widget.move(x, y)
 
     def quit_app(self, *args):
@@ -471,7 +476,15 @@ class FlashcardApp:
         self.app.quit()
 
 
+def exception_hook(exctype, value, traceback):
+    """Принудительно выводит нормальный Traceback ошибки в консоль, минуя глушилки Qt"""
+    import traceback as tb
+    sys.__stderr__.write("".join(tb.format_exception(exctype, value, traceback)))
+    sys.exit(1)
+
+
 if __name__ == '__main__':
+    sys.excepthook = exception_hook  # <- Магия здесь
     setup_logging()
     flashcard_app = FlashcardApp()
     flashcard_app.run()

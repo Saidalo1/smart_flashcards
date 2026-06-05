@@ -1,5 +1,5 @@
 {
-  "timer_interval": 30,
+  "timer_interval": 10,
   "hotkey": "shift_r",
   "active_topics": [
     "SAT Transitions & Grammar"

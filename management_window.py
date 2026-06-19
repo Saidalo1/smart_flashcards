@@ -23,7 +23,7 @@ QDialog {
     background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
         stop:0 #1a1a2e, stop:1 #16213e);
     color: #eee;
-    font-family: 'Segoe UI', Arial, sans-serif;
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 /* Tab Widget */
@@ -414,8 +414,23 @@ class ManagementWindow(QDialog):
         layout.addLayout(btn_layout)
 
     def setup_settings_tab(self):
-        """Sets up the settings tab with modern UI."""
-        layout = QVBoxLayout(self.settings_tab)
+        """Sets up the settings tab with a modern UI and a scroll area to prevent distortion."""
+        from PyQt6.QtWidgets import QScrollArea
+
+        # Main layout for the tab
+        main_tab_layout = QVBoxLayout(self.settings_tab)
+        main_tab_layout.setContentsMargins(0, 0, 0, 0)
+
+        # Create Scroll Area
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setFrameShape(QFrame.Shape.NoFrame)
+        scroll.setStyleSheet("background: transparent;")
+
+        # Container widget for settings content
+        container = QWidget()
+        container.setStyleSheet("background: transparent;")
+        layout = QVBoxLayout(container)
         layout.setContentsMargins(24, 24, 24, 24)
         layout.setSpacing(24)
 
@@ -626,6 +641,10 @@ class ManagementWindow(QDialog):
         layout.addWidget(info_card)
         layout.addStretch()
 
+        # Set the container to the scroll area
+        scroll.setWidget(container)
+        main_tab_layout.addWidget(scroll)
+
     def save_timer_setting(self, value):
         """Saves the timer interval setting."""
         if self.config_manager:
@@ -746,17 +765,34 @@ class ManagementWindow(QDialog):
             scan_code = event.nativeScanCode()
             modifiers = event.modifiers()
             
-            # Windows scan codes for L/R modifiers
-            SCAN_CODES = {
-                29: 'ctrl_l',      # Left Ctrl
-                285: 'ctrl_r',     # Right Ctrl (29 + 256)
-                42: 'shift_l',     # Left Shift
-                54: 'shift_r',     # Right Shift
-                56: 'alt_l',       # Left Alt
-                312: 'alt_r',      # Right Alt (56 + 256)
-                91: 'win_l',       # Left Win
-                92: 'win_r',       # Right Win
-            }
+            import platform
+            is_linux = platform.system() == "Linux"
+
+            # Platform-specific scan codes for L/R modifiers
+            if is_linux:
+                # X11 / Common Linux scan codes
+                SCAN_CODES = {
+                    37: 'ctrl_l',      # Left Ctrl
+                    105: 'ctrl_r',     # Right Ctrl
+                    50: 'shift_l',     # Left Shift
+                    62: 'shift_r',     # Right Shift
+                    64: 'alt_l',       # Left Alt
+                    108: 'alt_r',      # Right Alt (AltGr)
+                    133: 'win_l',      # Left Win
+                    134: 'win_r',      # Right Win
+                }
+            else:
+                # Windows scan codes
+                SCAN_CODES = {
+                    29: 'ctrl_l',      # Left Ctrl
+                    285: 'ctrl_r',     # Right Ctrl (29 + 256)
+                    42: 'shift_l',     # Left Shift
+                    54: 'shift_r',     # Right Shift
+                    56: 'alt_l',       # Left Alt
+                    312: 'alt_r',      # Right Alt (56 + 256)
+                    91: 'win_l',       # Left Win
+                    92: 'win_r',       # Right Win
+                }
             
             # Escape to cancel
             if key == Qt.Key.Key_Escape:

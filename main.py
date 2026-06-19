@@ -324,6 +324,17 @@ class FlashcardApp:
         self.hotkey_listener = keyboard.Listener(on_press=on_press, on_release=on_release)
         self.hotkey_listener.daemon = True
         self.hotkey_listener.start()
+
+        # Linux specific warning for Wayland
+        import platform
+        if platform.system() == "Linux":
+            session_type = os.environ.get('XDG_SESSION_TYPE', '').lower()
+            if session_type == 'wayland':
+                print("⚠️  Warning: You are using Wayland. Global hotkeys may not work when the app is inactive.")
+                print("   Switch to an X11 (Xorg) session for full global hotkey support.")
+            else:
+                print(f"Session: {session_type or 'unknown (assume X11)'}")
+
         print(f"Global hotkey '{hotkey_config}' activated!")
 
     def update_timer_interval(self):

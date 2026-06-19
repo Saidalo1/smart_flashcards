@@ -347,9 +347,11 @@ class ManagementWindow(QDialog):
 
         # Table
         self.table = QTableWidget()
-        self.table.setColumnCount(2)
-        self.table.setHorizontalHeaderLabels(["🇬🇧 English", "🇺🇿 Uzbek"])
-        self.table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        self.table.setColumnCount(3)
+        self.table.setHorizontalHeaderLabels(["🇬🇧 English", "🇺🇿 Uzbek", "📊 Уровень"])
+        self.table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
+        self.table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
+        self.table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents)
         self.table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.table.setAlternatingRowColors(True)
@@ -422,6 +424,41 @@ class ManagementWindow(QDialog):
         header.setObjectName("titleLabel")
         header.setFont(QFont("Segoe UI", 20, QFont.Weight.Bold))
         layout.addWidget(header)
+
+        # Study mode card
+        mode_card = QFrame()
+        mode_card.setObjectName("card")
+        mode_card_layout = QVBoxLayout(mode_card)
+        mode_card_layout.setSpacing(12)
+
+        mode_header = QLabel("🎯 Режим обучения")
+        mode_header.setObjectName("titleLabel")
+        mode_card_layout.addWidget(mode_header)
+
+        mode_desc = QLabel("Адаптивный — автоматически повышает уровень. "
+                           "Остальные — принудительно тестируют выбранный тип.")
+        mode_desc.setWordWrap(True)
+        mode_card_layout.addWidget(mode_desc)
+
+        from PyQt6.QtWidgets import QComboBox
+        self.study_mode_combo = QComboBox()
+        self.study_mode_options = {
+            'adaptive': '🧠 Адаптивный (рекомендуемый)',
+            'translation': '🌐 Только перевод',
+            'definition': '📝 Только определения',
+            'synonym': '🔀 Только синонимы',
+        }
+        for key, label in self.study_mode_options.items():
+            self.study_mode_combo.addItem(label, key)
+
+        # Set current value
+        current_mode = self.config_manager.study_mode
+        mode_keys = list(self.study_mode_options.keys())
+        if current_mode in mode_keys:
+            self.study_mode_combo.setCurrentIndex(mode_keys.index(current_mode))
+        self.study_mode_combo.currentIndexChanged.connect(self._save_study_mode)
+        mode_card_layout.addWidget(self.study_mode_combo)
+        layout.addWidget(mode_card)
 
         # Timer interval card
         timer_card = QFrame()
@@ -594,6 +631,13 @@ class ManagementWindow(QDialog):
         if self.config_manager:
             self.config_manager.timer_interval = value
             print(f"Timer interval saved: {value} seconds")
+
+    def _save_study_mode(self, index):
+        """Saves the study mode setting."""
+        if self.config_manager and hasattr(self, 'study_mode_combo'):
+            mode = self.study_mode_combo.currentData()
+            self.config_manager.study_mode = mode
+            print(f"Study mode saved: {mode}")
 
     def _build_settings_topics_tree(self):
         """Builds the hierarchical topic tree for settings."""
@@ -920,14 +964,27 @@ class ManagementWindow(QDialog):
                 QMessageBox.warning(self, "Ошибка", "Оба поля должны быть заполнены.")
 
     def load_vocabulary_data(self):
-        """Loads words into the table."""
+        """Loads words into the table with mastery level icons."""
         self.table.setRowCount(0)
         words = self.vocabulary.get_all_words()
         self.table.setRowCount(len(words))
 
+        mastery_icons = {
+            'translation': '🌐',
+            'definition': '📝',
+            'synonym': '🔀',
+        }
+
         for row, word_pair in enumerate(words):
             self.table.setItem(row, 0, QTableWidgetItem(word_pair['english']))
-            self.table.setItem(row, 1, QTableWidgetItem(word_pair['uzbek']))
+            self.table.setItem(row, 1, QTableWidgetItem(word_pair.get('uzbek', '')))
+
+            level = self.stats_manager.get_mastery_level(word_pair)
+            base_level = level.split('_')[0]
+            icon = mastery_icons.get(base_level, '🌐')
+            level_item = QTableWidgetItem(icon)
+            level_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+            self.table.setItem(row, 2, level_item)
 
     def load_stats_data(self):
         """Loads statistics into the stats table."""

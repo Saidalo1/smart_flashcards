@@ -8,7 +8,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "secluded",
@@ -19,7 +21,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "fluctuate",
@@ -30,7 +34,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "exalt",
@@ -41,7 +47,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "admonish",
@@ -52,7 +60,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "abrupt",
@@ -63,7 +73,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "content",
@@ -74,7 +86,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.4
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "eccentric",
@@ -85,7 +99,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "mired",
@@ -96,7 +112,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "colloquial",
@@ -107,7 +125,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "reconcile",
@@ -118,7 +138,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "alienate",
@@ -129,7 +151,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "distinguish",
@@ -140,7 +164,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "adequate",
@@ -151,7 +177,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "contend",
@@ -162,7 +190,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "skeptical",
@@ -173,7 +203,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "enfranchise",
@@ -184,7 +216,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "sophisticated",
@@ -195,7 +229,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "radical",
@@ -206,7 +242,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "formulate",
@@ -217,7 +255,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "attest",
@@ -228,7 +268,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "vexing",
@@ -239,7 +281,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "unassuming",
@@ -250,7 +294,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "coerce",
@@ -261,7 +307,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "adept",
@@ -272,7 +320,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "eloquent",
@@ -283,7 +333,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "austere",
@@ -294,7 +346,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "dread",
@@ -305,7 +359,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "inevitable",
@@ -316,7 +372,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "to stress",
@@ -327,7 +385,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.4
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "spawn",
@@ -338,7 +398,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "renounce",
@@ -349,7 +411,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "unprecedented",
@@ -360,7 +424,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "broach",
@@ -371,7 +437,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "proxy",
@@ -382,7 +450,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "detrimental",
@@ -393,7 +463,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "secular",
@@ -404,7 +476,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "innovative",
@@ -415,7 +489,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "tangible",
@@ -426,7 +502,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "disseminate",
@@ -437,7 +515,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "delegate",
@@ -448,7 +528,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "apparent",
@@ -459,7 +541,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "postulate",
@@ -470,7 +554,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "speculate",
@@ -481,7 +567,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "bazaar",
@@ -492,7 +580,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.4
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "sporadic",
@@ -503,7 +593,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "suffrage",
@@ -514,7 +606,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "incredulous",
@@ -525,7 +619,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "idealistic",
@@ -536,7 +632,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "conflate",
@@ -547,7 +645,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "paucity",
@@ -558,7 +658,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "ephemeral",
@@ -569,7 +671,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "prompt",
@@ -580,7 +684,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "reverence",
@@ -591,7 +697,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "disparity",
@@ -602,7 +710,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "dispassionate",
@@ -613,7 +723,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "phenomenon",
@@ -624,7 +736,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "boast",
@@ -635,7 +749,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "irksome",
@@ -646,7 +762,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "allude",
@@ -657,7 +775,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "omnipotence",
@@ -668,7 +788,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "provoke",
@@ -679,7 +801,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "indulge",
@@ -690,7 +814,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "entrenched",
@@ -701,7 +827,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "inherent",
@@ -712,7 +840,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "vernacular",
@@ -723,7 +853,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "inquisition",
@@ -734,7 +866,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "anecdote",
@@ -745,7 +879,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "malign",
@@ -756,7 +892,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "anomaly",
@@ -767,7 +905,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "inhibit",
@@ -778,7 +918,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "mutable",
@@ -789,7 +931,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "petty",
@@ -800,7 +944,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "avid",
@@ -811,7 +957,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "invoke",
@@ -822,7 +970,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "imprudent",
@@ -833,7 +983,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "tenacity",
@@ -844,7 +996,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "venerable",
@@ -855,7 +1009,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "authoritarian",
@@ -866,7 +1022,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "quarrel",
@@ -877,7 +1035,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "yield",
@@ -888,7 +1048,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "ambivalent",
@@ -899,7 +1061,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "endeavor",
@@ -910,7 +1074,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "insurrection",
@@ -921,7 +1087,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "contemplate",
@@ -932,7 +1100,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "compel",
@@ -943,7 +1113,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "feasible",
@@ -954,7 +1126,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "conjecture",
@@ -965,7 +1139,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "arbitrary",
@@ -976,7 +1152,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "reinforce",
@@ -987,7 +1165,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "to temper",
@@ -998,7 +1178,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "decree",
@@ -1009,7 +1191,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "brevity",
@@ -1020,7 +1204,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "equivocal",
@@ -1031,7 +1217,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "stronghold",
@@ -1042,7 +1230,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "conceive",
@@ -1053,7 +1243,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "vanity",
@@ -1064,7 +1256,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "sluggish",
@@ -1075,7 +1269,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "intuition",
@@ -1086,7 +1282,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "inexorable",
@@ -1097,7 +1295,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "engender",
@@ -1108,7 +1308,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "temperament",
@@ -1119,7 +1321,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "upheaval",
@@ -1130,7 +1334,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "embrace",
@@ -1141,7 +1347,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "substantiate",
@@ -1152,7 +1360,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "superficial",
@@ -1163,7 +1373,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "sovereignty",
@@ -1174,7 +1386,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "lavish",
@@ -1185,7 +1399,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "crux",
@@ -1196,7 +1412,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "indifference",
@@ -1207,7 +1425,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "tact",
@@ -1218,7 +1438,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "abundant",
@@ -1229,7 +1451,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "viable",
@@ -1240,7 +1464,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "scorn",
@@ -1251,7 +1477,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "transgress",
@@ -1262,7 +1490,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "analogy",
@@ -1273,7 +1503,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "objection",
@@ -1284,7 +1516,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "construe",
@@ -1295,7 +1529,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "procure",
@@ -1306,7 +1542,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "evoke",
@@ -1317,7 +1555,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "depiction",
@@ -1328,7 +1568,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "burden",
@@ -1339,7 +1581,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "recollection",
@@ -1350,7 +1594,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "tumult",
@@ -1361,7 +1607,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "concede",
@@ -1372,7 +1620,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "demeanor",
@@ -1383,7 +1633,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "emigration",
@@ -1394,7 +1646,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "irate",
@@ -1405,7 +1659,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "tentative",
@@ -1416,7 +1672,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "merely",
@@ -1427,7 +1685,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.4
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "deceive",
@@ -1438,7 +1698,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "trifling",
@@ -1449,7 +1711,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "labyrinthine",
@@ -1460,7 +1724,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "decrepit",
@@ -1471,7 +1737,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "corroborate",
@@ -1482,7 +1750,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "obstinacy",
@@ -1493,7 +1763,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "confinement",
@@ -1504,7 +1776,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "monotony",
@@ -1515,7 +1789,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "degrade",
@@ -1526,7 +1802,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "dilemma",
@@ -1537,7 +1815,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "conventional",
@@ -1548,7 +1828,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "proliferate",
@@ -1559,7 +1841,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "aesthetic",
@@ -1570,7 +1854,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "prominent",
@@ -1581,7 +1867,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "unwieldy",
@@ -1592,7 +1880,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "amplify",
@@ -1603,7 +1893,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "magnify",
@@ -1614,7 +1906,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "augment",
@@ -1625,7 +1919,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "appraise",
@@ -1636,7 +1932,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "constrict",
@@ -1647,7 +1945,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "denounce",
@@ -1658,7 +1958,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "impugn",
@@ -1669,7 +1971,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "repudiate",
@@ -1680,7 +1984,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "pugnacious",
@@ -1691,7 +1997,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "dismiss",
@@ -1702,7 +2010,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "detractor",
@@ -1713,7 +2023,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "discount",
@@ -1724,7 +2036,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "omit",
@@ -1735,7 +2049,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "elide",
@@ -1746,7 +2062,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "eccentric",
@@ -1757,7 +2075,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "engender",
@@ -1768,7 +2088,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "indigenous",
@@ -1779,7 +2101,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "initiator",
@@ -1790,7 +2114,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "meager",
@@ -1801,7 +2127,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "monetize",
@@ -1812,7 +2140,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "obligate",
@@ -1823,7 +2153,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "precursor",
@@ -1834,7 +2166,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "harbinger",
@@ -1845,7 +2179,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "presage",
@@ -1856,7 +2192,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "pristine",
@@ -1867,7 +2205,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "protract",
@@ -1878,7 +2218,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "protractor",
@@ -1889,7 +2231,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.4
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "scrutinize",
@@ -1900,7 +2244,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": "juda sinchkovlik bilan tekshirish",
+    "synonyms": []
   },
   {
     "english": "synopsis",
@@ -1911,7 +2257,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "peripheral",
@@ -1922,7 +2270,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "pivotal",
@@ -1933,7 +2283,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "inconsequential",
@@ -1944,7 +2296,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "consequential",
@@ -1955,7 +2309,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "promulgate",
@@ -1966,7 +2322,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "propagate",
@@ -1977,7 +2335,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "evince",
@@ -1988,7 +2348,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "mitigate",
@@ -1999,7 +2361,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "ameliorate",
@@ -2010,7 +2374,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "assuage",
@@ -2021,7 +2387,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "palliate",
@@ -2032,7 +2400,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "nebulous",
@@ -2043,7 +2413,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "ineluctable",
@@ -2054,7 +2426,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "irresolvable",
@@ -2065,7 +2439,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "unequivocal",
@@ -2076,7 +2452,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "equivocal",
@@ -2087,7 +2465,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "unanimous",
@@ -2098,7 +2478,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "corollary",
@@ -2109,7 +2491,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "postulate",
@@ -2120,7 +2504,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "meticulous",
@@ -2131,7 +2517,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "scrupulous",
@@ -2142,7 +2530,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "unscrupulous",
@@ -2153,7 +2543,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "affecting",
@@ -2164,7 +2556,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "stipulate",
@@ -2175,7 +2569,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "prescribe",
@@ -2186,7 +2582,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "dictate",
@@ -2197,7 +2595,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "ascribe",
@@ -2208,7 +2608,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "copious",
@@ -2219,7 +2621,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "qualify",
@@ -2230,7 +2634,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "palpable",
@@ -2241,7 +2647,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "tangible",
@@ -2252,7 +2660,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "prohibitive",
@@ -2263,7 +2673,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "warrant",
@@ -2274,7 +2686,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "precipitate",
@@ -2285,7 +2699,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "invalidate",
@@ -2296,7 +2712,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "jettison",
@@ -2307,7 +2725,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "benign",
@@ -2318,7 +2738,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "malign",
@@ -2329,7 +2751,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.6
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "undergo",
@@ -2340,7 +2764,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "endure",
@@ -2351,7 +2777,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.5
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "irreproachable",
@@ -2362,7 +2790,9 @@
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.7
+    "complexity": 0.7,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "demand",
@@ -2373,7 +2803,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "speculate",
@@ -2384,7 +2816,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "doubt",
@@ -2395,7 +2829,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "establish",
@@ -2406,7 +2842,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "impartial",
@@ -2417,7 +2855,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "offhand",
@@ -2428,7 +2868,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.7,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "persistent",
@@ -2439,7 +2881,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "mandatory",
@@ -2450,7 +2894,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "circumvent",
@@ -2461,7 +2907,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.7,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "eclipse",
@@ -2472,7 +2920,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "fabricate",
@@ -2483,7 +2933,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "exemplify",
@@ -2494,7 +2946,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "discernible",
@@ -2505,7 +2959,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.7,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "straightforward",
@@ -2516,7 +2972,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "inconclusive",
@@ -2527,7 +2985,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "unbiased",
@@ -2538,7 +2998,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "synchronization",
@@ -2549,7 +3011,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "hibernation",
@@ -2560,7 +3024,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "prediction",
@@ -2571,7 +3037,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "moderation",
@@ -2582,7 +3050,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": "me'yor, ortiqchalik yoki chekdan qochish",
+    "synonyms": []
   },
   {
     "english": "repudiate",
@@ -2593,7 +3063,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.7,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "proclaim",
@@ -2604,7 +3076,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "foretell",
@@ -2615,7 +3089,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "recant",
@@ -2626,7 +3102,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.7,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "unpredictable",
@@ -2637,7 +3115,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "important",
@@ -2648,7 +3128,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.4,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "secretive",
@@ -2659,7 +3141,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "ordinary",
@@ -2670,7 +3154,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.4,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "delegate",
@@ -2681,7 +3167,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "compose",
@@ -2692,7 +3180,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "interpret",
@@ -2703,7 +3193,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "renounce",
@@ -2714,7 +3206,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.7,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "catastrophic",
@@ -2725,7 +3219,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "elusive",
@@ -2736,7 +3232,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.7,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "abrupt",
@@ -2747,7 +3245,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "imminent",
@@ -2758,7 +3258,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "waive",
@@ -2769,7 +3271,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "concede",
@@ -2780,7 +3284,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "refute",
@@ -2791,7 +3297,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.7,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "require",
@@ -2802,7 +3310,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.4,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "replicable",
@@ -2813,7 +3323,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "predetermined",
@@ -2824,7 +3336,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "operative",
@@ -2835,7 +3349,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.7,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "latent",
@@ -2846,7 +3362,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "consistent with",
@@ -2857,7 +3375,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "representative of",
@@ -2868,7 +3388,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "overshadowed by",
@@ -2879,7 +3401,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": "solishtirganda unchalik ahamiyatli emasdek ko'rinadigan",
+    "synonyms": []
   },
   {
     "english": "irrelevant to",
@@ -2890,7 +3414,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "tenuous",
@@ -2901,7 +3427,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.7,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "disorienting",
@@ -2912,7 +3440,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "nuanced",
@@ -2923,7 +3453,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.7,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "widespread",
@@ -2934,7 +3466,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "careful",
@@ -2945,7 +3479,9 @@
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.4,
-    "grammar_pattern": null
+    "grammar_pattern": null,
+    "definition": "xavf yoki xatolardan qochishga urinadigan, ehtiyotkor",
+    "synonyms": []
   },
   {
     "english": "Also",
@@ -2957,7 +3493,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "shuningdek"
+    "hint": "shuningdek",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "And",
@@ -2969,7 +3507,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "va"
+    "hint": "va",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Furthermore",
@@ -2981,7 +3521,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "bundan tashqari"
+    "hint": "bundan tashqari",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Moreover",
@@ -2993,7 +3535,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "qolaversa"
+    "hint": "qolaversa",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Additionally",
@@ -3005,7 +3549,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "qo'shimcha ravishda"
+    "hint": "qo'shimcha ravishda",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Besides",
@@ -3017,7 +3563,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "bundan tashqari"
+    "hint": "bundan tashqari",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "For example",
@@ -3029,7 +3577,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "masalan"
+    "hint": "masalan",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "For instance",
@@ -3041,7 +3591,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "misol uchun"
+    "hint": "misol uchun",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Specifically",
@@ -3053,7 +3605,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "xususan"
+    "hint": "xususan",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Effectively",
@@ -3065,7 +3619,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "amalda"
+    "hint": "amalda",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Essentially",
@@ -3077,7 +3633,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "mohiyatan"
+    "hint": "mohiyatan",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "In other words",
@@ -3089,7 +3647,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "boshqacha aytganda"
+    "hint": "boshqacha aytganda",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "That is",
@@ -3101,7 +3661,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "ya'ni"
+    "hint": "ya'ni",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "In fact",
@@ -3113,7 +3675,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "aslida"
+    "hint": "aslida",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Indeed",
@@ -3125,7 +3689,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "haqiqatdan ham"
+    "hint": "haqiqatdan ham",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Likewise",
@@ -3137,7 +3703,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "xuddi shunday"
+    "hint": "xuddi shunday",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Similarly",
@@ -3149,7 +3717,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "o'xshash tarzda"
+    "hint": "o'xshash tarzda",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Just as",
@@ -3161,7 +3731,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "xuddi...dek"
+    "hint": "xuddi...dek",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "In the same way",
@@ -3173,7 +3745,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "xuddi shu tarzda"
+    "hint": "xuddi shu tarzda",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Alternatively",
@@ -3185,7 +3759,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "muqobil ravishda"
+    "hint": "muqobil ravishda",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Alternately",
@@ -3197,7 +3773,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "galma-galdan"
+    "hint": "galma-galdan",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Although",
@@ -3209,7 +3787,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "garchi"
+    "hint": "garchi",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Even though",
@@ -3221,7 +3801,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "garchi"
+    "hint": "garchi",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "But",
@@ -3233,7 +3815,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "ammo"
+    "hint": "ammo",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Conversely",
@@ -3245,7 +3829,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "aksincha"
+    "hint": "aksincha",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Despite",
@@ -3257,7 +3843,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "qaramasdan"
+    "hint": "qaramasdan",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "In spite of",
@@ -3269,7 +3857,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "bunga qaramay"
+    "hint": "bunga qaramay",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Even so",
@@ -3281,7 +3871,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "shunday bo'lsa ham"
+    "hint": "shunday bo'lsa ham",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "However",
@@ -3293,7 +3885,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "biroq"
+    "hint": "biroq",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "That said",
@@ -3305,7 +3899,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "shunday bo'lsa-da"
+    "hint": "shunday bo'lsa-da",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "In contrast",
@@ -3317,7 +3913,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "farqli o'laroq"
+    "hint": "farqli o'laroq",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Instead",
@@ -3329,7 +3927,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "buning o'rniga"
+    "hint": "buning o'rniga",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Nonetheless",
@@ -3341,7 +3941,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "shunga qaramay"
+    "hint": "shunga qaramay",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "On the contrary",
@@ -3353,7 +3955,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "aksincha"
+    "hint": "aksincha",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "On the other hand",
@@ -3365,7 +3969,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "boshqa tomondan"
+    "hint": "boshqa tomondan",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Still",
@@ -3377,7 +3983,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "shunga qaramay"
+    "hint": "shunga qaramay",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Yet",
@@ -3389,7 +3997,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "lekin"
+    "hint": "lekin",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Regardless",
@@ -3401,7 +4011,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "baribir"
+    "hint": "baribir",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "While",
@@ -3413,7 +4025,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "holbuki"
+    "hint": "holbuki",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Whereas",
@@ -3425,7 +4039,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "holbuki"
+    "hint": "holbuki",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Accordingly",
@@ -3437,7 +4053,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "shunga ko'ra"
+    "hint": "shunga ko'ra",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "As a result",
@@ -3449,7 +4067,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "natijada"
+    "hint": "natijada",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "As such",
@@ -3461,7 +4081,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "shunday qilib"
+    "hint": "shunday qilib",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Because",
@@ -3473,7 +4095,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "chunki"
+    "hint": "chunki",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Consequently",
@@ -3485,7 +4109,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "oqibatda"
+    "hint": "oqibatda",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Hence",
@@ -3497,7 +4123,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "shu sababli"
+    "hint": "shu sababli",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Since",
@@ -3509,7 +4137,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "sababli"
+    "hint": "sababli",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "So",
@@ -3521,7 +4151,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "shu sababdan"
+    "hint": "shu sababdan",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Thus",
@@ -3533,7 +4165,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "shu tarzda"
+    "hint": "shu tarzda",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Therefore",
@@ -3545,7 +4179,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "shuning uchun"
+    "hint": "shuning uchun",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "To this end",
@@ -3557,7 +4193,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "shu maqsadda"
+    "hint": "shu maqsadda",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Previously",
@@ -3569,7 +4207,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "ilgari"
+    "hint": "ilgari",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Subsequently",
@@ -3581,7 +4221,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "keyinchalik"
+    "hint": "keyinchalik",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Afterward",
@@ -3593,7 +4235,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "keyin"
+    "hint": "keyin",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Finally",
@@ -3605,7 +4249,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "nihoyat"
+    "hint": "nihoyat",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Next",
@@ -3617,7 +4263,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "so'ng"
+    "hint": "so'ng",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Lastly",
@@ -3629,7 +4277,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "oxirida"
+    "hint": "oxirida",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "In sum",
@@ -3641,7 +4291,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "xulosa qilib"
+    "hint": "xulosa qilib",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "ultimately",
@@ -3653,7 +4305,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "oxir-oqibat"
+    "hint": "oxir-oqibat",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Elsewhere",
@@ -3665,7 +4319,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "boshqa joyda"
+    "hint": "boshqa joyda",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "In any case",
@@ -3677,7 +4333,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "har qanday holatda"
+    "hint": "har qanday holatda",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "That being said",
@@ -3689,7 +4347,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "shunday bo'lsa-da"
+    "hint": "shunday bo'lsa-da",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "With this in mind",
@@ -3701,7 +4361,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "shuni hisobga olib"
+    "hint": "shuni hisobga olib",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Nevertheless",
@@ -3713,7 +4375,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "shunga qaramay"
+    "hint": "shunga qaramay",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "By contrast",
@@ -3725,7 +4389,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "farqli o'laroq"
+    "hint": "farqli o'laroq",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Actually",
@@ -3737,7 +4403,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "aslida"
+    "hint": "aslida",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "In reality",
@@ -3749,7 +4417,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "haqiqatda"
+    "hint": "haqiqatda",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "In addition",
@@ -3761,7 +4431,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "bundan tashqari"
+    "hint": "bundan tashqari",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "In particular",
@@ -3773,7 +4445,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "xususan"
+    "hint": "xususan",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Then",
@@ -3785,7 +4459,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "keyin / so'ng"
+    "hint": "keyin / so'ng",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "In the second place",
@@ -3797,7 +4473,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "ikkinchidan"
+    "hint": "ikkinchidan",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Secondly",
@@ -3809,7 +4487,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "ikkinchidan"
+    "hint": "ikkinchidan",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "In turn",
@@ -3821,7 +4501,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "o'z navbatida"
+    "hint": "o'z navbatida",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Meanwhile",
@@ -3833,7 +4515,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "shu vaqtning o'zida"
+    "hint": "shu vaqtning o'zida",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Currently",
@@ -3845,7 +4529,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "hozirgi vaqtda"
+    "hint": "hozirgi vaqtda",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Today",
@@ -3857,7 +4543,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "bugungi kunda"
+    "hint": "bugungi kunda",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "In conclusion",
@@ -3869,7 +4557,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "xulosa qilib"
+    "hint": "xulosa qilib",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "To conclude",
@@ -3881,7 +4571,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "xulosa qilganda"
+    "hint": "xulosa qilganda",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "For this reason",
@@ -3893,7 +4585,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "shu sababli"
+    "hint": "shu sababli",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "In so doing",
@@ -3905,7 +4599,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "shunday qilgan holda"
+    "hint": "shunday qilgan holda",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Granted",
@@ -3917,7 +4613,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "to'g'ri (tan olish kerakki)"
+    "hint": "to'g'ri (tan olish kerakki)",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Again and again",
@@ -3929,7 +4627,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "qayta-qayta"
+    "hint": "qayta-qayta",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "More often",
@@ -3941,7 +4641,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "ko'proq holatlarda"
+    "hint": "ko'proq holatlarda",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Increasingly",
@@ -3953,7 +4655,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "tobora ko'proq"
+    "hint": "tobora ko'proq",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Intermittently",
@@ -3965,7 +4669,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "vaqti-vaqti bilan"
+    "hint": "vaqti-vaqti bilan",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "In many cases",
@@ -3977,7 +4683,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "ko'p hollarda"
+    "hint": "ko'p hollarda",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "To that end",
@@ -3989,7 +4697,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "shu maqsadda"
+    "hint": "shu maqsadda",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "By comparison",
@@ -4001,7 +4711,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "taqqoslaganda"
+    "hint": "taqqoslaganda",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "In comparison",
@@ -4013,7 +4725,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "solishtirganda"
+    "hint": "solishtirganda",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Rather",
@@ -4025,7 +4739,9 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "buning o'rniga / aksincha"
+    "hint": "buning o'rniga / aksincha",
+    "definition": null,
+    "synonyms": []
   },
   {
     "english": "Fittingly",
@@ -4037,6 +4753,960 @@
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": "mos ravishda"
+    "hint": "mos ravishda",
+    "definition": null,
+    "synonyms": []
+  },
+  {
+    "english": "banal",
+    "uzbek": "",
+    "definition": "originalik yetishmaydigan, zerikarli va oddiy",
+    "synonyms": [
+      "unoriginal",
+      "ordinary"
+    ],
+    "category": "TOP 60 SAT Words (Part 1)",
+    "id": "sat60-001",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "skepticism toward",
+    "uzbek": "",
+    "definition": "shubha yoki ishonchsizlik hissi",
+    "synonyms": [
+      "doubt",
+      "mistrust"
+    ],
+    "category": "TOP 60 SAT Words (Part 1)",
+    "id": "sat60-002",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "verisimilitude in",
+    "uzbek": "",
+    "definition": "haqiqiy yoki realdek ko'rinish",
+    "synonyms": [
+      "authenticity",
+      "realism"
+    ],
+    "category": "TOP 60 SAT Words (Part 1)",
+    "id": "sat60-003",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "appraising",
+    "uzbek": "",
+    "definition": "baholash yoki qiymatni aniqlash",
+    "synonyms": [
+      "evaluating",
+      "assessing"
+    ],
+    "category": "TOP 60 SAT Words (Part 1)",
+    "id": "sat60-004",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "indoctrinated",
+    "uzbek": "",
+    "definition": "ma'lum bir qarashlarni ko'r-ko'rona qabul qilishga o'rgatilgan",
+    "synonyms": [
+      "programmed",
+      "inculcated"
+    ],
+    "category": "TOP 60 SAT Words (Part 1)",
+    "id": "sat60-006",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "assistance",
+    "uzbek": "",
+    "definition": "yordam berish harakati, ko'mak",
+    "synonyms": [
+      "help",
+      "support"
+    ],
+    "category": "TOP 60 SAT Words (Part 1)",
+    "id": "sat60-007",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "creative",
+    "uzbek": "",
+    "definition": "yangi narsalar yaratish yoki g'oyalar o'ylab topish qobiliyati",
+    "synonyms": [
+      "inventive",
+      "original"
+    ],
+    "category": "TOP 60 SAT Words (Part 1)",
+    "id": "sat60-008",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "similarities to",
+    "uzbek": "",
+    "definition": "o'xshash bo'lish yoki umumiy jihatlarga ega bo'lish",
+    "synonyms": [
+      "likeness",
+      "resemblance"
+    ],
+    "category": "TOP 60 SAT Words (Part 1)",
+    "id": "sat60-011",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "restricted",
+    "uzbek": "",
+    "definition": "cheklangan yoki kirish qiyin bo'lgan",
+    "synonyms": [
+      "limited",
+      "confined"
+    ],
+    "category": "TOP 60 SAT Words (Part 1)",
+    "id": "sat60-012",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "cherished",
+    "uzbek": "",
+    "definition": "juda qadrlanadigan va seviladigan",
+    "synonyms": [
+      "treasured",
+      "adored"
+    ],
+    "category": "TOP 60 SAT Words (Part 1)",
+    "id": "sat60-013",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "enthusiasm for",
+    "uzbek": "",
+    "definition": "kuchli ishtiyoq, qiziqish yoki mamnunlik",
+    "synonyms": [
+      "eagerness",
+      "passion"
+    ],
+    "category": "TOP 60 SAT Words (Part 1)",
+    "id": "sat60-014",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "transcending",
+    "uzbek": "",
+    "definition": "chegaradan chiqadigan, ustun bo'ladigan",
+    "synonyms": [
+      "surpassing",
+      "exceeding"
+    ],
+    "category": "TOP 60 SAT Words (Part 1)",
+    "id": "sat60-015",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "publicity",
+    "uzbek": "",
+    "definition": "OAV yoki jamoatchilik e'tiboriga tushish, reklama",
+    "synonyms": [
+      "exposure",
+      "promotion"
+    ],
+    "category": "TOP 60 SAT Words (Part 2)",
+    "id": "sat60-016",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "unoriginal",
+    "uzbek": "",
+    "definition": "yangi g'oyalar yoki ijodkorlik yetishmaydigan",
+    "synonyms": [
+      "derivative",
+      "copied"
+    ],
+    "category": "TOP 60 SAT Words (Part 2)",
+    "id": "sat60-017",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "an accessory",
+    "uzbek": "",
+    "definition": "qulaylik yoki chiroyli ko'rinish uchun qo'shimcha buyum",
+    "synonyms": [
+      "addition",
+      "attachment"
+    ],
+    "category": "TOP 60 SAT Words (Part 2)",
+    "id": "sat60-018",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "substantiating",
+    "uzbek": "",
+    "definition": "da'voni isbotlash uchun dalillar keltirish",
+    "synonyms": [
+      "proving",
+      "confirming"
+    ],
+    "category": "TOP 60 SAT Words (Part 2)",
+    "id": "sat60-019",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "appropriate",
+    "uzbek": "",
+    "definition": "vaziyatga mos yoki to'g'ri keladigan",
+    "synonyms": [
+      "fitting",
+      "apt"
+    ],
+    "category": "TOP 60 SAT Words (Part 2)",
+    "id": "sat60-020",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "surprise at",
+    "uzbek": "",
+    "definition": "kutilmaganlik yoki hayratlanish hissi",
+    "synonyms": [
+      "amazement",
+      "astonishment"
+    ],
+    "category": "TOP 60 SAT Words (Part 2)",
+    "id": "sat60-022",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "negligible",
+    "uzbek": "",
+    "definition": "e'tiborga loyiq bo'lmagan, juda kichik",
+    "synonyms": [
+      "insignificant",
+      "minor"
+    ],
+    "category": "TOP 60 SAT Words (Part 2)",
+    "id": "sat60-023",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "imperative",
+    "uzbek": "",
+    "definition": "juda muhim yoki o'ta zarur",
+    "synonyms": [
+      "crucial",
+      "essential"
+    ],
+    "category": "TOP 60 SAT Words (Part 2)",
+    "id": "sat60-024",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "design",
+    "uzbek": "",
+    "definition": "biror narsaning ko'rinishini ko'rsatadigan reja yoki chizma",
+    "synonyms": [
+      "plan",
+      "blueprint"
+    ],
+    "category": "TOP 60 SAT Words (Part 2)",
+    "id": "sat60-025",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "vague",
+    "uzbek": "",
+    "definition": "noaniq yoki tushunarsiz",
+    "synonyms": [
+      "ambiguous",
+      "indistinct"
+    ],
+    "category": "TOP 60 SAT Words (Part 2)",
+    "id": "sat60-026",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "integrated with",
+    "uzbek": "",
+    "definition": "boshqa narsa bilan birlashtirilgan",
+    "synonyms": [
+      "unified",
+      "merged"
+    ],
+    "category": "TOP 60 SAT Words (Part 2)",
+    "id": "sat60-027",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "struggling",
+    "uzbek": "",
+    "definition": "qiyinchilikka duch kelayotgan, kurashayotgan",
+    "synonyms": [
+      "battling",
+      "grappling"
+    ],
+    "category": "TOP 60 SAT Words (Part 2)",
+    "id": "sat60-028",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "disorganized",
+    "uzbek": "",
+    "definition": "tizimsiz, tartibsiz",
+    "synonyms": [
+      "messy",
+      "chaotic"
+    ],
+    "category": "TOP 60 SAT Words (Part 2)",
+    "id": "sat60-029",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "unknown",
+    "uzbek": "",
+    "definition": "noma'lum yoki notanish",
+    "synonyms": [
+      "unfamiliar",
+      "mysterious"
+    ],
+    "category": "TOP 60 SAT Words (Part 2)",
+    "id": "sat60-030",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "disingenuous",
+    "uzbek": "",
+    "definition": "samimiy bo'lmagan, o'zini bilmaganga soladigan",
+    "synonyms": [
+      "insincere",
+      "deceitful"
+    ],
+    "category": "TOP 60 SAT Words (Part 3)",
+    "id": "sat60-031",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "an extraordinary",
+    "uzbek": "",
+    "definition": "g'ayrioddiy, ajoyib, favqulodda",
+    "synonyms": [
+      "exceptional",
+      "remarkable"
+    ],
+    "category": "TOP 60 SAT Words (Part 3)",
+    "id": "sat60-032",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "extrapolating from",
+    "uzbek": "",
+    "definition": "ma'lum ma'lumotlarni kengaytirish orqali taxmin qilish",
+    "synonyms": [
+      "predicting",
+      "inferring"
+    ],
+    "category": "TOP 60 SAT Words (Part 3)",
+    "id": "sat60-033",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "nurture",
+    "uzbek": "",
+    "definition": "g'amxo'rlik qilish va o'sishni rag'batlantirish",
+    "synonyms": [
+      "foster",
+      "cultivate"
+    ],
+    "category": "TOP 60 SAT Words (Part 3)",
+    "id": "sat60-034",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "advice",
+    "uzbek": "",
+    "definition": "maslahat, yo'l-yo'riq yoki tavsiyalar",
+    "synonyms": [
+      "counsel",
+      "suggestion"
+    ],
+    "category": "TOP 60 SAT Words (Part 3)",
+    "id": "sat60-035",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "sincerity",
+    "uzbek": "",
+    "definition": "samimiylik va halollik",
+    "synonyms": [
+      "truthfulness",
+      "authenticity"
+    ],
+    "category": "TOP 60 SAT Words (Part 3)",
+    "id": "sat60-036",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "compensated for",
+    "uzbek": "",
+    "definition": "o'rni qoplangan yoki to'langan",
+    "synonyms": [
+      "repaid",
+      "offset"
+    ],
+    "category": "TOP 60 SAT Words (Part 3)",
+    "id": "sat60-037",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "scrutinized by",
+    "uzbek": "",
+    "definition": "tomonidan juda sinchkovlik bilan tekshirilgan",
+    "synonyms": [
+      "inspected",
+      "reviewed"
+    ],
+    "category": "TOP 60 SAT Words (Part 3)",
+    "id": "sat60-038",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "depleted",
+    "uzbek": "",
+    "definition": "tugagan, bo'shab qolgan",
+    "synonyms": [
+      "exhausted",
+      "drained"
+    ],
+    "category": "TOP 60 SAT Words (Part 3)",
+    "id": "sat60-039",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "inspect",
+    "uzbek": "",
+    "definition": "yaqindan ko'zdan kechirish, tekshirish",
+    "synonyms": [
+      "examine",
+      "check"
+    ],
+    "category": "TOP 60 SAT Words (Part 3)",
+    "id": "sat60-040",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "ambivalence toward",
+    "uzbek": "",
+    "definition": "qarama-qarshi yoki noaniq his-tuyg'ularga ega bo'lish",
+    "synonyms": [
+      "uncertainty",
+      "indecision"
+    ],
+    "category": "TOP 60 SAT Words (Part 3)",
+    "id": "sat60-041",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "lift",
+    "uzbek": "",
+    "definition": "ko'tarmoq yoki yuqoriroq joyga ko'chirmoq",
+    "synonyms": [
+      "hoist",
+      "elevate"
+    ],
+    "category": "TOP 60 SAT Words (Part 3)",
+    "id": "sat60-042",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "liked",
+    "uzbek": "",
+    "definition": "yoqadigan, ma'qullangan",
+    "synonyms": [
+      "enjoyed",
+      "favored"
+    ],
+    "category": "TOP 60 SAT Words (Part 3)",
+    "id": "sat60-043",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "advances",
+    "uzbek": "",
+    "definition": "oldinga siljiydi, rivojlanadi",
+    "synonyms": [
+      "progresses",
+      "improves"
+    ],
+    "category": "TOP 60 SAT Words (Part 3)",
+    "id": "sat60-044",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "corroborating",
+    "uzbek": "",
+    "definition": "dalillar bilan tasdiqlovchi",
+    "synonyms": [
+      "confirming",
+      "validating"
+    ],
+    "category": "TOP 60 SAT Words (Part 3)",
+    "id": "sat60-045",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "overlooked",
+    "uzbek": "",
+    "definition": "e'tibordan chetda qolgan, sezilmagan",
+    "synonyms": [
+      "ignored",
+      "missed"
+    ],
+    "category": "TOP 60 SAT Words (Part 4)",
+    "id": "sat60-046",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "misrepresent",
+    "uzbek": "",
+    "definition": "noto'g'ri yoki chalg'ituvchi ma'lumot berish",
+    "synonyms": [
+      "distort",
+      "falsify"
+    ],
+    "category": "TOP 60 SAT Words (Part 4)",
+    "id": "sat60-047",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "exceptions to",
+    "uzbek": "",
+    "definition": "umumiy qoidaga kirmaydigan holatlar, istisnolar",
+    "synonyms": [
+      "exemptions",
+      "exclusions"
+    ],
+    "category": "TOP 60 SAT Words (Part 4)",
+    "id": "sat60-048",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "evidence",
+    "uzbek": "",
+    "definition": "ishonchni tasdiqlovchi faktlar yoki dalillar, isbot",
+    "synonyms": [
+      "proof",
+      "testimony"
+    ],
+    "category": "TOP 60 SAT Words (Part 4)",
+    "id": "sat60-049",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "negating",
+    "uzbek": "",
+    "definition": "inkor qiladigan, samarasiz qiladigan",
+    "synonyms": [
+      "nullifying",
+      "denying"
+    ],
+    "category": "TOP 60 SAT Words (Part 4)",
+    "id": "sat60-050",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "buttress",
+    "uzbek": "",
+    "definition": "qo'llab-quvvatlash yoki kuchaytirish",
+    "synonyms": [
+      "reinforce",
+      "bolster"
+    ],
+    "category": "TOP 60 SAT Words (Part 4)",
+    "id": "sat60-051",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "responsive",
+    "uzbek": "",
+    "definition": "tez yoki ijobiy munosabat bildiradigan",
+    "synonyms": [
+      "reactive",
+      "receptive"
+    ],
+    "category": "TOP 60 SAT Words (Part 4)",
+    "id": "sat60-052",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "profusion of",
+    "uzbek": "",
+    "definition": "biror narsaning juda ko'p miqdori, seroblik",
+    "synonyms": [
+      "abundance",
+      "plenty"
+    ],
+    "category": "TOP 60 SAT Words (Part 4)",
+    "id": "sat60-053",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "conditions",
+    "uzbek": "",
+    "definition": "biror narsaga ta'sir qiluvchi vaziyatlar yoki sharoitlar",
+    "synonyms": [
+      "circumstances",
+      "factors"
+    ],
+    "category": "TOP 60 SAT Words (Part 4)",
+    "id": "sat60-054",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "analogical",
+    "uzbek": "",
+    "definition": "o'xshashlik yoki taqqoslashga asoslangan",
+    "synonyms": [
+      "comparable",
+      "parallel"
+    ],
+    "category": "TOP 60 SAT Words (Part 4)",
+    "id": "sat60-055",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "described",
+    "uzbek": "",
+    "definition": "batafsil tasvirlangan",
+    "synonyms": [
+      "explained",
+      "detailed"
+    ],
+    "category": "TOP 60 SAT Words (Part 4)",
+    "id": "sat60-056",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "fineness",
+    "uzbek": "",
+    "definition": "juda yupqa yoki yuqori darajada aniqlik sifati",
+    "synonyms": [
+      "delicacy",
+      "subtlety"
+    ],
+    "category": "TOP 60 SAT Words (Part 4)",
+    "id": "sat60-057",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "emulate",
+    "uzbek": "",
+    "definition": "taqlid qilish orqali tenglashishga yoki o'zib ketishga urinish",
+    "synonyms": [
+      "imitate",
+      "mimic"
+    ],
+    "category": "TOP 60 SAT Words (Part 4)",
+    "id": "sat60-058",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "an oddity",
+    "uzbek": "",
+    "definition": "g'ayrioddiy yoki g'alati narsa",
+    "synonyms": [
+      "peculiarity",
+      "anomaly"
+    ],
+    "category": "TOP 60 SAT Words (Part 4)",
+    "id": "sat60-059",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
+  },
+  {
+    "english": "disengage",
+    "uzbek": "",
+    "definition": "ajratish yoki bo'shatish",
+    "synonyms": [
+      "detach",
+      "withdraw"
+    ],
+    "category": "TOP 60 SAT Words (Part 4)",
+    "id": "sat60-060",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": null
   }
 ]

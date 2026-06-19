@@ -265,7 +265,31 @@ class StartupDialog(QDialog):
             
             topics_layout.addWidget(self.topics_tree)
             layout.addWidget(topics_frame)
-        
+
+        # Study mode selector
+        mode_frame = QFrame()
+        mode_frame.setObjectName("card")
+        mode_layout = QVBoxLayout(mode_frame)
+        mode_layout.setSpacing(12)
+
+        mode_label = QLabel("🎯 Режим обучения")
+        mode_label.setObjectName("titleLabel")
+        mode_label.setFont(QFont("Segoe UI", 14))
+        mode_layout.addWidget(mode_label)
+
+        from PyQt6.QtWidgets import QComboBox
+        self.study_mode_combo = QComboBox()
+        self.study_mode_options = {
+            'adaptive': '🧠 Адаптивный (рекомендуемый)',
+            'translation': '🌐 Только перевод',
+            'definition': '📝 Только определения',
+            'synonym': '🔀 Только синонимы',
+        }
+        for key, label in self.study_mode_options.items():
+            self.study_mode_combo.addItem(label, key)
+        mode_layout.addWidget(self.study_mode_combo)
+        layout.addWidget(mode_frame)
+
         # Continue button
         continue_btn = QPushButton("▶️ Продолжить")
         continue_btn.clicked.connect(self.select_and_continue)
@@ -442,5 +466,8 @@ class StartupDialog(QDialog):
         self.topics_tree.blockSignals(False)
 
     def get_result(self):
-        """Returns the selected username and topics."""
-        return self.selected_username, self.selected_topics
+        """Returns the selected username, topics, and study mode."""
+        study_mode = 'adaptive'
+        if hasattr(self, 'study_mode_combo'):
+            study_mode = self.study_mode_combo.currentData() or 'adaptive'
+        return self.selected_username, self.selected_topics, study_mode

@@ -2,10 +2,11 @@
   "timer_interval": 10,
   "hotkey": "shift_r",
   "active_topics": [
-    "SAT Transitions & Grammar"
+    "TOP 60 SAT Words (Part 1)"
   ],
   "show_notifications": true,
   "topic_weights": {},
   "theme": "dark",
-  "card_position": "mouse"
+  "card_position": "mouse",
+  "study_mode": "adaptive"
 }

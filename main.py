@@ -100,7 +100,7 @@ class FlashcardApp:
         if startup.exec() != startup.DialogCode.Accepted:
             sys.exit(0)
 
-        username, selected_topics = startup.get_result()
+        username, selected_topics, study_mode = startup.get_result()
         self.current_user = username
         print(f"User profile: {username}")
 
@@ -109,6 +109,10 @@ class FlashcardApp:
         self.config_manager = ConfigManager(config_path=user_profile_path / 'config.json')
         self.stats_manager = StatsManager(stats_path=user_profile_path / 'stats.json')
         self.similarity_checker = SimilarityChecker()
+
+        # Save selected study mode
+        if study_mode:
+            self.config_manager.study_mode = study_mode
 
         # Set active topics from startup if provided
         if selected_topics:
@@ -361,7 +365,8 @@ class FlashcardApp:
             self.stats_manager,
             self.vocabulary,
             self.similarity_checker,
-            is_multiple_choice=self.next_question_is_mc
+            is_multiple_choice=self.next_question_is_mc,
+            config_manager=self.config_manager
         )
         self.next_question_is_mc = not self.next_question_is_mc
         self.flashcard_widget.closed.connect(self.on_widget_closed)

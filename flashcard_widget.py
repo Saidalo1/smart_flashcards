@@ -1,9 +1,42 @@
 import random
 from PyQt6.QtWidgets import (
-    QFrame, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton, QGroupBox, QRadioButton, QStyle, QStyleOption
+    QFrame, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton,
+    QGroupBox, QRadioButton, QStyle, QStyleOption, QButtonGroup, QLayout
 )
 from PyQt6.QtCore import Qt, pyqtSignal, QTimer, QPoint
 from PyQt6.QtGui import QCursor, QPainter
+
+
+# --- Color themes per study mode ---
+MODE_THEMES = {
+    'translation': {
+        'gradient': 'qlineargradient(x1:0, y1:0, x2:1, y2:1, '
+                     'stop:0 #1a1a2e, stop:0.5 #16213e, stop:1 #0f3460)',
+        'border': '#2a4a7f',
+        'badge_bg': '#1a3a5c',
+        'badge_color': '#00d9ff',
+        'badge_text': '🌐 ПЕРЕВОД',
+        'placeholder': 'Введите перевод...',
+    },
+    'definition': {
+        'gradient': 'qlineargradient(x1:0, y1:0, x2:1, y2:1, '
+                     'stop:0 #1a2e1a, stop:0.5 #163e21, stop:1 #0f6034)',
+        'border': '#2a7f4a',
+        'badge_bg': '#1a4a2e',
+        'badge_color': '#2ecc71',
+        'badge_text': '📝 ОПРЕДЕЛЕНИЕ',
+        'placeholder': 'Что означает это слово?...',
+    },
+    'synonym': {
+        'gradient': 'qlineargradient(x1:0, y1:0, x2:1, y2:1, '
+                     'stop:0 #2e1a2e, stop:0.5 #3e1640, stop:1 #600f60)',
+        'border': '#7f2a7f',
+        'badge_bg': '#4a1a5c',
+        'badge_color': '#a855f7',
+        'badge_text': '🔀 СИНОНИМ',
+        'placeholder': 'Введите синоним...',
+    },
+}
 
 
 class HintPopupWindow(QFrame):
@@ -54,59 +87,221 @@ class HintPopupWindow(QFrame):
         self.adjustSize()
 
 
+class PremiumOptionWidget(QFrame):
+    """A clickable option card with radio button and word-wrapped label.
+
+    Handles long definition texts gracefully without clipping.
+    """
+    clicked = pyqtSignal()
+
+    def __init__(self, text, parent=None):
+        super().__init__(parent)
+        self.setObjectName("premiumOption")
+        self.setCursor(Qt.CursorShape.PointingHandCursor)
+
+        layout = QHBoxLayout(self)
+        layout.setContentsMargins(12, 10, 12, 10)
+        layout.setSpacing(10)
+
+        self.radio = QRadioButton()
+        self.radio.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.radio.setStyleSheet("""
+            QRadioButton {
+                background: transparent;
+                border: none;
+                padding: 0;
+                margin: 0;
+            }
+            QRadioButton::indicator {
+                width: 18px; height: 18px;
+                border: 2px solid #555;
+                border-radius: 10px;
+                background: #1e2235;
+            }
+            QRadioButton::indicator:checked {
+                background: #00d9ff;
+                border-color: #00d9ff;
+            }
+        """)
+        layout.addWidget(self.radio)
+
+        self.label = QLabel(text)
+        self.label.setWordWrap(True)
+        self.label.setStyleSheet(
+            "font-size: 15px; color: #eee; font-weight: normal; "
+            "background: transparent; padding: 0; border: none;"
+        )
+        layout.addWidget(self.label, 1)
+
+        self._apply_default_style()
+
+    def _apply_default_style(self):
+        self.setStyleSheet("""
+            QFrame#premiumOption {
+                background: #1e2235;
+                border: 2px solid #2a2e45;
+                border-radius: 10px;
+            }
+            QFrame#premiumOption:hover {
+                background: #252a40;
+                border-color: #00d9ff;
+            }
+        """)
+
+    def set_result_style(self, is_correct_option, was_selected_wrong=False):
+        """Highlights option after answer check."""
+        if is_correct_option:
+            self.setStyleSheet("""
+                QFrame#premiumOption {
+                    background: #1a4a2e;
+                    border: 2px solid #2ecc71;
+                    border-radius: 10px;
+                }
+            """)
+            self.label.setStyleSheet(
+                "font-size: 15px; color: #2ecc71; font-weight: bold; "
+                "background: transparent; padding: 0; border: none;"
+            )
+        elif was_selected_wrong:
+            self.setStyleSheet("""
+                QFrame#premiumOption {
+                    background: #4a1a1a;
+                    border: 2px solid #e74c3c;
+                    border-radius: 10px;
+                }
+            """)
+            self.label.setStyleSheet(
+                "font-size: 15px; color: #e74c3c; font-weight: bold; "
+                "background: transparent; padding: 0; border: none;"
+            )
+
+    def mousePressEvent(self, event):
+        if event.button() == Qt.MouseButton.LeftButton:
+            self.radio.setChecked(True)
+            self.clicked.emit()
+            event.accept()
+
+    def text(self):
+        return self.label.text()
+
+    def isChecked(self):
+        return self.radio.isChecked()
+
+    def setChecked(self, checked):
+        self.radio.setChecked(checked)
+
+    def setEnabled(self, enabled):
+        super().setEnabled(enabled)
+        self.radio.setEnabled(enabled)
+        self.setCursor(
+            Qt.CursorShape.PointingHandCursor if enabled
+            else Qt.CursorShape.ArrowCursor
+        )
+
+
 class FlashcardWidget(QFrame):
     """A widget to display a flashcard question and handle user input."""
     closed = pyqtSignal()
     card_delete_requested = pyqtSignal(dict)
 
-    def __init__(self, card, stats_manager, vocabulary, similarity_checker, is_multiple_choice=False, parent=None):
+    def __init__(self, card, stats_manager, vocabulary, similarity_checker,
+                 is_multiple_choice=False, config_manager=None, parent=None):
         super().__init__(parent)
         self.card = card
         self.vocabulary = vocabulary
         self.stats_manager = stats_manager
         self.similarity_checker = similarity_checker
+        self.config_manager = config_manager
         self._drag_pos = None
 
-        # Question type: 'translation' or 'grammar'
-        has_grammar = card.get('grammar_pattern') is not None
-        self.question_type = 'grammar' if has_grammar and random.random() < 0.4 else 'translation'
+        # --- Determine study mode for this card ---
+        self.study_mode = self._resolve_study_mode()
 
-        # Check if it's the new Transition category
-        self.is_transition_card = (self.card.get('category') == 'SAT Transitions & Grammar')
+        # Check if it's the Transition category (preserve legacy logic)
+        self.is_transition_card = (
+            self.card.get('category') == 'SAT Transitions & Grammar'
+        )
 
-        # For translation questions - determine language direction
-        if self.is_transition_card:
-            if 'uzbek' in self.card and self.card['uzbek']:
-                self.question_lang, self.answer_lang = 'english', 'uzbek'
-            else:
-                self.question_lang, self.answer_lang = 'english', 'english'
-        elif self.question_type == 'translation':
-            if random.choice([True, False]):
-                self.question_lang, self.answer_lang = 'english', 'uzbek'
-            else:
-                self.question_lang, self.answer_lang = 'uzbek', 'english'
+        # --- Set question/answer language based on study mode ---
+        if self.study_mode.startswith('definition'):
+            self.question_lang = 'english'
+            self.answer_lang = 'definition'
+        elif self.study_mode.startswith('synonym'):
+            self.question_lang = 'english'
+            self.answer_lang = 'synonyms'
         else:
-            self.question_lang, self.answer_lang = 'english', 'grammar_pattern'
+            # Translation mode — preserve all legacy logic
+            has_grammar = card.get('grammar_pattern') is not None
+            self.question_type_legacy = (
+                'grammar' if has_grammar and random.random() < 0.4
+                else 'translation'
+            )
 
-        # Smart mode selection
-        is_complex_phrase = '/' in self.card['english'] or '/' in self.card.get('uzbek', '')
-        is_short_answer = len(self.card['english'].split()) <= 3
+            if self.is_transition_card:
+                if 'uzbek' in self.card and self.card['uzbek']:
+                    self.question_lang, self.answer_lang = 'english', 'uzbek'
+                else:
+                    self.question_lang, self.answer_lang = 'english', 'english'
+            elif self.question_type_legacy == 'translation':
+                if random.choice([True, False]):
+                    self.question_lang, self.answer_lang = 'english', 'uzbek'
+                else:
+                    self.question_lang, self.answer_lang = 'uzbek', 'english'
+            else:
+                self.question_lang, self.answer_lang = 'english', 'grammar_pattern'
 
-        word_stats = self.stats_manager.get_stats_for_word(self.card)
-        correct_count = word_stats.get('correct', 0)
-        is_learning_phase = correct_count < 2
-
-        if self.question_type == 'grammar':
-            self.is_multiple_choice = True
-        else:
-            self.is_multiple_choice = is_learning_phase or (
-                        not is_complex_phrase and is_short_answer and is_multiple_choice)
+        # --- Smart multiple-choice decision ---
+        self.is_multiple_choice = self.study_mode.endswith('_mc')
 
         self.init_ui()
         self.set_question()
 
+    def _resolve_study_mode(self):
+        """Determines the actual study mode for this card.
+
+        Handles:
+        - Config-based static modes (translation/definition/synonym)
+        - Adaptive mode (mastery-based progression)
+        - Automatic fallback if card lacks required fields
+        """
+        config_mode = 'adaptive'
+        if self.config_manager:
+            config_mode = self.config_manager.study_mode
+
+        if config_mode == 'adaptive':
+            mode = self.stats_manager.get_mastery_level(self.card)
+        else:
+            # Config is static: 'translation', 'definition', 'synonym'
+            # Progress static mode based on its specific mc -> text progression
+            mc_mode = f"{config_mode}_mc"
+            text_mode = f"{config_mode}_text"
+
+            # Check if text mode is unlocked
+            word_key = self.stats_manager._get_word_key(self.card)
+            self.stats_manager._ensure_mode_stats(word_key)
+            mc_streak = self.stats_manager.stats[word_key].get(mc_mode, {}).get('streak', 0)
+            if mc_streak >= 3:
+                mode = text_mode
+            else:
+                mode = mc_mode
+
+        # Fallbacks: if card doesn't have required fields, downgrade dynamically
+        has_uzbek = bool((self.card.get('uzbek') or '').strip())
+        has_definition = bool((self.card.get('definition') or '').strip())
+        has_synonyms = bool(self.card.get('synonyms'))
+
+        if mode.startswith('synonym') and not has_synonyms:
+            mode = 'definition_text' if has_definition else 'translation_text'
+        if mode.startswith('definition') and not has_definition:
+            mode = 'translation_text' if has_uzbek else 'translation_mc'
+        if mode.startswith('translation') and not has_uzbek:
+            mode = 'definition_mc' if has_definition else 'translation_mc'
+
+        print(f"[STUDY_MODE] {self.card['english']}: resolved mode = {mode}")
+        return mode
+
     def _normalize_answer(self, text):
-        replacements = {"‘": "'", "’": "'", "ʻ": "'", "ʼ": "'"}
+        replacements = {"'": "'", "\u2019": "'", "\u02bb": "'", "\u02bc": "'"}
         for old, new in replacements.items():
             text = text.replace(old, new)
         return text.strip().lower()
@@ -135,11 +330,16 @@ class FlashcardWidget(QFrame):
         main_layout.addWidget(self.drag_bar)
 
         content_layout = QVBoxLayout()
-        content_layout.setContentsMargins(20, 15, 20, 20)
-        content_layout.setSpacing(15)
+        content_layout.setContentsMargins(20, 15, 20, 12)
+        content_layout.setSpacing(10)
+
+        # Mode badge is not added to layout as color coding is sufficient
+        base_mode = self.study_mode.split('_')[0]
+        theme = MODE_THEMES.get(base_mode, MODE_THEMES['translation'])
 
         top_layout = QHBoxLayout()
         self.question_label = QLabel()
+        self.question_label.setObjectName("questionLabel")
         self.question_label.setWordWrap(True)
         self.question_label.setTextInteractionFlags(Qt.TextInteractionFlag.LinksAccessibleByMouse)
         self.question_label.linkActivated.connect(self.toggle_hint)
@@ -161,8 +361,34 @@ class FlashcardWidget(QFrame):
         self.check_button.setDefault(True)
         content_layout.addWidget(self.check_button)
 
+        # Streak progress indicator
+        self._add_streak_indicator(content_layout)
+
+        main_layout.setSizeConstraint(QLayout.SizeConstraint.SetFixedSize)
         self.apply_stylesheet()
         self.setLayout(main_layout)
+
+    def _add_streak_indicator(self, layout):
+        """Adds a visual streak progress bar below the check button."""
+        from stats_manager import MASTERY_STREAK_THRESHOLD
+
+        current_streak = self.stats_manager.get_streak(self.card, self.study_mode)
+        capped_streak = min(current_streak, MASTERY_STREAK_THRESHOLD)
+
+        filled = "⬤" * capped_streak
+        empty = "○" * (MASTERY_STREAK_THRESHOLD - capped_streak)
+        progress_text = f"Progress: {filled}{empty}"
+
+        self.streak_label = QLabel(progress_text)
+        self.streak_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        base_mode = self.study_mode.split('_')[0]
+        theme = MODE_THEMES.get(base_mode, MODE_THEMES['translation'])
+        self.streak_label.setStyleSheet(
+            f"font-size: 11px; color: {theme['badge_color']}; "
+            f"background: transparent; border: none; padding: 2px;"
+        )
+        layout.addWidget(self.streak_label)
 
     def _create_delete_button(self):
         delete_button = QPushButton("🗑️")
@@ -182,16 +408,17 @@ class FlashcardWidget(QFrame):
         super().paintEvent(event)
 
     def apply_stylesheet(self):
-        self.setStyleSheet("""
-            QFrame#main_widget {
-                background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
-                    stop:0 #1a1a2e, stop:0.5 #16213e, stop:1 #0f3460);
-                border: 2px solid #2a2e45;
+        base_mode = self.study_mode.split('_')[0]
+        theme = MODE_THEMES.get(base_mode, MODE_THEMES['translation'])
+        self.setStyleSheet(f"""
+            QFrame#main_widget {{
+                background: {theme['gradient']};
+                border: 2px solid {theme['border']};
                 border-radius: 20px;
                 color: #ecf0f1;
-            }
+            }}
 
-            QLabel#dragBar {
+            QLabel#dragBar {{
                 background: #222740;
                 border: none;
                 border-top-left-radius: 18px;
@@ -200,23 +427,23 @@ class FlashcardWidget(QFrame):
                 font-size: 12px;
                 font-weight: normal;
                 padding: 4px;
-            }
+            }}
 
-            QLabel#dragBar:hover {
+            QLabel#dragBar:hover {{
                 background: #2a3050;
                 color: #999;
-            }
+            }}
 
-            QLabel {
+            QLabel#questionLabel {{
                 font-size: 20px;
                 font-weight: bold;
                 color: #fff;
                 border: none;
                 padding: 6px 12px;
                 background: transparent;
-            }
+            }}
 
-            QPushButton {
+            QPushButton {{
                 background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
                     stop:0 #667eea, stop:1 #764ba2);
                 color: white;
@@ -225,149 +452,282 @@ class FlashcardWidget(QFrame):
                 font-size: 16px;
                 font-weight: bold;
                 border: none;
-            }
+            }}
 
-            QPushButton:hover {
+            QPushButton:hover {{
                 background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
                     stop:0 #764ba2, stop:1 #667eea);
-            }
+            }}
 
-            QLineEdit {
+            QLineEdit {{
                 padding: 14px 18px;
                 border: 2px solid #2a3050;
                 border-radius: 12px;
                 font-size: 18px;
                 background: #1e2235;
                 color: #fff;
-            }
+            }}
 
-            QLineEdit:focus {
+            QLineEdit:focus {{
                 border: 2px solid #00d9ff;
                 background: #222740;
-            }
+            }}
 
-            QRadioButton {
-                font-size: 16px;
-                padding: 10px 16px;
-                border: none;
-                color: #ddd;
-                background: #1e2235;
-                border-radius: 8px;
-                margin: 4px 0;
-            }
-
-            QRadioButton:hover {
-                background: #252a40;
-                color: #fff;
-            }
-
-            QRadioButton:checked {
-                background: #1a3a4a;
-                color: #00d9ff;
-            }
-
-            QGroupBox {
+            QGroupBox {{
                 border: 1px solid #2a2e45;
                 border-radius: 12px;
                 margin-top: 10px;
                 padding-top: 5px;
-            }
+            }}
 
-            QPushButton#deleteButton {
+            QPushButton#deleteButton {{
                 background: transparent;
                 border: none;
                 font-size: 20px;
                 color: #c0392b;
                 padding: 4px;
-            }
+            }}
 
-            QPushButton#deleteButton:hover {
+            QPushButton#deleteButton:hover {{
                 color: #e74c3c;
-            }
+            }}
         """)
 
     def setup_text_input_ui(self, layout):
+        base_mode = self.study_mode.split('_')[0]
+        theme = MODE_THEMES.get(base_mode, MODE_THEMES['translation'])
         self.answer_input = QLineEdit()
-        self.answer_input.setPlaceholderText("Your translation...")
+        self.answer_input.setPlaceholderText(theme['placeholder'])
         self.answer_input.returnPressed.connect(self.check_answer)
         layout.addWidget(self.answer_input)
         self.answer_input.setFocus()
 
     def setup_multiple_choice_ui(self, layout):
-        self.options_group = QGroupBox()
-        self.options_layout = QVBoxLayout()
-        self.radio_buttons = []
+        self.option_widgets = []
+        self.button_group = QButtonGroup(self)
 
-        if self.question_type == 'grammar':
-            options = ['V-ing', 'to + V']
-            random.shuffle(options)
+        # Generate options based on study mode
+        if self.study_mode.startswith('translation') and hasattr(self, 'question_type_legacy'):
+            if self.question_type_legacy == 'grammar':
+                options = ['V-ing', 'to + V']
+                random.shuffle(options)
+            else:
+                options = self.vocabulary.get_options_for_card(
+                    self.card, self.answer_lang
+                )
+        elif self.study_mode.startswith('definition'):
+            options = self._get_definition_options()
+        elif self.study_mode.startswith('synonym'):
+            options = self._get_synonym_options()
         else:
-            options = self.vocabulary.get_options_for_card(self.card, self.answer_lang)
+            options = self.vocabulary.get_options_for_card(
+                self.card, self.answer_lang
+            )
 
-        for option in options:
-            radio = QRadioButton(option)
-            self.radio_buttons.append(radio)
-            self.options_layout.addWidget(radio)
-        self.options_group.setLayout(self.options_layout)
-        layout.addWidget(self.options_group)
+        for i, option in enumerate(options):
+            widget = PremiumOptionWidget(option, self)
+            self.button_group.addButton(widget.radio, i)
+            self.option_widgets.append(widget)
+            layout.addWidget(widget)
+
+    def _get_definition_options(self):
+        """Generates multiple-choice options from definitions of same-category words."""
+        correct_def = self.card.get('definition') or ''
+        card_category = self.card.get('category')
+
+        if card_category:
+            pool = [
+                w for w in self.vocabulary.words
+                if w.get('category') == card_category
+                and w.get('definition')
+                and w['english'] != self.card['english']
+            ]
+        else:
+            pool = [
+                w for w in self.vocabulary.words
+                if w.get('definition')
+                and w['english'] != self.card['english']
+            ]
+
+        if len(pool) < 3:
+            pool = [
+                w for w in self.vocabulary.words
+                if w.get('definition')
+                and w['english'] != self.card['english']
+            ]
+
+        distractors = random.sample(pool, min(3, len(pool)))
+        options = [correct_def] + [d['definition'] for d in distractors]
+        random.shuffle(options)
+        return options
+
+    def _get_synonym_options(self):
+        """Generates multiple-choice options from synonyms of same-category words."""
+        correct_synonyms = self.card.get('synonyms', [])
+        correct_answer = correct_synonyms[0] if correct_synonyms else ''
+        card_category = self.card.get('category')
+
+        if card_category:
+            pool = [
+                w for w in self.vocabulary.words
+                if w.get('category') == card_category
+                and w.get('synonyms')
+                and w['english'] != self.card['english']
+            ]
+        else:
+            pool = [
+                w for w in self.vocabulary.words
+                if w.get('synonyms')
+                and w['english'] != self.card['english']
+            ]
+
+        if len(pool) < 3:
+            pool = [
+                w for w in self.vocabulary.words
+                if w.get('synonyms')
+                and w['english'] != self.card['english']
+            ]
+
+        distractors = random.sample(pool, min(3, len(pool)))
+        options = [correct_answer] + [d['synonyms'][0] for d in distractors]
+        random.shuffle(options)
+        return options
 
     def set_question(self):
-        hint_html = " <a href='hint' style='text-decoration:none; color:#f1c40f;'><sup>💡</sup></a>"
-        question_text = self.card.get(self.question_lang, self.card.get('english', 'No text'))
+        has_hint = bool(self.card.get('hint'))
+        hint_html = " <a href='hint' style='text-decoration:none; color:#f1c40f;'><sup>💡</sup></a>" if has_hint else ""
+        word = self.card.get('english', 'No text')
 
-        if self.question_type == 'grammar':
-            self.question_label.setText(f"Grammar pattern for: <b>{self.card.get('english', '')}</b>{hint_html}")
-        elif getattr(self, 'is_transition_card', False):
-            self.question_label.setText(f"Transition: <b>{question_text}</b>{hint_html}")
+        if self.study_mode.startswith('definition'):
+            self.question_label.setText(
+                f"Define: <b>{word}</b>{hint_html}"
+            )
+        elif self.study_mode.startswith('synonym'):
+            self.question_label.setText(
+                f"Synonym for: <b>{word}</b>{hint_html}"
+            )
+        elif hasattr(self, 'question_type_legacy') and self.question_type_legacy == 'grammar':
+            self.question_label.setText(
+                f"Grammar pattern for: <b>{word}</b>{hint_html}"
+            )
+        elif self.is_transition_card:
+            question_text = self.card.get(self.question_lang, word)
+            self.question_label.setText(
+                f"Transition: <b>{question_text}</b>{hint_html}"
+            )
         else:
-            self.question_label.setText(f"Translate: <b>{question_text}</b>{hint_html}")
+            question_text = self.card.get(self.question_lang, word)
+            self.question_label.setText(
+                f"Translate: <b>{question_text}</b>{hint_html}"
+            )
 
     def check_answer(self):
-        correct_answer_string = self.card[self.answer_lang]
         user_answer = ""
+
         if self.is_multiple_choice:
-            for radio in self.radio_buttons:
-                if radio.isChecked():
-                    user_answer = radio.text()
+            for widget in self.option_widgets:
+                if widget.isChecked():
+                    user_answer = widget.text()
                     break
         else:
             user_answer = self.answer_input.text()
 
+        # Disable inputs
         self.check_button.setEnabled(False)
         if not self.is_multiple_choice:
             self.answer_input.setEnabled(False)
         else:
-            for radio in self.radio_buttons:
-                radio.setEnabled(False)
+            for widget in self.option_widgets:
+                widget.setEnabled(False)
 
-        possible_answers = [ans.strip() for ans in correct_answer_string.split('/')]
-        if self.is_multiple_choice:
-            is_correct = self._normalize_answer(user_answer) in [self._normalize_answer(ans) for ans in
-                                                                 possible_answers]
+        # --- Check correctness based on study mode ---
+        if self.study_mode.startswith('definition'):
+            is_correct = self._check_definition_answer(user_answer)
+            correct_display = self.card.get('definition') or ''
+        elif self.study_mode.startswith('synonym'):
+            is_correct = self._check_synonym_answer(user_answer)
+            synonyms = self.card.get('synonyms', [])
+            correct_display = ' / '.join(synonyms)
         else:
-            is_correct = any(self.similarity_checker.are_similar(user_answer, p_ans) for p_ans in possible_answers)
+            # Translation / grammar — legacy behavior
+            correct_answer_string = self.card[self.answer_lang]
+            possible_answers = [ans.strip() for ans in correct_answer_string.split('/')]
+            if self.is_multiple_choice:
+                is_correct = self._normalize_answer(user_answer) in [
+                    self._normalize_answer(ans) for ans in possible_answers
+                ]
+            else:
+                is_correct = any(
+                    self.similarity_checker.are_similar(user_answer, p_ans)
+                    for p_ans in possible_answers
+                )
+            correct_display = correct_answer_string
 
-        self.stats_manager.record_answer(self.card, is_correct)
+        # Record answer with mode
+        self.stats_manager.record_answer(self.card, is_correct, self.study_mode)
 
+        # Visual feedback for multiple choice
         if self.is_multiple_choice:
-            for radio in self.radio_buttons:
-                radio_text = self._normalize_answer(radio.text())
-                is_this_correct = radio_text in [self._normalize_answer(ans) for ans in possible_answers]
+            for widget in self.option_widgets:
+                widget_text = self._normalize_answer(widget.text())
+                if self.study_mode.startswith('definition'):
+                    is_this_correct = widget_text == self._normalize_answer(
+                        self.card.get('definition') or ''
+                    )
+                elif self.study_mode.startswith('synonym'):
+                    synonyms = self.card.get('synonyms', [])
+                    is_this_correct = widget_text in [
+                        self._normalize_answer(s) for s in synonyms
+                    ]
+                else:
+                    correct_answer_string = self.card[self.answer_lang]
+                    possible = [ans.strip() for ans in correct_answer_string.split('/')]
+                    is_this_correct = widget_text in [
+                        self._normalize_answer(ans) for ans in possible
+                    ]
+
                 if is_this_correct:
-                    radio.setStyleSheet("background: #2ecc71; color: white; font-weight: bold;")
-                elif radio.isChecked() and not is_correct:
-                    radio.setStyleSheet("background: #e74c3c; color: white;")
+                    widget.set_result_style(is_correct_option=True)
+                elif widget.isChecked() and not is_correct:
+                    widget.set_result_style(
+                        is_correct_option=False, was_selected_wrong=True
+                    )
 
         if is_correct:
-            self.setStyleSheet(self.styleSheet() + "QFrame#main_widget { border: 2px solid #2ecc71; }")
+            self.setStyleSheet(
+                self.styleSheet()
+                + "QFrame#main_widget { border: 2px solid #2ecc71; }"
+            )
             self.check_button.setText("Correct! 👍")
             self.check_button.setStyleSheet("background-color: #2ecc71;")
         else:
-            self.setStyleSheet(self.styleSheet() + "QFrame#main_widget { border: 2px solid #e74c3c; }")
-            self.check_button.setText(f"Correct: {correct_answer_string}")
+            self.setStyleSheet(
+                self.styleSheet()
+                + "QFrame#main_widget { border: 2px solid #e74c3c; }"
+            )
+            self.check_button.setText(f"Correct: {correct_display}")
             self.check_button.setStyleSheet("background-color: #e74c3c;")
 
         QTimer.singleShot(4000, self.close)
+
+    def _check_definition_answer(self, user_answer):
+        """Checks if user's answer matches the definition using similarity."""
+        correct_def = self.card.get('definition') or ''
+        if self.is_multiple_choice:
+            return self._normalize_answer(user_answer) == self._normalize_answer(correct_def)
+        return self.similarity_checker.are_similar(user_answer, correct_def)
+
+    def _check_synonym_answer(self, user_answer):
+        """Checks if user's answer matches any synonym (1-to-any logic)."""
+        synonyms = self.card.get('synonyms', [])
+        if self.is_multiple_choice:
+            return self._normalize_answer(user_answer) in [
+                self._normalize_answer(s) for s in synonyms
+            ]
+        return any(
+            self.similarity_checker.are_similar(user_answer, syn)
+            for syn in synonyms
+        )
 
     def toggle_hint(self, link=None):
         if hasattr(self, 'hint_popup') and self.hint_popup and self.hint_popup.isVisible():
@@ -375,7 +735,7 @@ class FlashcardWidget(QFrame):
             self.hint_popup = None
             return
 
-        hint_text = self.card.get('hint', '').strip()
+        hint_text = (self.card.get('hint') or '').strip()
         if hint_text:
             self.hint_popup = HintPopupWindow(hint_text, self)
             cursor_pos = QCursor.pos()
@@ -400,8 +760,8 @@ class FlashcardWidget(QFrame):
             self.close()
         elif self.is_multiple_choice and event.key() in (Qt.Key.Key_1, Qt.Key.Key_2, Qt.Key.Key_3, Qt.Key.Key_4):
             index = event.key() - Qt.Key.Key_1
-            if index < len(self.radio_buttons):
-                self.radio_buttons[index].setChecked(True)
+            if index < len(self.option_widgets):
+                self.option_widgets[index].setChecked(True)
                 self.check_answer()
 
     def mousePressEvent(self, event):

@@ -221,10 +221,18 @@ class Vocabulary:
                 word['last_shown'] = None
                 word['correct_answers'] = 0
                 word['total_answers'] = 0
-                word['complexity'] = 0.5 # Default complexity
-        
+                word['complexity'] = 0.5  # Default complexity
+
+            # Migrate: add definition and synonyms fields if missing
+            if 'definition' not in word:
+                needs_saving = True
+                word['definition'] = None
+            if 'synonyms' not in word:
+                needs_saving = True
+                word['synonyms'] = []
+
         if needs_saving:
-            print("Migrating old vocabulary format to new format...")
+            print("Migrating vocabulary format (adding new fields)...")
             self.save_words()
             print("Migration complete.")
 

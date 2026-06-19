@@ -17,7 +17,8 @@ DEFAULT_CONFIG = {
     'active_topics': [],
     'topic_weights': {},
     'show_notifications': True,
-    'theme': 'dark'
+    'theme': 'dark',
+    'study_mode': 'adaptive'
 }
 
 
@@ -100,5 +101,19 @@ class ConfigManager:
     @card_position.setter
     def card_position(self, value):
         self.config['card_position'] = value
+        self.save_config()
+
+    @property
+    def study_mode(self):
+        """Study mode: 'adaptive', 'translation', 'definition', or 'synonym'."""
+        return self.config.get('study_mode', 'adaptive')
+
+    @study_mode.setter
+    def study_mode(self, value):
+        valid_modes = ('adaptive', 'translation', 'definition', 'synonym')
+        if value not in valid_modes:
+            print(f"Invalid study mode '{value}', defaulting to 'adaptive'")
+            value = 'adaptive'
+        self.config['study_mode'] = value
         self.save_config()
 

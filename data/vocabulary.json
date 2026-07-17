@@ -80,15 +80,19 @@
   {
     "english": "content",
     "uzbek": "mamnun, qoniqarli, xursand",
-    "category": "SAT Vocabulary (1-15)",
+    "category": "SAT 180 Vocab (121-135)",
     "grammar_pattern": null,
     "id": "sat-007",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.4,
-    "definition": null,
-    "synonyms": []
+    "definition": "satisfied or pleased",
+    "synonyms": [
+      "fulfilled",
+      "happy"
+    ],
+    "hint": "mamnun, ko'ngli to'q"
   },
   {
     "english": "eccentric",
@@ -899,15 +903,19 @@
   {
     "english": "anomaly",
     "uzbek": "g'alatilik, oddiy bo'lmagan narsa",
-    "category": "SAT Vocabulary (61-75)",
+    "category": "SAT 180 Vocab (91-105)",
     "grammar_pattern": null,
     "id": "sat-070",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
-    "definition": null,
-    "synonyms": []
+    "definition": "something unusual or unexpected",
+    "synonyms": [
+      "irregularity",
+      "outlier"
+    ],
+    "hint": "g'ayrioddiy yoki kutilmagan holat, anomaliya"
   },
   {
     "english": "inhibit",
@@ -1887,15 +1895,19 @@
   {
     "english": "amplify",
     "uzbek": "kuchaytirmoq, ovozini oshirmoq",
-    "category": "Must Know Vocabulary (1-15)",
+    "category": "SAT 180 Vocab (151-165)",
     "grammar_pattern": null,
     "id": "mk-001",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "definition": null,
-    "synonyms": []
+    "definition": "make louder or more intense",
+    "synonyms": [
+      "increase",
+      "boost"
+    ],
+    "hint": "kuchaytirmoq, balandlatmoq"
   },
   {
     "english": "magnify",
@@ -2238,15 +2250,19 @@
   {
     "english": "scrutinize",
     "uzbek": "sinchiklab o'rganmoq, diqqat bilan tekshirmoq",
-    "category": "Must Know Vocabulary (16-30)",
+    "category": "SAT 180 Vocab (1-15)",
     "grammar_pattern": null,
     "id": "mk-028",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
-    "definition": "juda sinchkovlik bilan tekshirish",
-    "synonyms": []
+    "definition": "to examine very carefully",
+    "synonyms": [
+      "inspect",
+      "analyze"
+    ],
+    "hint": "juda sinchiklab tekshirmoq yoki o'rganmoq"
   },
   {
     "english": "synopsis",
@@ -2589,15 +2605,19 @@
   {
     "english": "dictate",
     "uzbek": "diktovka qilmoq, buyurmoq, aytib turib yozdirmoq",
-    "category": "Must Know Vocabulary (46-60)",
+    "category": "SAT 180 Vocab (166-180)",
     "grammar_pattern": null,
     "id": "mk-055",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "definition": null,
-    "synonyms": []
+    "definition": "to give orders or directions",
+    "synonyms": [
+      "command",
+      "order"
+    ],
+    "hint": "buyurmoq, diktovka qilmoq"
   },
   {
     "english": "ascribe",
@@ -3044,28 +3064,36 @@
   {
     "english": "moderation",
     "uzbek": "me'yoriylik, o'rtachalik",
-    "category": "TOP 195 Digital SAT Vocabulary",
+    "category": "SAT 180 Vocab (1-15)",
     "id": "top195-020",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
     "grammar_pattern": null,
-    "definition": "me'yor, ortiqchalik yoki chekdan qochish",
-    "synonyms": []
+    "definition": "the avoidance of excess or extremes",
+    "synonyms": [
+      "restraint",
+      "temperance"
+    ],
+    "hint": "me'yor, haddan tashqari oshib ketmaslik"
   },
   {
     "english": "repudiate",
     "uzbek": "rad etmoq, tan olmaslik",
-    "category": "TOP 195 Digital SAT Vocabulary",
+    "category": "SAT 180 Vocab (106-120)",
     "id": "top195-021",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.7,
     "grammar_pattern": null,
-    "definition": null,
-    "synonyms": []
+    "definition": "to reject or refuse",
+    "synonyms": [
+      "deny",
+      "renounce"
+    ],
+    "hint": "rad etmoq, voz kechmoq"
   },
   {
     "english": "proclaim",
@@ -3135,15 +3163,19 @@
   {
     "english": "secretive",
     "uzbek": "sirli, yashirin",
-    "category": "TOP 195 Digital SAT Vocabulary",
+    "category": "SAT 180 Vocab (61-75)",
     "id": "top195-027",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "definition": null,
-    "synonyms": []
+    "definition": "concealing information or intentions",
+    "synonyms": [
+      "furtive",
+      "covert"
+    ],
+    "hint": "sirli, ma'lumot yoki niyatlarni yashiradigan"
   },
   {
     "english": "ordinary",
@@ -3317,15 +3349,19 @@
   {
     "english": "replicable",
     "uzbek": "takrorlash mumkin bo'lgan, qayta tiklanadigan",
-    "category": "TOP 195 Digital SAT Vocabulary",
+    "category": "SAT 180 Vocab (76-90)",
     "id": "top195-041",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
     "grammar_pattern": null,
-    "definition": null,
-    "synonyms": []
+    "definition": "able to be copied or repeated",
+    "synonyms": [
+      "reproducible",
+      "repeatable"
+    ],
+    "hint": "takrorlanishi mumkin bo'lgan, nusxalanadigan"
   },
   {
     "english": "predetermined",
@@ -3395,15 +3431,19 @@
   {
     "english": "overshadowed by",
     "uzbek": "soyasida qolmoq, ahamiyatini yo'qotish",
-    "category": "TOP 195 Digital SAT Vocabulary",
+    "category": "SAT 180 Vocab (16-30)",
     "id": "top195-047",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.6,
     "grammar_pattern": null,
-    "definition": "solishtirganda unchalik ahamiyatli emasdek ko'rinadigan",
-    "synonyms": []
+    "definition": "made less important or visible by comparison",
+    "synonyms": [
+      "eclipsed",
+      "dominated"
+    ],
+    "hint": "taqqoslaganda soyada qolib ketgan, ahamiyati kamaygan"
   },
   {
     "english": "irrelevant to",
@@ -3473,15 +3513,19 @@
   {
     "english": "careful",
     "uzbek": "ehtiyotkor, diqqatli",
-    "category": "TOP 195 Digital SAT Vocabulary",
+    "category": "SAT 180 Vocab (1-15)",
     "id": "top195-053",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.4,
     "grammar_pattern": null,
-    "definition": "xavf yoki xatolardan qochishga urinadigan, ehtiyotkor",
-    "synonyms": []
+    "definition": "making sure to avoid danger or mistakes",
+    "synonyms": [
+      "cautious",
+      "attentive"
+    ],
+    "hint": "xavf yoki xatolardan qochishga urinadigan, ehtiyotkor"
   },
   {
     "english": "Also",
@@ -4760,953 +4804,2873 @@
   {
     "english": "banal",
     "uzbek": "",
-    "definition": "originalik yetishmaydigan, zerikarli va oddiy",
+    "definition": "so lacking in originality as to be obvious and boring",
     "synonyms": [
       "unoriginal",
       "ordinary"
     ],
-    "category": "TOP 60 SAT Words (Part 1)",
+    "category": "SAT 180 Vocab (1-15)",
     "id": "sat60-001",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "originalik yetishmaydigan, o'ta oddiy va zerikarli"
   },
   {
     "english": "skepticism toward",
     "uzbek": "",
-    "definition": "shubha yoki ishonchsizlik hissi",
+    "definition": "a feeling or attitude of doubt about something",
     "synonyms": [
       "doubt",
       "mistrust"
     ],
-    "category": "TOP 60 SAT Words (Part 1)",
+    "category": "SAT 180 Vocab (1-15)",
     "id": "sat60-002",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "biror narsaga nisbatan shubha yoki ishonchsizlik hissi"
   },
   {
     "english": "verisimilitude in",
     "uzbek": "",
-    "definition": "haqiqiy yoki realdek ko'rinish",
+    "definition": "the appearance of being true or real",
     "synonyms": [
       "authenticity",
       "realism"
     ],
-    "category": "TOP 60 SAT Words (Part 1)",
+    "category": "SAT 180 Vocab (1-15)",
     "id": "sat60-003",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "haqiqiy yoki realdek ko'rinish (haqiqatga o'xshashlik)"
   },
   {
     "english": "appraising",
     "uzbek": "",
-    "definition": "baholash yoki qiymatni aniqlash",
+    "definition": "evaluating or judging the value of something",
     "synonyms": [
       "evaluating",
       "assessing"
     ],
-    "category": "TOP 60 SAT Words (Part 1)",
+    "category": "SAT 180 Vocab (1-15)",
     "id": "sat60-004",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "biror narsaning qiymatini baholash yoki aniqlash"
   },
   {
     "english": "indoctrinated",
     "uzbek": "",
-    "definition": "ma'lum bir qarashlarni ko'r-ko'rona qabul qilishga o'rgatilgan",
+    "definition": "taught to accept a set of beliefs uncritically",
     "synonyms": [
       "programmed",
       "inculcated"
     ],
-    "category": "TOP 60 SAT Words (Part 1)",
+    "category": "SAT 180 Vocab (1-15)",
     "id": "sat60-006",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "ma'lum bir qarashlarni ko'r-ko'rona qabul qilishga o'rgatilgan"
   },
   {
     "english": "assistance",
     "uzbek": "",
-    "definition": "yordam berish harakati, ko'mak",
+    "definition": "the act of helping",
     "synonyms": [
       "help",
       "support"
     ],
-    "category": "TOP 60 SAT Words (Part 1)",
+    "category": "SAT 180 Vocab (1-15)",
     "id": "sat60-007",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "yordam berish harakati, ko'mak"
   },
   {
     "english": "creative",
     "uzbek": "",
-    "definition": "yangi narsalar yaratish yoki g'oyalar o'ylab topish qobiliyati",
+    "definition": "having the ability to make new things or think of new ideas",
     "synonyms": [
       "inventive",
       "original"
     ],
-    "category": "TOP 60 SAT Words (Part 1)",
+    "category": "SAT 180 Vocab (1-15)",
     "id": "sat60-008",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "yangi narsalar yaratish yoki yangi g'oyalar o'ylab topish qobiliyati"
   },
   {
     "english": "similarities to",
     "uzbek": "",
-    "definition": "o'xshash bo'lish yoki umumiy jihatlarga ega bo'lish",
+    "definition": "being alike or having things in common",
     "synonyms": [
       "likeness",
       "resemblance"
     ],
-    "category": "TOP 60 SAT Words (Part 1)",
+    "category": "SAT 180 Vocab (1-15)",
     "id": "sat60-011",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "o'xshash bo'lish yoki umumiy jihatlarga ega bo'lish"
   },
   {
     "english": "restricted",
     "uzbek": "",
-    "definition": "cheklangan yoki kirish qiyin bo'lgan",
+    "definition": "limited in extent or access",
     "synonyms": [
       "limited",
       "confined"
     ],
-    "category": "TOP 60 SAT Words (Part 1)",
+    "category": "SAT 180 Vocab (1-15)",
     "id": "sat60-012",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "cheklangan yoki kirish qiyin bo'lgan"
   },
   {
     "english": "cherished",
     "uzbek": "",
-    "definition": "juda qadrlanadigan va seviladigan",
+    "definition": "greatly valued and loved",
     "synonyms": [
       "treasured",
       "adored"
     ],
-    "category": "TOP 60 SAT Words (Part 1)",
+    "category": "SAT 180 Vocab (1-15)",
     "id": "sat60-013",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "juda qadrlanadigan va seviladigan"
   },
   {
     "english": "enthusiasm for",
     "uzbek": "",
-    "definition": "kuchli ishtiyoq, qiziqish yoki mamnunlik",
+    "definition": "intense enjoyment, interest, or approval",
     "synonyms": [
       "eagerness",
       "passion"
     ],
-    "category": "TOP 60 SAT Words (Part 1)",
+    "category": "SAT 180 Vocab (1-15)",
     "id": "sat60-014",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "kuchli ishtiyoq, qiziqish yoki mamnunlik"
   },
   {
     "english": "transcending",
     "uzbek": "",
-    "definition": "chegaradan chiqadigan, ustun bo'ladigan",
+    "definition": "going beyond or rising above",
     "synonyms": [
       "surpassing",
       "exceeding"
     ],
-    "category": "TOP 60 SAT Words (Part 1)",
+    "category": "SAT 180 Vocab (1-15)",
     "id": "sat60-015",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "chegaradan chiqadigan, ustun bo'ladigan"
   },
   {
     "english": "publicity",
     "uzbek": "",
-    "definition": "OAV yoki jamoatchilik e'tiboriga tushish, reklama",
+    "definition": "attention given by the media",
     "synonyms": [
       "exposure",
       "promotion"
     ],
-    "category": "TOP 60 SAT Words (Part 2)",
+    "category": "SAT 180 Vocab (16-30)",
     "id": "sat60-016",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "OAV yoki jamoatchilik e'tiboriga tushish, reklama"
   },
   {
     "english": "unoriginal",
     "uzbek": "",
-    "definition": "yangi g'oyalar yoki ijodkorlik yetishmaydigan",
+    "definition": "lacking new ideas or creativity",
     "synonyms": [
       "derivative",
       "copied"
     ],
-    "category": "TOP 60 SAT Words (Part 2)",
+    "category": "SAT 180 Vocab (16-30)",
     "id": "sat60-017",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "yangi g'oyalar yoki ijodkorlik yetishmaydigan"
   },
   {
     "english": "an accessory",
     "uzbek": "",
-    "definition": "qulaylik yoki chiroyli ko'rinish uchun qo'shimcha buyum",
+    "definition": "an extra item added for convenience or appearance",
     "synonyms": [
       "addition",
       "attachment"
     ],
-    "category": "TOP 60 SAT Words (Part 2)",
+    "category": "SAT 180 Vocab (16-30)",
     "id": "sat60-018",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "qo'shimcha buyum, aksessuar"
   },
   {
     "english": "substantiating",
     "uzbek": "",
-    "definition": "da'voni isbotlash uchun dalillar keltirish",
+    "definition": "providing evidence to support a claim",
     "synonyms": [
       "proving",
       "confirming"
     ],
-    "category": "TOP 60 SAT Words (Part 2)",
+    "category": "SAT 180 Vocab (16-30)",
     "id": "sat60-019",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "dalil keltirish, isbotlash, tasdiqlash"
   },
   {
     "english": "appropriate",
     "uzbek": "",
-    "definition": "vaziyatga mos yoki to'g'ri keladigan",
+    "definition": "suitable or proper for a situation",
     "synonyms": [
       "fitting",
       "apt"
     ],
-    "category": "TOP 60 SAT Words (Part 2)",
+    "category": "SAT 180 Vocab (16-30)",
     "id": "sat60-020",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "vaziyatga mos yoki to'g'ri keladigan"
   },
   {
     "english": "surprise at",
     "uzbek": "",
-    "definition": "kutilmaganlik yoki hayratlanish hissi",
+    "definition": "a feeling of unexpectedness",
     "synonyms": [
       "amazement",
       "astonishment"
     ],
-    "category": "TOP 60 SAT Words (Part 2)",
+    "category": "SAT 180 Vocab (16-30)",
     "id": "sat60-022",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "kutilmagan holatdan hayratlanish hissi"
   },
   {
     "english": "negligible",
     "uzbek": "",
-    "definition": "e'tiborga loyiq bo'lmagan, juda kichik",
+    "definition": "so small as to be not worth considering",
     "synonyms": [
       "insignificant",
       "minor"
     ],
-    "category": "TOP 60 SAT Words (Part 2)",
+    "category": "SAT 180 Vocab (16-30)",
     "id": "sat60-023",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "e'tiborga loyiq bo'lmagan darajada kichik, ahamiyatsiz"
   },
   {
     "english": "imperative",
     "uzbek": "",
-    "definition": "juda muhim yoki o'ta zarur",
+    "definition": "extremely important or necessary",
     "synonyms": [
       "crucial",
       "essential"
     ],
-    "category": "TOP 60 SAT Words (Part 2)",
+    "category": "SAT 180 Vocab (16-30)",
     "id": "sat60-024",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "o'ta muhim yoki zarur, shart bo'lgan"
   },
   {
     "english": "design",
     "uzbek": "",
-    "definition": "biror narsaning ko'rinishini ko'rsatadigan reja yoki chizma",
+    "definition": "a plan or drawing produced to show the look of something",
     "synonyms": [
       "plan",
       "blueprint"
     ],
-    "category": "TOP 60 SAT Words (Part 2)",
+    "category": "SAT 180 Vocab (16-30)",
     "id": "sat60-025",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "loyiha, reja yoki chizma"
   },
   {
     "english": "vague",
     "uzbek": "",
-    "definition": "noaniq yoki tushunarsiz",
+    "definition": "unclear or not specific",
     "synonyms": [
       "ambiguous",
       "indistinct"
     ],
-    "category": "TOP 60 SAT Words (Part 2)",
+    "category": "SAT 180 Vocab (16-30)",
     "id": "sat60-026",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "noaniq yoki mavhum"
   },
   {
     "english": "integrated with",
     "uzbek": "",
-    "definition": "boshqa narsa bilan birlashtirilgan",
+    "definition": "combined or put together with something else",
     "synonyms": [
       "unified",
       "merged"
     ],
-    "category": "TOP 60 SAT Words (Part 2)",
+    "category": "SAT 180 Vocab (16-30)",
     "id": "sat60-027",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "boshqa narsa bilan birlashtirilgan yoki integratsiya qilingan"
   },
   {
     "english": "struggling",
     "uzbek": "",
-    "definition": "qiyinchilikka duch kelayotgan, kurashayotgan",
+    "definition": "having difficulty",
     "synonyms": [
       "battling",
       "grappling"
     ],
-    "category": "TOP 60 SAT Words (Part 2)",
+    "category": "SAT 180 Vocab (16-30)",
     "id": "sat60-028",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "qiynalayotgan, kurashayotgan"
   },
   {
     "english": "disorganized",
     "uzbek": "",
-    "definition": "tizimsiz, tartibsiz",
+    "definition": "lacking structure or order",
     "synonyms": [
       "messy",
       "chaotic"
     ],
-    "category": "TOP 60 SAT Words (Part 2)",
+    "category": "SAT 180 Vocab (16-30)",
     "id": "sat60-029",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "tartibsiz, strukturasiz"
   },
   {
     "english": "unknown",
     "uzbek": "",
-    "definition": "noma'lum yoki notanish",
+    "definition": "not known or familiar",
     "synonyms": [
       "unfamiliar",
       "mysterious"
     ],
-    "category": "TOP 60 SAT Words (Part 2)",
+    "category": "SAT 180 Vocab (16-30)",
     "id": "sat60-030",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "noma'lum yoki notanish"
   },
   {
     "english": "disingenuous",
     "uzbek": "",
-    "definition": "samimiy bo'lmagan, o'zini bilmaganga soladigan",
+    "definition": "not sincere, pretending to know less than one really does",
     "synonyms": [
       "insincere",
       "deceitful"
     ],
-    "category": "TOP 60 SAT Words (Part 3)",
+    "category": "SAT 180 Vocab (31-45)",
     "id": "sat60-031",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "samimiy bo'lmagan, o'zini bilmaganga soladigan"
   },
   {
     "english": "an extraordinary",
     "uzbek": "",
-    "definition": "g'ayrioddiy, ajoyib, favqulodda",
+    "definition": "very unusual, remarkable, exceptional",
     "synonyms": [
-      "exceptional",
       "remarkable"
     ],
-    "category": "TOP 60 SAT Words (Part 3)",
+    "category": "SAT 180 Vocab (31-45)",
     "id": "sat60-032",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "favqulodda, ajoyib, g'ayrioddiy"
   },
   {
     "english": "extrapolating from",
     "uzbek": "",
-    "definition": "ma'lum ma'lumotlarni kengaytirish orqali taxmin qilish",
+    "definition": "estimating by extending known information",
     "synonyms": [
       "predicting",
       "inferring"
     ],
-    "category": "TOP 60 SAT Words (Part 3)",
+    "category": "SAT 180 Vocab (31-45)",
     "id": "sat60-033",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "ma'lum ma'lumotlarni kengaytirish orqali taxmin qilish"
   },
   {
     "english": "nurture",
     "uzbek": "",
-    "definition": "g'amxo'rlik qilish va o'sishni rag'batlantirish",
+    "definition": "to care for and encourage growth",
     "synonyms": [
       "foster",
       "cultivate"
     ],
-    "category": "TOP 60 SAT Words (Part 3)",
+    "category": "SAT 180 Vocab (31-45)",
     "id": "sat60-034",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "g'amxo'rlik qilish va rivojlanishiga yordam berish"
   },
   {
     "english": "advice",
     "uzbek": "",
-    "definition": "maslahat, yo'l-yo'riq yoki tavsiyalar",
+    "definition": "guidance or recommendations",
     "synonyms": [
       "counsel",
       "suggestion"
     ],
-    "category": "TOP 60 SAT Words (Part 3)",
+    "category": "SAT 180 Vocab (31-45)",
     "id": "sat60-035",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "maslahat yoki tavsiyalar"
   },
   {
     "english": "sincerity",
     "uzbek": "",
-    "definition": "samimiylik va halollik",
+    "definition": "honesty and genuineness",
     "synonyms": [
       "truthfulness",
       "authenticity"
     ],
-    "category": "TOP 60 SAT Words (Part 3)",
+    "category": "SAT 180 Vocab (31-45)",
     "id": "sat60-036",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "samimiylik va halollik"
   },
   {
     "english": "compensated for",
     "uzbek": "",
-    "definition": "o'rni qoplangan yoki to'langan",
+    "definition": "made up for or paid for something",
     "synonyms": [
       "repaid",
       "offset"
     ],
-    "category": "TOP 60 SAT Words (Part 3)",
+    "category": "SAT 180 Vocab (31-45)",
     "id": "sat60-037",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "o'rni qoplangan yoki to'langan"
   },
   {
     "english": "scrutinized by",
     "uzbek": "",
-    "definition": "tomonidan juda sinchkovlik bilan tekshirilgan",
+    "definition": "examined very carefully by",
     "synonyms": [
       "inspected",
       "reviewed"
     ],
-    "category": "TOP 60 SAT Words (Part 3)",
+    "category": "SAT 180 Vocab (31-45)",
     "id": "sat60-038",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "tomonidan juda sinchiklab tekshirilgan"
   },
   {
     "english": "depleted",
     "uzbek": "",
-    "definition": "tugagan, bo'shab qolgan",
+    "definition": "used up, emptied",
     "synonyms": [
       "exhausted",
       "drained"
     ],
-    "category": "TOP 60 SAT Words (Part 3)",
+    "category": "SAT 180 Vocab (31-45)",
     "id": "sat60-039",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "tugatilgan, bo'shatilgan, charchagan"
   },
   {
     "english": "inspect",
     "uzbek": "",
-    "definition": "yaqindan ko'zdan kechirish, tekshirish",
+    "definition": "to look at closely",
     "synonyms": [
       "examine",
       "check"
     ],
-    "category": "TOP 60 SAT Words (Part 3)",
+    "category": "SAT 180 Vocab (31-45)",
     "id": "sat60-040",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "yaqindan ko'zdan kechirmoq, tekshirmoq"
   },
   {
     "english": "ambivalence toward",
     "uzbek": "",
-    "definition": "qarama-qarshi yoki noaniq his-tuyg'ularga ega bo'lish",
+    "definition": "having mixed or uncertain feelings about",
     "synonyms": [
       "uncertainty",
       "indecision"
     ],
-    "category": "TOP 60 SAT Words (Part 3)",
+    "category": "SAT 180 Vocab (31-45)",
     "id": "sat60-041",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "qarama-qarshi yoki noaniq his-tuyg'ularga ega bo'lish"
   },
   {
     "english": "lift",
     "uzbek": "",
-    "definition": "ko'tarmoq yoki yuqoriroq joyga ko'chirmoq",
+    "definition": "to raise or move to a higher position",
     "synonyms": [
       "hoist",
       "elevate"
     ],
-    "category": "TOP 60 SAT Words (Part 3)",
+    "category": "SAT 180 Vocab (31-45)",
     "id": "sat60-042",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "ko'tarmoq yoki yuqoriroq joyga ko'chirmoq"
   },
   {
     "english": "liked",
     "uzbek": "",
-    "definition": "yoqadigan, ma'qullangan",
+    "definition": "regarded with affection or approval",
     "synonyms": [
       "enjoyed",
       "favored"
     ],
-    "category": "TOP 60 SAT Words (Part 3)",
+    "category": "SAT 180 Vocab (31-45)",
     "id": "sat60-043",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "yoqadigan, ma'qullangan"
   },
   {
     "english": "advances",
     "uzbek": "",
-    "definition": "oldinga siljiydi, rivojlanadi",
+    "definition": "moves forward, makes progress",
     "synonyms": [
       "progresses",
       "improves"
     ],
-    "category": "TOP 60 SAT Words (Part 3)",
+    "category": "SAT 180 Vocab (31-45)",
     "id": "sat60-044",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "oldinga siljiydi, rivojlanadi"
   },
   {
     "english": "corroborating",
     "uzbek": "",
-    "definition": "dalillar bilan tasdiqlovchi",
+    "definition": "supporting with evidence or authority",
     "synonyms": [
       "confirming",
       "validating"
     ],
-    "category": "TOP 60 SAT Words (Part 3)",
+    "category": "SAT 180 Vocab (31-45)",
     "id": "sat60-045",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "dalillar bilan tasdiqlash yoki qo'llab-quvvatlash"
   },
   {
     "english": "overlooked",
     "uzbek": "",
-    "definition": "e'tibordan chetda qolgan, sezilmagan",
+    "definition": "failed to notice",
     "synonyms": [
       "ignored",
       "missed"
     ],
-    "category": "TOP 60 SAT Words (Part 4)",
+    "category": "SAT 180 Vocab (46-60)",
     "id": "sat60-046",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "e'tibordan chetda qolgan, payqamagan"
   },
   {
     "english": "misrepresent",
     "uzbek": "",
-    "definition": "noto'g'ri yoki chalg'ituvchi ma'lumot berish",
+    "definition": "give a false or misleading account",
     "synonyms": [
       "distort",
       "falsify"
     ],
-    "category": "TOP 60 SAT Words (Part 4)",
+    "category": "SAT 180 Vocab (46-60)",
     "id": "sat60-047",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "noto'g'ri yoki chalg'ituvchi ma'lumot bermoq, buzib ko'rsatmoq"
   },
   {
     "english": "exceptions to",
     "uzbek": "",
-    "definition": "umumiy qoidaga kirmaydigan holatlar, istisnolar",
+    "definition": "cases not included in the general rule",
     "synonyms": [
       "exemptions",
       "exclusions"
     ],
-    "category": "TOP 60 SAT Words (Part 4)",
+    "category": "SAT 180 Vocab (46-60)",
     "id": "sat60-048",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "umumiy qoidadan mustasno holatlar"
   },
   {
     "english": "evidence",
     "uzbek": "",
-    "definition": "ishonchni tasdiqlovchi faktlar yoki dalillar, isbot",
+    "definition": "facts or information supporting a belief",
     "synonyms": [
       "proof",
       "testimony"
     ],
-    "category": "TOP 60 SAT Words (Part 4)",
+    "category": "SAT 180 Vocab (46-60)",
     "id": "sat60-049",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "dalil yoki isbot"
   },
   {
     "english": "negating",
     "uzbek": "",
-    "definition": "inkor qiladigan, samarasiz qiladigan",
+    "definition": "making ineffective, denying",
     "synonyms": [
       "nullifying",
       "denying"
     ],
-    "category": "TOP 60 SAT Words (Part 4)",
+    "category": "SAT 180 Vocab (46-60)",
     "id": "sat60-050",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "inkor etish, samarasiz qilish"
   },
   {
     "english": "buttress",
     "uzbek": "",
-    "definition": "qo'llab-quvvatlash yoki kuchaytirish",
+    "definition": "to support or strengthen",
     "synonyms": [
       "reinforce",
       "bolster"
     ],
-    "category": "TOP 60 SAT Words (Part 4)",
+    "category": "SAT 180 Vocab (46-60)",
     "id": "sat60-051",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "qo'llab-quvvatlash yoki kuchaytirish"
   },
   {
     "english": "responsive",
     "uzbek": "",
-    "definition": "tez yoki ijobiy munosabat bildiradigan",
+    "definition": "reacting quickly or positively",
     "synonyms": [
       "reactive",
       "receptive"
     ],
-    "category": "TOP 60 SAT Words (Part 4)",
+    "category": "SAT 180 Vocab (46-60)",
     "id": "sat60-052",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "tez yoki ijobiy munosabat bildiradigan"
   },
   {
     "english": "profusion of",
     "uzbek": "",
-    "definition": "biror narsaning juda ko'p miqdori, seroblik",
+    "definition": "a large quantity of something",
     "synonyms": [
       "abundance",
       "plenty"
     ],
-    "category": "TOP 60 SAT Words (Part 4)",
+    "category": "SAT 180 Vocab (46-60)",
     "id": "sat60-053",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "biror narsaning juda ko'p miqdori, seroblik"
   },
   {
     "english": "conditions",
     "uzbek": "",
-    "definition": "biror narsaga ta'sir qiluvchi vaziyatlar yoki sharoitlar",
+    "definition": "situations or environments affecting something",
     "synonyms": [
       "circumstances",
       "factors"
     ],
-    "category": "TOP 60 SAT Words (Part 4)",
+    "category": "SAT 180 Vocab (46-60)",
     "id": "sat60-054",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "sharoitlar yoki vaziyatlar"
   },
   {
     "english": "analogical",
     "uzbek": "",
-    "definition": "o'xshashlik yoki taqqoslashga asoslangan",
+    "definition": "based on similarities or comparison",
     "synonyms": [
       "comparable",
       "parallel"
     ],
-    "category": "TOP 60 SAT Words (Part 4)",
+    "category": "SAT 180 Vocab (46-60)",
     "id": "sat60-055",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "o'xshashlik yoki taqqoslashga asoslangan"
   },
   {
     "english": "described",
     "uzbek": "",
-    "definition": "batafsil tasvirlangan",
+    "definition": "told about with details",
     "synonyms": [
       "explained",
       "detailed"
     ],
-    "category": "TOP 60 SAT Words (Part 4)",
+    "category": "SAT 180 Vocab (46-60)",
     "id": "sat60-056",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "batafsil tasvirlangan, tushuntirilgan"
   },
   {
     "english": "fineness",
     "uzbek": "",
-    "definition": "juda yupqa yoki yuqori darajada aniqlik sifati",
+    "definition": "the quality of being very thin or highly detailed",
     "synonyms": [
       "delicacy",
       "subtlety"
     ],
-    "category": "TOP 60 SAT Words (Part 4)",
+    "category": "SAT 180 Vocab (46-60)",
     "id": "sat60-057",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "noziklik, juda yupqa yoki batafsil bo'lish sifati"
   },
   {
     "english": "emulate",
     "uzbek": "",
-    "definition": "taqlid qilish orqali tenglashishga yoki o'zib ketishga urinish",
+    "definition": "to try to match or surpass, often by imitation",
     "synonyms": [
       "imitate",
       "mimic"
     ],
-    "category": "TOP 60 SAT Words (Part 4)",
+    "category": "SAT 180 Vocab (46-60)",
     "id": "sat60-058",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "taqlid qilish orqali tenglashishga yoki o'zib ketishga urinish"
   },
   {
     "english": "an oddity",
     "uzbek": "",
-    "definition": "g'ayrioddiy yoki g'alati narsa",
+    "definition": "something unusual or strange",
     "synonyms": [
       "peculiarity",
       "anomaly"
     ],
-    "category": "TOP 60 SAT Words (Part 4)",
+    "category": "SAT 180 Vocab (46-60)",
     "id": "sat60-059",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "g'ayrioddiy yoki g'alati narsa, anomaliya"
   },
   {
     "english": "disengage",
     "uzbek": "",
-    "definition": "ajratish yoki bo'shatish",
+    "definition": "to separate or release from something",
     "synonyms": [
       "detach",
       "withdraw"
     ],
-    "category": "TOP 60 SAT Words (Part 4)",
+    "category": "SAT 180 Vocab (46-60)",
     "id": "sat60-060",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
     "grammar_pattern": null,
-    "hint": null
+    "hint": "ajratish yoki bo'shatish, chekinish"
+  },
+  {
+    "english": "predicting",
+    "uzbek": "",
+    "definition": "making an educated guess about the future",
+    "synonyms": [
+      "forecast",
+      "projecting"
+    ],
+    "category": "SAT 180 Vocab (61-75)",
+    "id": "sat180-061",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "kelajak haqida taxmin qilish, bashorat qilish"
+  },
+  {
+    "english": "collaborators",
+    "uzbek": "",
+    "definition": "people who work together on a project",
+    "synonyms": [
+      "partners",
+      "co-workers"
+    ],
+    "category": "SAT 180 Vocab (61-75)",
+    "id": "sat180-062",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "hamkorlar, bir loyihada birga ishlovchilar"
+  },
+  {
+    "english": "Tenderly",
+    "uzbek": "",
+    "definition": "with gentle and loving care",
+    "synonyms": [
+      "softly",
+      "gently"
+    ],
+    "category": "SAT 180 Vocab (61-75)",
+    "id": "sat180-064",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "muloyimlik va mehr bilan"
+  },
+  {
+    "english": "decorations",
+    "uzbek": "",
+    "definition": "items used to make something look attractive",
+    "synonyms": [
+      "ornaments",
+      "adornments"
+    ],
+    "category": "SAT 180 Vocab (61-75)",
+    "id": "sat180-065",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "bezaklar, bezatish buyumlari"
+  },
+  {
+    "english": "interaction",
+    "uzbek": "",
+    "definition": "communication or direct involvement",
+    "synonyms": [
+      "engagement",
+      "contact"
+    ],
+    "category": "SAT 180 Vocab (61-75)",
+    "id": "sat180-066",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "o'zaro aloqa, muloqot"
+  },
+  {
+    "english": "placated by",
+    "uzbek": "",
+    "definition": "made less angry or hostile by",
+    "synonyms": [
+      "soothed",
+      "appeased"
+    ],
+    "category": "SAT 180 Vocab (61-75)",
+    "id": "sat180-067",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "tomonidan tinchlantirilgan yoki yumshatilgan"
+  },
+  {
+    "english": "enhance",
+    "uzbek": "",
+    "definition": "improve or make better",
+    "synonyms": [
+      "boost",
+      "augment"
+    ],
+    "category": "SAT 180 Vocab (61-75)",
+    "id": "sat180-068",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "yaxshilamoq yoki kuchaytirmoq"
+  },
+  {
+    "english": "approximate",
+    "uzbek": "",
+    "definition": "nearly correct or exact",
+    "synonyms": [
+      "estimate",
+      "approach"
+    ],
+    "category": "SAT 180 Vocab (61-75)",
+    "id": "sat180-069",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "taxminiy, deyarli to'g'ri"
+  },
+  {
+    "english": "Standard",
+    "uzbek": "",
+    "definition": "a level of quality",
+    "synonyms": [
+      "norm",
+      "benchmark"
+    ],
+    "category": "SAT 180 Vocab (61-75)",
+    "id": "sat180-070",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "sifat darajasi, standart"
+  },
+  {
+    "english": "stabilizing",
+    "uzbek": "",
+    "definition": "making steady or stable",
+    "synonyms": [
+      "steadying",
+      "securing"
+    ],
+    "category": "SAT 180 Vocab (61-75)",
+    "id": "sat180-071",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "barqarorlashtirish, mustahkamlash"
+  },
+  {
+    "english": "replicate",
+    "uzbek": "",
+    "definition": "to copy or repeat",
+    "synonyms": [
+      "duplicate",
+      "reproduce"
+    ],
+    "category": "SAT 180 Vocab (61-75)",
+    "id": "sat180-072",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "nusxalash, qaytadan takrorlash"
+  },
+  {
+    "english": "Ranked",
+    "uzbek": "",
+    "definition": "given a particular position in a list",
+    "synonyms": [
+      "ordered",
+      "classified"
+    ],
+    "category": "SAT 180 Vocab (61-75)",
+    "id": "sat180-073",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "ro'yxatda ma'lum bir o'ringa ega bo'lgan"
+  },
+  {
+    "english": "analyze",
+    "uzbek": "",
+    "definition": "to examine in detail",
+    "synonyms": [
+      "examine",
+      "study"
+    ],
+    "category": "SAT 180 Vocab (61-75)",
+    "id": "sat180-074",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "batafsil tahlil qilmoq, o'rganmoq"
+  },
+  {
+    "english": "abandon",
+    "uzbek": "",
+    "definition": "to leave behind or give up",
+    "synonyms": [
+      "desert",
+      "forsake"
+    ],
+    "category": "SAT 180 Vocab (61-75)",
+    "id": "sat180-075",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "tashlab ketmoq yoki voz kechmoq"
+  },
+  {
+    "english": "ornamental",
+    "uzbek": "",
+    "definition": "used for decoration",
+    "synonyms": [
+      "decorative",
+      "fancy"
+    ],
+    "category": "SAT 180 Vocab (76-90)",
+    "id": "sat180-076",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "bezak uchun ishlatiladigan"
+  },
+  {
+    "english": "attract",
+    "uzbek": "",
+    "definition": "draw interest or attention",
+    "synonyms": [
+      "allure",
+      "entice"
+    ],
+    "category": "SAT 180 Vocab (76-90)",
+    "id": "sat180-077",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "jalb qilmoq, diqqatni tortmoq"
+  },
+  {
+    "english": "uncontroversial",
+    "uzbek": "",
+    "definition": "not likely to cause disagreement",
+    "synonyms": [
+      "undisputed",
+      "accepted"
+    ],
+    "category": "SAT 180 Vocab (76-90)",
+    "id": "sat180-078",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "bahs-munozaraga sabab bo'lmaydigan, hamma tan olgan"
+  },
+  {
+    "english": "imitation",
+    "uzbek": "",
+    "definition": "a copy of something",
+    "synonyms": [
+      "replica",
+      "mimicry"
+    ],
+    "category": "SAT 180 Vocab (76-90)",
+    "id": "sat180-079",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "taqlid, nusxa"
+  },
+  {
+    "english": "proclaims",
+    "uzbek": "",
+    "definition": "declares officially or publicly",
+    "synonyms": [
+      "announces",
+      "declares"
+    ],
+    "category": "SAT 180 Vocab (76-90)",
+    "id": "sat180-080",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "rasman yoki ochiq e'lon qiladi"
+  },
+  {
+    "english": "apathy toward",
+    "uzbek": "",
+    "definition": "lack of interest or feeling",
+    "synonyms": [
+      "indifference",
+      "unconcern"
+    ],
+    "category": "SAT 180 Vocab (76-90)",
+    "id": "sat180-081",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "loqaydlik, befarqlik"
+  },
+  {
+    "english": "refusing",
+    "uzbek": "",
+    "definition": "not willing to do or accept",
+    "synonyms": [
+      "declining",
+      "rejecting"
+    ],
+    "category": "SAT 180 Vocab (76-90)",
+    "id": "sat180-082",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "rad etish, rozi bo'lmaslik"
+  },
+  {
+    "english": "Reveal",
+    "uzbek": "",
+    "definition": "to make known or show",
+    "synonyms": [
+      "disclose",
+      "uncover"
+    ],
+    "category": "SAT 180 Vocab (76-90)",
+    "id": "sat180-084",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "oshkor qilmoq, ko'rsatmoq"
+  },
+  {
+    "english": "restrained",
+    "uzbek": "",
+    "definition": "controlled, not excessive",
+    "synonyms": [
+      "moderate",
+      "reserved"
+    ],
+    "category": "SAT 180 Vocab (76-90)",
+    "id": "sat180-085",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "vazmin, me'yordagi, cheklangan"
+  },
+  {
+    "english": "convey",
+    "uzbek": "",
+    "definition": "to communicate or express",
+    "synonyms": [
+      "transmit",
+      "communicate"
+    ],
+    "category": "SAT 180 Vocab (76-90)",
+    "id": "sat180-086",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "yetkazmoq, ifodalab bermoq"
+  },
+  {
+    "english": "appraised of",
+    "uzbek": "",
+    "definition": "informed or made aware of",
+    "synonyms": [
+      "notified",
+      "advised"
+    ],
+    "category": "SAT 180 Vocab (76-90)",
+    "id": "sat180-087",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "xabardor qilingan, ogohlantirilgan"
+  },
+  {
+    "english": "mimicked",
+    "uzbek": "",
+    "definition": "copied or imitated",
+    "synonyms": [
+      "imitated",
+      "parroted"
+    ],
+    "category": "SAT 180 Vocab (76-90)",
+    "id": "sat180-088",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "taqlid qilingan, nusxalangan"
+  },
+  {
+    "english": "criticism of",
+    "uzbek": "",
+    "definition": "pointing out faults or problems",
+    "synonyms": [
+      "disapproval",
+      "critique"
+    ],
+    "category": "SAT 180 Vocab (76-90)",
+    "id": "sat180-089",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "tanqid qilish, kamchiliklarni ko'rsatish"
+  },
+  {
+    "english": "reviewed",
+    "uzbek": "",
+    "definition": "examined or inspected",
+    "synonyms": [
+      "evaluated",
+      "assessed"
+    ],
+    "category": "SAT 180 Vocab (76-90)",
+    "id": "sat180-090",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "ko'rib chiqilgan, tekshirilgan"
+  },
+  {
+    "english": "discretion",
+    "uzbek": "",
+    "definition": "carefulness and good judgment",
+    "synonyms": [
+      "prudence",
+      "tact"
+    ],
+    "category": "SAT 180 Vocab (91-105)",
+    "id": "sat180-092",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "ehotiyotkorlik va oqilona qaror qabul qilish"
+  },
+  {
+    "english": "Entering",
+    "uzbek": "",
+    "definition": "going into",
+    "synonyms": [
+      "joining",
+      "penetrating"
+    ],
+    "category": "SAT 180 Vocab (91-105)",
+    "id": "sat180-093",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "kirish, kirib borish"
+  },
+  {
+    "english": "uncertainty about",
+    "uzbek": "",
+    "definition": "doubt or lack of sureness",
+    "synonyms": [
+      "ambiguity",
+      "indecision"
+    ],
+    "category": "SAT 180 Vocab (91-105)",
+    "id": "sat180-094",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "noaniqlik, shubha"
+  },
+  {
+    "english": "reciprocates",
+    "uzbek": "",
+    "definition": "responds with a similar action",
+    "synonyms": [
+      "returns",
+      "matches"
+    ],
+    "category": "SAT 180 Vocab (91-105)",
+    "id": "sat180-095",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "xuddi shunday javob qaytaradi"
+  },
+  {
+    "english": "an incident",
+    "uzbek": "",
+    "definition": "an event or occurrence",
+    "synonyms": [
+      "event",
+      "episode"
+    ],
+    "category": "SAT 180 Vocab (91-105)",
+    "id": "sat180-096",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "hodisa, voqea"
+  },
+  {
+    "english": "presuppose",
+    "uzbek": "",
+    "definition": "to assume beforehand",
+    "synonyms": [
+      "assume",
+      "suppose"
+    ],
+    "category": "SAT 180 Vocab (91-105)",
+    "id": "sat180-097",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "oldindan taxmin qilmoq, nazarda tutmoq"
+  },
+  {
+    "english": "acclaim",
+    "uzbek": "",
+    "definition": "praise enthusiastically",
+    "synonyms": [
+      "applaud",
+      "praise"
+    ],
+    "category": "SAT 180 Vocab (91-105)",
+    "id": "sat180-098",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "ishtiyoq bilan olqishlamoq, maqtamoq"
+  },
+  {
+    "english": "Correct",
+    "uzbek": "",
+    "definition": "free from error",
+    "synonyms": [
+      "accurate",
+      "right"
+    ],
+    "category": "SAT 180 Vocab (91-105)",
+    "id": "sat180-099",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "to'g'ri, xatosiz"
+  },
+  {
+    "english": "conspicuous",
+    "uzbek": "",
+    "definition": "easily seen or noticed",
+    "synonyms": [
+      "noticeable",
+      "obvious"
+    ],
+    "category": "SAT 180 Vocab (91-105)",
+    "id": "sat180-100",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "ko'zga tashlanadigan, yaqqol ko'rinadigan"
+  },
+  {
+    "english": "comparable to",
+    "uzbek": "",
+    "definition": "similar to",
+    "synonyms": [
+      "analogous",
+      "akin to"
+    ],
+    "category": "SAT 180 Vocab (91-105)",
+    "id": "sat180-101",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "taqqoslasa bo'ladigan, o'xshash"
+  },
+  {
+    "english": "monetizing",
+    "uzbek": "",
+    "definition": "turning into money",
+    "synonyms": [
+      "profiting from",
+      "commercializing"
+    ],
+    "category": "SAT 180 Vocab (91-105)",
+    "id": "sat180-102",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "pulga aylantirish, foyda ko'rish"
+  },
+  {
+    "english": "recognize",
+    "uzbek": "",
+    "definition": "to identify from previous experience",
+    "synonyms": [
+      "identify",
+      "acknowledge"
+    ],
+    "category": "SAT 180 Vocab (91-105)",
+    "id": "sat180-103",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "taniymoq, e'tirof etmoq"
+  },
+  {
+    "english": "Stretching toward",
+    "uzbek": "",
+    "definition": "reaching out to",
+    "synonyms": [
+      "extending to",
+      "aiming for"
+    ],
+    "category": "SAT 180 Vocab (91-105)",
+    "id": "sat180-104",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "cho'zilayotgan, intilayotgan"
+  },
+  {
+    "english": "partnership",
+    "uzbek": "",
+    "definition": "a relationship involving cooperation",
+    "synonyms": [
+      "collaboration",
+      "alliance"
+    ],
+    "category": "SAT 180 Vocab (91-105)",
+    "id": "sat180-105",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "sheriklik, hamkorlik munosabati"
+  },
+  {
+    "english": "regretted",
+    "uzbek": "",
+    "definition": "felt sorry about",
+    "synonyms": [
+      "lamented",
+      "rued"
+    ],
+    "category": "SAT 180 Vocab (106-120)",
+    "id": "sat180-106",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "pushaymon bo'lgan, afsuslangan"
+  },
+  {
+    "english": "discern",
+    "uzbek": "",
+    "definition": "to see or understand clearly",
+    "synonyms": [
+      "perceive",
+      "detect"
+    ],
+    "category": "SAT 180 Vocab (106-120)",
+    "id": "sat180-107",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "aniq ko'rmoq yoki tushunmoq, farqlamoq"
+  },
+  {
+    "english": "thrive",
+    "uzbek": "",
+    "definition": "to grow or develop well",
+    "synonyms": [
+      "flourish",
+      "prosper"
+    ],
+    "category": "SAT 180 Vocab (106-120)",
+    "id": "sat180-109",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "gullab-yashnamoq, rivojlanmoq"
+  },
+  {
+    "english": "Joining with",
+    "uzbek": "",
+    "definition": "coming together with",
+    "synonyms": [
+      "uniting",
+      "merging"
+    ],
+    "category": "SAT 180 Vocab (106-120)",
+    "id": "sat180-110",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "birlashish, birga bo'lish"
+  },
+  {
+    "english": "suspicions",
+    "uzbek": "",
+    "definition": "beliefs that something may be wrong",
+    "synonyms": [
+      "doubts",
+      "mistrust"
+    ],
+    "category": "SAT 180 Vocab (106-120)",
+    "id": "sat180-111",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "shubha-gumonlar"
+  },
+  {
+    "english": "useful to",
+    "uzbek": "",
+    "definition": "helpful for",
+    "synonyms": [
+      "beneficial to",
+      "valuable for"
+    ],
+    "category": "SAT 180 Vocab (106-120)",
+    "id": "sat180-112",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "foydali, yordam beradigan"
+  },
+  {
+    "english": "counterfactual",
+    "uzbek": "",
+    "definition": "contrary to facts",
+    "synonyms": [
+      "hypothetical",
+      "imagined"
+    ],
+    "category": "SAT 180 Vocab (106-120)",
+    "id": "sat180-113",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "haqiqatga zid, faraziy"
+  },
+  {
+    "english": "rapid",
+    "uzbek": "",
+    "definition": "happening quickly",
+    "synonyms": [
+      "swift",
+      "fast"
+    ],
+    "category": "SAT 180 Vocab (106-120)",
+    "id": "sat180-114",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "tezkor, jadal"
+  },
+  {
+    "english": "Basic",
+    "uzbek": "",
+    "definition": "simple or fundamental",
+    "synonyms": [
+      "elementary",
+      "foundational"
+    ],
+    "category": "SAT 180 Vocab (106-120)",
+    "id": "sat180-115",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "oddiy yoki asosiy, fundamental"
+  },
+  {
+    "english": "surpassed by",
+    "uzbek": "",
+    "definition": "exceeded by",
+    "synonyms": [
+      "outdone by",
+      "overtaken by"
+    ],
+    "category": "SAT 180 Vocab (106-120)",
+    "id": "sat180-116",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "ortda qoldirilgan, o'zib ketilgan"
+  },
+  {
+    "english": "asserted",
+    "uzbek": "",
+    "definition": "stated confidently",
+    "synonyms": [
+      "declared",
+      "claimed"
+    ],
+    "category": "SAT 180 Vocab (106-120)",
+    "id": "sat180-117",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "ishonch bilan ta'kidlangan"
+  },
+  {
+    "english": "get angry about",
+    "uzbek": "",
+    "definition": "become upset about",
+    "synonyms": [
+      "react",
+      "flare up"
+    ],
+    "category": "SAT 180 Vocab (106-120)",
+    "id": "sat180-118",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "jahli chiqmoq, achchiqlanmoq"
+  },
+  {
+    "english": "applicable to",
+    "uzbek": "",
+    "definition": "relevant for",
+    "synonyms": [
+      "pertinent to",
+      "related to"
+    ],
+    "category": "SAT 180 Vocab (106-120)",
+    "id": "sat180-119",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "taalluqli bo'lgan, mos keladigan"
+  },
+  {
+    "english": "Abruptly",
+    "uzbek": "",
+    "definition": "suddenly or unexpectedly",
+    "synonyms": [
+      "quickly",
+      "sharply"
+    ],
+    "category": "SAT 180 Vocab (106-120)",
+    "id": "sat180-120",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "to'satdan, kutilmaganda"
+  },
+  {
+    "english": "Accomplishment",
+    "uzbek": "",
+    "definition": "something achieved successfully",
+    "synonyms": [
+      "achievement",
+      "feat"
+    ],
+    "category": "SAT 180 Vocab (121-135)",
+    "id": "sat180-121",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "muvaffaqiyatli erishilgan narsa, yutuq"
+  },
+  {
+    "english": "An incomplete",
+    "uzbek": "",
+    "definition": "lacking some parts",
+    "synonyms": [
+      "unfinished",
+      "partial"
+    ],
+    "category": "SAT 180 Vocab (121-135)",
+    "id": "sat180-122",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "chala, tugallanmagan"
+  },
+  {
+    "english": "assigned",
+    "uzbek": "",
+    "definition": "given as a task",
+    "synonyms": [
+      "allocated",
+      "designated"
+    ],
+    "category": "SAT 180 Vocab (121-135)",
+    "id": "sat180-123",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "vazifa qilib berilgan"
+  },
+  {
+    "english": "achievements",
+    "uzbek": "",
+    "definition": "things done successfully",
+    "synonyms": [
+      "successes",
+      "triumphs"
+    ],
+    "category": "SAT 180 Vocab (121-135)",
+    "id": "sat180-124",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "muvaffaqiyatlar, yutuqlar"
+  },
+  {
+    "english": "committed",
+    "uzbek": "",
+    "definition": "dedicated or loyal",
+    "synonyms": [
+      "devoted",
+      "pledged"
+    ],
+    "category": "SAT 180 Vocab (121-135)",
+    "id": "sat180-125",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "sodiq, fidoyi"
+  },
+  {
+    "english": "universal",
+    "uzbek": "",
+    "definition": "done by all people",
+    "synonyms": [
+      "worldwide",
+      "global"
+    ],
+    "category": "SAT 180 Vocab (121-135)",
+    "id": "sat180-126",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "umumiy, universal"
+  },
+  {
+    "english": "recants",
+    "uzbek": "",
+    "definition": "withdraws a statement",
+    "synonyms": [
+      "retracts",
+      "renounces"
+    ],
+    "category": "SAT 180 Vocab (121-135)",
+    "id": "sat180-127",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "o'z so'zidan qaytadi, inkor etadi"
+  },
+  {
+    "english": "speculate about",
+    "uzbek": "",
+    "definition": "form theories about",
+    "synonyms": [
+      "hypothesize",
+      "guess"
+    ],
+    "category": "SAT 180 Vocab (121-135)",
+    "id": "sat180-128",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "faraz qilmoq, taxminlar qilmoq"
+  },
+  {
+    "english": "realistic",
+    "uzbek": "",
+    "definition": "practical and possible",
+    "synonyms": [
+      "sensible",
+      "pragmatic"
+    ],
+    "category": "SAT 180 Vocab (121-135)",
+    "id": "sat180-129",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "realistik, amalga oshirsa bo'ladigan"
+  },
+  {
+    "english": "relate",
+    "uzbek": "",
+    "definition": "to show or make a connection",
+    "synonyms": [
+      "connect",
+      "link"
+    ],
+    "category": "SAT 180 Vocab (121-135)",
+    "id": "sat180-130",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "aloqa o'rnatmoq, bog'lamoq"
+  },
+  {
+    "english": "produces",
+    "uzbek": "",
+    "definition": "makes or creates",
+    "synonyms": [
+      "generates",
+      "manufactures"
+    ],
+    "category": "SAT 180 Vocab (121-135)",
+    "id": "sat180-131",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "ishlab chiqaradi, yaratadi"
+  },
+  {
+    "english": "observant",
+    "uzbek": "",
+    "definition": "quick to notice things",
+    "synonyms": [
+      "attentive",
+      "watchful"
+    ],
+    "category": "SAT 180 Vocab (121-135)",
+    "id": "sat180-132",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "kuzatuvchan, e'tiborli"
+  },
+  {
+    "english": "illustrated",
+    "uzbek": "",
+    "definition": "explained with pictures or examples",
+    "synonyms": [
+      "depicted",
+      "demonstrated"
+    ],
+    "category": "SAT 180 Vocab (121-135)",
+    "id": "sat180-133",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "chizmalar yoki misollar bilan tushuntirilgan"
+  },
+  {
+    "english": "fruitless",
+    "uzbek": "",
+    "definition": "failing to achieve results",
+    "synonyms": [
+      "unproductive",
+      "futile"
+    ],
+    "category": "SAT 180 Vocab (121-135)",
+    "id": "sat180-135",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "samarasiz, besamar"
+  },
+  {
+    "english": "question",
+    "uzbek": "",
+    "definition": "to ask or doubt",
+    "synonyms": [
+      "inquire",
+      "challenge"
+    ],
+    "category": "SAT 180 Vocab (136-150)",
+    "id": "sat180-136",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "so'roq ostiga olmoq, shubhalanmoq"
+  },
+  {
+    "english": "probability",
+    "uzbek": "",
+    "definition": "likelihood something will happen",
+    "synonyms": [
+      "chance",
+      "likelihood"
+    ],
+    "category": "SAT 180 Vocab (136-150)",
+    "id": "sat180-137",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "ehtimollik"
+  },
+  {
+    "english": "precursors",
+    "uzbek": "",
+    "definition": "things that come before",
+    "synonyms": [
+      "forerunners",
+      "antecedents"
+    ],
+    "category": "SAT 180 Vocab (136-150)",
+    "id": "sat180-138",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "harniklar, o'tmishdoshlar, darakchilar"
+  },
+  {
+    "english": "disputed",
+    "uzbek": "",
+    "definition": "argued about",
+    "synonyms": [
+      "contested",
+      "challenged"
+    ],
+    "category": "SAT 180 Vocab (136-150)",
+    "id": "sat180-139",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "bahsli, munozarali"
+  },
+  {
+    "english": "critique",
+    "uzbek": "",
+    "definition": "a detailed analysis or review",
+    "synonyms": [
+      "review",
+      "assessment"
+    ],
+    "category": "SAT 180 Vocab (136-150)",
+    "id": "sat180-140",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "batafsil tahlil yoki taqriz"
+  },
+  {
+    "english": "Bypassed",
+    "uzbek": "",
+    "definition": "went around or avoided",
+    "synonyms": [
+      "skirted",
+      "circumvented"
+    ],
+    "category": "SAT 180 Vocab (136-150)",
+    "id": "sat180-141",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "aylanib o'tilgan, chetlab o'tilgan"
+  },
+  {
+    "english": "establishes",
+    "uzbek": "",
+    "definition": "sets up or creates",
+    "synonyms": [
+      "founds",
+      "initiates"
+    ],
+    "category": "SAT 180 Vocab (136-150)",
+    "id": "sat180-142",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "tashkil etadi, o'rnatadi"
+  },
+  {
+    "english": "ignore",
+    "uzbek": "",
+    "definition": "pay no attention to",
+    "synonyms": [
+      "disregard",
+      "overlook"
+    ],
+    "category": "SAT 180 Vocab (136-150)",
+    "id": "sat180-143",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "e'tiborsiz qoldirmoq, mensimaslik"
+  },
+  {
+    "english": "Particular",
+    "uzbek": "",
+    "definition": "specific or distinct",
+    "synonyms": [
+      "specific",
+      "individual"
+    ],
+    "category": "SAT 180 Vocab (136-150)",
+    "id": "sat180-144",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "o'ziga xos, aniq bir"
+  },
+  {
+    "english": "source",
+    "uzbek": "",
+    "definition": "where something comes from",
+    "synonyms": [
+      "origin",
+      "root"
+    ],
+    "category": "SAT 180 Vocab (136-150)",
+    "id": "sat180-145",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "manba, kelib chiqish joyi"
+  },
+  {
+    "english": "rejected",
+    "uzbek": "",
+    "definition": "refused to accept",
+    "synonyms": [
+      "declined",
+      "dismissed"
+    ],
+    "category": "SAT 180 Vocab (136-150)",
+    "id": "sat180-146",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "rad etilgan, qabul qilinmagan"
+  },
+  {
+    "english": "appeased",
+    "uzbek": "",
+    "definition": "calmed or pacified",
+    "synonyms": [
+      "soothed",
+      "placated"
+    ],
+    "category": "SAT 180 Vocab (136-150)",
+    "id": "sat180-147",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "tinchlantirilgan, qoniqtirilgan"
+  },
+  {
+    "english": "inherited",
+    "uzbek": "",
+    "definition": "received from someone (often at birth)",
+    "synonyms": [
+      "acquired",
+      "obtained"
+    ],
+    "category": "SAT 180 Vocab (136-150)",
+    "id": "sat180-148",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "meros qilib olingan"
+  },
+  {
+    "english": "animosities toward",
+    "uzbek": "",
+    "definition": "feelings of hostility",
+    "synonyms": [
+      "hatred",
+      "enmity"
+    ],
+    "category": "SAT 180 Vocab (136-150)",
+    "id": "sat180-149",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "dushmanlik yoki adovat tuyg'usi"
+  },
+  {
+    "english": "incongruity",
+    "uzbek": "",
+    "definition": "not matching or fitting",
+    "synonyms": [
+      "mismatch",
+      "inconsistency"
+    ],
+    "category": "SAT 180 Vocab (136-150)",
+    "id": "sat180-150",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "mos kelmaslik, nomuvofiqlik"
+  },
+  {
+    "english": "ensured",
+    "uzbek": "",
+    "definition": "made certain or guaranteed",
+    "synonyms": [
+      "secured",
+      "assured"
+    ],
+    "category": "SAT 180 Vocab (151-165)",
+    "id": "sat180-151",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "kafolatlangan, ta'minlangan"
+  },
+  {
+    "english": "fabricates",
+    "uzbek": "",
+    "definition": "invents or creates, often with intent to deceive",
+    "synonyms": [
+      "forges",
+      "concocts"
+    ],
+    "category": "SAT 180 Vocab (151-165)",
+    "id": "sat180-152",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "soxtalashtiradi, uydiradi"
+  },
+  {
+    "english": "rival",
+    "uzbek": "",
+    "definition": "a person or thing competing with another",
+    "synonyms": [
+      "competitor",
+      "opponent"
+    ],
+    "category": "SAT 180 Vocab (151-165)",
+    "id": "sat180-153",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "raqib, raqobatchi"
+  },
+  {
+    "english": "worried",
+    "uzbek": "",
+    "definition": "anxious or troubled",
+    "synonyms": [
+      "concerned",
+      "uneasy"
+    ],
+    "category": "SAT 180 Vocab (151-165)",
+    "id": "sat180-154",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "tashvishlangan, xavotirda"
+  },
+  {
+    "english": "examples of",
+    "uzbek": "",
+    "definition": "specific cases illustrating something",
+    "synonyms": [
+      "instances",
+      "samples"
+    ],
+    "category": "SAT 180 Vocab (151-165)",
+    "id": "sat180-155",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "misollar, namunalar"
+  },
+  {
+    "english": "Create",
+    "uzbek": "",
+    "definition": "to make or produce",
+    "synonyms": [
+      "generate",
+      "invent"
+    ],
+    "category": "SAT 180 Vocab (151-165)",
+    "id": "sat180-156",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "yaratmoq, ishlab chiqarmoq"
+  },
+  {
+    "english": "concerns about",
+    "uzbek": "",
+    "definition": "worries or doubts about something",
+    "synonyms": [
+      "apprehensions",
+      "reservations"
+    ],
+    "category": "SAT 180 Vocab (151-165)",
+    "id": "sat180-158",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "xavotirlar, shubhalar"
+  },
+  {
+    "english": "Advertising",
+    "uzbek": "",
+    "definition": "public promotion of a product or service",
+    "synonyms": [
+      "marketing",
+      "publicity"
+    ],
+    "category": "SAT 180 Vocab (151-165)",
+    "id": "sat180-159",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "reklama qilish"
+  },
+  {
+    "english": "Enough",
+    "uzbek": "",
+    "definition": "as much or as many as needed",
+    "synonyms": [
+      "sufficient",
+      "adequate"
+    ],
+    "category": "SAT 180 Vocab (151-165)",
+    "id": "sat180-160",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "etarli, yetarli darajada"
+  },
+  {
+    "english": "exploiting",
+    "uzbek": "",
+    "definition": "making use of (sometimes unfairly)",
+    "synonyms": [
+      "taking advantage",
+      "utilizing"
+    ],
+    "category": "SAT 180 Vocab (151-165)",
+    "id": "sat180-161",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "foydalanayotgan, ekspluatatsiya qilayotgan"
+  },
+  {
+    "english": "Suspicious",
+    "uzbek": "",
+    "definition": "having doubts or mistrust",
+    "synonyms": [
+      "wary",
+      "doubtful"
+    ],
+    "category": "SAT 180 Vocab (151-165)",
+    "id": "sat180-162",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "shubhali, ishonchsiz"
+  },
+  {
+    "english": "a determined",
+    "uzbek": "",
+    "definition": "firmly resolved or decided",
+    "synonyms": [
+      "resolute",
+      "persistent"
+    ],
+    "category": "SAT 180 Vocab (151-165)",
+    "id": "sat180-163",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "qat'iy qaror qilgan, sabotli"
+  },
+  {
+    "english": "calibrations with",
+    "uzbek": "",
+    "definition": "adjustments or settings made to match something",
+    "synonyms": [
+      "alignments",
+      "tunings"
+    ],
+    "category": "SAT 180 Vocab (151-165)",
+    "id": "sat180-164",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "moslashishlar, kalibrlash"
+  },
+  {
+    "english": "Arriving at",
+    "uzbek": "",
+    "definition": "reaching or coming to",
+    "synonyms": [
+      "attaining",
+      "reaching"
+    ],
+    "category": "SAT 180 Vocab (151-165)",
+    "id": "sat180-165",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "yetib kelish, erishish"
+  },
+  {
+    "english": "lighthearted about",
+    "uzbek": "",
+    "definition": "not serious, cheerful",
+    "synonyms": [
+      "carefree",
+      "playful"
+    ],
+    "category": "SAT 180 Vocab (166-180)",
+    "id": "sat180-166",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "yengil-yelpi qarash, quvnoq"
+  },
+  {
+    "english": "sources in",
+    "uzbek": "",
+    "definition": "origins or places where something comes from",
+    "synonyms": [
+      "origins",
+      "roots"
+    ],
+    "category": "SAT 180 Vocab (166-180)",
+    "id": "sat180-167",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "kelib chiqish manbalari"
+  },
+  {
+    "english": "praised",
+    "uzbek": "",
+    "definition": "expressed approval or admiration",
+    "synonyms": [
+      "lauded",
+      "commended"
+    ],
+    "category": "SAT 180 Vocab (166-180)",
+    "id": "sat180-168",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "maqtangan, olqishlangan"
+  },
+  {
+    "english": "reduced",
+    "uzbek": "",
+    "definition": "made smaller or less",
+    "synonyms": [
+      "diminished",
+      "decreased"
+    ],
+    "category": "SAT 180 Vocab (166-180)",
+    "id": "sat180-169",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "kamaytirilgan, qisqartirilgan"
+  },
+  {
+    "english": "improvise",
+    "uzbek": "",
+    "definition": "create or perform without preparation",
+    "synonyms": [
+      "ad-lib",
+      "invent"
+    ],
+    "category": "SAT 180 Vocab (166-180)",
+    "id": "sat180-170",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "tayyorgarliksiz bajarmoq, improvizatsiya qilmoq"
+  },
+  {
+    "english": "Inspired",
+    "uzbek": "",
+    "definition": "filled with the urge to do something",
+    "synonyms": [
+      "motivated",
+      "moved"
+    ],
+    "category": "SAT 180 Vocab (166-180)",
+    "id": "sat180-171",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "ilhomlangan, ruhlangan"
+  },
+  {
+    "english": "Trace",
+    "uzbek": "",
+    "definition": "to find or discover by investigation",
+    "synonyms": [
+      "track",
+      "follow"
+    ],
+    "category": "SAT 180 Vocab (166-180)",
+    "id": "sat180-172",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "izini topmoq, qidirib aniqlamoq"
+  },
+  {
+    "english": "an explanation",
+    "uzbek": "",
+    "definition": "a reason or justification",
+    "synonyms": [
+      "clarification",
+      "account"
+    ],
+    "category": "SAT 180 Vocab (166-180)",
+    "id": "sat180-173",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "tushuntirish, izoh"
+  },
+  {
+    "english": "alter",
+    "uzbek": "",
+    "definition": "to change or modify",
+    "synonyms": [
+      "adjust",
+      "modify"
+    ],
+    "category": "SAT 180 Vocab (166-180)",
+    "id": "sat180-174",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "o'zgartirmoq"
+  },
+  {
+    "english": "influenced",
+    "uzbek": "",
+    "definition": "affected or changed by something",
+    "synonyms": [
+      "swayed",
+      "shaped"
+    ],
+    "category": "SAT 180 Vocab (166-180)",
+    "id": "sat180-175",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "ta'sir ko'rsatilgan"
+  },
+  {
+    "english": "anticipating",
+    "uzbek": "",
+    "definition": "looking forward to",
+    "synonyms": [
+      "expecting",
+      "awaiting"
+    ],
+    "category": "SAT 180 Vocab (166-180)",
+    "id": "sat180-176",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "intizorlik bilan kutayotgan"
+  },
+  {
+    "english": "habitual",
+    "uzbek": "",
+    "definition": "done regularly or repeatedly",
+    "synonyms": [
+      "routine",
+      "customary"
+    ],
+    "category": "SAT 180 Vocab (166-180)",
+    "id": "sat180-177",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "odatiy, surunkali"
+  },
+  {
+    "english": "epitomized",
+    "uzbek": "",
+    "definition": "was a perfect example of",
+    "synonyms": [
+      "embodied",
+      "exemplified"
+    ],
+    "category": "SAT 180 Vocab (166-180)",
+    "id": "sat180-178",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "timsoli bo'lgan, yaqqol namuna bo'lgan"
+  },
+  {
+    "english": "Persuade",
+    "uzbek": "",
+    "definition": "to convince someone to do or believe something",
+    "synonyms": [
+      "influence",
+      "sway"
+    ],
+    "category": "SAT 180 Vocab (166-180)",
+    "id": "sat180-180",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "grammar_pattern": null,
+    "hint": "ishontirmoq, ko'ndirmoq"
   }
 ]

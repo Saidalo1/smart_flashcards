@@ -15236,7 +15236,7 @@
         "incorrect": 0
     },
     "secluded": {
-        "correct": 0,
+        "correct": 1,
         "incorrect": 0,
         "translation": {
             "correct": 0,
@@ -15257,9 +15257,9 @@
             "errors_in_row": 0
         },
         "translation_mc": {
-            "correct": 0,
+            "correct": 1,
             "incorrect": 0,
-            "streak": 0,
+            "streak": 1,
             "errors_in_row": 0
         },
         "translation_text": {

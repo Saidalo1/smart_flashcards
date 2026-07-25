@@ -3059,541 +3059,272 @@
     "hint": "ishontirmoq, ko'ndirmoq"
   },
   {
-    "english": "acquiesce",
-    "uzbek": "rozi bo'lmoq, ko'nmoq (majburan yoki qarshiliksiz)",
-    "category": "IELTS High Score (1-15)",
+    "english": "clarify",
+    "uzbek": "oydinlashtirmoq, oydinlik kiritmoq (прояснять, уточнять)",
+    "category": "General English B1-B2 (1-15)",
     "grammar_pattern": null,
-    "id": "ielts-001",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.7,
-    "definition": "to accept something reluctantly but without protest",
-    "synonyms": [
-      "comply",
-      "concede",
-      "yield"
-    ],
-    "hint": "qarshilik ko'rsatmasdan rozi bo'lish"
-  },
-  {
-    "english": "mitigate",
-    "uzbek": "yumshatmoq, yengillashtirmoq, kamaytirmoq",
-    "category": "IELTS High Score (1-15)",
-    "grammar_pattern": null,
-    "id": "ielts-002",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.6,
-    "definition": "to make something bad or painful less severe or serious",
-    "synonyms": [
-      "alleviate",
-      "reduce",
-      "ease"
-    ],
-    "hint": "salbiy ta'sirni kamaytirish"
-  },
-  {
-    "english": "pivotal",
-    "uzbek": "hal qiluvchi, o'ta muhim, asosiy",
-    "category": "IELTS High Score (1-15)",
-    "grammar_pattern": null,
-    "id": "ielts-003",
+    "id": "geb-001",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "definition": "of crucial importance in relation to the development or success of something else",
-    "synonyms": [
-      "crucial",
-      "essential",
-      "critical"
-    ],
-    "hint": "muvaffaqiyat yoki rivojlanish uchun eng asosiy narsa"
-  },
-  {
-    "english": "ameliorate",
-    "uzbek": "yaxshilamoq, vaziyatni tubdan yaxshi holga keltirmoq",
-    "category": "IELTS High Score (1-15)",
-    "grammar_pattern": null,
-    "id": "ielts-004",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.7,
-    "definition": "to make something bad or unsatisfactory better",
-    "synonyms": [
-      "improve",
-      "enhance",
-      "better"
-    ],
-    "hint": "yomon holatda bo'lgan narsani yaxshilash"
-  },
-  {
-    "english": "ubiquitous",
-    "uzbek": "hamma joyda uchraydigan, keng yoyilgan",
-    "category": "IELTS High Score (1-15)",
-    "grammar_pattern": null,
-    "id": "ielts-005",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.6,
-    "definition": "present, appearing, or found everywhere",
-    "synonyms": [
-      "omnipresent",
-      "widespread",
-      "pervasive"
-    ],
-    "hint": "har qadamda duch keladigan narsa"
-  },
-  {
-    "english": "feasible",
-    "uzbek": "amalga oshirsa bo'ladigan, real, maqsadga muvofiq",
-    "category": "IELTS High Score (1-15)",
-    "grammar_pattern": null,
-    "id": "ielts-006",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5,
-    "definition": "possible to do easily or conveniently",
-    "synonyms": [
-      "practicable",
-      "viable",
-      "achievable"
-    ],
-    "hint": "bajarish mumkin bo'lgan reja yoki g'oya"
-  },
-  {
-    "english": "detrimental",
-    "uzbek": "zararli, ziyon keltiradigan",
-    "category": "IELTS High Score (1-15)",
-    "grammar_pattern": null,
-    "id": "ielts-007",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5,
-    "definition": "tending to cause harm or damage",
-    "synonyms": [
-      "harmful",
-      "damaging",
-      "adverse"
-    ],
-    "hint": "sog'liqqa yoki tabiatga salbiy ta'sir ko'rsatadigan"
-  },
-  {
-    "english": "prevalent",
-    "uzbek": "keng tarqalgan, hukmron, ommalashgan",
-    "category": "IELTS High Score (1-15)",
-    "grammar_pattern": null,
-    "id": "ielts-008",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5,
-    "definition": "widespread in a particular area or at a particular time",
-    "synonyms": [
-      "common",
-      "widespread",
-      "rampant"
-    ],
-    "hint": "jamiyatda yoki ma'lum bir sohada keng ommalashgan"
-  },
-  {
-    "english": "exacerbate",
-    "uzbek": "yomonlashtirmoq, keskinlashtirmoq, og'irlashtirmoq (vaziyatni)",
-    "category": "IELTS High Score (1-15)",
-    "grammar_pattern": null,
-    "id": "ielts-009",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.7,
-    "definition": "to make a problem, bad situation, or negative feeling worse",
-    "synonyms": [
-      "aggravate",
-      "worsen",
-      "inflame"
-    ],
-    "hint": "mavjud muammoni yanada chigallashtirish"
-  },
-  {
-    "english": "plausible",
-    "uzbek": "ishonarli, aqlga sig'adigan, haqiqatga yaqin",
-    "category": "IELTS High Score (1-15)",
-    "grammar_pattern": null,
-    "id": "ielts-010",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.6,
-    "definition": "seeming reasonable or probable; believable",
-    "synonyms": [
-      "believable",
-      "credible",
-      "reasonable"
-    ],
-    "hint": "yolg'on bo'lishi mumkin bo'lsa-da, haqiqatga o'xshash tushuntirish"
-  },
-  {
-    "english": "profound",
-    "uzbek": "chuqur, ulkan, jiddiy (ta'sir, bilim haqida)",
-    "category": "IELTS High Score (1-15)",
-    "grammar_pattern": null,
-    "id": "ielts-011",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.5,
-    "definition": "very great, intense, or having deep insight/meaning",
-    "synonyms": [
-      "deep",
-      "intense",
-      "significant"
-    ],
-    "hint": "hayotdagi chuqur o'zgarish yoki chuqur bilim"
-  },
-  {
-    "english": "resilient",
-    "uzbek": "chidamli, tez tiklanadigan, egiluvchan",
-    "category": "IELTS High Score (1-15)",
-    "grammar_pattern": null,
-    "id": "ielts-012",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.6,
-    "definition": "able to withstand or recover quickly from difficult conditions",
-    "synonyms": [
-      "tough",
-      "strong",
-      "adaptable"
-    ],
-    "hint": "qiyinchiliklardan keyin tezda o'zini tiklay oladigan shaxs yoki tizim"
-  },
-  {
-    "english": "substantiate",
-    "uzbek": "isbotlamoq, asoslamoq, dalillar keltirmoq",
-    "category": "IELTS High Score (1-15)",
-    "grammar_pattern": null,
-    "id": "ielts-013",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.7,
-    "definition": "to provide evidence to support or prove the truth of something",
-    "synonyms": [
-      "prove",
-      "verify",
-      "corroborate"
-    ],
-    "hint": "o'z fikrini faktlar bilan tasdiqlash"
-  },
-  {
-    "english": "elucidate",
-    "uzbek": "oydinlashtirmoq, ochiq-oydin tushuntirmoq",
-    "category": "IELTS High Score (1-15)",
-    "grammar_pattern": null,
-    "id": "ielts-014",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.6,
-    "definition": "to make something clear; explain in detail",
+    "definition": "make a statement or situation less confused and more comprehensible",
     "synonyms": [
       "explain",
-      "clarify",
-      "expound"
+      "clear up",
+      "elucidate"
     ],
-    "hint": "qiyin tushunchani soddalashtirib tushuntirib berish"
+    "hint": "Example: 'Could you clarify this point?'"
   },
   {
-    "english": "cognizant",
-    "uzbek": "xabardor bo'lgan, anglab yetgan, tushungan",
-    "category": "IELTS High Score (1-15)",
+    "english": "hesitate",
+    "uzbek": "ikkilanmoq, ikkilanib turmoq (сомневаться, колебаться)",
+    "category": "General English B1-B2 (1-15)",
     "grammar_pattern": null,
-    "id": "ielts-015",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.7,
-    "definition": "having knowledge or being fully aware of something",
-    "synonyms": [
-      "aware",
-      "conscious",
-      "mindful"
-    ],
-    "hint": "muammoning jiddiyligini to'liq anglab yetgan holat"
-  },
-  {
-    "english": "to play a pivotal role",
-    "uzbek": "hal qiluvchi rol o'ynamoq",
-    "category": "IELTS High Score (16-30)",
-    "grammar_pattern": null,
-    "id": "ielts-016",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.4,
-    "definition": "to have an extremely important influence on the development or success of something",
-    "synonyms": [
-      "be crucial",
-      "be vital",
-      "be key"
-    ],
-    "hint": "biror voqea yoki jarayonda eng asosiy vazifani bajarish"
-  },
-  {
-    "english": "a double-edged sword",
-    "uzbek": "ikki tig'li qilich (ham foydali, ham zararli tomoni bor holat)",
-    "category": "IELTS High Score (16-30)",
-    "grammar_pattern": null,
-    "id": "ielts-017",
+    "id": "geb-002",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "definition": "something that has both positive and negative consequences",
+    "definition": "pause before saying or doing something, especially through uncertainty",
     "synonyms": [
-      "mixed blessing",
-      "two-sided situation"
+      "pause",
+      "delay",
+      "waver"
     ],
-    "hint": "masalan, texnologiya taraqqiyoti ham foydali, ham zararli"
+    "hint": "Example: 'Don't hesitate to ask questions.'"
   },
   {
-    "english": "to pave the way for",
-    "uzbek": "yo'l ochmoq, zamin yaratmoq, sharoit yaratmoq",
-    "category": "IELTS High Score (16-30)",
+    "english": "assume",
+    "uzbek": "taxmin qilmoq, farz qilmoq (предполагать, допускать)",
+    "category": "General English B1-B2 (1-15)",
     "grammar_pattern": null,
-    "id": "ielts-018",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.4,
-    "definition": "to create a situation in which it is now possible or easier for something to happen",
-    "synonyms": [
-      "clear the way",
-      "prepare the ground",
-      "facilitate"
-    ],
-    "hint": "kelajakdagi katta o'zgarishlar uchun poydevor qo'yish"
-  },
-  {
-    "english": "in the long run",
-    "uzbek": "uzoq muddatda, yakunda, oxir-oqibat",
-    "category": "IELTS High Score (16-30)",
-    "grammar_pattern": null,
-    "id": "ielts-019",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.4,
-    "definition": "over a relatively long period of time; in the end",
-    "synonyms": [
-      "eventually",
-      "ultimately",
-      "in the end"
-    ],
-    "hint": "hozir emas, balki ancha vaqt o'tgandan keyin sodir bo'ladigan natija"
-  },
-  {
-    "english": "to bridge the gap",
-    "uzbek": "farqni kamaytirmoq, bog'liqlik o'rnatmoq",
-    "category": "IELTS High Score (16-30)",
-    "grammar_pattern": null,
-    "id": "ielts-020",
+    "id": "geb-003",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "definition": "to connect two different things or to make the difference between them smaller",
+    "definition": "suppose to be the case, without proof",
     "synonyms": [
-      "connect",
-      "reconcile",
-      "link"
+      "suppose",
+      "presume",
+      "think"
     ],
-    "hint": "masalan, boylar va kambag'allar yoki nazariya va amaliyot o'rtasidagi tafovutni kamaytirish"
+    "hint": "Example: 'I assume you already know this.'"
   },
   {
-    "english": "to keep up with the times",
-    "uzbek": "davr bilan hamnafas bo'lmoq, zamon talabiga moslashmoq",
-    "category": "IELTS High Score (16-30)",
+    "english": "determine",
+    "uzbek": "aniqlamoq, belgilamoq (определять, выявлять)",
+    "category": "General English B1-B2 (1-15)",
     "grammar_pattern": null,
-    "id": "ielts-021",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.4,
-    "definition": "to adapt to modern methods, fashions, or ideas",
-    "synonyms": [
-      "stay modern",
-      "adapt",
-      "stay updated"
-    ],
-    "hint": "yangi texnologiyalar va g'oyalardan ortda qolmaslik"
-  },
-  {
-    "english": "to take something for granted",
-    "uzbek": "oddiy holdek qabul qilmoq, yetarlicha qadrlamaslik",
-    "category": "IELTS High Score (16-30)",
-    "grammar_pattern": null,
-    "id": "ielts-022",
+    "id": "geb-004",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "definition": "to fail to properly appreciate something because it is always available",
+    "definition": "firmly decide something or establish something exactly by calculation or investigation",
     "synonyms": [
-      "undervalue",
-      "assume without question"
+      "establish",
+      "identify",
+      "find out"
     ],
-    "hint": "masalan, toza suv yoki tinchlikni oddiy hol deb o'ylash va qadrlamaslik"
+    "hint": "Example: 'We need to determine the problem.'"
   },
   {
-    "english": "to be a cornerstone of",
-    "uzbek": "poydevori/asosi bo'lmoq",
-    "category": "IELTS High Score (16-30)",
+    "english": "handle",
+    "uzbek": "bajarmoq, hal qilmoq, shug'ullanmoq (справляться, разруливать)",
+    "category": "General English B1-B2 (1-15)",
     "grammar_pattern": null,
-    "id": "ielts-023",
+    "id": "geb-005",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "definition": "to be an essential, basic, or primary element of something",
+    "definition": "manage, deal with, or be responsible for",
     "synonyms": [
-      "foundation",
-      "pillar",
-      "basis"
+      "manage",
+      "deal with",
+      "tackle"
     ],
-    "hint": "masalan, ta'lim jamiyatning asosiy poydevoridir"
+    "hint": "Example: 'I can handle this task.'"
   },
   {
-    "english": "to address the issue",
-    "uzbek": "muammoni hal qilmoq, ko'rib chiqmoq",
-    "category": "IELTS High Score (16-30)",
+    "english": "overcome",
+    "uzbek": "yengib o'tmoq, yengmoq, bartaraf etmoq (преодолевать)",
+    "category": "General English B1-B2 (1-15)",
     "grammar_pattern": null,
-    "id": "ielts-024",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.4,
-    "definition": "to think about a problem or a situation and decide how to deal with it",
-    "synonyms": [
-      "tackle the problem",
-      "solve",
-      "deal with"
-    ],
-    "hint": "hukumat yoki tashkilotlar tomonidan muammoni bartaraf etishga harakat qilish"
-  },
-  {
-    "english": "to make ends meet",
-    "uzbek": "zo'rg'a kun ko'rmoq, oylikdan oylikkacha zo'rg'a yetkazmoq",
-    "category": "IELTS High Score (16-30)",
-    "grammar_pattern": null,
-    "id": "ielts-025",
+    "id": "geb-006",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "definition": "to earn just enough money to pay for basic life necessities",
+    "definition": "succeed in dealing with a problem or difficulty",
     "synonyms": [
-      "get by",
-      "survive financially",
-      "cope"
+      "surmount",
+      "defeat",
+      "beat"
     ],
-    "hint": "pul yetishmovchiligi sababli kundalik xarajatlarni arang qoplash"
+    "hint": "Example: 'We can overcome any difficulty.'"
   },
   {
-    "english": "to stand the test of time",
-    "uzbek": "vaqt sinovidan o'tmoq",
-    "category": "IELTS High Score (16-30)",
+    "english": "postpone",
+    "uzbek": "keyinga qoldirmoq, kechiktirmoq (откладывать на потом)",
+    "category": "General English B1-B2 (1-15)",
     "grammar_pattern": null,
-    "id": "ielts-026",
+    "id": "geb-007",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "definition": "to remain popular, strong, or effective for a long period of time",
+    "definition": "cause or arrange for something to take place at a time later than that first planned",
     "synonyms": [
-      "endure",
-      "last",
-      "persist"
+      "delay",
+      "defer",
+      "put off"
     ],
-    "hint": "klassik asarlar yoki yaxshi do'stlik haqida aytiladi"
+    "hint": "Example: 'Let's postpone the meeting.'"
   },
   {
-    "english": "a bone of contention",
-    "uzbek": "nizo sababi, kelishmovchilik manbai, bahsli masala",
-    "category": "IELTS High Score (16-30)",
+    "english": "maintain",
+    "uzbek": "saqlamoq, qo'llab-quvvatlamoq, ta'minlamoq (поддерживать, сохранять)",
+    "category": "General English B1-B2 (1-15)",
     "grammar_pattern": null,
-    "id": "ielts-027",
-    "last_shown": null,
-    "correct_answers": 0,
-    "total_answers": 0,
-    "complexity": 0.6,
-    "definition": "a subject or issue over which there is continuing disagreement",
-    "synonyms": [
-      "subject of dispute",
-      "issue",
-      "point of disagreement"
-    ],
-    "hint": "ikki taraf doimiy ravishda tortishadigan yoki kelisha olmaydigan mavzu"
-  },
-  {
-    "english": "to stem from",
-    "uzbek": "kelib chiqmoq, sababli yuzaga kelmoq",
-    "category": "IELTS High Score (16-30)",
-    "grammar_pattern": null,
-    "id": "ielts-028",
+    "id": "geb-008",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
     "complexity": 0.5,
-    "definition": "to be caused by or to originate from something",
+    "definition": "cause or enable a condition or state of affairs to continue",
     "synonyms": [
-      "originate from",
-      "arise from",
-      "result from"
+      "keep",
+      "preserve",
+      "sustain"
     ],
-    "hint": "muammoning ildizi ma'lum bir narsaga borib taqalishi"
+    "hint": "Example: 'It's hard to maintain focus all day.'"
   },
   {
-    "english": "to draw inspiration from",
-    "uzbek": "ilhomlanmoq, namuna/ilhom olmoq",
-    "category": "IELTS High Score (16-30)",
+    "english": "evaluate",
+    "uzbek": "baholamoq, qiymat bermoq, tahlil qilmoq (оценивать, анализировать)",
+    "category": "General English B1-B2 (1-15)",
     "grammar_pattern": null,
-    "id": "ielts-029",
+    "id": "geb-009",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.4,
-    "definition": "to get ideas or creative influence from someone or something",
+    "complexity": 0.5,
+    "definition": "form an idea of the amount, number, or value of; assess",
     "synonyms": [
-      "be inspired by",
-      "emulate",
-      "derive ideas"
+      "assess",
+      "appraise",
+      "analyze"
     ],
-    "hint": "san'atkor yoki yozuvchining biror asardan ilhom olishi"
+    "hint": "Example: 'Let me evaluate the results first.'"
   },
   {
-    "english": "on the verge of",
-    "uzbek": "arafasida, juda yaqin qolganda",
-    "category": "IELTS High Score (16-30)",
+    "english": "estimate",
+    "uzbek": "taxminan baholamoq, chamalamoq, hisoblamoq (примерно оценивать время/бюджет)",
+    "category": "General English B1-B2 (1-15)",
     "grammar_pattern": null,
-    "id": "ielts-030",
+    "id": "geb-010",
     "last_shown": null,
     "correct_answers": 0,
     "total_answers": 0,
-    "complexity": 0.4,
-    "definition": "very close to experiencing or doing something",
+    "complexity": 0.5,
+    "definition": "roughly calculate or judge the value, number, quantity, or extent of",
     "synonyms": [
-      "on the brink of",
-      "close to",
-      "about to"
+      "calculate",
+      "gauge",
+      "approximate"
     ],
-    "hint": "yo'q bo'lib ketish arafasida bo'lgan hayvonlar yoki bankrot bo'lish arafasidagi kompaniya"
+    "hint": "Example: 'I estimate it will take two hours.'"
+  },
+  {
+    "english": "ensure",
+    "uzbek": "ta'minlamoq, kafolatlamoq (обеспечивать, гарантировать)",
+    "category": "General English B1-B2 (1-15)",
+    "grammar_pattern": null,
+    "id": "geb-011",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": "make certain that something shall occur or be the case",
+    "synonyms": [
+      "guarantee",
+      "secure",
+      "make sure"
+    ],
+    "hint": "Example: 'Please ensure everything is working.'"
+  },
+  {
+    "english": "consider",
+    "uzbek": "o'ylab ko'rmoq, ko'rib chiqmoq, deb hisoblamoq (обдумывать, рассматривать)",
+    "category": "General English B1-B2 (1-15)",
+    "grammar_pattern": null,
+    "id": "geb-012",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": "think carefully about something, typically before making a decision",
+    "synonyms": [
+      "think about",
+      "ponder",
+      "contemplate"
+    ],
+    "hint": "Example: 'I will consider your offer.'"
+  },
+  {
+    "english": "persuade",
+    "uzbek": "ko'ndirmoq, ishontirmoq (убеждать, склонять к чему-то)",
+    "category": "General English B1-B2 (1-15)",
+    "grammar_pattern": null,
+    "id": "geb-013",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": "provide a sound reason for someone to do something; convince",
+    "synonyms": [
+      "convince",
+      "induce",
+      "influence"
+    ],
+    "hint": "Example: 'He persuaded me to try it.'"
+  },
+  {
+    "english": "distract",
+    "uzbek": "chalg'itmoq, fikrini bo'lmoq (отвлекать)",
+    "category": "General English B1-B2 (1-15)",
+    "grammar_pattern": null,
+    "id": "geb-014",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": "prevent someone from giving their full attention to something",
+    "synonyms": [
+      "divert",
+      "sidetrack"
+    ],
+    "hint": "Example: 'Sorry, I didn't mean to distract you.'"
+  },
+  {
+    "english": "gather",
+    "uzbek": "to'plamoq, yig'moq (собирать информацию, людей)",
+    "category": "General English B1-B2 (1-15)",
+    "grammar_pattern": null,
+    "id": "geb-015",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": "bring together or assemble from various places or sources",
+    "synonyms": [
+      "collect",
+      "assemble",
+      "convene"
+    ],
+    "hint": "Example: 'Let's gather all the data first.'"
   }
 ]

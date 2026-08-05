@@ -766,10 +766,22 @@ class FlashcardWidget(QFrame):
 
     def mousePressEvent(self, event):
         if event.button() == Qt.MouseButton.LeftButton:
-            self._drag_pos = event.globalPosition().toPoint() - self.frameGeometry().topLeft()
+            # Prefer the compositor-driven move. On Wayland a client is NOT
+            # allowed to reposition its own top-level window, so the manual
+            # self.move() below is silently ignored there. startSystemMove()
+            # hands the drag to the compositor and works on Wayland, X11 and
+            # Windows alike. We fall back to manual dragging only if the
+            # platform has no system-move support.
+            window_handle = self.windowHandle()
+            if window_handle is not None and window_handle.startSystemMove():
+                self._drag_pos = None
+            else:
+                self._drag_pos = event.globalPosition().toPoint() - self.frameGeometry().topLeft()
             event.accept()
 
     def mouseMoveEvent(self, event):
+        # Only used on the manual-drag fallback path; when startSystemMove()
+        # succeeded, _drag_pos is None and the compositor owns the drag.
         if event.buttons() == Qt.MouseButton.LeftButton and self._drag_pos is not None:
             self.move(event.globalPosition().toPoint() - self._drag_pos)
             event.accept()

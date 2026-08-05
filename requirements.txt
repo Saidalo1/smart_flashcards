@@ -4,6 +4,7 @@ sentence-transformers==5.1.2
 torch==2.8.0
 pyinstaller==6.17.0
 pynput==1.7.7
+evdev==1.9.2  # kernel-level global hotkeys on Linux/Wayland (needs 'input' group)
 
 # Main transitive dependencies (pinned for stability)
 transformers==4.57.3

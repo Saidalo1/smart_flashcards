@@ -76,6 +76,14 @@ except ImportError:
     HOTKEY_AVAILABLE = False
     print("Warning: pynput not installed. Global hotkey disabled.")
 
+# Kernel-level (evdev) hotkey backend — the only reliable way to get GLOBAL
+# hotkeys under Wayland, where pynput/X11 can't see keys sent to other windows.
+try:
+    from evdev_hotkey import EvdevHotkeyListener, EVDEV_AVAILABLE
+except ImportError:
+    EVDEV_AVAILABLE = False
+    EvdevHotkeyListener = None
+
 APP_NAME = "Smart Flashcards"
 
 
@@ -180,6 +188,34 @@ class FlashcardApp:
         QTimer.singleShot(0, self.show_flashcard)
 
     def setup_global_hotkey(self):
+        """Sets up the global hotkey listener.
+
+        On Linux we prefer the evdev (kernel-level) backend because it is the
+        only one that works globally under Wayland. It also works on X11. We
+        fall back to pynput if evdev is unavailable (e.g. no /dev/input access,
+        or a non-Linux OS such as Windows, where pynput works natively).
+        """
+        import platform
+
+        hotkey_config = self.config_manager.hotkey.lower()
+
+        if platform.system() == "Linux" and EVDEV_AVAILABLE and EvdevHotkeyListener is not None:
+            listener = EvdevHotkeyListener(
+                hotkey_config,
+                self.hotkey_signal.triggered.emit,
+            )
+            if listener.start():
+                self.evdev_listener = listener
+                print(f"Global hotkey '{hotkey_config}' activated via evdev "
+                      f"(kernel-level, works on Wayland & X11).")
+                return
+            print("evdev hotkey backend unavailable (no /dev/input access?). "
+                  "Falling back to pynput. Tip: add yourself to the 'input' "
+                  "group with: sudo usermod -aG input $USER  (then re-login).")
+
+        self._setup_pynput_hotkey()
+
+    def _setup_pynput_hotkey(self):
         """Sets up global hotkey listener using pynput with L/R modifier support."""
         if not HOTKEY_AVAILABLE:
             return
@@ -487,9 +523,51 @@ class FlashcardApp:
         print("Saving and quitting...")
         self.stats_manager.save_stats()
         self.timer.stop()
+        if hasattr(self, 'evdev_listener'):
+            self.evdev_listener.stop()
         if HOTKEY_AVAILABLE and hasattr(self, 'hotkey_listener'):
             self.hotkey_listener.stop()
         self.app.quit()
+
+
+def prefer_x11_on_wayland():
+    """On a Wayland session, ask Qt to run through XWayland (the 'xcb' plugin).
+
+    Native Wayland forbids a client from (a) querying the global mouse cursor and
+    (b) positioning its own top-level window. That breaks the 'card_position'
+    feature entirely — the card can't appear at the cursor or in a screen corner,
+    because move() and QCursor.pos() are both no-ops there.
+
+    Under XWayland both work again, restoring the Windows-like behavior. The
+    other Linux fixes are platform-independent: global hotkeys use the evdev
+    backend, and window dragging uses QWindow.startSystemMove(), both of which
+    work under xcb too.
+
+    Escape hatch: set SMART_FLASHCARDS_FORCE_WAYLAND=1 to keep native Wayland
+    (e.g. to avoid slight blur on fractional HiDPI scaling). An explicitly
+    pre-set QT_QPA_PLATFORM is always respected. The 'xcb;wayland' fallback list
+    means that if the xcb plugin can't initialise, Qt cleanly falls back to
+    native Wayland instead of failing to start.
+
+    Must be called BEFORE QApplication is constructed.
+    """
+    import platform
+    if platform.system() != "Linux":
+        return
+    if os.environ.get('QT_QPA_PLATFORM'):
+        return  # user made an explicit choice; don't override it
+    if os.environ.get('SMART_FLASHCARDS_FORCE_WAYLAND') == '1':
+        print("SMART_FLASHCARDS_FORCE_WAYLAND=1 set — keeping native Wayland. "
+              "Note: card positioning at the mouse cursor / corners won't work.")
+        return
+    session = os.environ.get('XDG_SESSION_TYPE', '').lower()
+    is_wayland = session == 'wayland' or bool(os.environ.get('WAYLAND_DISPLAY'))
+    if not is_wayland:
+        return
+    os.environ['QT_QPA_PLATFORM'] = 'xcb;wayland'
+    print("Wayland detected → running Qt via XWayland (xcb) so the flashcard "
+          "can be positioned at the mouse cursor / screen corners. "
+          "Set SMART_FLASHCARDS_FORCE_WAYLAND=1 to keep native Wayland.")
 
 
 def exception_hook(exctype, value, traceback):
@@ -502,5 +580,6 @@ def exception_hook(exctype, value, traceback):
 if __name__ == '__main__':
     sys.excepthook = exception_hook  # <- Магия здесь
     setup_logging()
+    prefer_x11_on_wayland()  # must run before QApplication is created
     flashcard_app = FlashcardApp()
     flashcard_app.run()

@@ -205,13 +205,19 @@ class FlashcardWidget(QFrame):
     card_delete_requested = pyqtSignal(dict)
 
     def __init__(self, card, stats_manager, vocabulary, similarity_checker,
-                 is_multiple_choice=False, config_manager=None, parent=None):
+                 is_multiple_choice=False, config_manager=None,
+                 accept_focus=True, parent=None):
         super().__init__(parent)
         self.card = card
         self.vocabulary = vocabulary
         self.stats_manager = stats_manager
         self.similarity_checker = similarity_checker
         self.config_manager = config_manager
+        # When False (timer-driven overlay) the window is barred from EVER taking
+        # keyboard focus unsolicited — so pressing win+space (language switch) or
+        # any global shortcut while you type elsewhere can't yank focus onto the
+        # card. Explicit summons (hotkey) pass True to allow typing an answer.
+        self._accept_focus = accept_focus
         self._drag_pos = None
 
         # --- Determine study mode for this card ---
@@ -327,6 +333,12 @@ class FlashcardWidget(QFrame):
         # when you have a moment. Keyboard focus is taken only when you click the
         # card, or when it is summoned explicitly via the hotkey (see main.py).
         self.setAttribute(Qt.WidgetAttribute.WA_ShowWithoutActivating)
+        if not self._accept_focus:
+            # Globally-active input model: the WM will never focus this window on
+            # its own (fixes focus theft on win+space / global shortcuts). You can
+            # still click it to interact; text answers are best summoned via the
+            # hotkey, which shows a focusable card instead.
+            self.setAttribute(Qt.WidgetAttribute.WA_X11DoNotAcceptFocus)
 
         self.setMinimumWidth(460)
         self.setMaximumWidth(600)

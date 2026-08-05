@@ -425,7 +425,8 @@ class FlashcardApp:
             self.vocabulary,
             self.similarity_checker,
             is_multiple_choice=self.next_question_is_mc,
-            config_manager=self.config_manager
+            config_manager=self.config_manager,
+            accept_focus=activate
         )
         self.next_question_is_mc = not self.next_question_is_mc
         self.flashcard_widget.closed.connect(self.on_widget_closed)

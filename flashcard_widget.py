@@ -199,6 +199,25 @@ class PremiumOptionWidget(QFrame):
         )
 
 
+class GrabOnClickLineEdit(QLineEdit):
+    """QLineEdit that claims X11 keyboard focus when clicked.
+
+    In X11 overlay (override-redirect) mode the window manager never assigns
+    keyboard focus to the card, so clicking the field must explicitly grab it
+    (via the supplied callback) for typing to work. Off X11 the callback is a
+    no-op and this behaves like a normal QLineEdit.
+    """
+
+    def __init__(self, on_click, parent=None):
+        super().__init__(parent)
+        self._on_click = on_click
+
+    def mousePressEvent(self, event):
+        if self._on_click:
+            self._on_click()
+        super().mousePressEvent(event)
+
+
 class FlashcardWidget(QFrame):
     """A widget to display a flashcard question and handle user input."""
     closed = pyqtSignal()
@@ -219,6 +238,24 @@ class FlashcardWidget(QFrame):
         # card. Explicit summons (hotkey) pass True to allow typing an answer.
         self._accept_focus = accept_focus
         self._drag_pos = None
+        self._xdisplay = None
+
+        # Can we run as a true X11 override-redirect overlay? Only under the xcb
+        # platform (X11 / XWayland) with python-Xlib available. In that mode the
+        # window manager never manages or focuses the card, which is the only
+        # reliable way on GNOME to stop it grabbing focus on win+space or other
+        # global shortcuts. Keyboard is then claimed explicitly via Xlib.
+        self._x11_overlay = False
+        try:
+            import sys as _sys
+            from PyQt6.QtWidgets import QApplication as _QA
+            _app = _QA.instance()
+            if _sys.platform.startswith('linux') and _app is not None \
+                    and _app.platformName() == 'xcb':
+                import Xlib  # noqa: F401  — capability probe only
+                self._x11_overlay = True
+        except Exception:
+            self._x11_overlay = False
 
         # --- Determine study mode for this card ---
         self.study_mode = self._resolve_study_mode()
@@ -316,28 +353,28 @@ class FlashcardWidget(QFrame):
         self.setObjectName("main_widget")
         self.setWindowTitle('Smart Flashcards')
 
-        # Tool + FramelessWindowHint + StaysOnTop => a pinned HUD-style overlay
-        # that floats above other windows (incl. games) without grabbing the
-        # taskbar. Crucially NOT modal: a modal window steals ALL keyboard/mouse
-        # input from whatever you're doing (typing, gaming), which is exactly the
-        # "it switches at the wrong moment / win+space misbehaves" complaint.
-        self.setWindowFlags(
+        # A pinned overlay that floats above other windows (incl. games) and is
+        # NOT modal — a modal window steals ALL input from whatever you're doing.
+        flags = (
             Qt.WindowType.WindowStaysOnTopHint
             | Qt.WindowType.FramelessWindowHint
-            | Qt.WindowType.Tool
         )
+        if self._x11_overlay:
+            # Override-redirect: the WM never manages or focuses this window, so
+            # it can't grab focus off the active app (e.g. on win+space). We
+            # position it ourselves and claim the keyboard explicitly when needed.
+            flags |= Qt.WindowType.X11BypassWindowManagerHint
+        self.setWindowFlags(flags)
+
         self.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose)
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
-        # Show without stealing focus from the active app. The card appears
-        # pinned in place; you keep typing / playing and answer it (by mouse)
-        # when you have a moment. Keyboard focus is taken only when you click the
-        # card, or when it is summoned explicitly via the hotkey (see main.py).
+        # Never activate on show — the card must not pull focus off the active
+        # app when it appears. You answer it by mouse; keyboard is taken only on
+        # an explicit click into the field or when summoned via the hotkey.
         self.setAttribute(Qt.WidgetAttribute.WA_ShowWithoutActivating)
-        if not self._accept_focus:
-            # Globally-active input model: the WM will never focus this window on
-            # its own (fixes focus theft on win+space / global shortcuts). You can
-            # still click it to interact; text answers are best summoned via the
-            # hotkey, which shows a focusable card instead.
+        if not self._x11_overlay and not self._accept_focus:
+            # Non-X11 fallback (native Wayland / other WMs): best-effort hint to
+            # the WM not to focus the passive overlay.
             self.setAttribute(Qt.WidgetAttribute.WA_X11DoNotAcceptFocus)
 
         self.setMinimumWidth(460)
@@ -521,7 +558,7 @@ class FlashcardWidget(QFrame):
     def setup_text_input_ui(self, layout):
         base_mode = self.study_mode.split('_')[0]
         theme = MODE_THEMES.get(base_mode, MODE_THEMES['translation'])
-        self.answer_input = QLineEdit()
+        self.answer_input = GrabOnClickLineEdit(self._grab_x11_keyboard)
         self.answer_input.setPlaceholderText(theme['placeholder'])
         self.answer_input.returnPressed.connect(self.check_answer)
         layout.addWidget(self.answer_input)
@@ -775,6 +812,24 @@ class FlashcardWidget(QFrame):
             self.hint_popup.move(x, y)
             self.hint_popup.show()
 
+    def _grab_x11_keyboard(self):
+        """Explicitly claim X11 keyboard focus for this window (X11 overlay mode).
+
+        Override-redirect windows are never focused by the WM, so we ask the X
+        server directly. No-op off X11 (native Wayland / Windows).
+        """
+        if not self._x11_overlay:
+            return
+        try:
+            from Xlib import display, X
+            if self._xdisplay is None:
+                self._xdisplay = display.Display()
+            xwin = self._xdisplay.create_resource_object('window', int(self.winId()))
+            self._xdisplay.set_input_focus(xwin, X.RevertToParent, X.CurrentTime)
+            self._xdisplay.sync()
+        except Exception as e:
+            print(f"[x11 overlay] keyboard grab failed: {e}")
+
     def focus_answer_input(self):
         """Gives keyboard focus to the answer field (text modes only).
 
@@ -783,6 +838,17 @@ class FlashcardWidget(QFrame):
         """
         if not self.is_multiple_choice and hasattr(self, 'answer_input'):
             self.answer_input.setFocus()
+
+    def summon_focus(self):
+        """Bring the card to attention and give it the keyboard.
+
+        Used only for explicit triggers (hotkey / menu): raise it, claim the X11
+        keyboard (override-redirect windows won't get it from the WM), and focus
+        the answer field so you can type immediately.
+        """
+        self.activateWindow()
+        self._grab_x11_keyboard()
+        self.focus_answer_input()
 
     def request_delete(self):
         print(f"Delete button clicked for: {self.card['english']}")
@@ -803,17 +869,21 @@ class FlashcardWidget(QFrame):
 
     def mousePressEvent(self, event):
         if event.button() == Qt.MouseButton.LeftButton:
-            # Prefer the compositor-driven move. On Wayland a client is NOT
-            # allowed to reposition its own top-level window, so the manual
-            # self.move() below is silently ignored there. startSystemMove()
-            # hands the drag to the compositor and works on Wayland, X11 and
-            # Windows alike. We fall back to manual dragging only if the
-            # platform has no system-move support.
-            window_handle = self.windowHandle()
-            if window_handle is not None and window_handle.startSystemMove():
-                self._drag_pos = None
-            else:
+            if self._x11_overlay:
+                # Override-redirect windows are unmanaged, so startSystemMove()
+                # (which asks the WM to move us) has no effect. Drag manually —
+                # move() works fine for unmanaged X11 windows.
                 self._drag_pos = event.globalPosition().toPoint() - self.frameGeometry().topLeft()
+            else:
+                # Elsewhere prefer the compositor-driven move: on native Wayland a
+                # client may NOT reposition its own top-level, so manual move() is
+                # ignored there and startSystemMove() hands the drag to the
+                # compositor. Fall back to manual if unsupported.
+                window_handle = self.windowHandle()
+                if window_handle is not None and window_handle.startSystemMove():
+                    self._drag_pos = None
+                else:
+                    self._drag_pos = event.globalPosition().toPoint() - self.frameGeometry().topLeft()
             event.accept()
 
     def mouseMoveEvent(self, event):
@@ -828,5 +898,11 @@ class FlashcardWidget(QFrame):
         event.accept()
 
     def closeEvent(self, event):
+        if self._xdisplay is not None:
+            try:
+                self._xdisplay.close()
+            except Exception:
+                pass
+            self._xdisplay = None
         self.closed.emit()
         super().closeEvent(event)

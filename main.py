@@ -441,9 +441,9 @@ class FlashcardApp:
         self.flashcard_widget.raise_()
         if activate:
             # ...but only grab focus / keyboard when the card was summoned
-            # explicitly. The timer-driven overlay must NOT steal focus.
-            self.flashcard_widget.activateWindow()
-            self.flashcard_widget.focus_answer_input()
+            # explicitly (hotkey / menu). The timer-driven overlay must NOT steal
+            # focus — it is answered by mouse, or you click its field to type.
+            self.flashcard_widget.summon_focus()
 
     def on_widget_closed(self):
         self.flashcard_widget = None

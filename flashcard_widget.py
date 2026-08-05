@@ -310,13 +310,26 @@ class FlashcardWidget(QFrame):
         self.setObjectName("main_widget")
         self.setWindowTitle('Smart Flashcards')
 
-        self.setWindowFlags(Qt.WindowType.WindowStaysOnTopHint | Qt.WindowType.FramelessWindowHint)
+        # Tool + FramelessWindowHint + StaysOnTop => a pinned HUD-style overlay
+        # that floats above other windows (incl. games) without grabbing the
+        # taskbar. Crucially NOT modal: a modal window steals ALL keyboard/mouse
+        # input from whatever you're doing (typing, gaming), which is exactly the
+        # "it switches at the wrong moment / win+space misbehaves" complaint.
+        self.setWindowFlags(
+            Qt.WindowType.WindowStaysOnTopHint
+            | Qt.WindowType.FramelessWindowHint
+            | Qt.WindowType.Tool
+        )
         self.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose)
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
+        # Show without stealing focus from the active app. The card appears
+        # pinned in place; you keep typing / playing and answer it (by mouse)
+        # when you have a moment. Keyboard focus is taken only when you click the
+        # card, or when it is summoned explicitly via the hotkey (see main.py).
+        self.setAttribute(Qt.WidgetAttribute.WA_ShowWithoutActivating)
 
         self.setMinimumWidth(460)
         self.setMaximumWidth(600)
-        self.setWindowModality(Qt.WindowModality.ApplicationModal)
 
         main_layout = QVBoxLayout()
         main_layout.setContentsMargins(0, 0, 0, 0)
@@ -500,7 +513,10 @@ class FlashcardWidget(QFrame):
         self.answer_input.setPlaceholderText(theme['placeholder'])
         self.answer_input.returnPressed.connect(self.check_answer)
         layout.addWidget(self.answer_input)
-        self.answer_input.setFocus()
+        # NOTE: intentionally NOT calling setFocus() here — that would grab the
+        # keyboard the instant the card appears and interrupt whatever you're
+        # typing. Focus is given only on an explicit summon (hotkey) via
+        # focus_answer_input(), or when you click into the field yourself.
 
     def setup_multiple_choice_ui(self, layout):
         self.option_widgets = []
@@ -746,6 +762,15 @@ class FlashcardWidget(QFrame):
 
             self.hint_popup.move(x, y)
             self.hint_popup.show()
+
+    def focus_answer_input(self):
+        """Gives keyboard focus to the answer field (text modes only).
+
+        Called only when the card is summoned explicitly (hotkey / menu), so the
+        automatic pinned-overlay case never steals the keyboard.
+        """
+        if not self.is_multiple_choice and hasattr(self, 'answer_input'):
+            self.answer_input.setFocus()
 
     def request_delete(self):
         print(f"Delete button clicked for: {self.card['english']}")

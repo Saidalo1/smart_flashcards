@@ -390,12 +390,24 @@ class FlashcardApp:
         sys.exit(self.app.exec())
 
     def force_show_flashcard(self):
-        """Forces showing next card (closes existing)."""
+        """Forces showing next card (closes existing).
+
+        Used for EXPLICIT triggers (global hotkey / tray menu): the user asked
+        for a card right now, so we bring it to the foreground and focus it.
+        """
         if self.flashcard_widget and self.flashcard_widget.isVisible():
             self.flashcard_widget.close()
-        self.show_flashcard()
+        self.show_flashcard(activate=True)
 
-    def show_flashcard(self):
+    def show_flashcard(self, activate=False):
+        """Shows the next card.
+
+        activate=False (default, timer-driven): the card appears as a pinned
+        overlay WITHOUT stealing focus — you keep typing / gaming and answer it
+        by mouse when you have a moment (e.g. between deaths in a match).
+        activate=True (hotkey / menu): you asked for it, so it is raised and the
+        answer field is focused for immediate typing.
+        """
         if self.flashcard_widget and self.flashcard_widget.isVisible():
             return
 
@@ -424,8 +436,13 @@ class FlashcardApp:
         self.flashcard_widget.adjustSize()  # 2. Подгоняем размер под реальный текст
         self.position_widget(self.flashcard_widget)  # 3. Двигаем в нужный угол экрана
 
-        self.flashcard_widget.activateWindow()
+        # Always float above other windows...
         self.flashcard_widget.raise_()
+        if activate:
+            # ...but only grab focus / keyboard when the card was summoned
+            # explicitly. The timer-driven overlay must NOT steal focus.
+            self.flashcard_widget.activateWindow()
+            self.flashcard_widget.focus_answer_input()
 
     def on_widget_closed(self):
         self.flashcard_widget = None
@@ -494,13 +511,26 @@ class FlashcardApp:
         position = self.config_manager.card_position
 
         if position == 'mouse':
-            # Position at mouse cursor
+            # Smart offset from the cursor (tooltip-style), NOT centered on it.
+            # Centering covers the exact point the user is reading/working at,
+            # which is an intrusive antipattern. Instead we place the card
+            # below-right of the pointer with a small gap so that spot stays
+            # visible, and flip to the other side near a screen edge.
             cursor_pos = QCursor.pos()
-            x = cursor_pos.x() - widget_size.width() // 2
-            y = cursor_pos.y() - widget_size.height() // 2
-            # Keep within screen bounds
-            x = max(padding, min(x, screen_geometry.right() - widget_size.width() - padding))
-            y = max(padding, min(y, screen_geometry.bottom() - widget_size.height() - padding))
+            gap = 18
+            w = widget_size.width()
+            h = widget_size.height()
+
+            x = cursor_pos.x() + gap
+            y = cursor_pos.y() + gap
+            # Flip left / up if the card would run off the right / bottom edge.
+            if x + w > screen_geometry.right() - padding:
+                x = cursor_pos.x() - gap - w
+            if y + h > screen_geometry.bottom() - padding:
+                y = cursor_pos.y() - gap - h
+            # Final clamp so it is always fully on-screen.
+            x = max(screen_geometry.left() + padding, min(x, screen_geometry.right() - w - padding))
+            y = max(screen_geometry.top() + padding, min(y, screen_geometry.bottom() - h - padding))
         elif position == 'center':
             x = (screen_geometry.width() - widget_size.width()) // 2
             y = (screen_geometry.height() - widget_size.height()) // 2

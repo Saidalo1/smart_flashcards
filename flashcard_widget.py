@@ -273,25 +273,19 @@ class FlashcardWidget(QFrame):
             self.question_lang = 'english'
             self.answer_lang = 'synonyms'
         else:
-            # Translation mode — preserve all legacy logic
-            has_grammar = card.get('grammar_pattern') is not None
-            self.question_type_legacy = (
-                'grammar' if has_grammar and random.random() < 0.4
-                else 'translation'
-            )
-
+            # Translation mode. We never quiz the grammar pattern itself — the
+            # pattern is shown inline in the word title (see set_question), so the
+            # learner always sees e.g. "avoid doing sth" while still being asked
+            # for the meaning.
             if self.is_transition_card:
                 if 'uzbek' in self.card and self.card['uzbek']:
                     self.question_lang, self.answer_lang = 'english', 'uzbek'
                 else:
                     self.question_lang, self.answer_lang = 'english', 'english'
-            elif self.question_type_legacy == 'translation':
-                if random.choice([True, False]):
-                    self.question_lang, self.answer_lang = 'english', 'uzbek'
-                else:
-                    self.question_lang, self.answer_lang = 'uzbek', 'english'
+            elif random.choice([True, False]):
+                self.question_lang, self.answer_lang = 'english', 'uzbek'
             else:
-                self.question_lang, self.answer_lang = 'english', 'grammar_pattern'
+                self.question_lang, self.answer_lang = 'uzbek', 'english'
 
         # --- Smart multiple-choice decision ---
         self.is_multiple_choice = self.study_mode.endswith('_mc')
@@ -572,15 +566,7 @@ class FlashcardWidget(QFrame):
         self.button_group = QButtonGroup(self)
 
         # Generate options based on study mode
-        if self.study_mode.startswith('translation') and hasattr(self, 'question_type_legacy'):
-            if self.question_type_legacy == 'grammar':
-                options = ['V-ing', 'to + V']
-                random.shuffle(options)
-            else:
-                options = self.vocabulary.get_options_for_card(
-                    self.card, self.answer_lang
-                )
-        elif self.study_mode.startswith('definition'):
+        if self.study_mode.startswith('definition'):
             options = self._get_definition_options()
         elif self.study_mode.startswith('synonym'):
             options = self._get_synonym_options()
@@ -662,26 +648,27 @@ class FlashcardWidget(QFrame):
         has_hint = bool(self.card.get('hint'))
         hint_html = " <a href='hint' style='text-decoration:none; color:#f1c40f;'><sup>💡</sup></a>" if has_hint else ""
         word = self.card.get('english', 'No text')
+        # For verbs, show the word together with its pattern continuation
+        # (e.g. "avoid doing sth", "refuse to do sth") whenever the English word
+        # is the prompt. This only changes what's displayed — the answer asked
+        # for is still the meaning.
+        english_prompt = self.card.get('grammar_pattern') or word
 
         if self.study_mode.startswith('definition'):
             self.question_label.setText(
-                f"Define: <b>{word}</b>{hint_html}"
+                f"Define: <b>{english_prompt}</b>{hint_html}"
             )
         elif self.study_mode.startswith('synonym'):
             self.question_label.setText(
-                f"Synonym for: <b>{word}</b>{hint_html}"
-            )
-        elif hasattr(self, 'question_type_legacy') and self.question_type_legacy == 'grammar':
-            self.question_label.setText(
-                f"Grammar pattern for: <b>{word}</b>{hint_html}"
+                f"Synonym for: <b>{english_prompt}</b>{hint_html}"
             )
         elif self.is_transition_card:
-            question_text = self.card.get(self.question_lang, word)
+            question_text = english_prompt if self.question_lang == 'english' else self.card.get(self.question_lang, word)
             self.question_label.setText(
                 f"Transition: <b>{question_text}</b>{hint_html}"
             )
         else:
-            question_text = self.card.get(self.question_lang, word)
+            question_text = english_prompt if self.question_lang == 'english' else self.card.get(self.question_lang, word)
             self.question_label.setText(
                 f"Translate: <b>{question_text}</b>{hint_html}"
             )

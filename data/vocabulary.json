@@ -7144,7 +7144,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "maktab yoki ish joyidagi ovqatlanish xonasi"
   },
   {
     "english": "Playground",
@@ -7158,7 +7158,7 @@
     "complexity": 0.3,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "bolalar o'ynaydigan maydoncha"
   },
   {
     "english": "Playing field",
@@ -7172,7 +7172,7 @@
     "complexity": 0.3,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "sport o'yinlari o'ynaladigan katta maydon"
   },
   {
     "english": "Staff room",
@@ -7186,7 +7186,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "o'qituvchilar/xodimlar dam oladigan xona"
   },
   {
     "english": "Store room",
@@ -7200,7 +7200,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "narsalar saqlanadigan xona, ombor"
   },
   {
     "english": "Language lab",
@@ -7214,7 +7214,7 @@
     "complexity": 0.5,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "til o'rganish uchun jihozlangan xona"
   },
   {
     "english": "Science lab",
@@ -7228,7 +7228,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "tajribalar o'tkaziladigan ilmiy xona"
   },
   {
     "english": "Foreground",
@@ -7242,7 +7242,7 @@
     "complexity": 0.5,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "rasmda tomoshabinga eng yaqin qism, oldingi plan"
   },
   {
     "english": "Background",
@@ -7256,7 +7256,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "rasmda orqadagi qism, fon"
   },
   {
     "english": "Judge",
@@ -7270,7 +7270,7 @@
     "complexity": 0.5,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "biror narsa haqida hukm/xulosa chiqarmoq"
   },
   {
     "english": "Common",
@@ -7284,7 +7284,7 @@
     "complexity": 0.3,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "ko'pchilikka tegishli, keng tarqalgan"
   },
   {
     "english": "Whereas",
@@ -7298,7 +7298,7 @@
     "complexity": 0.6,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "ikki narsani qarama-qarshi qo'yadi: holbuki, ammo"
   },
   {
     "english": "Obvious",
@@ -7312,7 +7312,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "ko'zga yaqqol ko'rinib turgan, aniq"
   },
   {
     "english": "Unlike",
@@ -7326,7 +7326,7 @@
     "complexity": 0.5,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "...dan farqli o'laroq"
   },
   {
     "english": "In contrast",
@@ -7340,7 +7340,7 @@
     "complexity": 0.5,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "aksincha, farqli o'laroq"
   },
   {
     "english": "Justify",
@@ -7354,7 +7354,7 @@
     "complexity": 0.6,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "biror ish yoki qarorni to'g'ri deb asoslamoq"
   },
   {
     "english": "Lead (v)",
@@ -7368,7 +7368,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "yetaklamoq, biror natijaga olib bormoq"
   },
   {
     "english": "Point",
@@ -7382,7 +7382,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "fikr, nuqtai nazar, asosiy g'oya"
   },
   {
     "english": "Sum up",
@@ -7396,7 +7396,7 @@
     "complexity": 0.5,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "qisqacha xulosa qilmoq"
   },
   {
     "english": "Summarise",
@@ -7410,7 +7410,7 @@
     "complexity": 0.5,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "asosiy mazmunni qisqacha bayon qilmoq"
   },
   {
     "english": "Possible",
@@ -7424,7 +7424,7 @@
     "complexity": 0.3,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "bo'lishi mumkin bo'lgan"
   },
   {
     "english": "Deserve",
@@ -7438,7 +7438,7 @@
     "complexity": 0.5,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "biror narsaga loyiq/munosib bo'lmoq"
   },
   {
     "english": "Donate",
@@ -7452,7 +7452,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "xayriya sifatida bermoq, ehson qilmoq"
   },
   {
     "english": "Raise money",
@@ -7466,7 +7466,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "biror maqsad uchun pul yig'moq"
   },
   {
     "english": "Probably",
@@ -7480,7 +7480,7 @@
     "complexity": 0.3,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "katta ehtimol bilan, chamasi"
   },
   {
     "english": "Immediately",
@@ -7494,7 +7494,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "shu zahoti, darhol"
   },
   {
     "english": "Donation",
@@ -7508,7 +7508,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "ixtiyoriy berilgan pul yoki yordam, xayriya"
   },
   {
     "english": "Primary school",
@@ -7522,7 +7522,7 @@
     "complexity": 0.3,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "boshlang'ich ta'lim maktabi"
   },
   {
     "english": "Facility",
@@ -7536,7 +7536,7 @@
     "complexity": 0.5,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "qulaylik yoki imkoniyat, jihoz"
   },
   {
     "english": "Gift",
@@ -7550,7 +7550,7 @@
     "complexity": 0.3,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "sovg'a, tuhfa"
   },
   {
     "english": "Rest",
@@ -7564,7 +7564,7 @@
     "complexity": 0.3,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "qolgan qism, qoldiq"
   },
   {
     "english": "Concession clause",
@@ -7578,7 +7578,7 @@
     "complexity": 0.6,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "'though/although' bilan boshlanadigan ergash gap"
   },
   {
     "english": "To be in debt",
@@ -7592,7 +7592,7 @@
     "complexity": 0.5,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "qarzi bo'lmoq"
   },
   {
     "english": "Replace",
@@ -7606,7 +7606,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "biror narsani boshqasi bilan almashtirmoq"
   },
   {
     "english": "Improve",
@@ -7620,6 +7620,6 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": null
+    "hint": "yaxshilamoq, sifatini oshirmoq"
   }
 ]

@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import (
     QGroupBox, QRadioButton, QStyle, QStyleOption, QButtonGroup, QLayout
 )
 from PyQt6.QtCore import Qt, pyqtSignal, QTimer, QPoint
-from PyQt6.QtGui import QCursor, QPainter
+from PyQt6.QtGui import QPainter
 
 
 # --- Color themes per study mode ---
@@ -397,12 +397,41 @@ class FlashcardWidget(QFrame):
         self.question_label = QLabel()
         self.question_label.setObjectName("questionLabel")
         self.question_label.setWordWrap(True)
-        self.question_label.setTextInteractionFlags(Qt.TextInteractionFlag.LinksAccessibleByMouse)
-        self.question_label.linkActivated.connect(self.toggle_hint)
         top_layout.addWidget(self.question_label, 1)
+
+        # 💡 as a real button. A QLabel <a> link needs hover/hit-test events that
+        # never reach the override-redirect X11 overlay, so link clicks silently
+        # did nothing. A QPushButton receives clicks reliably (like the answer
+        # options do).
+        self.hint_button = QPushButton("💡")
+        self.hint_button.setObjectName("hintButton")
+        self.hint_button.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.hint_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.hint_button.setFixedSize(32, 32)
+        self.hint_button.setToolTip("Подсказка")
+        self.hint_button.clicked.connect(self.toggle_hint)
+        # Styled via apply_stylesheet (#hintButton), exactly like #deleteButton.
+        # A per-widget stylesheet here would miss the generic QPushButton padding
+        # override and the emoji would get clipped out of the fixed-size button.
+        self.hint_button.hide()
+        top_layout.addWidget(self.hint_button, 0, Qt.AlignmentFlag.AlignTop)
 
         top_layout.addWidget(self._create_delete_button(), 0, Qt.AlignmentFlag.AlignTop)
         content_layout.addLayout(top_layout)
+
+        # Hint shown as a floating overlay: a child of the window that is NOT in
+        # any layout, so it paints ABOVE the options without reflowing them, and
+        # (being a child) it travels with the card when you drag it. It is
+        # positioned under the 💡 button in toggle_hint().
+        self.hint_label = QLabel(self)
+        self.hint_label.setObjectName("hintOverlay")
+        self.hint_label.setWordWrap(True)
+        self.hint_label.setStyleSheet(
+            "QLabel#hintOverlay { color: #f1c40f; font-style: italic; "
+            "background: #2a2f18; border: 1px solid #f1c40f; border-radius: 8px; "
+            "padding: 8px 12px; }"
+        )
+        self.hint_label.hide()
 
         main_layout.addLayout(content_layout)
         self.content_layout = content_layout
@@ -547,6 +576,18 @@ class FlashcardWidget(QFrame):
             QPushButton#deleteButton:hover {{
                 color: #e74c3c;
             }}
+
+            QPushButton#hintButton {{
+                background: transparent;
+                border: none;
+                font-size: 18px;
+                padding: 4px;
+            }}
+
+            QPushButton#hintButton:hover {{
+                background: rgba(241, 196, 15, 0.15);
+                border-radius: 6px;
+            }}
         """)
 
     def setup_text_input_ui(self, layout):
@@ -645,8 +686,10 @@ class FlashcardWidget(QFrame):
         return options
 
     def set_question(self):
-        has_hint = bool(self.card.get('hint'))
-        hint_html = " <a href='hint' style='text-decoration:none; color:#f1c40f;'><sup>💡</sup></a>" if has_hint else ""
+        has_hint = bool((self.card.get('hint') or '').strip())
+        self.hint_button.setVisible(has_hint)
+        self.hint_label.hide()  # collapse any previously opened hint on a new card
+        print(f"[HINT] set_question card={self.card.get('english')!r} has_hint={has_hint} -> 💡 button {'shown' if has_hint else 'hidden'}")
         word = self.card.get('english', 'No text')
         # For verbs, show the word together with its pattern continuation
         # (e.g. "avoid doing sth", "refuse to do sth") whenever the English word
@@ -656,21 +699,21 @@ class FlashcardWidget(QFrame):
 
         if self.study_mode.startswith('definition'):
             self.question_label.setText(
-                f"Define: <b>{english_prompt}</b>{hint_html}"
+                f"Define: <b>{english_prompt}</b>"
             )
         elif self.study_mode.startswith('synonym'):
             self.question_label.setText(
-                f"Synonym for: <b>{english_prompt}</b>{hint_html}"
+                f"Synonym for: <b>{english_prompt}</b>"
             )
         elif self.is_transition_card:
             question_text = english_prompt if self.question_lang == 'english' else self.card.get(self.question_lang, word)
             self.question_label.setText(
-                f"Transition: <b>{question_text}</b>{hint_html}"
+                f"Transition: <b>{question_text}</b>"
             )
         else:
             question_text = english_prompt if self.question_lang == 'english' else self.card.get(self.question_lang, word)
             self.question_label.setText(
-                f"Translate: <b>{question_text}</b>{hint_html}"
+                f"Translate: <b>{question_text}</b>"
             )
 
     def check_answer(self):
@@ -782,22 +825,32 @@ class FlashcardWidget(QFrame):
         )
 
     def toggle_hint(self, link=None):
-        if hasattr(self, 'hint_popup') and self.hint_popup and self.hint_popup.isVisible():
-            self.hint_popup.close()
-            self.hint_popup = None
+        hint_text = (self.card.get('hint') or '').strip()
+        print(f"[HINT] toggle_hint called; card={self.card.get('english')!r} hint={hint_text!r}")
+        if not hint_text:
+            print("[HINT] no hint text for this card -> nothing to show")
             return
 
-        hint_text = (self.card.get('hint') or '').strip()
-        if hint_text:
-            self.hint_popup = HintPopupWindow(hint_text, self)
-            cursor_pos = QCursor.pos()
-            popup_size = self.hint_popup.sizeHint()
+        if self.hint_label.isVisible():
+            self.hint_label.hide()
+            print("[HINT] hidden")
+            return
 
-            x = cursor_pos.x() + 10
-            y = cursor_pos.y() - popup_size.height() - 10
-
-            self.hint_popup.move(x, y)
-            self.hint_popup.show()
+        self.hint_label.setText(f"💡 {hint_text}")
+        # Full-width banner pinned just under the title row, so it reads as a
+        # header hint instead of a small box floating over the answer options.
+        # It's not in a layout (overlays, doesn't reflow) and is a child of the
+        # window (travels with the card when dragged).
+        margin = 12
+        self.hint_label.setFixedWidth(self.width() - 2 * margin)
+        self.hint_label.adjustSize()
+        # Pin to the very top, over the "drag me" bar — where the user marked it.
+        y = 4
+        self.hint_label.move(margin, y)
+        self.hint_label.raise_()
+        self.hint_label.show()
+        print(f"[HINT] shown overlay at ({margin},{y}) "
+              f"size={self.hint_label.width()}x{self.hint_label.height()}")
 
     def _grab_x11_keyboard(self):
         """Explicitly claim X11 keyboard focus for this window (X11 overlay mode).

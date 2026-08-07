@@ -7144,7 +7144,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": "maktab yoki ish joyidagi ovqatlanish xonasi"
+    "hint": "We usually have lunch in the school canteen."
   },
   {
     "english": "Playground",
@@ -7158,7 +7158,7 @@
     "complexity": 0.3,
     "definition": null,
     "synonyms": [],
-    "hint": "bolalar o'ynaydigan maydoncha"
+    "hint": "The children are playing on the playground after class."
   },
   {
     "english": "Playing field",
@@ -7172,7 +7172,7 @@
     "complexity": 0.3,
     "definition": null,
     "synonyms": [],
-    "hint": "sport o'yinlari o'ynaladigan katta maydon"
+    "hint": "The teams lined up on the playing field before the match."
   },
   {
     "english": "Staff room",
@@ -7186,7 +7186,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": "o'qituvchilar/xodimlar dam oladigan xona"
+    "hint": "The teachers are having a meeting in the staff room."
   },
   {
     "english": "Store room",
@@ -7200,7 +7200,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": "narsalar saqlanadigan xona, ombor"
+    "hint": "We keep the extra chairs in the store room."
   },
   {
     "english": "Language lab",
@@ -7214,7 +7214,7 @@
     "complexity": 0.5,
     "definition": null,
     "synonyms": [],
-    "hint": "til o'rganish uchun jihozlangan xona"
+    "hint": "Students practise listening in the language lab."
   },
   {
     "english": "Science lab",
@@ -7228,7 +7228,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": "tajribalar o'tkaziladigan ilmiy xona"
+    "hint": "We did the chemistry experiment in the science lab."
   },
   {
     "english": "Foreground",
@@ -7242,7 +7242,7 @@
     "complexity": 0.5,
     "definition": null,
     "synonyms": [],
-    "hint": "rasmda tomoshabinga eng yaqin qism, oldingi plan"
+    "hint": "In the foreground of the painting there is a small boat."
   },
   {
     "english": "Background",
@@ -7256,7 +7256,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": "rasmda orqadagi qism, fon"
+    "hint": "You can see mountains in the background of the photo."
   },
   {
     "english": "Judge",
@@ -7270,7 +7270,7 @@
     "complexity": 0.5,
     "definition": null,
     "synonyms": [],
-    "hint": "biror narsa haqida hukm/xulosa chiqarmoq"
+    "hint": "You shouldn't judge people by their appearance."
   },
   {
     "english": "Common",
@@ -7284,7 +7284,7 @@
     "complexity": 0.3,
     "definition": null,
     "synonyms": [],
-    "hint": "ko'pchilikka tegishli, keng tarqalgan"
+    "hint": "English is a common language for business."
   },
   {
     "english": "Whereas",
@@ -7298,7 +7298,7 @@
     "complexity": 0.6,
     "definition": null,
     "synonyms": [],
-    "hint": "ikki narsani qarama-qarshi qo'yadi: holbuki, ammo"
+    "hint": "My brother loves sport, whereas I prefer reading."
   },
   {
     "english": "Obvious",
@@ -7312,7 +7312,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": "ko'zga yaqqol ko'rinib turgan, aniq"
+    "hint": "It was obvious that she was tired."
   },
   {
     "english": "Unlike",
@@ -7326,7 +7326,7 @@
     "complexity": 0.5,
     "definition": null,
     "synonyms": [],
-    "hint": "...dan farqli o'laroq"
+    "hint": "Unlike her sister, she enjoys cooking."
   },
   {
     "english": "In contrast",
@@ -7340,7 +7340,7 @@
     "complexity": 0.5,
     "definition": null,
     "synonyms": [],
-    "hint": "aksincha, farqli o'laroq"
+    "hint": "The south is warm; in contrast, the north is cold."
   },
   {
     "english": "Justify",
@@ -7354,7 +7354,7 @@
     "complexity": 0.6,
     "definition": null,
     "synonyms": [],
-    "hint": "biror ish yoki qarorni to'g'ri deb asoslamoq"
+    "hint": "She tried to justify spending so much money on clothes."
   },
   {
     "english": "Lead (v)",
@@ -7368,7 +7368,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": "yetaklamoq, biror natijaga olib bormoq"
+    "hint": "Hard work usually leads to success."
   },
   {
     "english": "Point",
@@ -7382,7 +7382,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": "fikr, nuqtai nazar, asosiy g'oya"
+    "hint": "That's a good point — I hadn't thought of it."
   },
   {
     "english": "Sum up",
@@ -7396,7 +7396,7 @@
     "complexity": 0.5,
     "definition": null,
     "synonyms": [],
-    "hint": "qisqacha xulosa qilmoq"
+    "hint": "To sum up, we need more time and more money."
   },
   {
     "english": "Summarise",
@@ -7410,7 +7410,7 @@
     "complexity": 0.5,
     "definition": null,
     "synonyms": [],
-    "hint": "asosiy mazmunni qisqacha bayon qilmoq"
+    "hint": "Can you summarise the article in one sentence?"
   },
   {
     "english": "Possible",
@@ -7424,7 +7424,7 @@
     "complexity": 0.3,
     "definition": null,
     "synonyms": [],
-    "hint": "bo'lishi mumkin bo'lgan"
+    "hint": "Is it possible to finish this today?"
   },
   {
     "english": "Deserve",
@@ -7438,7 +7438,7 @@
     "complexity": 0.5,
     "definition": null,
     "synonyms": [],
-    "hint": "biror narsaga loyiq/munosib bo'lmoq"
+    "hint": "After working so hard, you deserve to rest."
   },
   {
     "english": "Donate",
@@ -7452,7 +7452,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": "xayriya sifatida bermoq, ehson qilmoq"
+    "hint": "She donated her old clothes to charity."
   },
   {
     "english": "Raise money",
@@ -7466,7 +7466,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": "biror maqsad uchun pul yig'moq"
+    "hint": "We organised a concert to raise money for the school."
   },
   {
     "english": "Probably",
@@ -7480,7 +7480,7 @@
     "complexity": 0.3,
     "definition": null,
     "synonyms": [],
-    "hint": "katta ehtimol bilan, chamasi"
+    "hint": "It will probably rain this afternoon."
   },
   {
     "english": "Immediately",
@@ -7494,7 +7494,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": "shu zahoti, darhol"
+    "hint": "Call me immediately if there is a problem."
   },
   {
     "english": "Donation",
@@ -7508,7 +7508,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": "ixtiyoriy berilgan pul yoki yordam, xayriya"
+    "hint": "The museum survives on donations from visitors."
   },
   {
     "english": "Primary school",
@@ -7522,7 +7522,7 @@
     "complexity": 0.3,
     "definition": null,
     "synonyms": [],
-    "hint": "boshlang'ich ta'lim maktabi"
+    "hint": "My little sister still goes to primary school."
   },
   {
     "english": "Facility",
@@ -7536,7 +7536,7 @@
     "complexity": 0.5,
     "definition": null,
     "synonyms": [],
-    "hint": "qulaylik yoki imkoniyat, jihoz"
+    "hint": "The hotel has excellent sports facilities."
   },
   {
     "english": "Gift",
@@ -7550,7 +7550,7 @@
     "complexity": 0.3,
     "definition": null,
     "synonyms": [],
-    "hint": "sovg'a, tuhfa"
+    "hint": "He gave her a beautiful gift for her birthday."
   },
   {
     "english": "Rest",
@@ -7564,7 +7564,7 @@
     "complexity": 0.3,
     "definition": null,
     "synonyms": [],
-    "hint": "qolgan qism, qoldiq"
+    "hint": "I will do the rest of the work tomorrow."
   },
   {
     "english": "Concession clause",
@@ -7578,7 +7578,7 @@
     "complexity": 0.6,
     "definition": null,
     "synonyms": [],
-    "hint": "'though/although' bilan boshlanadigan ergash gap"
+    "hint": "In \"Although it was late, we kept working\", the concession clause begins with \"although\"."
   },
   {
     "english": "To be in debt",
@@ -7592,7 +7592,7 @@
     "complexity": 0.5,
     "definition": null,
     "synonyms": [],
-    "hint": "qarzi bo'lmoq"
+    "hint": "After buying the car, they were deeply in debt."
   },
   {
     "english": "Replace",
@@ -7606,7 +7606,7 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": "biror narsani boshqasi bilan almashtirmoq"
+    "hint": "We had to replace the old computer with a new one."
   },
   {
     "english": "Improve",
@@ -7620,6 +7620,888 @@
     "complexity": 0.4,
     "definition": null,
     "synonyms": [],
-    "hint": "yaxshilamoq, sifatini oshirmoq"
+    "hint": "Reading every day will improve your English."
+  },
+  {
+    "english": "terrible",
+    "uzbek": "dahshatli, juda yomon",
+    "category": "vocab 7 (31-35)",
+    "grammar_pattern": null,
+    "id": "v7-036",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.3,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The weather was terrible, so we stayed at home."
+  },
+  {
+    "english": "terrified",
+    "uzbek": "qo'rquvdan dahshatga tushgan, qattiq qo'rqqan",
+    "category": "vocab 7 (31-35)",
+    "grammar_pattern": null,
+    "id": "v7-037",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": [],
+    "hint": "He was terrified of the dark when he was a child."
+  },
+  {
+    "english": "had a fever",
+    "uzbek": "isitmasi bor edi",
+    "category": "vocab 7 (31-35)",
+    "grammar_pattern": null,
+    "id": "v7-038",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The child had a fever and stayed in bed all day."
+  },
+  {
+    "english": "leaping",
+    "uzbek": "sakrayotgan, sakrab",
+    "category": "vocab 7 (31-35)",
+    "grammar_pattern": null,
+    "id": "v7-039",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": [],
+    "hint": "Flames were leaping high into the sky."
+  },
+  {
+    "english": "flame",
+    "uzbek": "alanga, olov",
+    "category": "vocab 7 (31-35)",
+    "grammar_pattern": null,
+    "id": "v7-040",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": [],
+    "hint": "A small flame appeared and quickly grew bigger."
+  },
+  {
+    "english": "screaming",
+    "uzbek": "qichqirayotgan, baqirib",
+    "category": "vocab 7 (31-35)",
+    "grammar_pattern": null,
+    "id": "v7-041",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The children ran out of the house, screaming."
+  },
+  {
+    "english": "hid",
+    "uzbek": "yashirindi, berkindi",
+    "category": "vocab 7 (31-35)",
+    "grammar_pattern": null,
+    "id": "v7-042",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": [],
+    "hint": "He was so scared that he hid under the bed."
+  },
+  {
+    "english": "suddenly",
+    "uzbek": "to'satdan, birdan",
+    "category": "vocab 7 (31-35)",
+    "grammar_pattern": null,
+    "id": "v7-043",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.3,
+    "definition": null,
+    "synonyms": [],
+    "hint": "Suddenly, the lights went out."
+  },
+  {
+    "english": "Crime",
+    "uzbek": "jinoyat",
+    "category": "vocab 8 (1-15)",
+    "grammar_pattern": null,
+    "id": "v8-001",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.3,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The police are trying to reduce crime in the city."
+  },
+  {
+    "english": "Criminal",
+    "uzbek": "jinoyatchi",
+    "category": "vocab 8 (1-15)",
+    "grammar_pattern": null,
+    "id": "v8-002",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.3,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The criminal was finally caught by the police."
+  },
+  {
+    "english": "Recognise",
+    "uzbek": "tanib olmoq",
+    "category": "vocab 8 (1-15)",
+    "grammar_pattern": null,
+    "id": "v8-003",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": [],
+    "hint": "I didn't recognise him with his new haircut."
+  },
+  {
+    "english": "Arson",
+    "uzbek": "o't qo'yish",
+    "category": "vocab 8 (1-15)",
+    "grammar_pattern": null,
+    "id": "v8-004",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The fire was not an accident; it was arson."
+  },
+  {
+    "english": "Arsonist",
+    "uzbek": "o't qo'yuvchi",
+    "category": "vocab 8 (1-15)",
+    "grammar_pattern": null,
+    "id": "v8-005",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The arsonist set fire to three buildings."
+  },
+  {
+    "english": "To set fire to somewhere",
+    "uzbek": "qayergadir o't qo'ymoq",
+    "category": "vocab 8 (1-15)",
+    "grammar_pattern": null,
+    "id": "v8-006",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": [],
+    "hint": "Someone set fire to the old factory last night."
+  },
+  {
+    "english": "Burglary",
+    "uzbek": "qulfni buzib qilinadigan tungi o'g'rilik",
+    "category": "vocab 8 (1-15)",
+    "grammar_pattern": null,
+    "id": "v8-007",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": [],
+    "hint": "There was a burglary at our neighbour's house."
+  },
+  {
+    "english": "Burglar",
+    "uzbek": "qulf buzar, tungi bosqinchi",
+    "category": "vocab 8 (1-15)",
+    "grammar_pattern": null,
+    "id": "v8-008",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The burglar climbed in through an open window."
+  },
+  {
+    "english": "To burgle",
+    "uzbek": "qulfni buzib o'g'rilik qilmoq",
+    "category": "vocab 8 (1-15)",
+    "grammar_pattern": null,
+    "id": "v8-009",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": [],
+    "hint": "Thieves burgled the shop while it was closed."
+  },
+  {
+    "english": "To break into a house",
+    "uzbek": "uyga bostirib kirish",
+    "category": "vocab 8 (1-15)",
+    "grammar_pattern": null,
+    "id": "v8-010",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": [],
+    "hint": "Someone tried to break into a house on our street."
+  },
+  {
+    "english": "Drug-dealing",
+    "uzbek": "giyohvand moddalar savdosi",
+    "category": "vocab 8 (1-15)",
+    "grammar_pattern": null,
+    "id": "v8-011",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": [],
+    "hint": "He was arrested for drug-dealing."
+  },
+  {
+    "english": "Drug-dealer",
+    "uzbek": "giyohvand moddalar sotuvchisi",
+    "category": "vocab 8 (1-15)",
+    "grammar_pattern": null,
+    "id": "v8-012",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The police are looking for a well-known drug-dealer."
+  },
+  {
+    "english": "To sell/deal drugs",
+    "uzbek": "giyohvand moddalarni sotish yoki ular bilan muomala qilish",
+    "category": "vocab 8 (1-15)",
+    "grammar_pattern": null,
+    "id": "v8-013",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": [],
+    "hint": "He was sent to prison for selling drugs."
+  },
+  {
+    "english": "Looting",
+    "uzbek": "talonchilik",
+    "category": "vocab 8 (1-15)",
+    "grammar_pattern": null,
+    "id": "v8-014",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": [],
+    "hint": "After the storm, there was looting in the shops."
+  },
+  {
+    "english": "Looter",
+    "uzbek": "talonchi",
+    "category": "vocab 8 (1-15)",
+    "grammar_pattern": null,
+    "id": "v8-015",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": [],
+    "hint": "Looters took everything from the store."
+  },
+  {
+    "english": "To loot",
+    "uzbek": "talon-taroj qilish",
+    "category": "vocab 8 (16-30)",
+    "grammar_pattern": null,
+    "id": "v8-016",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The crowd began to loot the shops."
+  },
+  {
+    "english": "Mugging",
+    "uzbek": "ko'cha bezorligi",
+    "category": "vocab 8 (16-30)",
+    "grammar_pattern": null,
+    "id": "v8-017",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": [],
+    "hint": "Muggings often happen after dark."
+  },
+  {
+    "english": "Mugger",
+    "uzbek": "ko'cha bezorisi",
+    "category": "vocab 8 (16-30)",
+    "grammar_pattern": null,
+    "id": "v8-018",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": [],
+    "hint": "A mugger stole her bag in the street."
+  },
+  {
+    "english": "To mug smb",
+    "uzbek": "kimnidir ko'chada talon-taroj qilish",
+    "category": "vocab 8 (16-30)",
+    "grammar_pattern": null,
+    "id": "v8-019",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": [],
+    "hint": "Someone tried to mug him near the station."
+  },
+  {
+    "english": "Murder",
+    "uzbek": "qotillik",
+    "category": "vocab 8 (16-30)",
+    "grammar_pattern": null,
+    "id": "v8-020",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The police are investigating a murder."
+  },
+  {
+    "english": "Murderer",
+    "uzbek": "qotil",
+    "category": "vocab 8 (16-30)",
+    "grammar_pattern": null,
+    "id": "v8-021",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The murderer was sentenced to life in prison."
+  },
+  {
+    "english": "To murder smb",
+    "uzbek": "birovni o'ldirish",
+    "category": "vocab 8 (16-30)",
+    "grammar_pattern": null,
+    "id": "v8-022",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": [],
+    "hint": "He was accused of murdering his business partner."
+  },
+  {
+    "english": "Robbery",
+    "uzbek": "o'g'irlik (joyni yoki odamni)",
+    "category": "vocab 8 (16-30)",
+    "grammar_pattern": null,
+    "id": "v8-023",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": [],
+    "hint": "There was a bank robbery downtown this morning."
+  },
+  {
+    "english": "Robber",
+    "uzbek": "o'g'ri (joyni yoki odamni)",
+    "category": "vocab 8 (16-30)",
+    "grammar_pattern": null,
+    "id": "v8-024",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The robbers escaped with a lot of money."
+  },
+  {
+    "english": "To rob",
+    "uzbek": "o'g'irlamoq",
+    "category": "vocab 8 (16-30)",
+    "grammar_pattern": "rob sb of sth",
+    "id": "v8-025",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": [],
+    "hint": "Two men robbed the bank in broad daylight."
+  },
+  {
+    "english": "Shoplifting",
+    "uzbek": "do'kon o'g'irligi",
+    "category": "vocab 8 (16-30)",
+    "grammar_pattern": null,
+    "id": "v8-026",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The store loses money because of shoplifting."
+  },
+  {
+    "english": "Shoplifter",
+    "uzbek": "do'kon o'g'risi",
+    "category": "vocab 8 (16-30)",
+    "grammar_pattern": null,
+    "id": "v8-027",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": [],
+    "hint": "A shoplifter was caught hiding items in his coat."
+  },
+  {
+    "english": "To steal",
+    "uzbek": "o'g'irlamoq",
+    "category": "vocab 8 (16-30)",
+    "grammar_pattern": "steal sth from sb",
+    "id": "v8-028",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.3,
+    "definition": null,
+    "synonyms": [],
+    "hint": "Someone stole my bike from outside the shop."
+  },
+  {
+    "english": "To shoplift",
+    "uzbek": "do'kondan o'g'irlamoq",
+    "category": "vocab 8 (16-30)",
+    "grammar_pattern": null,
+    "id": "v8-029",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": [],
+    "hint": "She was caught trying to shoplift a jacket."
+  },
+  {
+    "english": "Smuggling",
+    "uzbek": "kontrabanda (noqonuniy olib kirish yoki eksport qilish)",
+    "category": "vocab 8 (16-30)",
+    "grammar_pattern": null,
+    "id": "v8-030",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": [],
+    "hint": "They were arrested for smuggling."
+  },
+  {
+    "english": "Smuggler",
+    "uzbek": "kontrabanda bilan shug'ullanuvchi kishi",
+    "category": "vocab 8 (31-45)",
+    "grammar_pattern": null,
+    "id": "v8-031",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The smugglers hid the goods in a truck."
+  },
+  {
+    "english": "To smuggle",
+    "uzbek": "kontrabanda bilan shug'ullanmoq",
+    "category": "vocab 8 (31-45)",
+    "grammar_pattern": null,
+    "id": "v8-032",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": [],
+    "hint": "They tried to smuggle cigarettes across the border."
+  },
+  {
+    "english": "Theft",
+    "uzbek": "o'g'irlik",
+    "category": "vocab 8 (31-45)",
+    "grammar_pattern": null,
+    "id": "v8-033",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": [],
+    "hint": "He reported the theft of his phone to the police."
+  },
+  {
+    "english": "Thief",
+    "uzbek": "o'g'ri",
+    "category": "vocab 8 (31-45)",
+    "grammar_pattern": null,
+    "id": "v8-034",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.3,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The thief ran off with her purse."
+  },
+  {
+    "english": "Vandalism",
+    "uzbek": "vandalizm (jamoat joylaridagi narsalarni ataylab buzish)",
+    "category": "vocab 8 (31-45)",
+    "grammar_pattern": null,
+    "id": "v8-035",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The park was closed because of vandalism."
+  },
+  {
+    "english": "Vandal",
+    "uzbek": "mol-mulkni ataylab buzuvchi shaxs",
+    "category": "vocab 8 (31-45)",
+    "grammar_pattern": null,
+    "id": "v8-036",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": [],
+    "hint": "Vandals broke all the windows of the school."
+  },
+  {
+    "english": "To vandalise",
+    "uzbek": "ataylab yoki bema'ni ravishda buzish (tarixiy obidalarni)",
+    "category": "vocab 8 (31-45)",
+    "grammar_pattern": null,
+    "id": "v8-037",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.6,
+    "definition": null,
+    "synonyms": [],
+    "hint": "Someone vandalised the statue in the square."
+  },
+  {
+    "english": "Appeal for",
+    "uzbek": "murojaat qilmoq",
+    "category": "vocab 8 (31-45)",
+    "grammar_pattern": null,
+    "id": "v8-038",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The police appealed for witnesses to come forward."
+  },
+  {
+    "english": "Witness",
+    "uzbek": "guvoh",
+    "category": "vocab 8 (31-45)",
+    "grammar_pattern": null,
+    "id": "v8-039",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.3,
+    "definition": null,
+    "synonyms": [],
+    "hint": "A witness saw the whole accident."
+  },
+  {
+    "english": "Identify",
+    "uzbek": "aniqlamoq",
+    "category": "vocab 8 (31-45)",
+    "grammar_pattern": null,
+    "id": "v8-040",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": [],
+    "hint": "Can you identify the man who took your bag?"
+  },
+  {
+    "english": "Patrol",
+    "uzbek": "qo'riqlamoq, patrul qilmoq",
+    "category": "vocab 8 (31-45)",
+    "grammar_pattern": null,
+    "id": "v8-041",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": [],
+    "hint": "Police officers patrol the streets at night."
+  },
+  {
+    "english": "Suspect",
+    "uzbek": "shubhali shaxs, gumondor",
+    "category": "vocab 8 (31-45)",
+    "grammar_pattern": null,
+    "id": "v8-042",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The police have arrested a suspect."
+  },
+  {
+    "english": "Make an arrest",
+    "uzbek": "hibsga olmoq",
+    "category": "vocab 8 (31-45)",
+    "grammar_pattern": null,
+    "id": "v8-043",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The officers made an arrest at the scene."
+  },
+  {
+    "english": "CCTV footage",
+    "uzbek": "kamera tasvirlari",
+    "category": "vocab 8 (31-45)",
+    "grammar_pattern": null,
+    "id": "v8-044",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The CCTV footage showed the thief clearly."
+  },
+  {
+    "english": "Culprit",
+    "uzbek": "aybdor shaxs",
+    "category": "vocab 8 (31-45)",
+    "grammar_pattern": null,
+    "id": "v8-045",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The police are still looking for the culprit."
+  },
+  {
+    "english": "Drug-smuggling",
+    "uzbek": "giyohvand moddalar kontrabandasi",
+    "category": "vocab 8 (46-55)",
+    "grammar_pattern": null,
+    "id": "v8-046",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": [],
+    "hint": "He was jailed for drug-smuggling."
+  },
+  {
+    "english": "Prevent",
+    "uzbek": "oldini olmoq",
+    "category": "vocab 8 (46-55)",
+    "grammar_pattern": "prevent sb from doing sth",
+    "id": "v8-047",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": [],
+    "hint": "Locks help prevent thieves from getting in."
+  },
+  {
+    "english": "Frightening",
+    "uzbek": "qo'rqituvchi",
+    "category": "vocab 8 (46-55)",
+    "grammar_pattern": null,
+    "id": "v8-048",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": [],
+    "hint": "It was a frightening experience for everyone."
+  },
+  {
+    "english": "Victim",
+    "uzbek": "qurbon",
+    "category": "vocab 8 (46-55)",
+    "grammar_pattern": null,
+    "id": "v8-049",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.3,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The victim was taken to hospital."
+  },
+  {
+    "english": "Report",
+    "uzbek": "hisobot",
+    "category": "vocab 8 (46-55)",
+    "grammar_pattern": null,
+    "id": "v8-050",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.3,
+    "definition": null,
+    "synonyms": [],
+    "hint": "You should report the theft to the police."
+  },
+  {
+    "english": "End up",
+    "uzbek": "yakun topmoq",
+    "category": "vocab 8 (46-55)",
+    "grammar_pattern": "end up doing sth",
+    "id": "v8-051",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": [],
+    "hint": "If you steal, you could end up in prison."
+  },
+  {
+    "english": "Passer-by",
+    "uzbek": "yo'lovchi, o'tkinchi",
+    "category": "vocab 8 (46-55)",
+    "grammar_pattern": null,
+    "id": "v8-052",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.5,
+    "definition": null,
+    "synonyms": [],
+    "hint": "A passer-by called the police."
+  },
+  {
+    "english": "Run off",
+    "uzbek": "qochib ketmoq",
+    "category": "vocab 8 (46-55)",
+    "grammar_pattern": null,
+    "id": "v8-053",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The thief ran off before the police arrived."
+  },
+  {
+    "english": "Launch",
+    "uzbek": "boshlamoq, ishga tushirmoq",
+    "category": "vocab 8 (46-55)",
+    "grammar_pattern": null,
+    "id": "v8-054",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The police launched an investigation into the robbery."
+  },
+  {
+    "english": "Take place",
+    "uzbek": "sodir bo'lmoq",
+    "category": "vocab 8 (46-55)",
+    "grammar_pattern": null,
+    "id": "v8-055",
+    "last_shown": null,
+    "correct_answers": 0,
+    "total_answers": 0,
+    "complexity": 0.4,
+    "definition": null,
+    "synonyms": [],
+    "hint": "The robbery took place at midnight."
   }
 ]

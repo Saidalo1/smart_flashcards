@@ -11414,8 +11414,8 @@
         }
     },
     "whereas": {
-        "correct": 5,
-        "incorrect": 1,
+        "correct": 8,
+        "incorrect": 2,
         "translation": {
             "correct": 0,
             "incorrect": 0,
@@ -11435,9 +11435,9 @@
             "errors_in_row": 0
         },
         "translation_mc": {
-            "correct": 0,
-            "incorrect": 0,
-            "streak": 0,
+            "correct": 3,
+            "incorrect": 1,
+            "streak": 1,
             "errors_in_row": 0
         },
         "translation_text": {
@@ -13154,7 +13154,7 @@
         }
     },
     "in contrast": {
-        "correct": 3,
+        "correct": 5,
         "incorrect": 0,
         "translation": {
             "correct": 0,
@@ -13175,9 +13175,9 @@
             "errors_in_row": 0
         },
         "translation_mc": {
-            "correct": 0,
+            "correct": 2,
             "incorrect": 0,
-            "streak": 0,
+            "streak": 2,
             "errors_in_row": 0
         },
         "translation_text": {
@@ -29780,18 +29780,18 @@
         }
     },
     "primary school": {
-        "correct": 0,
+        "correct": 5,
         "incorrect": 0,
         "translation_mc": {
-            "correct": 0,
+            "correct": 3,
             "incorrect": 0,
-            "streak": 0,
+            "streak": 3,
             "errors_in_row": 0
         },
         "translation_text": {
-            "correct": 0,
+            "correct": 2,
             "incorrect": 0,
-            "streak": 0,
+            "streak": 2,
             "errors_in_row": 0
         },
         "definition_mc": {
@@ -30420,12 +30420,12 @@
         }
     },
     "rest": {
-        "correct": 0,
+        "correct": 3,
         "incorrect": 0,
         "translation_mc": {
-            "correct": 0,
+            "correct": 3,
             "incorrect": 0,
-            "streak": 0,
+            "streak": 3,
             "errors_in_row": 0
         },
         "translation_text": {
@@ -33900,18 +33900,18 @@
         }
     },
     "immediately": {
-        "correct": 1,
+        "correct": 6,
         "incorrect": 0,
         "translation_mc": {
-            "correct": 1,
+            "correct": 3,
             "incorrect": 0,
-            "streak": 1,
+            "streak": 3,
             "errors_in_row": 0
         },
         "translation_text": {
-            "correct": 0,
+            "correct": 3,
             "incorrect": 0,
-            "streak": 0,
+            "streak": 3,
             "errors_in_row": 0
         },
         "definition_mc": {
@@ -33980,18 +33980,18 @@
         }
     },
     "donate": {
-        "correct": 2,
+        "correct": 8,
         "incorrect": 0,
         "translation_mc": {
-            "correct": 2,
+            "correct": 3,
             "incorrect": 0,
-            "streak": 2,
+            "streak": 3,
             "errors_in_row": 0
         },
         "translation_text": {
-            "correct": 0,
+            "correct": 5,
             "incorrect": 0,
-            "streak": 0,
+            "streak": 5,
             "errors_in_row": 0
         },
         "definition_mc": {
@@ -36740,6 +36740,1486 @@
         }
     },
     "envelope": {
+        "correct": 0,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "canteen": {
+        "correct": 3,
+        "incorrect": 1,
+        "translation_mc": {
+            "correct": 3,
+            "incorrect": 0,
+            "streak": 3,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 1,
+            "streak": 0,
+            "errors_in_row": 1
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "playground": {
+        "correct": 1,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 1,
+            "incorrect": 0,
+            "streak": 1,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "playing field": {
+        "correct": 2,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 2,
+            "incorrect": 0,
+            "streak": 2,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "staff room": {
+        "correct": 3,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 3,
+            "incorrect": 0,
+            "streak": 3,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "store room": {
+        "correct": 3,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 3,
+            "incorrect": 0,
+            "streak": 3,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "language lab": {
+        "correct": 3,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 3,
+            "incorrect": 0,
+            "streak": 3,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "science lab": {
+        "correct": 2,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 2,
+            "incorrect": 0,
+            "streak": 2,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "foreground": {
+        "correct": 4,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 3,
+            "incorrect": 0,
+            "streak": 3,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 1,
+            "incorrect": 0,
+            "streak": 1,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "background": {
+        "correct": 2,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 2,
+            "incorrect": 0,
+            "streak": 2,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "judge": {
+        "correct": 3,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 3,
+            "incorrect": 0,
+            "streak": 3,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "common": {
+        "correct": 4,
+        "incorrect": 1,
+        "translation_mc": {
+            "correct": 3,
+            "incorrect": 1,
+            "streak": 3,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 1,
+            "incorrect": 0,
+            "streak": 1,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "obvious": {
+        "correct": 3,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 3,
+            "incorrect": 0,
+            "streak": 3,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "unlike": {
+        "correct": 1,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 1,
+            "incorrect": 0,
+            "streak": 1,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "justify": {
+        "correct": 6,
+        "incorrect": 1,
+        "translation_mc": {
+            "correct": 3,
+            "incorrect": 1,
+            "streak": 3,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 3,
+            "incorrect": 0,
+            "streak": 3,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "lead (v)": {
+        "correct": 8,
+        "incorrect": 2,
+        "translation_mc": {
+            "correct": 3,
+            "incorrect": 1,
+            "streak": 3,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 5,
+            "incorrect": 1,
+            "streak": 3,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "point": {
+        "correct": 4,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 3,
+            "incorrect": 0,
+            "streak": 3,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 1,
+            "incorrect": 0,
+            "streak": 1,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "sum up": {
+        "correct": 5,
+        "incorrect": 1,
+        "translation_mc": {
+            "correct": 3,
+            "incorrect": 0,
+            "streak": 3,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 2,
+            "incorrect": 1,
+            "streak": 0,
+            "errors_in_row": 1
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "summarise": {
+        "correct": 6,
+        "incorrect": 1,
+        "translation_mc": {
+            "correct": 5,
+            "incorrect": 1,
+            "streak": 3,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 1,
+            "incorrect": 0,
+            "streak": 1,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "possible": {
+        "correct": 8,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 3,
+            "incorrect": 0,
+            "streak": 3,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 5,
+            "incorrect": 0,
+            "streak": 5,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "deserve": {
+        "correct": 2,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 2,
+            "incorrect": 0,
+            "streak": 2,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "raise money": {
+        "correct": 3,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 3,
+            "incorrect": 0,
+            "streak": 3,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "probably": {
+        "correct": 7,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 3,
+            "incorrect": 0,
+            "streak": 3,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 4,
+            "incorrect": 0,
+            "streak": 4,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "donation": {
+        "correct": 5,
+        "incorrect": 1,
+        "translation_mc": {
+            "correct": 3,
+            "incorrect": 1,
+            "streak": 3,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 2,
+            "incorrect": 0,
+            "streak": 2,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "facility": {
+        "correct": 5,
+        "incorrect": 4,
+        "translation_mc": {
+            "correct": 4,
+            "incorrect": 2,
+            "streak": 3,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 1,
+            "incorrect": 2,
+            "streak": 0,
+            "errors_in_row": 1
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "gift": {
+        "correct": 3,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 3,
+            "incorrect": 0,
+            "streak": 3,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "concession clause": {
+        "correct": 1,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 1,
+            "incorrect": 0,
+            "streak": 1,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "to be in debt": {
+        "correct": 1,
+        "incorrect": 1,
+        "translation_mc": {
+            "correct": 1,
+            "incorrect": 1,
+            "streak": 1,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "replace": {
+        "correct": 2,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 2,
+            "incorrect": 0,
+            "streak": 2,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "improve": {
+        "correct": 2,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 2,
+            "incorrect": 0,
+            "streak": 2,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "terrible": {
+        "correct": 1,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 1,
+            "incorrect": 0,
+            "streak": 1,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "terrified": {
+        "correct": 1,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 1,
+            "incorrect": 0,
+            "streak": 1,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "had a fever": {
+        "correct": 0,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "leaping": {
+        "correct": 0,
+        "incorrect": 1,
+        "translation_mc": {
+            "correct": 0,
+            "incorrect": 1,
+            "streak": 0,
+            "errors_in_row": 1
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "flame": {
+        "correct": 0,
+        "incorrect": 1,
+        "translation_mc": {
+            "correct": 0,
+            "incorrect": 1,
+            "streak": 0,
+            "errors_in_row": 1
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "screaming": {
+        "correct": 0,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "hid": {
+        "correct": 0,
+        "incorrect": 0,
+        "translation_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "translation_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "definition_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_mc": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        },
+        "synonym_text": {
+            "correct": 0,
+            "incorrect": 0,
+            "streak": 0,
+            "errors_in_row": 0
+        }
+    },
+    "suddenly": {
         "correct": 0,
         "incorrect": 0,
         "translation_mc": {

@@ -7,6 +7,6 @@
   "show_notifications": true,
   "topic_weights": {},
   "theme": "dark",
-  "card_position": "mouse",
-  "study_mode": "translation"
+  "card_position": "middle_right",
+  "study_mode": "adaptive"
 }

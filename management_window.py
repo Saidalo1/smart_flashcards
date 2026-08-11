@@ -584,6 +584,10 @@ class ManagementWindow(QDialog):
             'bottom_left': '↙️ Слева снизу',
             'top_right': '↗️ Справа сверху',
             'top_left': '↖️ Слева сверху',
+            'middle_right': '➡️ Справа по центру',
+            'middle_left': '⬅️ Слева по центру',
+            'top_center': '⬆️ Сверху по центру',
+            'bottom_center': '⬇️ Снизу по центру',
             'center': '⏺️ По центру',
             'mouse': '🖱️ У курсора мыши'
         }

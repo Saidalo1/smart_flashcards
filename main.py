@@ -533,8 +533,20 @@ class FlashcardApp:
             x = max(screen_geometry.left() + padding, min(x, screen_geometry.right() - w - padding))
             y = max(screen_geometry.top() + padding, min(y, screen_geometry.bottom() - h - padding))
         elif position == 'center':
-            x = (screen_geometry.width() - widget_size.width()) // 2
-            y = (screen_geometry.height() - widget_size.height()) // 2
+            x = screen_geometry.left() + (screen_geometry.width() - widget_size.width()) // 2
+            y = screen_geometry.top() + (screen_geometry.height() - widget_size.height()) // 2
+        elif position == 'middle_right':
+            x = screen_geometry.right() - widget_size.width() - padding
+            y = screen_geometry.top() + (screen_geometry.height() - widget_size.height()) // 2
+        elif position == 'middle_left':
+            x = screen_geometry.left() + padding
+            y = screen_geometry.top() + (screen_geometry.height() - widget_size.height()) // 2
+        elif position == 'top_center':
+            x = screen_geometry.left() + (screen_geometry.width() - widget_size.width()) // 2
+            y = screen_geometry.top() + padding
+        elif position == 'bottom_center':
+            x = screen_geometry.left() + (screen_geometry.width() - widget_size.width()) // 2
+            y = screen_geometry.bottom() - widget_size.height() - padding
         elif position == 'top_right':
             x = screen_geometry.right() - widget_size.width() - padding
             y = screen_geometry.top() + padding

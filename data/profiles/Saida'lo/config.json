@@ -2,11 +2,11 @@
   "timer_interval": 10,
   "hotkey": "shift_r",
   "active_topics": [
-    "vocab 8 (1-15)"
+    "vocab 11 (1-15)"
   ],
   "show_notifications": true,
   "topic_weights": {},
   "theme": "dark",
   "card_position": "mouse",
-  "study_mode": "adaptive"
+  "study_mode": "translation"
 }

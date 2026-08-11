@@ -200,12 +200,12 @@ class PremiumOptionWidget(QFrame):
 
 
 class GrabOnClickLineEdit(QLineEdit):
-    """QLineEdit that claims X11 keyboard focus when clicked.
+    """QLineEdit that engages the card for typing when clicked.
 
-    In X11 overlay (override-redirect) mode the window manager never assigns
-    keyboard focus to the card, so clicking the field must explicitly grab it
-    (via the supplied callback) for typing to work. Off X11 the callback is a
-    no-op and this behaves like a normal QLineEdit.
+    In X11 overlay (override-redirect) mode the window can't hold keyboard focus,
+    so clicking the field promotes the card to a normal managed window (via the
+    supplied callback) so typing works and survives win+space. Off X11 the
+    callback just focuses the field.
     """
 
     def __init__(self, on_click, parent=None):
@@ -238,24 +238,26 @@ class FlashcardWidget(QFrame):
         # card. Explicit summons (hotkey) pass True to allow typing an answer.
         self._accept_focus = accept_focus
         self._drag_pos = None
-        self._xdisplay = None
 
-        # Can we run as a true X11 override-redirect overlay? Only under the xcb
-        # platform (X11 / XWayland) with python-Xlib available. In that mode the
-        # window manager never manages or focuses the card, which is the only
-        # reliable way on GNOME to stop it grabbing focus on win+space or other
-        # global shortcuts. Keyboard is then claimed explicitly via Xlib.
+        # On Linux under the xcb platform (X11 / XWayland) a PASSIVE overlay is
+        # shown as an override-redirect window so the WM can't hand it focus
+        # unsolicited (e.g. on win+space while you type elsewhere). The moment the
+        # user engages it to type, it is promoted to a normal managed window (see
+        # _promote_to_managed) so it holds focus through global shortcuts.
         self._x11_overlay = False
         try:
             import sys as _sys
             from PyQt6.QtWidgets import QApplication as _QA
             _app = _QA.instance()
-            if _sys.platform.startswith('linux') and _app is not None \
-                    and _app.platformName() == 'xcb':
-                import Xlib  # noqa: F401  — capability probe only
-                self._x11_overlay = True
+            self._x11_overlay = (
+                _sys.platform.startswith('linux')
+                and _app is not None
+                and _app.platformName() == 'xcb'
+            )
         except Exception:
             self._x11_overlay = False
+        # True while the window is an override-redirect (unmanaged) overlay.
+        self._is_bypass = False
 
         # --- Determine study mode for this card ---
         self.study_mode = self._resolve_study_mode()
@@ -353,18 +355,19 @@ class FlashcardWidget(QFrame):
             Qt.WindowType.WindowStaysOnTopHint
             | Qt.WindowType.FramelessWindowHint
         )
-        if self._x11_overlay:
-            # Override-redirect: the WM never manages or focuses this window, so
-            # it can't grab focus off the active app (e.g. on win+space). We
-            # position it ourselves and claim the keyboard explicitly when needed.
+        # Passive timer overlay on X11 -> override-redirect so it never steals
+        # focus. Explicitly-summoned cards (accept_focus) start as normal managed
+        # windows so they can hold keyboard focus through win+space etc.
+        if self._x11_overlay and not self._accept_focus:
             flags |= Qt.WindowType.X11BypassWindowManagerHint
+            self._is_bypass = True
         self.setWindowFlags(flags)
 
         self.setAttribute(Qt.WidgetAttribute.WA_DeleteOnClose)
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
         # Never activate on show — the card must not pull focus off the active
         # app when it appears. You answer it by mouse; keyboard is taken only on
-        # an explicit click into the field or when summoned via the hotkey.
+        # an explicit click into the field (which promotes it) or via the hotkey.
         self.setAttribute(Qt.WidgetAttribute.WA_ShowWithoutActivating)
         if not self._x11_overlay and not self._accept_focus:
             # Non-X11 fallback (native Wayland / other WMs): best-effort hint to
@@ -593,7 +596,7 @@ class FlashcardWidget(QFrame):
     def setup_text_input_ui(self, layout):
         base_mode = self.study_mode.split('_')[0]
         theme = MODE_THEMES.get(base_mode, MODE_THEMES['translation'])
-        self.answer_input = GrabOnClickLineEdit(self._grab_x11_keyboard)
+        self.answer_input = GrabOnClickLineEdit(self._engage_for_typing)
         self.answer_input.setPlaceholderText(theme['placeholder'])
         self.answer_input.returnPressed.connect(self.check_answer)
         layout.addWidget(self.answer_input)
@@ -852,42 +855,61 @@ class FlashcardWidget(QFrame):
         print(f"[HINT] shown overlay at ({margin},{y}) "
               f"size={self.hint_label.width()}x{self.hint_label.height()}")
 
-    def _grab_x11_keyboard(self):
-        """Explicitly claim X11 keyboard focus for this window (X11 overlay mode).
+    def _promote_to_managed(self):
+        """Turn a passive override-redirect overlay into a normal managed window.
 
-        Override-redirect windows are never focused by the WM, so we ask the X
-        server directly. No-op off X11 (native Wayland / Windows).
+        Unmanaged (override-redirect) windows can't hold keyboard focus through
+        global shortcuts — win+space makes the WM push focus to another window.
+        Once the user engages the card to type, drop the override-redirect flag
+        so it becomes a regular focusable window that keeps focus like any app.
         """
-        if not self._x11_overlay:
+        if not self._is_bypass:
             return
-        try:
-            from Xlib import display, X
-            if self._xdisplay is None:
-                self._xdisplay = display.Display()
-            xwin = self._xdisplay.create_resource_object('window', int(self.winId()))
-            self._xdisplay.set_input_focus(xwin, X.RevertToParent, X.CurrentTime)
-            self._xdisplay.sync()
-        except Exception as e:
-            print(f"[x11 overlay] keyboard grab failed: {e}")
+        self._is_bypass = False
+        pos = self.pos()
+        # NOTE: deliberately NO WindowStaysOnTopHint here. A managed always-on-top
+        # window steals focus on win+space in GNOME/XWayland (the very bug we're
+        # fighting). As a plain managed window it stays on top while focused (you
+        # are answering it) and simply drops behind — without grabbing focus —
+        # once you click away.
+        self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
+        # setWindowFlags() unmaps the window; restore position and re-show.
+        self.move(pos)
+        self.show()
+        self.activateWindow()
+        self.raise_()
+
+    def _engage_for_typing(self):
+        """User clicked the answer field — make the card typable.
+
+        For a passive X11 overlay this promotes it to a managed window first
+        (deferred so the current click finishes), then focuses the field.
+        """
+        if self._is_bypass:
+            QTimer.singleShot(0, self._do_engage)
+        else:
+            self.focus_answer_input()
+
+    def _do_engage(self):
+        self._promote_to_managed()
+        self.activateWindow()
+        self.focus_answer_input()
 
     def focus_answer_input(self):
-        """Gives keyboard focus to the answer field (text modes only).
-
-        Called only when the card is summoned explicitly (hotkey / menu), so the
-        automatic pinned-overlay case never steals the keyboard.
-        """
+        """Gives keyboard focus to the answer field (text modes only)."""
         if not self.is_multiple_choice and hasattr(self, 'answer_input'):
             self.answer_input.setFocus()
 
     def summon_focus(self):
-        """Bring the card to attention and give it the keyboard.
+        """Explicit trigger (hotkey / menu): bring to front and give it the keyboard.
 
-        Used only for explicit triggers (hotkey / menu): raise it, claim the X11
-        keyboard (override-redirect windows won't get it from the WM), and focus
-        the answer field so you can type immediately.
+        Promotes a passive overlay to a managed window if needed, then activates
+        and focuses the answer field so you can type immediately — and, being
+        managed, it holds focus through win+space.
         """
+        self._promote_to_managed()
         self.activateWindow()
-        self._grab_x11_keyboard()
+        self.raise_()
         self.focus_answer_input()
 
     def request_delete(self):
@@ -938,11 +960,5 @@ class FlashcardWidget(QFrame):
         event.accept()
 
     def closeEvent(self, event):
-        if self._xdisplay is not None:
-            try:
-                self._xdisplay.close()
-            except Exception:
-                pass
-            self._xdisplay = None
         self.closed.emit()
         super().closeEvent(event)

@@ -159,7 +159,7 @@ class FlashcardApp:
         self.next_card_action = QAction(f"▶️ Следующая карточка ({hotkey})")
         self.next_card_action.triggered.connect(self.force_show_flashcard)
 
-        self.switch_user_action = QAction("🔄 Сменить пользователя")
+        self.switch_user_action = QAction("🏠 Главное меню")
         self.switch_user_action.triggered.connect(self.switch_user)
 
         self.quit_action = QAction("❌ Выход")

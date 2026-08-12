@@ -249,3 +249,11 @@ data/models/similarity_model/model.safetensors
 # Installer build output
 installer_output/
 *.exe
+# build artifacts & runtime
+build/
+dist/
+*.log
+data/language.txt
+
+# app runtime language pref
+data/language.txt

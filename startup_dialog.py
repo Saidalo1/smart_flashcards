@@ -594,6 +594,7 @@ class StartupDialog(QDialog):
         self.profile_list = QListWidget()
         self.profile_list.itemDoubleClicked.connect(self.select_and_continue)
         self.profile_list.currentItemChanged.connect(self._on_profile_selection_changed)
+        self.profile_list.setMaximumHeight(150)  # profiles rarely need much room
         layout.addWidget(self.profile_list)
         
         # New profile section
@@ -645,11 +646,12 @@ class StartupDialog(QDialog):
             self.topics_tree.setRootIsDecorated(True)
             self.topics_tree.setAnimated(True)
             self.topics_tree.setIndentation(24)
+            self.topics_tree.setMinimumHeight(240)
             self.topics_tree.itemChanged.connect(self._on_topic_item_changed)
 
             self._build_topics_tree()
 
-            topics_layout.addWidget(self.topics_tree)
+            topics_layout.addWidget(self.topics_tree, 1)
 
             self.empty_topics_label = QLabel(tr('empty_topics'))
             self.empty_topics_label.setObjectName("subtitleLabel")
@@ -657,7 +659,7 @@ class StartupDialog(QDialog):
             topics_layout.addWidget(self.empty_topics_label)
 
             self._update_empty_state()
-            layout.addWidget(topics_frame)
+            layout.addWidget(topics_frame, 1)   # topics get the extra vertical space
 
         # Study mode selector
         mode_frame = QFrame()

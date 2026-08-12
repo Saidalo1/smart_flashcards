@@ -18,16 +18,21 @@ def setup_logging():
     log_dir.mkdir(parents=True, exist_ok=True)
     log_file = log_dir / 'app.log'
 
+    # In a windowed PyInstaller build (console=False) sys.stdout/err are None, so a
+    # StreamHandler(None) would fail on every record and recurse into "Logging error".
+    # Only attach a console handler when there really is a console.
+    handlers = [logging.FileHandler(str(log_file), encoding='utf-8')]
+    if sys.stdout is not None:
+        handlers.append(logging.StreamHandler(sys.stdout))
+
     logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s [%(levelname)s] %(message)s',
-        handlers=[
-            logging.FileHandler(str(log_file), encoding='utf-8'),
-            logging.StreamHandler(sys.stdout),
-        ]
+        handlers=handlers,
     )
 
-    # Redirect print statements to logger
+    # Redirect print()/errors into the logger so the app's many print() calls keep
+    # working even without a console (where sys.stdout/err are None).
     sys.stdout = LoggerWriter(logging.getLogger(), logging.INFO)
     sys.stderr = LoggerWriter(logging.getLogger(), logging.ERROR)
 

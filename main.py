@@ -102,12 +102,49 @@ class FlashcardApp:
     """Main application class."""
 
     def __init__(self):
+        # Windows shows the taskbar icon per "AppUserModelID". Without our own id the
+        # button inherits pythonw's (blank) icon even though the tray icon is fine.
+        if sys.platform == 'win32':
+            try:
+                import ctypes
+                ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID('SmartFlashcards.App.1')
+            except Exception:
+                pass
+
         self.app = QApplication(sys.argv)
         self.app.setStyle("Fusion")  # Required: WindowsVista style breaks border-radius rendering
         self.app.setQuitOnLastWindowClosed(False)
 
+        # Build the app icon once and set it app-wide so every window (and the taskbar
+        # button) shows it. The tray icon below reuses the same QIcon.
+        self._app_pixmap = QPixmap()
+        self._app_pixmap.loadFromData(base64.b64decode(icon_b64))
+        self.app_icon = QIcon(self._app_pixmap)
+        self.app.setWindowIcon(self.app_icon)
+
+        # Dark styling for the dropdown list of every QComboBox. Without this, the
+        # opened list is white-on-white on light-themed Windows (only the arrow
+        # glyphs show) — unreadable. Applied app-wide so all combos are covered.
+        self.app.setStyleSheet(self.app.styleSheet() + """
+            QComboBox QAbstractItemView {
+                background-color: #16213e;
+                color: #eaeaea;
+                selection-background-color: #7b2ff7;
+                selection-color: #ffffff;
+                border: 1px solid #0f3460;
+                outline: 0;
+            }
+            QComboBox QAbstractItemView::item { min-height: 26px; padding: 4px 8px; }
+        """)
+
         # Load vocabulary first (needed for startup dialog)
         self.vocabulary = Vocabulary()
+
+        # Very first launch only: ask the interface language up front (audience is
+        # mostly Uzbek friends), then remember it. Skipped on every later launch.
+        from i18n import is_language_chosen
+        if not is_language_chosen():
+            self._ask_language_first_run()
 
         # Show startup dialog for profile selection. It returns RESTART_CODE when
         # the user switches the interface language, so we re-open it localized.
@@ -150,11 +187,8 @@ class FlashcardApp:
         self.management_window = None
         self.next_question_is_mc = True
 
-        # Setup System Tray
-        pixmap = QPixmap()
-        pixmap.loadFromData(base64.b64decode(icon_b64))
-        icon = QIcon(pixmap)
-        self.tray_icon = QSystemTrayIcon(icon, self.app)
+        # Setup System Tray (reuse the app-wide icon built above)
+        self.tray_icon = QSystemTrayIcon(self.app_icon, self.app)
         hotkey = self.config_manager.hotkey
         self.tray_icon.setToolTip(f"{APP_NAME} — {username} (Press {hotkey})")
 
@@ -576,16 +610,64 @@ class FlashcardApp:
             )
         QTimer.singleShot(100, self.show_flashcard)
 
+    def _ask_language_first_run(self):
+        """First launch only: a small three-button interface-language picker."""
+        from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLabel, QPushButton
+        from PyQt6.QtCore import Qt
+        from i18n import LANGUAGES, set_language
+
+        dlg = QDialog()
+        dlg.setWindowTitle("Til / Язык / Language")
+        dlg.setWindowIcon(self.app_icon)
+        dlg.setModal(True)
+        dlg.setStyleSheet("""
+            QDialog { background-color: #1a1a2e; }
+            QLabel { color: #eaeaea; }
+            QPushButton {
+                background-color: #16213e; color: #eaeaea;
+                border: 1px solid #0f3460; border-radius: 10px;
+                padding: 12px 18px; font-size: 14px;
+            }
+            QPushButton:hover { background-color: #0f3460; border-color: #7b2ff7; }
+        """)
+
+        lay = QVBoxLayout(dlg)
+        lay.setContentsMargins(28, 24, 28, 24)
+        lay.setSpacing(14)
+
+        title = QLabel("🌐  Tilni tanlang · Выберите язык · Choose language")
+        title.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        title.setStyleSheet("font-size: 15px; font-weight: bold;")
+        lay.addWidget(title)
+
+        # Uzbek first (main audience), then Russian, then English.
+        for code in ('uz', 'ru', 'en'):
+            btn = QPushButton(LANGUAGES[code])
+            btn.clicked.connect(lambda _=False, c=code: (set_language(c), dlg.accept()))
+            lay.addWidget(btn)
+
+        dlg.exec()
+
     def show_management_window(self):
+        # Guard against a second click spawning a duplicate: if the window is already
+        # open, just bring it to the front instead of opening another one.
+        if self.management_window is not None:
+            self.management_window.raise_()
+            self.management_window.activateWindow()
+            return
+
         print("Opening management window...")
         self.timer.stop()
 
-        dialog = ManagementWindow(
+        self.management_window = ManagementWindow(
             self.vocabulary,
             self.stats_manager,
             self.config_manager
         )
-        dialog.exec()
+        try:
+            self.management_window.exec()
+        finally:
+            self.management_window = None
 
         # Apply any settings changed in the window without needing a restart.
         # (semantic_grading on/off still needs a restart to load/unload the model.)
@@ -605,9 +687,21 @@ class FlashcardApp:
         # Clear last user to force profile selection
         profile_manager.set_last_user("")
 
-        # Restart the app
+        # Relaunch the app. In a onefile PyInstaller build the running process sets
+        # _MEIPASS2 in the environment; if a freshly spawned copy inherits it, its
+        # bootloader thinks it's already unpacked and dies with "Failed to start
+        # embedded python interpreter" (+ "Failed to remove temporary directory").
+        # Strip it so the child extracts into its own _MEI dir. Also sys.argv[0] is
+        # already the exe when frozen, so relaunch with argv[1:] to avoid passing the
+        # exe path as an argument.
         import subprocess
-        subprocess.Popen([sys.executable] + sys.argv)
+        env = os.environ.copy()
+        env.pop('_MEIPASS2', None)
+        if getattr(sys, 'frozen', False):
+            args = [sys.executable] + sys.argv[1:]
+        else:
+            args = [sys.executable] + sys.argv
+        subprocess.Popen(args, env=env, close_fds=True)
         self.app.quit()
 
     def position_widget(self, widget):
@@ -723,9 +817,20 @@ def prefer_x11_on_wayland():
 
 
 def exception_hook(exctype, value, traceback):
-    """Принудительно выводит нормальный Traceback ошибки в консоль, минуя глушилки Qt"""
+    """Logs an uncaught exception, then exits.
+
+    In a windowed PyInstaller build (console=False) sys.__stderr__ is None, so
+    writing to it would itself raise and hide the real error. Route through the
+    logging file handler (always present) and only touch stderr if it exists.
+    """
     import traceback as tb
-    sys.__stderr__.write("".join(tb.format_exception(exctype, value, traceback)))
+    text = "".join(tb.format_exception(exctype, value, traceback))
+    try:
+        logging.critical("Uncaught exception:\n%s", text)
+    except Exception:
+        pass
+    if sys.__stderr__ is not None:
+        sys.__stderr__.write(text)
     sys.exit(1)
 
 

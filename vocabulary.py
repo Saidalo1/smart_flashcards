@@ -308,11 +308,12 @@ class Vocabulary:
             print(f"[OPTIONS] No category - using all {len(same_category_words)} words")
         
         if len(same_category_words) < 4:
-            # Fall back to all words if not enough in category
-            print(f"[OPTIONS] WARNING: Falling back to all words!")
+            # Widen the distractor pool to all words. If there still aren't 4,
+            # show whatever options exist (even a single one) rather than nothing.
+            print(f"[OPTIONS] Few words in category — widening to all words.")
             same_category_words = self.words
-            if len(same_category_words) < 4:
-                return []
+        if not same_category_words:
+            return []
 
         correct_answer = correct_card[language]
         options = {correct_answer}

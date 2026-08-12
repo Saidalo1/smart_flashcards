@@ -546,7 +546,7 @@ class StartupDialog(QDialog):
         self.selected_topics = []
 
         self.setWindowTitle("Smart Flashcards")
-        self.setMinimumSize(500, 700)
+        self.setMinimumSize(500, 640)
         self.setStyleSheet(STARTUP_STYLE)
 
         self.init_ui()
@@ -590,13 +590,23 @@ class StartupDialog(QDialog):
         subtitle.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(subtitle)
         
-        # Profile list
+        # Profile list. Its height is fitted to the number of profiles (see
+        # _fit_profile_list_height) so 2 profiles don't get a scrollbar while 1 topic
+        # leaves a huge gap — the two areas stay visually balanced.
         self.profile_list = QListWidget()
         self.profile_list.itemDoubleClicked.connect(self.select_and_continue)
         self.profile_list.currentItemChanged.connect(self._on_profile_selection_changed)
-        self.profile_list.setMaximumHeight(150)  # profiles rarely need much room
         layout.addWidget(self.profile_list)
-        
+
+        # Delete-profile button (acts on the selected profile, with confirmation).
+        del_row = QHBoxLayout()
+        del_row.addStretch()
+        self.delete_profile_btn = QPushButton(tr('del_profile_btn'))
+        self.delete_profile_btn.setObjectName("secondaryButton")
+        self.delete_profile_btn.clicked.connect(self._delete_selected_profile)
+        del_row.addWidget(self.delete_profile_btn)
+        layout.addLayout(del_row)
+
         # New profile section
         new_profile_frame = QFrame()
         new_profile_frame.setObjectName("card")
@@ -646,7 +656,7 @@ class StartupDialog(QDialog):
             self.topics_tree.setRootIsDecorated(True)
             self.topics_tree.setAnimated(True)
             self.topics_tree.setIndentation(24)
-            self.topics_tree.setMinimumHeight(240)
+            self.topics_tree.setMinimumHeight(160)
             self.topics_tree.itemChanged.connect(self._on_topic_item_changed)
 
             self._build_topics_tree()
@@ -778,12 +788,39 @@ class StartupDialog(QDialog):
 
         self.topics_tree.blockSignals(False)
     
+    def _fit_profile_list_height(self):
+        """Sizes the profile list to its contents (up to 5 rows) so a couple of
+        profiles fit without a scrollbar, and only long lists scroll."""
+        count = self.profile_list.count()
+        row_h = self.profile_list.sizeHintForRow(0) if count else 0
+        if row_h <= 0:
+            row_h = 40  # sensible fallback before rows are measured
+        visible = min(max(count, 1), 5)
+        frame = 2 * self.profile_list.frameWidth() + 6
+        self.profile_list.setFixedHeight(row_h * visible + frame)
+
+    def _delete_selected_profile(self):
+        """Deletes the currently selected profile after confirmation."""
+        item = self.profile_list.currentItem()
+        if not item:
+            QMessageBox.warning(self, tr('err_title'), tr('err_select_profile'))
+            return
+        name = item.data(Qt.ItemDataRole.UserRole)
+        reply = QMessageBox.question(
+            self, tr('confirm_title'), tr('del_profile_confirm', name=name),
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+            QMessageBox.StandardButton.No,
+        )
+        if reply == QMessageBox.StandardButton.Yes:
+            profile_manager.delete_profile(name)
+            self.load_profiles()
+
     def load_profiles(self):
         """Loads existing profiles into the list."""
         self.profile_list.clear()
         profiles = profile_manager.get_all_profiles()
         last_user = profile_manager.get_last_user()
-        
+
         for profile in profiles:
             item = QListWidgetItem(f"👤 {profile}")
             item.setData(Qt.ItemDataRole.UserRole, profile)
@@ -791,6 +828,8 @@ class StartupDialog(QDialog):
             if profile == last_user:
                 item.setSelected(True)
                 self.profile_list.setCurrentItem(item)
+
+        self._fit_profile_list_height()
     
     def create_new_profile(self):
         """Creates a new profile and selects it."""

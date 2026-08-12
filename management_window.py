@@ -1044,12 +1044,21 @@ class ManagementWindow(QDialog):
             super().keyPressEvent(event)
 
     def _request_restart(self):
-        """Restarts the application."""
+        """Restarts the application (onefile-safe relaunch)."""
+        import os
         import sys
         import subprocess
         from PyQt6.QtWidgets import QApplication
         self.close()
-        subprocess.Popen([sys.executable] + sys.argv)
+        # See main.FlashcardApp.switch_user: strip _MEIPASS2 and drop argv[0] so the
+        # onefile bootloader in the child doesn't fail to start.
+        env = os.environ.copy()
+        env.pop('_MEIPASS2', None)
+        if getattr(sys, 'frozen', False):
+            args = [sys.executable] + sys.argv[1:]
+        else:
+            args = [sys.executable] + sys.argv
+        subprocess.Popen(args, env=env, close_fds=True)
         QApplication.instance().quit()
 
 

@@ -38,6 +38,10 @@ STRINGS = {
     'err_select_profile': {'ru': 'Выберите или создайте профиль!', 'uz': 'Profil tanlang yoki yarating!', 'en': 'Select or create a profile!'},
     'err_enter_name':     {'ru': 'Введите имя профиля!',      'uz': 'Profil nomini kiriting!',            'en': 'Enter a profile name!'},
     'err_profile_exists': {'ru': "Профиль '{name}' уже существует!", 'uz': "'{name}' profili allaqachon mavjud!", 'en': "Profile '{name}' already exists!"},
+    'del_profile_btn':    {'ru': '🗑 Удалить профиль',      'uz': "🗑 Profilni o'chirish",              'en': '🗑 Delete profile'},
+    'del_profile_confirm':{'ru': "Удалить профиль '<b>{name}</b>' и все его данные?",
+                           'uz': "'<b>{name}</b>' profili va barcha ma'lumotlari o'chirilsinmi?",
+                           'en': "Delete profile '<b>{name}</b>' and all its data?"},
 
     # ---------------- Tray menu ----------------
     'tray_manage':        {'ru': '📚 Управление...',          'uz': '📚 Boshqaruv...',                    'en': '📚 Manage...'},
@@ -166,6 +170,14 @@ STRINGS = {
 
 def _lang_file():
     return get_data_dir() / 'language.txt'
+
+
+def is_language_chosen():
+    """True if the user has already picked a language (the file exists).
+
+    Used to show a one-time language picker on the very first launch.
+    """
+    return _lang_file().exists()
 
 
 def get_language():

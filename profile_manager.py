@@ -70,3 +70,16 @@ def create_profile(username):
 def profile_exists(username):
     """Checks if a profile exists."""
     return get_profile_path(username).exists()
+
+
+def delete_profile(username):
+    """Deletes a profile and all its data. Returns True if something was removed."""
+    import shutil
+    path = get_profile_path(username)
+    if not path.exists():
+        return False
+    shutil.rmtree(path, ignore_errors=True)
+    # If we just deleted the remembered profile, forget it too.
+    if get_last_user() == username:
+        set_last_user("")
+    return True

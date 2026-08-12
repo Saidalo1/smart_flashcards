@@ -200,6 +200,49 @@ class Vocabulary:
         print(f"Added word: {english}")
         return True
 
+    def add_words_to_topic(self, category, pairs, default_complexity=0.5):
+        """Adds several words under one topic/category at once.
+
+        `pairs` is an iterable of dicts with at least 'english' (and usually
+        'uzbek'). Optional per-row keys: 'hint', 'definition', 'grammar_pattern',
+        'synonyms' (a list, or a comma-separated string). Duplicate English words
+        (case-insensitive) are skipped. Saves once. Returns how many were added.
+        """
+        category = (category or '').strip()
+        existing = {w['english'].lower() for w in self.words}
+        added = 0
+        for row in pairs:
+            english = (row.get('english') or '').strip()
+            uzbek = (row.get('uzbek') or '').strip()
+            if not english or english.lower() in existing:
+                continue
+            hint = (row.get('hint') or '').strip() or None
+            definition = (row.get('definition') or '').strip() or None
+            grammar_pattern = (row.get('grammar_pattern') or '').strip() or None
+            synonyms = row.get('synonyms') or []
+            if isinstance(synonyms, str):
+                synonyms = [s.strip() for s in synonyms.split(',') if s.strip()]
+            self.words.append({
+                "english": english,
+                "uzbek": uzbek,
+                "category": category,
+                "grammar_pattern": grammar_pattern,
+                "id": str(uuid.uuid4()),
+                "last_shown": None,
+                "correct_answers": 0,
+                "total_answers": 0,
+                "complexity": default_complexity,
+                "definition": definition,
+                "synonyms": synonyms,
+                "hint": hint,
+            })
+            existing.add(english.lower())
+            added += 1
+        if added:
+            self.save_words()
+        print(f"Added {added} word(s) to topic '{category}'.")
+        return added
+
     def update_word(self, old_english, new_english, new_uzbek):
         """Updates an existing word."""
         for word in self.words:

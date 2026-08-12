@@ -179,6 +179,356 @@ QHeaderView::section {
 """
 
 
+ADD_TOPIC_TABLE_STYLE = """
+QTableWidget {
+    background: #1e2235;
+    border: 1px solid #2a2e45;
+    border-radius: 10px;
+    color: #eee;
+    font-size: 14px;
+    gridline-color: #454d76;
+}
+QTableWidget::item {
+    padding: 6px;
+    border-bottom: 1px solid #353c5e;
+}
+QTableWidget::item:selected { background: #1a4a5a; }
+/* The inline cell editor is a QLineEdit — override the big global padding so
+   text isn't clipped inside the short row while typing. */
+QTableWidget QLineEdit {
+    padding: 4px 8px;
+    margin: 0;
+    min-height: 26px;
+    border: 2px solid #00d9ff;
+    border-radius: 0;
+    background: #232842;
+    color: #fff;
+    font-size: 14px;
+}
+QHeaderView::section {
+    background: #252a40;
+    color: #9fb0c3;
+    border: none;
+    padding: 8px;
+    font-weight: 600;
+}
+QComboBox {
+    background: #1e2235;
+    border: 2px solid #2a2e45;
+    border-radius: 10px;
+    padding: 10px 14px;
+    color: #fff;
+    font-size: 15px;
+}
+QComboBox:focus { border: 2px solid #00d9ff; }
+QComboBox::drop-down { border: none; width: 28px; }
+QComboBox QAbstractItemView {
+    background: #1e2235;
+    border: 1px solid #2a2e45;
+    color: #fff;
+    selection-background-color: #1a4a5a;
+    outline: none;
+}
+QPushButton#segButton {
+    background: #252a40;
+    color: #9fb0c3;
+    border: 1px solid #2a2e45;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+}
+QPushButton#segButton:hover { background: #2a3050; }
+QPushButton#segButton:checked {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #667eea, stop:1 #764ba2);
+    color: white;
+    border-color: transparent;
+}
+"""
+
+
+class _HelpIcon(QLabel):
+    """A small '?' badge that explains a term on hover — for non-obvious fields."""
+
+    def __init__(self, text, parent=None):
+        super().__init__("?", parent)
+        self.setToolTip(text)
+        self.setCursor(Qt.CursorShape.WhatsThisCursor)
+        self.setFixedSize(18, 18)
+        self.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.setStyleSheet(
+            "QLabel { color:#00d9ff; border:1px solid #00d9ff; border-radius:9px; "
+            "font-size:12px; font-weight:bold; background:transparent; }"
+        )
+
+
+class WordDetailsDialog(QDialog):
+    """Per-word rich fields: definition, synonyms (added one by one), pattern."""
+
+    def __init__(self, english="", data=None, parent=None):
+        super().__init__(parent)
+        from PyQt6.QtWidgets import QListWidget
+        data = data or {}
+        self.setWindowTitle("Детали слова")
+        self.setMinimumWidth(460)
+        self.setStyleSheet(STARTUP_STYLE + ADD_TOPIC_TABLE_STYLE)
+
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(24, 24, 24, 24)
+        layout.setSpacing(12)
+
+        title = QLabel(f"Детали: {english}" if english else "Детали слова")
+        title.setObjectName("titleLabel")
+        title.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(title)
+
+        # Definition
+        layout.addLayout(self._field_header(
+            "Определение (англ.)",
+            "Короткое объяснение слова на английском. Нужно для режима «Определение»."))
+        self.definition_input = QLineEdit(data.get('definition') or '')
+        self.definition_input.setPlaceholderText("напр. to continue having something")
+        layout.addWidget(self.definition_input)
+
+        # Synonyms — added one at a time
+        layout.addLayout(self._field_header(
+            "Синонимы",
+            "Слова с похожим значением. Добавляй по одному кнопкой «＋». "
+            "Нужны для режима «Синонимы»."))
+        syn_row = QHBoxLayout()
+        self.syn_input = QLineEdit()
+        self.syn_input.setPlaceholderText("впиши синоним и нажми ＋ (или Enter)")
+        self.syn_input.returnPressed.connect(self._add_synonym)
+        add_syn = QPushButton("＋")
+        add_syn.setObjectName("secondaryButton")
+        add_syn.setFixedWidth(52)
+        add_syn.clicked.connect(self._add_synonym)
+        syn_row.addWidget(self.syn_input)
+        syn_row.addWidget(add_syn)
+        layout.addLayout(syn_row)
+        self.syn_list = QListWidget()
+        self.syn_list.setMaximumHeight(120)
+        for s in (data.get('synonyms') or []):
+            self.syn_list.addItem(s)
+        self.syn_list.itemDoubleClicked.connect(
+            lambda it: self.syn_list.takeItem(self.syn_list.row(it)))
+        layout.addWidget(self.syn_list)
+        syn_hint = QLabel("Двойной клик по синониму — удалить.")
+        syn_hint.setObjectName("subtitleLabel")
+        layout.addWidget(syn_hint)
+
+        # Pattern
+        layout.addLayout(self._field_header(
+            "Паттерн (сочетание)",
+            "Как слово обычно сочетается в речи: напр. «avoid doing sth», "
+            "«depend on sth». Показывается в заголовке карточки."))
+        self.pattern_input = QLineEdit(data.get('grammar_pattern') or '')
+        self.pattern_input.setPlaceholderText("напр. avoid doing sth")
+        layout.addWidget(self.pattern_input)
+
+        btns = QHBoxLayout()
+        cancel = QPushButton("Отмена")
+        cancel.setObjectName("secondaryButton")
+        cancel.clicked.connect(self.reject)
+        ok = QPushButton("Готово")
+        ok.clicked.connect(self.accept)
+        btns.addWidget(cancel)
+        btns.addStretch()
+        btns.addWidget(ok)
+        layout.addLayout(btns)
+
+    def _field_header(self, label_text, help_text):
+        row = QHBoxLayout()
+        row.setSpacing(6)
+        row.addWidget(QLabel(label_text))
+        row.addWidget(_HelpIcon(help_text))
+        row.addStretch()
+        return row
+
+    def _add_synonym(self):
+        text = self.syn_input.text().strip()
+        if text:
+            self.syn_list.addItem(text)
+            self.syn_input.clear()
+        self.syn_input.setFocus()
+
+    def get_data(self):
+        synonyms = [self.syn_list.item(i).text() for i in range(self.syn_list.count())]
+        return {
+            'definition': self.definition_input.text().strip(),
+            'synonyms': synonyms,
+            'grammar_pattern': self.pattern_input.text().strip(),
+        }
+
+
+class AddTopicDialog(QDialog):
+    """Create a new topic and add words to it — reachable from the main menu."""
+
+    def __init__(self, vocabulary, parent=None):
+        super().__init__(parent)
+        self.vocabulary = vocabulary
+        self.setWindowTitle("Новая тема")
+        self.setMinimumSize(620, 580)
+        self.setStyleSheet(STARTUP_STYLE + ADD_TOPIC_TABLE_STYLE)
+        self._build_ui()
+
+    def _build_ui(self):
+        from PyQt6.QtWidgets import QTableWidget, QHeaderView, QComboBox, QTableWidgetItem
+
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(24, 24, 24, 24)
+        layout.setSpacing(14)
+
+        title = QLabel("➕ Новая тема")
+        title.setObjectName("titleLabel")
+        title.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(title)
+
+        layout.addWidget(QLabel("Название темы"))
+        # Editable combo: pick an existing topic to EXTEND it, or type a new name.
+        self.name_combo = QComboBox()
+        self.name_combo.setEditable(True)
+        self.name_combo.addItems(self.vocabulary.get_all_topics())
+        self.name_combo.setCurrentIndex(-1)
+        self.name_combo.lineEdit().setPlaceholderText("Выбери существующую тему или впиши новую")
+        layout.addWidget(self.name_combo)
+
+        last_topic = self._last_topic()
+        if last_topic:
+            last_label = QLabel(f"↩ Последняя тема: {last_topic}")
+            last_label.setObjectName("subtitleLabel")
+            last_label.setWordWrap(True)
+            layout.addWidget(last_label)
+
+        tip = QLabel("Впишите English и перевод (и, по желанию, подсказку). "
+                     "Кнопка ✎ в строке — определение, синонимы, паттерн. "
+                     "Пустые строки игнорируются.")
+        tip.setObjectName("subtitleLabel")
+        tip.setWordWrap(True)
+        layout.addWidget(tip)
+
+        self.table = QTableWidget(6, 4)
+        self.table.setHorizontalHeaderLabels(
+            ["English", "Перевод", "Подсказка (необязательно)", "✎"])
+        header = self.table.horizontalHeader()
+        header.setSectionResizeMode(0, QHeaderView.ResizeMode.Interactive)
+        header.setSectionResizeMode(1, QHeaderView.ResizeMode.Interactive)
+        header.setSectionResizeMode(2, QHeaderView.ResizeMode.Stretch)
+        header.setSectionResizeMode(3, QHeaderView.ResizeMode.Fixed)
+        self.table.setColumnWidth(0, 150)
+        self.table.setColumnWidth(1, 150)
+        self.table.setColumnWidth(3, 52)
+        self.table.verticalHeader().setVisible(False)
+        self.table.verticalHeader().setDefaultSectionSize(40)
+        for r in range(self.table.rowCount()):
+            self._add_details_button(r)
+        layout.addWidget(self.table)
+
+        row_btns = QHBoxLayout()
+        add_row = QPushButton("➕ Строка")
+        add_row.setObjectName("secondaryButton")
+        add_row.clicked.connect(self._add_row)
+        del_row = QPushButton("➖ Удалить строку")
+        del_row.setObjectName("secondaryButton")
+        del_row.clicked.connect(self._delete_row)
+        row_btns.addWidget(add_row)
+        row_btns.addWidget(del_row)
+        row_btns.addStretch()
+        layout.addLayout(row_btns)
+
+        actions = QHBoxLayout()
+        cancel = QPushButton("Отмена")
+        cancel.setObjectName("secondaryButton")
+        cancel.clicked.connect(self.reject)
+        save = QPushButton("💾 Сохранить")
+        save.clicked.connect(self._save)
+        actions.addWidget(cancel)
+        actions.addStretch()
+        actions.addWidget(save)
+        layout.addLayout(actions)
+
+    def _delete_row(self):
+        row = self.table.currentRow()
+        if row >= 0:
+            self.table.removeRow(row)
+
+    def _add_row(self):
+        r = self.table.rowCount()
+        self.table.insertRow(r)
+        self._add_details_button(r)
+
+    def _add_details_button(self, row):
+        btn = QPushButton("✎")
+        btn.setObjectName("secondaryButton")
+        btn.setCursor(Qt.CursorShape.PointingHandCursor)
+        btn.setToolTip("Определение, синонимы, паттерн")
+        btn.clicked.connect(self._open_details)
+        self.table.setCellWidget(row, 3, btn)
+
+    def _open_details(self):
+        from PyQt6.QtWidgets import QTableWidgetItem
+        btn = self.sender()
+        row = next((r for r in range(self.table.rowCount())
+                    if self.table.cellWidget(r, 3) is btn), -1)
+        if row < 0:
+            return
+        eng_item = self.table.item(row, 0)
+        english = eng_item.text().strip() if eng_item else ""
+        data = eng_item.data(Qt.ItemDataRole.UserRole) if eng_item else None
+        dlg = WordDetailsDialog(english, data, self)
+        if dlg.exec() == QDialog.DialogCode.Accepted:
+            details = dlg.get_data()
+            if eng_item is None:
+                eng_item = QTableWidgetItem("")
+                self.table.setItem(row, 0, eng_item)
+            eng_item.setData(Qt.ItemDataRole.UserRole, details)
+            has_extra = any([details['definition'], details['synonyms'],
+                             details['grammar_pattern']])
+            btn.setText("✎ ✓" if has_extra else "✎")
+
+    def _last_topic(self):
+        """The category of the most recently added word, for quick reference."""
+        for word in reversed(self.vocabulary.get_all_words()):
+            cat = (word.get('category') or '').strip()
+            if cat:
+                return cat
+        return None
+
+    def _save(self):
+        name = self.name_combo.currentText().strip()
+        if not name:
+            QMessageBox.warning(self, "Ошибка", "Введите название темы.")
+            return
+        pairs = []
+        for r in range(self.table.rowCount()):
+            def cell(c):
+                item = self.table.item(r, c)
+                return item.text().strip() if item else ""
+            english = cell(0)
+            if not english:
+                continue
+            row = {"english": english, "uzbek": cell(1), "hint": cell(2)}
+            eng_item = self.table.item(r, 0)
+            details = eng_item.data(Qt.ItemDataRole.UserRole) if eng_item else None
+            if details:
+                row["definition"] = details.get('definition') or ''
+                row["synonyms"] = details.get('synonyms') or []
+                row["grammar_pattern"] = details.get('grammar_pattern') or ''
+            pairs.append(row)
+        if not pairs:
+            QMessageBox.warning(self, "Ошибка", "Добавьте хотя бы одно слово (столбец English).")
+            return
+        added = self.vocabulary.add_words_to_topic(name, pairs)
+        if added:
+            QMessageBox.information(self, "Готово", f"Добавлено слов: {added} в тему «{name}».")
+        else:
+            QMessageBox.information(
+                self, "Готово",
+                "Новых слов не добавлено — возможно, все уже есть в словаре."
+            )
+        self.accept()
+
+
 class StartupDialog(QDialog):
     """Dialog for selecting or creating a user profile at startup."""
     
@@ -249,21 +599,37 @@ class StartupDialog(QDialog):
             topics_layout = QVBoxLayout(topics_frame)
             topics_layout.setSpacing(12)
             
+            topics_header = QHBoxLayout()
             topics_label = QLabel("📚 Выберите темы для изучения")
             topics_label.setObjectName("titleLabel")
             topics_label.setFont(QFont("Segoe UI", 14))
-            topics_layout.addWidget(topics_label)
-            
+            topics_header.addWidget(topics_label)
+            topics_header.addStretch()
+            add_topic_btn = QPushButton("➕ Добавить тему")
+            add_topic_btn.setObjectName("secondaryButton")
+            add_topic_btn.clicked.connect(self.open_add_topic_dialog)
+            topics_header.addWidget(add_topic_btn)
+            topics_layout.addLayout(topics_header)
+
             self.topics_tree = QTreeWidget()
             self.topics_tree.setHeaderHidden(True)
             self.topics_tree.setRootIsDecorated(True)
             self.topics_tree.setAnimated(True)
             self.topics_tree.setIndentation(24)
             self.topics_tree.itemChanged.connect(self._on_topic_item_changed)
-            
+
             self._build_topics_tree()
-            
+
             topics_layout.addWidget(self.topics_tree)
+
+            self.empty_topics_label = QLabel(
+                "Пока нет слов. Нажмите «➕ Добавить тему», чтобы создать первую тему."
+            )
+            self.empty_topics_label.setObjectName("subtitleLabel")
+            self.empty_topics_label.setWordWrap(True)
+            topics_layout.addWidget(self.empty_topics_label)
+
+            self._update_empty_state()
             layout.addWidget(topics_frame)
 
         # Study mode selector
@@ -337,6 +703,23 @@ class StartupDialog(QDialog):
                 self._topic_items[cat] = child
 
         self.topics_tree.blockSignals(False)
+        self._update_empty_state()
+
+    def _update_empty_state(self):
+        """Shows guidance instead of an empty tree when there are no topics yet."""
+        if not hasattr(self, 'empty_topics_label'):
+            return
+        has_topics = self.topics_tree.topLevelItemCount() > 0
+        self.topics_tree.setVisible(has_topics)
+        self.empty_topics_label.setVisible(not has_topics)
+
+    def open_add_topic_dialog(self):
+        """Opens the 'new topic' dialog and refreshes the tree on success."""
+        if not self.vocabulary:
+            return
+        dialog = AddTopicDialog(self.vocabulary, self)
+        if dialog.exec() == QDialog.DialogCode.Accepted:
+            self._build_topics_tree()
 
     def _on_topic_item_changed(self, item, column):
         """Handles tri-state checkbox logic for parent/child items."""

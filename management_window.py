@@ -8,7 +8,7 @@ from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QPushButton, QTableWidget, QTableWidgetItem, 
     QHeaderView, QAbstractItemView, QDialog, QLineEdit, QDialogButtonBox, 
     QMessageBox, QTabWidget, QHBoxLayout, QLabel, QSlider, QSpinBox,
-    QFrame, QGraphicsDropShadowEffect, QTreeWidget, QTreeWidgetItem
+    QFrame, QGraphicsDropShadowEffect, QTreeWidget, QTreeWidgetItem, QCheckBox
 )
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QColor, QFont
@@ -514,6 +514,62 @@ class ManagementWindow(QDialog):
         timer_layout.addLayout(slider_layout)
         layout.addWidget(timer_card)
 
+        # Grading strictness (similarity threshold) card
+        threshold_card = QFrame()
+        threshold_card.setObjectName("card")
+        threshold_layout = QVBoxLayout(threshold_card)
+        threshold_layout.setSpacing(12)
+
+        threshold_header = QLabel("🎯 Строгость проверки ответа")
+        threshold_header.setObjectName("titleLabel")
+        threshold_layout.addWidget(threshold_header)
+
+        threshold_desc = QLabel(
+            "Насколько точно набранный ответ должен совпадать с правильным. "
+            "Выше — строже (для друзей рекомендуется 70–80%)."
+        )
+        threshold_desc.setWordWrap(True)
+        threshold_layout.addWidget(threshold_desc)
+
+        threshold_row = QHBoxLayout()
+        _thr_pct = int(round(self.config_manager.similarity_threshold * 100))
+        self.threshold_slider = QSlider(Qt.Orientation.Horizontal)
+        self.threshold_slider.setMinimum(30)
+        self.threshold_slider.setMaximum(95)
+        self.threshold_slider.setValue(_thr_pct)
+        self.threshold_slider.setTickInterval(10)
+        self.threshold_slider.setTickPosition(QSlider.TickPosition.TicksBelow)
+
+        self.threshold_spinbox = QSpinBox()
+        self.threshold_spinbox.setMinimum(30)
+        self.threshold_spinbox.setMaximum(95)
+        self.threshold_spinbox.setValue(_thr_pct)
+        self.threshold_spinbox.setSuffix(" %")
+        self.threshold_spinbox.setFixedWidth(120)
+
+        self.threshold_slider.valueChanged.connect(self.threshold_spinbox.setValue)
+        self.threshold_spinbox.valueChanged.connect(self.threshold_slider.setValue)
+        self.threshold_spinbox.valueChanged.connect(self.save_threshold_setting)
+
+        threshold_row.addWidget(self.threshold_slider)
+        threshold_row.addWidget(self.threshold_spinbox)
+        threshold_layout.addLayout(threshold_row)
+
+        self.semantic_checkbox = QCheckBox("🧠 Семантическая проверка (принимать синонимы)")
+        self.semantic_checkbox.setChecked(self.config_manager.semantic_grading)
+        self.semantic_checkbox.toggled.connect(self.save_semantic_setting)
+        threshold_layout.addWidget(self.semantic_checkbox)
+
+        semantic_note = QLabel(
+            "Выключено — строгая проверка без ИИ: не примет синонимы и не грузит "
+            "модель (~470 МБ). Изменение применяется после перезапуска."
+        )
+        semantic_note.setWordWrap(True)
+        semantic_note.setStyleSheet("color: #888; font-size: 12px;")
+        threshold_layout.addWidget(semantic_note)
+
+        layout.addWidget(threshold_card)
+
         # Topics selection card
         topics_card = QFrame()
         topics_card.setObjectName("card")
@@ -654,6 +710,18 @@ class ManagementWindow(QDialog):
         if self.config_manager:
             self.config_manager.timer_interval = value
             print(f"Timer interval saved: {value} seconds")
+
+    def save_threshold_setting(self, percent):
+        """Saves the answer-grading strictness (similarity threshold), as a percent."""
+        if self.config_manager:
+            self.config_manager.similarity_threshold = percent / 100.0
+            print(f"Similarity threshold saved: {percent}% ({percent / 100.0:.2f})")
+
+    def save_semantic_setting(self, checked):
+        """Enables/disables synonym-aware semantic grading (applies on restart)."""
+        if self.config_manager:
+            self.config_manager.semantic_grading = checked
+            print(f"Semantic grading set to: {checked} (restart to apply)")
 
     def _save_study_mode(self, index):
         """Saves the study mode setting."""

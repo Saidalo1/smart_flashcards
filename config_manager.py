@@ -18,7 +18,17 @@ DEFAULT_CONFIG = {
     'topic_weights': {},
     'show_notifications': True,
     'theme': 'dark',
-    'study_mode': 'adaptive'
+    'study_mode': 'adaptive',
+    # How close a typed answer must be to count as correct (0..1). Higher = stricter.
+    # You (watching the logs) can keep it low; a build for friends should be stricter
+    # so a wrong-but-related word isn't accepted.
+    'similarity_threshold': 0.6,
+    # String-similarity accept cutoff (0..100) for the fast RapidFuzz pass that
+    # forgives typos/case/spacing before any semantic check.
+    'fuzz_threshold': 85,
+    # Whether to use the semantic model as a fallback (accepts synonyms/paraphrases).
+    # Turn OFF for a strict, lightweight build (RapidFuzz only, no model download).
+    'semantic_grading': True,
 }
 
 
@@ -101,6 +111,45 @@ class ConfigManager:
     @card_position.setter
     def card_position(self, value):
         self.config['card_position'] = value
+        self.save_config()
+
+    @property
+    def similarity_threshold(self):
+        """Semantic-similarity accept threshold (0..1). Higher = stricter grading."""
+        return self.config.get('similarity_threshold', 0.6)
+
+    @similarity_threshold.setter
+    def similarity_threshold(self, value):
+        try:
+            value = float(value)
+        except (TypeError, ValueError):
+            value = 0.6
+        value = max(0.0, min(1.0, value))
+        self.config['similarity_threshold'] = value
+        self.save_config()
+
+    @property
+    def fuzz_threshold(self):
+        """RapidFuzz string-similarity accept cutoff (0..100). Higher = stricter."""
+        return self.config.get('fuzz_threshold', 85)
+
+    @fuzz_threshold.setter
+    def fuzz_threshold(self, value):
+        try:
+            value = int(value)
+        except (TypeError, ValueError):
+            value = 85
+        self.config['fuzz_threshold'] = max(0, min(100, value))
+        self.save_config()
+
+    @property
+    def semantic_grading(self):
+        """Whether to load the semantic model for synonym-aware grading."""
+        return bool(self.config.get('semantic_grading', True))
+
+    @semantic_grading.setter
+    def semantic_grading(self, value):
+        self.config['semantic_grading'] = bool(value)
         self.save_config()
 
     @property

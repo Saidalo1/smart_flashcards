@@ -116,7 +116,11 @@ class FlashcardApp:
         user_profile_path = profile_manager.get_profile_path(username)
         self.config_manager = ConfigManager(config_path=user_profile_path / 'config.json')
         self.stats_manager = StatsManager(stats_path=user_profile_path / 'stats.json')
-        self.similarity_checker = SimilarityChecker()
+        self.similarity_checker = SimilarityChecker(
+            threshold=self.config_manager.similarity_threshold,
+            fuzz_threshold=self.config_manager.fuzz_threshold,
+            use_semantic=self.config_manager.semantic_grading,
+        )
 
         # Save selected study mode
         if study_mode:
@@ -161,10 +165,17 @@ class FlashcardApp:
         self.quit_action = QAction("❌ Выход")
         self.quit_action.triggered.connect(self.quit_app)
 
+        # Quick topic switcher: a checkable submenu right in the tray, so a set can
+        # be toggled in two clicks without opening the management window (or having
+        # to "switch user"). Rebuilt on open so added/deleted topics stay in sync.
+        self.topics_menu = QMenu("📚 Темы")
+        self.topics_menu.aboutToShow.connect(self._rebuild_topics_menu)
+
         # Menu
         self.tray_menu = QMenu()
         self.tray_menu.addAction(self.user_action)
         self.tray_menu.addSeparator()
+        self.tray_menu.addMenu(self.topics_menu)
         self.tray_menu.addAction(self.manage_action)
         self.tray_menu.addAction(self.shuffle_action)
         self.tray_menu.addAction(self.next_card_action)
@@ -471,6 +482,88 @@ class FlashcardApp:
         )
         QTimer.singleShot(100, self.show_flashcard)
 
+    def _rebuild_topics_menu(self):
+        """(Re)builds the checkable topic submenu from current vocabulary + config.
+
+        Topics are grouped by their base name (the part before '(...)') so a set
+        like "vocab 7" collapses into one sub-menu of its chunks instead of a flat
+        wall of items.
+        """
+        from collections import OrderedDict
+
+        menu = self.topics_menu
+        menu.clear()
+
+        all_topics = self.vocabulary.get_all_topics()
+        active = self.config_manager.active_topics
+        all_active = not active            # empty list = every topic is active
+        selected = set(active)
+
+        select_all = QAction("✅ Выбрать все", menu)
+        select_all.triggered.connect(self._select_all_topics)
+        menu.addAction(select_all)
+        menu.addSeparator()
+
+        if not all_topics:
+            empty = QAction("(нет тем)", menu)
+            empty.setEnabled(False)
+            menu.addAction(empty)
+            return
+
+        groups = OrderedDict()
+        for t in all_topics:
+            groups.setdefault(t.split(' (')[0], []).append(t)
+
+        for base, items in groups.items():
+            if len(items) == 1 and items[0] == base:
+                self._add_topic_action(menu, items[0], base, all_active or items[0] in selected)
+            else:
+                sub = QMenu(base, menu)
+                for t in items:
+                    label = t[len(base):].strip() or t   # e.g. "(1-15)"
+                    self._add_topic_action(sub, t, label, all_active or t in selected)
+                menu.addMenu(sub)
+
+    def _add_topic_action(self, parent_menu, topic_name, label, checked):
+        act = QAction(label, parent_menu)
+        act.setCheckable(True)
+        act.setChecked(checked)   # set BEFORE connecting so it doesn't fire toggled
+        act.toggled.connect(lambda ch, name=topic_name: self._toggle_topic(name, ch))
+        parent_menu.addAction(act)
+
+    def _toggle_topic(self, topic_name, checked):
+        """Adds/removes one topic from the active set and reshuffles."""
+        all_topics = self.vocabulary.get_all_topics()
+        current = set(self.config_manager.active_topics) or set(all_topics)
+        if checked:
+            current.add(topic_name)
+        else:
+            current.discard(topic_name)
+        # Empty stored list means "all active", so collapse a full selection to [].
+        new_topics = [] if len(current) >= len(all_topics) else [t for t in all_topics if t in current]
+        self.config_manager.active_topics = new_topics
+        self._apply_topic_change()
+
+    def _select_all_topics(self):
+        self.config_manager.active_topics = []
+        self._apply_topic_change()
+
+    def _apply_topic_change(self):
+        """Reshuffles the deck for the current topic selection and shows a card."""
+        active = self.config_manager.active_topics
+        if self.flashcard_widget and self.flashcard_widget.isVisible():
+            self.flashcard_widget.close()
+        self.vocabulary.shuffle_deck(self.stats_manager, active if active else None)
+        count = len(active) if active else len(self.vocabulary.get_all_topics())
+        if self.config_manager.get('show_notifications', True):
+            self.tray_icon.showMessage(
+                "Темы обновлены",
+                f"Активно тем: {count} · карт в колоде: {len(self.vocabulary.deck)}",
+                QSystemTrayIcon.MessageIcon.Information,
+                1800,
+            )
+        QTimer.singleShot(100, self.show_flashcard)
+
     def show_management_window(self):
         print("Opening management window...")
         self.timer.stop()
@@ -482,6 +575,10 @@ class FlashcardApp:
         )
         dialog.exec()
 
+        # Apply any settings changed in the window without needing a restart.
+        # (semantic_grading on/off still needs a restart to load/unload the model.)
+        self.similarity_checker.threshold = self.config_manager.similarity_threshold
+        self.similarity_checker.fuzz_threshold = self.config_manager.fuzz_threshold
         active_topics = self.config_manager.active_topics
         self.vocabulary.shuffle_deck(self.stats_manager, active_topics if active_topics else None)
         self.update_timer_interval()

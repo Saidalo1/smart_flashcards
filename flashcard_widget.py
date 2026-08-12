@@ -796,14 +796,14 @@ class FlashcardWidget(QFrame):
                 self.styleSheet()
                 + "QFrame#main_widget { border: 2px solid #2ecc71; }"
             )
-            self.check_button.setText("Correct! 👍")
+            self.check_button.setText(correct_display)
             self.check_button.setStyleSheet("background-color: #2ecc71;")
         else:
             self.setStyleSheet(
                 self.styleSheet()
                 + "QFrame#main_widget { border: 2px solid #e74c3c; }"
             )
-            self.check_button.setText(f"Correct: {correct_display}")
+            self.check_button.setText(correct_display)
             self.check_button.setStyleSheet("background-color: #e74c3c;")
 
         QTimer.singleShot(4000, self.close)

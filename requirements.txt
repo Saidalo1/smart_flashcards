@@ -1,5 +1,9 @@
 # Core dependencies with pinned versions for reproducibility
 PyQt6==6.10.1
+rapidfuzz==3.14.5  # fast, typo-tolerant string grading (first pass)
+# sentence-transformers + torch power the semantic (synonym) grading fallback.
+# They are optional at runtime: with semantic_grading=False the app never imports
+# them, so a strict/lightweight build can drop torch entirely.
 sentence-transformers==5.1.2
 torch==2.8.0
 pyinstaller==6.17.0

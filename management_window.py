@@ -13,6 +13,8 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QColor, QFont
 
+from i18n import tr
+
 
 # ============================================================================
 # MODERN STYLESHEET
@@ -255,7 +257,7 @@ class WordEditDialog(QDialog):
     
     def __init__(self, english="", uzbek="", parent=None):
         super().__init__(parent)
-        self.setWindowTitle("Редактировать слово")
+        self.setWindowTitle(tr('edit_word_dlg'))
         self.setStyleSheet(MODERN_STYLE)
         self.setMinimumWidth(400)
 
@@ -301,7 +303,7 @@ class ManagementWindow(QDialog):
         self.stats_manager = stats_manager
         self.config_manager = config_manager
 
-        self.setWindowTitle("📚 Smart Flashcards — Управление")
+        self.setWindowTitle(tr('mgmt_title'))
         self.setMinimumSize(900, 650)
         self.setStyleSheet(MODERN_STYLE)
 
@@ -315,18 +317,18 @@ class ManagementWindow(QDialog):
 
         # --- Vocabulary Tab ---
         self.vocab_tab = QWidget()
-        self.tabs.addTab(self.vocab_tab, "📖 Словарь")
+        self.tabs.addTab(self.vocab_tab, tr('tab_vocab'))
         self.setup_vocab_tab()
 
         # --- Stats Tab ---
         self.stats_tab = QWidget()
-        self.tabs.addTab(self.stats_tab, "📊 Статистика")
+        self.tabs.addTab(self.stats_tab, tr('tab_stats'))
         self.setup_stats_tab()
 
         # --- Settings Tab ---
         if self.config_manager:
             self.settings_tab = QWidget()
-            self.tabs.addTab(self.settings_tab, "⚙️ Настройки")
+            self.tabs.addTab(self.settings_tab, tr('tab_settings'))
             self.setup_settings_tab()
 
         # Load data
@@ -340,7 +342,7 @@ class ManagementWindow(QDialog):
         layout.setSpacing(16)
 
         # Header
-        header = QLabel("📖 Словарь")
+        header = QLabel(tr('tab_vocab'))
         header.setObjectName("titleLabel")
         header.setFont(QFont("Segoe UI", 20, QFont.Weight.Bold))
         layout.addWidget(header)
@@ -348,7 +350,7 @@ class ManagementWindow(QDialog):
         # Table
         self.table = QTableWidget()
         self.table.setColumnCount(3)
-        self.table.setHorizontalHeaderLabels(["🇬🇧 English", "🇺🇿 Uzbek", "📊 Уровень"])
+        self.table.setHorizontalHeaderLabels(["🇬🇧 English", "🇺🇿 Uzbek", tr('th_level')])
         self.table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
         self.table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
         self.table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents)
@@ -361,13 +363,13 @@ class ManagementWindow(QDialog):
         button_layout = QHBoxLayout()
         button_layout.setSpacing(12)
         
-        add_btn = QPushButton("➕ Добавить")
+        add_btn = QPushButton(tr('btn_add'))
         add_btn.clicked.connect(self.add_word)
         
-        edit_btn = QPushButton("✏️ Редактировать")
+        edit_btn = QPushButton(tr('btn_edit'))
         edit_btn.clicked.connect(self.edit_word)
         
-        delete_btn = QPushButton("🗑️ Удалить")
+        delete_btn = QPushButton(tr('btn_delete'))
         delete_btn.setObjectName("dangerButton")
         delete_btn.clicked.connect(self.delete_selected_word)
         
@@ -385,7 +387,7 @@ class ManagementWindow(QDialog):
         layout.setSpacing(16)
 
         # Header
-        header = QLabel("📊 Статистика обучения")
+        header = QLabel(tr('stats_header'))
         header.setObjectName("titleLabel")
         header.setFont(QFont("Segoe UI", 20, QFont.Weight.Bold))
         layout.addWidget(header)
@@ -394,7 +396,7 @@ class ManagementWindow(QDialog):
         self.stats_table = QTableWidget()
         self.stats_table.setColumnCount(4)
         self.stats_table.setHorizontalHeaderLabels([
-            "📝 Слово", "✅ Правильно", "❌ Неправильно", "📈 Успешность"
+            tr('stats_th_word'), tr('stats_th_correct'), tr('stats_th_wrong'), tr('stats_th_rate')
         ])
         self.stats_table.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.stats_table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
@@ -404,7 +406,7 @@ class ManagementWindow(QDialog):
         layout.addWidget(self.stats_table)
 
         # Reset button
-        reset_btn = QPushButton("🗑️ Сбросить статистику")
+        reset_btn = QPushButton(tr('reset_stats_btn'))
         reset_btn.setObjectName("dangerButton")
         reset_btn.clicked.connect(self.reset_all_stats)
         
@@ -435,7 +437,7 @@ class ManagementWindow(QDialog):
         layout.setSpacing(24)
 
         # Header
-        header = QLabel("⚙️ Настройки")
+        header = QLabel(tr('tab_settings'))
         header.setObjectName("titleLabel")
         header.setFont(QFont("Segoe UI", 20, QFont.Weight.Bold))
         layout.addWidget(header)
@@ -446,22 +448,21 @@ class ManagementWindow(QDialog):
         mode_card_layout = QVBoxLayout(mode_card)
         mode_card_layout.setSpacing(12)
 
-        mode_header = QLabel("🎯 Режим обучения")
+        mode_header = QLabel(tr('study_mode'))
         mode_header.setObjectName("titleLabel")
         mode_card_layout.addWidget(mode_header)
 
-        mode_desc = QLabel("Адаптивный — автоматически повышает уровень. "
-                           "Остальные — принудительно тестируют выбранный тип.")
+        mode_desc = QLabel(tr('mode_desc'))
         mode_desc.setWordWrap(True)
         mode_card_layout.addWidget(mode_desc)
 
         from PyQt6.QtWidgets import QComboBox
         self.study_mode_combo = QComboBox()
         self.study_mode_options = {
-            'adaptive': '🧠 Адаптивный (рекомендуемый)',
-            'translation': '🌐 Только перевод',
-            'definition': '📝 Только определения',
-            'synonym': '🔀 Только синонимы',
+            'adaptive': tr('mode_adaptive'),
+            'translation': tr('mode_translation'),
+            'definition': tr('mode_definition'),
+            'synonym': tr('mode_synonym'),
         }
         for key, label in self.study_mode_options.items():
             self.study_mode_combo.addItem(label, key)
@@ -481,11 +482,11 @@ class ManagementWindow(QDialog):
         timer_layout = QVBoxLayout(timer_card)
         timer_layout.setSpacing(16)
 
-        timer_header = QLabel("⏱️ Интервал показа карточек")
+        timer_header = QLabel(tr('set_timer_title'))
         timer_header.setObjectName("titleLabel")
         timer_layout.addWidget(timer_header)
 
-        timer_desc = QLabel("Как часто показывать новые карточки (в секундах)")
+        timer_desc = QLabel(tr('set_timer_desc'))
         timer_layout.addWidget(timer_desc)
 
         # Slider + SpinBox
@@ -502,7 +503,7 @@ class ManagementWindow(QDialog):
         self.timer_spinbox.setMinimum(10)
         self.timer_spinbox.setMaximum(300)
         self.timer_spinbox.setValue(self.config_manager.timer_interval)
-        self.timer_spinbox.setSuffix(" сек")
+        self.timer_spinbox.setSuffix(tr('unit_sec'))
         self.timer_spinbox.setFixedWidth(120)
         
         self.timer_slider.valueChanged.connect(self.timer_spinbox.setValue)
@@ -520,14 +521,11 @@ class ManagementWindow(QDialog):
         threshold_layout = QVBoxLayout(threshold_card)
         threshold_layout.setSpacing(12)
 
-        threshold_header = QLabel("🎯 Строгость проверки ответа")
+        threshold_header = QLabel(tr('set_strict_title'))
         threshold_header.setObjectName("titleLabel")
         threshold_layout.addWidget(threshold_header)
 
-        threshold_desc = QLabel(
-            "Насколько точно набранный ответ должен совпадать с правильным. "
-            "Выше — строже (для друзей рекомендуется 70–80%)."
-        )
+        threshold_desc = QLabel(tr('set_strict_desc'))
         threshold_desc.setWordWrap(True)
         threshold_layout.addWidget(threshold_desc)
 
@@ -555,15 +553,12 @@ class ManagementWindow(QDialog):
         threshold_row.addWidget(self.threshold_spinbox)
         threshold_layout.addLayout(threshold_row)
 
-        self.semantic_checkbox = QCheckBox("🧠 Семантическая проверка (принимать синонимы)")
+        self.semantic_checkbox = QCheckBox(tr('set_semantic'))
         self.semantic_checkbox.setChecked(self.config_manager.semantic_grading)
         self.semantic_checkbox.toggled.connect(self.save_semantic_setting)
         threshold_layout.addWidget(self.semantic_checkbox)
 
-        semantic_note = QLabel(
-            "Выключено — строгая проверка без ИИ: не примет синонимы и не грузит "
-            "модель (~470 МБ). Изменение применяется после перезапуска."
-        )
+        semantic_note = QLabel(tr('set_semantic_note'))
         semantic_note.setWordWrap(True)
         semantic_note.setStyleSheet("color: #888; font-size: 12px;")
         threshold_layout.addWidget(semantic_note)
@@ -576,11 +571,11 @@ class ManagementWindow(QDialog):
         topics_layout = QVBoxLayout(topics_card)
         topics_layout.setSpacing(12)
 
-        topics_header = QLabel("📚 Активные темы")
+        topics_header = QLabel(tr('set_topics_title'))
         topics_header.setObjectName("titleLabel")
         topics_layout.addWidget(topics_header)
 
-        topics_desc = QLabel("Выберите темы для изучения (если ничего не выбрано — все темы активны)")
+        topics_desc = QLabel(tr('set_topics_desc'))
         topics_desc.setWordWrap(True)
         topics_layout.addWidget(topics_desc)
 
@@ -626,26 +621,26 @@ class ManagementWindow(QDialog):
         position_layout = QVBoxLayout(position_card)
         position_layout.setSpacing(12)
 
-        position_header = QLabel("📍 Позиция карточки")
+        position_header = QLabel(tr('set_position_title2'))
         position_header.setObjectName("titleLabel")
         position_layout.addWidget(position_header)
 
-        position_desc = QLabel("Где появляется карточка на экране")
+        position_desc = QLabel(tr('set_position_desc2'))
         position_layout.addWidget(position_desc)
 
         from PyQt6.QtWidgets import QComboBox
         self.position_combo = QComboBox()
         self.position_options = {
-            'bottom_right': '↘️ Справа снизу',
-            'bottom_left': '↙️ Слева снизу',
-            'top_right': '↗️ Справа сверху',
-            'top_left': '↖️ Слева сверху',
-            'middle_right': '➡️ Справа по центру',
-            'middle_left': '⬅️ Слева по центру',
-            'top_center': '⬆️ Сверху по центру',
-            'bottom_center': '⬇️ Снизу по центру',
-            'center': '⏺️ По центру',
-            'mouse': '🖱️ У курсора мыши'
+            'bottom_right': tr('pos_bottom_right'),
+            'bottom_left': tr('pos_bottom_left'),
+            'top_right': tr('pos_top_right'),
+            'top_left': tr('pos_top_left'),
+            'middle_right': tr('pos_middle_right'),
+            'middle_left': tr('pos_middle_left'),
+            'top_center': tr('pos_top_center'),
+            'bottom_center': tr('pos_bottom_center'),
+            'center': tr('pos_center'),
+            'mouse': tr('pos_mouse')
         }
         for key, label in self.position_options.items():
             self.position_combo.addItem(label, key)
@@ -664,19 +659,19 @@ class ManagementWindow(QDialog):
         hotkey_layout = QVBoxLayout(hotkey_card)
         hotkey_layout.setSpacing(12)
 
-        hotkey_header = QLabel("⌨️ Горячая клавиша")
+        hotkey_header = QLabel(tr('set_hotkey_title'))
         hotkey_header.setObjectName("titleLabel")
         hotkey_layout.addWidget(hotkey_header)
 
-        hotkey_desc = QLabel("Клавиша для показа следующей карточки")
+        hotkey_desc = QLabel(tr('set_hotkey_desc'))
         hotkey_layout.addWidget(hotkey_desc)
 
         hotkey_row = QHBoxLayout()
-        self.hotkey_label = QLabel(f"Текущая: {self.config_manager.hotkey}")
+        self.hotkey_label = QLabel(tr('set_hotkey_current', key=self.config_manager.hotkey))
         self.hotkey_label.setStyleSheet("font-weight: bold; font-size: 14px;")
         hotkey_row.addWidget(self.hotkey_label)
         
-        self.hotkey_btn = QPushButton("🎹 Назначить клавишу")
+        self.hotkey_btn = QPushButton(tr('set_hotkey_btn'))
         self.hotkey_btn.setObjectName("primaryBtn")
         self.hotkey_btn.clicked.connect(self.start_hotkey_capture)
         hotkey_row.addWidget(self.hotkey_btn)
@@ -688,12 +683,12 @@ class ManagementWindow(QDialog):
         info_card.setObjectName("card")
         info_layout = QVBoxLayout(info_card)
         
-        info_header = QLabel("💡 Подсказка")
+        info_header = QLabel(tr('info_tip_title'))
         info_header.setObjectName("titleLabel")
         info_layout.addWidget(info_header)
         
         info_text = QLabel(
-            "После смены горячей клавиши нужно перезапустить приложение!"
+            tr('hotkey_restart_note')
         )
         info_text.setWordWrap(True)
         info_layout.addWidget(info_text)
@@ -745,7 +740,7 @@ class ManagementWindow(QDialog):
             )
 
             parent = QTreeWidgetItem(self.topics_tree)
-            parent.setText(0, f"📁 {group_name} ({total_words} слов)")
+            parent.setText(0, f"📁 {group_name} ({tr('words_n', n=total_words)})")
             parent.setFlags(
                 parent.flags()
                 | Qt.ItemFlag.ItemIsUserCheckable
@@ -759,7 +754,7 @@ class ManagementWindow(QDialog):
                 display_name = match.group(1) if match else cat
 
                 child = QTreeWidgetItem(parent)
-                child.setText(0, f"{display_name} ({word_count} слов)")
+                child.setText(0, f"{display_name} ({tr('words_n', n=word_count)})")
                 child.setFlags(child.flags() | Qt.ItemFlag.ItemIsUserCheckable)
                 is_checked = cat in active_topics if active_topics else False
                 child.setCheckState(0, Qt.CheckState.Checked if is_checked else Qt.CheckState.Unchecked)
@@ -823,7 +818,7 @@ class ManagementWindow(QDialog):
 
     def start_hotkey_capture(self):
         """Starts capturing a new hotkey."""
-        self.hotkey_btn.setText("⏳ Нажмите клавишу...")
+        self.hotkey_btn.setText(tr('press_key'))
         self.hotkey_btn.setEnabled(False)
         self._capturing_hotkey = True
         self._current_modifiers = []
@@ -870,7 +865,7 @@ class ManagementWindow(QDialog):
             if key == Qt.Key.Key_Escape:
                 self._capturing_hotkey = False
                 self.releaseKeyboard()
-                self.hotkey_btn.setText("🎹 Назначить клавишу")
+                self.hotkey_btn.setText(tr('set_hotkey_btn'))
                 self.hotkey_btn.setEnabled(True)
                 return
             
@@ -1019,20 +1014,20 @@ class ManagementWindow(QDialog):
                 
                 old_hotkey = self.config_manager.hotkey
                 self.config_manager.hotkey = full_hotkey
-                self.hotkey_label.setText(f"Текущая: {full_hotkey}")
+                self.hotkey_label.setText(tr('set_hotkey_current', key=full_hotkey))
                 print(f"Hotkey saved: {full_hotkey} (scan_code: {scan_code})")
                 
                 # Always ask to restart since hotkey requires restart
                 self._capturing_hotkey = False
                 self.releaseKeyboard()
-                self.hotkey_btn.setText("🎹 Назначить клавишу")
+                self.hotkey_btn.setText(tr('set_hotkey_btn'))
                 self.hotkey_btn.setEnabled(True)
                 
                 if old_hotkey != full_hotkey:
                     reply = QMessageBox.question(
                         self, 
-                        "Перезапустить?",
-                        f"Горячая клавиша изменена на: {full_hotkey}\n\nПерезапустить приложение сейчас?",
+                        tr('restart_title'),
+                        tr('hotkey_changed_restart', key=full_hotkey),
                         QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
                     )
                     if reply == QMessageBox.StandardButton.Yes:
@@ -1043,7 +1038,7 @@ class ManagementWindow(QDialog):
             print(f"Unknown key: Qt.Key={key}, scan_code={scan_code}")
             self._capturing_hotkey = False
             self.releaseKeyboard()
-            self.hotkey_btn.setText("🎹 Назначить клавишу")
+            self.hotkey_btn.setText(tr('set_hotkey_btn'))
             self.hotkey_btn.setEnabled(True)
         else:
             super().keyPressEvent(event)
@@ -1067,9 +1062,9 @@ class ManagementWindow(QDialog):
                 if self.vocabulary.add_word(english, uzbek):
                     self.load_vocabulary_data()
                 else:
-                    QMessageBox.warning(self, "Дубликат", f"Слово '{english}' уже существует.")
+                    QMessageBox.warning(self, tr('dup_title'), tr('dup_msg', word=english))
             else:
-                QMessageBox.warning(self, "Ошибка", "Оба поля должны быть заполнены.")
+                QMessageBox.warning(self, tr('err_title'), tr('err_both_fields'))
 
     def load_vocabulary_data(self):
         """Loads words into the table with mastery level icons."""
@@ -1132,7 +1127,7 @@ class ManagementWindow(QDialog):
         """Opens dialog to edit selected word."""
         selected_rows = self.table.selectionModel().selectedRows()
         if not selected_rows:
-            QMessageBox.warning(self, "Ошибка", "Выберите слово для редактирования.")
+            QMessageBox.warning(self, tr('err_title'), tr('err_select_edit'))
             return
 
         row = selected_rows[0].row()
@@ -1146,23 +1141,23 @@ class ManagementWindow(QDialog):
                 if self.vocabulary.update_word(old_english, new_english, new_uzbek):
                     self.load_vocabulary_data()
                 else:
-                    QMessageBox.warning(self, "Ошибка", "Не удалось обновить слово.")
+                    QMessageBox.warning(self, tr('err_title'), tr('err_update_failed'))
             else:
-                QMessageBox.warning(self, "Ошибка", "Оба поля должны быть заполнены.")
+                QMessageBox.warning(self, tr('err_title'), tr('err_both_fields'))
 
     def delete_selected_word(self):
         """Deletes the selected word."""
         selected_rows = self.table.selectionModel().selectedRows()
         if not selected_rows:
-            QMessageBox.warning(self, "Ошибка", "Выберите слово для удаления.")
+            QMessageBox.warning(self, tr('err_title'), tr('err_select_delete'))
             return
 
         row = selected_rows[0].row()
         english_word = self.table.item(row, 0).text()
 
         reply = QMessageBox.question(
-            self, "Подтверждение",
-            f"Удалить слово '<b>{english_word}</b>'?",
+            self, tr('confirm_title'),
+            tr('confirm_delete_word', word=english_word),
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
             QMessageBox.StandardButton.No
         )
@@ -1170,13 +1165,13 @@ class ManagementWindow(QDialog):
         if reply == QMessageBox.StandardButton.Yes:
             if self.vocabulary.delete_word(english_word):
                 self.load_vocabulary_data()
-                QMessageBox.information(self, "Готово", f"Слово '{english_word}' удалено.")
+                QMessageBox.information(self, tr('ok_done'), tr('word_deleted', word=english_word))
 
     def reset_all_stats(self):
         """Resets all statistics."""
         reply = QMessageBox.question(
-            self, "Сброс статистики",
-            "Вы уверены? Это действие <b>нельзя отменить</b>!",
+            self, tr('reset_stats_title'),
+            tr('reset_stats_confirm'),
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
             QMessageBox.StandardButton.No
         )
@@ -1184,4 +1179,4 @@ class ManagementWindow(QDialog):
         if reply == QMessageBox.StandardButton.Yes:
             self.stats_manager.reset_stats()
             self.load_stats_data()
-            QMessageBox.information(self, "Готово", "Статистика сброшена.")
+            QMessageBox.information(self, tr('ok_done'), tr('stats_reset_done'))

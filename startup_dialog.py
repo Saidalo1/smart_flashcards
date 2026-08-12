@@ -4,14 +4,15 @@ Startup dialog for selecting user profile and initial setup.
 
 import re
 from PyQt6.QtWidgets import (
-    QDialog, QVBoxLayout, QHBoxLayout, QLabel, QPushButton, 
+    QDialog, QVBoxLayout, QHBoxLayout, QLabel, QPushButton,
     QListWidget, QListWidgetItem, QLineEdit, QMessageBox,
-    QFrame, QWidget, QTreeWidget, QTreeWidgetItem
+    QFrame, QWidget, QTreeWidget, QTreeWidgetItem, QComboBox
 )
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QFont
 
 import profile_manager
+from i18n import tr, set_language, get_language, LANGUAGES
 
 
 STARTUP_STYLE = """
@@ -100,6 +101,24 @@ QLineEdit {
 
 QLineEdit:focus {
     border: 2px solid #00d9ff;
+}
+
+QComboBox {
+    background: #1e2235;
+    border: 2px solid #2a2e45;
+    border-radius: 10px;
+    padding: 10px 14px;
+    color: #fff;
+    font-size: 15px;
+}
+QComboBox:focus { border: 2px solid #00d9ff; }
+QComboBox::drop-down { border: none; width: 28px; }
+QComboBox QAbstractItemView {
+    background: #1e2235;
+    border: 1px solid #2a2e45;
+    color: #fff;
+    selection-background-color: #1a4a5a;
+    outline: none;
 }
 
 QFrame#card {
@@ -269,7 +288,7 @@ class WordDetailsDialog(QDialog):
         super().__init__(parent)
         from PyQt6.QtWidgets import QListWidget
         data = data or {}
-        self.setWindowTitle("Детали слова")
+        self.setWindowTitle(tr('word_details'))
         self.setMinimumWidth(460)
         self.setStyleSheet(STARTUP_STYLE + ADD_TOPIC_TABLE_STYLE)
 
@@ -277,27 +296,22 @@ class WordDetailsDialog(QDialog):
         layout.setContentsMargins(24, 24, 24, 24)
         layout.setSpacing(12)
 
-        title = QLabel(f"Детали: {english}" if english else "Детали слова")
+        title = QLabel(tr('word_details_of', word=english) if english else tr('word_details'))
         title.setObjectName("titleLabel")
         title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(title)
 
         # Definition
-        layout.addLayout(self._field_header(
-            "Определение (англ.)",
-            "Короткое объяснение слова на английском. Нужно для режима «Определение»."))
+        layout.addLayout(self._field_header(tr('def_label'), tr('def_help')))
         self.definition_input = QLineEdit(data.get('definition') or '')
-        self.definition_input.setPlaceholderText("напр. to continue having something")
+        self.definition_input.setPlaceholderText(tr('def_ph'))
         layout.addWidget(self.definition_input)
 
         # Synonyms — added one at a time
-        layout.addLayout(self._field_header(
-            "Синонимы",
-            "Слова с похожим значением. Добавляй по одному кнопкой «＋». "
-            "Нужны для режима «Синонимы»."))
+        layout.addLayout(self._field_header(tr('syn_label'), tr('syn_help')))
         syn_row = QHBoxLayout()
         self.syn_input = QLineEdit()
-        self.syn_input.setPlaceholderText("впиши синоним и нажми ＋ (или Enter)")
+        self.syn_input.setPlaceholderText(tr('syn_ph'))
         self.syn_input.returnPressed.connect(self._add_synonym)
         add_syn = QPushButton("＋")
         add_syn.setObjectName("secondaryButton")
@@ -313,24 +327,21 @@ class WordDetailsDialog(QDialog):
         self.syn_list.itemDoubleClicked.connect(
             lambda it: self.syn_list.takeItem(self.syn_list.row(it)))
         layout.addWidget(self.syn_list)
-        syn_hint = QLabel("Двойной клик по синониму — удалить.")
+        syn_hint = QLabel(tr('syn_remove_hint'))
         syn_hint.setObjectName("subtitleLabel")
         layout.addWidget(syn_hint)
 
         # Pattern
-        layout.addLayout(self._field_header(
-            "Паттерн (сочетание)",
-            "Как слово обычно сочетается в речи: напр. «avoid doing sth», "
-            "«depend on sth». Показывается в заголовке карточки."))
+        layout.addLayout(self._field_header(tr('pat_label'), tr('pat_help')))
         self.pattern_input = QLineEdit(data.get('grammar_pattern') or '')
-        self.pattern_input.setPlaceholderText("напр. avoid doing sth")
+        self.pattern_input.setPlaceholderText(tr('pat_ph'))
         layout.addWidget(self.pattern_input)
 
         btns = QHBoxLayout()
-        cancel = QPushButton("Отмена")
+        cancel = QPushButton(tr('cancel'))
         cancel.setObjectName("secondaryButton")
         cancel.clicked.connect(self.reject)
-        ok = QPushButton("Готово")
+        ok = QPushButton(tr('ok_done'))
         ok.clicked.connect(self.accept)
         btns.addWidget(cancel)
         btns.addStretch()
@@ -367,7 +378,7 @@ class AddTopicDialog(QDialog):
     def __init__(self, vocabulary, parent=None):
         super().__init__(parent)
         self.vocabulary = vocabulary
-        self.setWindowTitle("Новая тема")
+        self.setWindowTitle(tr('new_topic_title'))
         self.setMinimumSize(620, 580)
         self.setStyleSheet(STARTUP_STYLE + ADD_TOPIC_TABLE_STYLE)
         self._build_ui()
@@ -379,37 +390,34 @@ class AddTopicDialog(QDialog):
         layout.setContentsMargins(24, 24, 24, 24)
         layout.setSpacing(14)
 
-        title = QLabel("➕ Новая тема")
+        title = QLabel(tr('new_topic_title'))
         title.setObjectName("titleLabel")
         title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(title)
 
-        layout.addWidget(QLabel("Название темы"))
+        layout.addWidget(QLabel(tr('topic_name')))
         # Editable combo: pick an existing topic to EXTEND it, or type a new name.
         self.name_combo = QComboBox()
         self.name_combo.setEditable(True)
         self.name_combo.addItems(self.vocabulary.get_all_topics())
         self.name_combo.setCurrentIndex(-1)
-        self.name_combo.lineEdit().setPlaceholderText("Выбери существующую тему или впиши новую")
+        self.name_combo.lineEdit().setPlaceholderText(tr('topic_name_ph'))
         layout.addWidget(self.name_combo)
 
         last_topic = self._last_topic()
         if last_topic:
-            last_label = QLabel(f"↩ Последняя тема: {last_topic}")
+            last_label = QLabel(tr('last_topic', topic=last_topic))
             last_label.setObjectName("subtitleLabel")
             last_label.setWordWrap(True)
             layout.addWidget(last_label)
 
-        tip = QLabel("Впишите English и перевод (и, по желанию, подсказку). "
-                     "Кнопка ✎ в строке — определение, синонимы, паттерн. "
-                     "Пустые строки игнорируются.")
+        tip = QLabel(tr('addtopic_tip'))
         tip.setObjectName("subtitleLabel")
         tip.setWordWrap(True)
         layout.addWidget(tip)
 
         self.table = QTableWidget(6, 4)
-        self.table.setHorizontalHeaderLabels(
-            ["English", "Перевод", "Подсказка (необязательно)", "✎"])
+        self.table.setHorizontalHeaderLabels([tr('col_english') if False else "English", tr('col_translation'), tr('col_hint'), "✎"])
         header = self.table.horizontalHeader()
         header.setSectionResizeMode(0, QHeaderView.ResizeMode.Interactive)
         header.setSectionResizeMode(1, QHeaderView.ResizeMode.Interactive)
@@ -425,10 +433,10 @@ class AddTopicDialog(QDialog):
         layout.addWidget(self.table)
 
         row_btns = QHBoxLayout()
-        add_row = QPushButton("➕ Строка")
+        add_row = QPushButton(tr('btn_add_row'))
         add_row.setObjectName("secondaryButton")
         add_row.clicked.connect(self._add_row)
-        del_row = QPushButton("➖ Удалить строку")
+        del_row = QPushButton(tr('btn_del_row'))
         del_row.setObjectName("secondaryButton")
         del_row.clicked.connect(self._delete_row)
         row_btns.addWidget(add_row)
@@ -437,10 +445,10 @@ class AddTopicDialog(QDialog):
         layout.addLayout(row_btns)
 
         actions = QHBoxLayout()
-        cancel = QPushButton("Отмена")
+        cancel = QPushButton(tr('cancel'))
         cancel.setObjectName("secondaryButton")
         cancel.clicked.connect(self.reject)
-        save = QPushButton("💾 Сохранить")
+        save = QPushButton(tr('save'))
         save.clicked.connect(self._save)
         actions.addWidget(cancel)
         actions.addStretch()
@@ -461,7 +469,7 @@ class AddTopicDialog(QDialog):
         btn = QPushButton("✎")
         btn.setObjectName("secondaryButton")
         btn.setCursor(Qt.CursorShape.PointingHandCursor)
-        btn.setToolTip("Определение, синонимы, паттерн")
+        btn.setToolTip(tr('details_tooltip'))
         btn.clicked.connect(self._open_details)
         self.table.setCellWidget(row, 3, btn)
 
@@ -497,7 +505,7 @@ class AddTopicDialog(QDialog):
     def _save(self):
         name = self.name_combo.currentText().strip()
         if not name:
-            QMessageBox.warning(self, "Ошибка", "Введите название темы.")
+            QMessageBox.warning(self, tr('err_title'), tr('err_enter_topic'))
             return
         pairs = []
         for r in range(self.table.rowCount()):
@@ -516,47 +524,68 @@ class AddTopicDialog(QDialog):
                 row["grammar_pattern"] = details.get('grammar_pattern') or ''
             pairs.append(row)
         if not pairs:
-            QMessageBox.warning(self, "Ошибка", "Добавьте хотя бы одно слово (столбец English).")
+            QMessageBox.warning(self, tr('err_title'), tr('err_add_one_word'))
             return
         added = self.vocabulary.add_words_to_topic(name, pairs)
         if added:
-            QMessageBox.information(self, "Готово", f"Добавлено слов: {added} в тему «{name}».")
+            QMessageBox.information(self, tr('ok_done'), tr('words_added', added=added, name=name))
         else:
-            QMessageBox.information(
-                self, "Готово",
-                "Новых слов не добавлено — возможно, все уже есть в словаре."
-            )
+            QMessageBox.information(self, tr('ok_done'), tr('no_new_words'))
         self.accept()
 
 
 class StartupDialog(QDialog):
     """Dialog for selecting or creating a user profile at startup."""
-    
+
+    RESTART_CODE = 100  # exec() returns this when the language was changed
+
     def __init__(self, vocabulary=None, parent=None):
         super().__init__(parent)
         self.vocabulary = vocabulary
         self.selected_username = None
         self.selected_topics = []
-        
-        self.setWindowTitle("Smart Flashcards — Добро пожаловать!")
+
+        self.setWindowTitle("Smart Flashcards")
         self.setMinimumSize(500, 700)
         self.setStyleSheet(STARTUP_STYLE)
-        
+
         self.init_ui()
         self.load_profiles()
-    
+
+    def _on_language_changed(self, index):
+        code = self.lang_combo.itemData(index)
+        if code and code != get_language():
+            set_language(code)
+            self.done(self.RESTART_CODE)
+
     def init_ui(self):
         layout = QVBoxLayout(self)
         layout.setSpacing(20)
         layout.setContentsMargins(32, 32, 32, 32)
-        
+
+        # Language selector (top-right). Changing it re-opens the dialog localized.
+        lang_row = QHBoxLayout()
+        lang_row.addStretch()
+        lang_lbl = QLabel(f"🌍 {tr('language')}:")
+        lang_lbl.setStyleSheet("color:#cfd6e6; font-size:14px;")
+        lang_row.addWidget(lang_lbl)
+        self.lang_combo = QComboBox()
+        for code, name in LANGUAGES.items():
+            self.lang_combo.addItem(name, code)
+        codes = list(LANGUAGES.keys())
+        self.lang_combo.setCurrentIndex(codes.index(get_language()) if get_language() in codes else 0)
+        self.lang_combo.setFixedWidth(150)
+        self.lang_combo.currentIndexChanged.connect(self._on_language_changed)
+        lang_row.addWidget(self.lang_combo)
+        layout.addLayout(lang_row)
+
         # Title
-        title = QLabel("👋 Добро пожаловать!")
+        title = QLabel(tr('welcome_title'))
         title.setObjectName("titleLabel")
         title.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(title)
-        
-        subtitle = QLabel("Выберите профиль или создайте новый")
+
+        subtitle = QLabel(tr('welcome_subtitle'))
         subtitle.setObjectName("subtitleLabel")
         subtitle.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(subtitle)
@@ -573,18 +602,18 @@ class StartupDialog(QDialog):
         new_profile_layout = QVBoxLayout(new_profile_frame)
         new_profile_layout.setSpacing(12)
         
-        new_label = QLabel("✨ Новый профиль")
+        new_label = QLabel(tr('new_profile'))
         new_label.setObjectName("titleLabel")
         new_label.setFont(QFont("Segoe UI", 14))
         new_profile_layout.addWidget(new_label)
-        
+
         input_layout = QHBoxLayout()
         self.name_input = QLineEdit()
-        self.name_input.setPlaceholderText("Введите имя...")
+        self.name_input.setPlaceholderText(tr('enter_name'))
         self.name_input.returnPressed.connect(self.create_new_profile)
         input_layout.addWidget(self.name_input)
-        
-        create_btn = QPushButton("Создать")
+
+        create_btn = QPushButton(tr('create'))
         create_btn.clicked.connect(self.create_new_profile)
         create_btn.setFixedWidth(120)
         input_layout.addWidget(create_btn)
@@ -600,12 +629,12 @@ class StartupDialog(QDialog):
             topics_layout.setSpacing(12)
             
             topics_header = QHBoxLayout()
-            topics_label = QLabel("📚 Выберите темы для изучения")
+            topics_label = QLabel(tr('choose_topics'))
             topics_label.setObjectName("titleLabel")
             topics_label.setFont(QFont("Segoe UI", 14))
             topics_header.addWidget(topics_label)
             topics_header.addStretch()
-            add_topic_btn = QPushButton("➕ Добавить тему")
+            add_topic_btn = QPushButton(tr('add_topic'))
             add_topic_btn.setObjectName("secondaryButton")
             add_topic_btn.clicked.connect(self.open_add_topic_dialog)
             topics_header.addWidget(add_topic_btn)
@@ -622,9 +651,7 @@ class StartupDialog(QDialog):
 
             topics_layout.addWidget(self.topics_tree)
 
-            self.empty_topics_label = QLabel(
-                "Пока нет слов. Нажмите «➕ Добавить тему», чтобы создать первую тему."
-            )
+            self.empty_topics_label = QLabel(tr('empty_topics'))
             self.empty_topics_label.setObjectName("subtitleLabel")
             self.empty_topics_label.setWordWrap(True)
             topics_layout.addWidget(self.empty_topics_label)
@@ -638,18 +665,17 @@ class StartupDialog(QDialog):
         mode_layout = QVBoxLayout(mode_frame)
         mode_layout.setSpacing(12)
 
-        mode_label = QLabel("🎯 Режим обучения")
+        mode_label = QLabel(tr('study_mode'))
         mode_label.setObjectName("titleLabel")
         mode_label.setFont(QFont("Segoe UI", 14))
         mode_layout.addWidget(mode_label)
 
-        from PyQt6.QtWidgets import QComboBox
         self.study_mode_combo = QComboBox()
         self.study_mode_options = {
-            'adaptive': '🧠 Адаптивный (рекомендуемый)',
-            'translation': '🌐 Только перевод',
-            'definition': '📝 Только определения',
-            'synonym': '🔀 Только синонимы',
+            'adaptive': tr('mode_adaptive'),
+            'translation': tr('mode_translation'),
+            'definition': tr('mode_definition'),
+            'synonym': tr('mode_synonym'),
         }
         for key, label in self.study_mode_options.items():
             self.study_mode_combo.addItem(label, key)
@@ -657,7 +683,7 @@ class StartupDialog(QDialog):
         layout.addWidget(mode_frame)
 
         # Continue button
-        continue_btn = QPushButton("▶️ Продолжить")
+        continue_btn = QPushButton(tr('continue'))
         continue_btn.clicked.connect(self.select_and_continue)
         layout.addWidget(continue_btn)
     
@@ -677,7 +703,7 @@ class StartupDialog(QDialog):
 
             # Create parent item
             parent = QTreeWidgetItem(self.topics_tree)
-            parent.setText(0, f"📁 {group_name} ({total_words} слов)")
+            parent.setText(0, f"📁 {group_name} ({tr('words_n', n=total_words)})")
             parent.setFlags(
                 parent.flags()
                 | Qt.ItemFlag.ItemIsUserCheckable
@@ -694,7 +720,7 @@ class StartupDialog(QDialog):
                 display_name = match.group(1) if match else cat
 
                 child = QTreeWidgetItem(parent)
-                child.setText(0, f"{display_name} ({word_count} слов)")
+                child.setText(0, f"{display_name} ({tr('words_n', n=word_count)})")
                 child.setFlags(
                     child.flags() | Qt.ItemFlag.ItemIsUserCheckable
                 )
@@ -768,11 +794,11 @@ class StartupDialog(QDialog):
         """Creates a new profile and selects it."""
         name = self.name_input.text().strip()
         if not name:
-            QMessageBox.warning(self, "Ошибка", "Введите имя профиля!")
+            QMessageBox.warning(self, tr('err_title'), tr('err_enter_name'))
             return
-        
+
         if profile_manager.profile_exists(name):
-            QMessageBox.warning(self, "Ошибка", f"Профиль '{name}' уже существует!")
+            QMessageBox.warning(self, tr('err_title'), tr('err_profile_exists', name=name))
             return
         
         profile_manager.create_profile(name)
@@ -791,7 +817,7 @@ class StartupDialog(QDialog):
         """Selects the current profile and closes the dialog."""
         current_item = self.profile_list.currentItem()
         if not current_item:
-            QMessageBox.warning(self, "Ошибка", "Выберите или создайте профиль!")
+            QMessageBox.warning(self, tr('err_title'), tr('err_select_profile'))
             return
         
         self.selected_username = current_item.data(Qt.ItemDataRole.UserRole)

@@ -66,6 +66,7 @@ from management_window import ManagementWindow
 from startup_dialog import StartupDialog
 from icon import icon_b64
 import profile_manager
+from i18n import tr
 
 # Global hotkey support
 try:
@@ -103,10 +104,16 @@ class FlashcardApp:
         # Load vocabulary first (needed for startup dialog)
         self.vocabulary = Vocabulary()
 
-        # Show startup dialog for profile selection
-        startup = StartupDialog(vocabulary=self.vocabulary)
-        if startup.exec() != startup.DialogCode.Accepted:
-            sys.exit(0)
+        # Show startup dialog for profile selection. It returns RESTART_CODE when
+        # the user switches the interface language, so we re-open it localized.
+        while True:
+            startup = StartupDialog(vocabulary=self.vocabulary)
+            code = startup.exec()
+            if code == StartupDialog.RESTART_CODE:
+                continue
+            if code != startup.DialogCode.Accepted:
+                sys.exit(0)
+            break
 
         username, selected_topics, study_mode = startup.get_result()
         self.current_user = username
@@ -150,25 +157,25 @@ class FlashcardApp:
         self.user_action = QAction(f"👤 {username}")
         self.user_action.setEnabled(False)
 
-        self.manage_action = QAction("📚 Управление...")
+        self.manage_action = QAction(tr('tray_manage'))
         self.manage_action.triggered.connect(self.show_management_window)
 
-        self.shuffle_action = QAction("🔀 Перемешать колоду")
+        self.shuffle_action = QAction(tr('tray_shuffle'))
         self.shuffle_action.triggered.connect(self.shuffle_deck)
 
-        self.next_card_action = QAction(f"▶️ Следующая карточка ({hotkey})")
+        self.next_card_action = QAction(tr('tray_next_card', hotkey=hotkey))
         self.next_card_action.triggered.connect(self.force_show_flashcard)
 
-        self.switch_user_action = QAction("🏠 Главное меню")
+        self.switch_user_action = QAction(tr('tray_main_menu'))
         self.switch_user_action.triggered.connect(self.switch_user)
 
-        self.quit_action = QAction("❌ Выход")
+        self.quit_action = QAction(tr('tray_quit'))
         self.quit_action.triggered.connect(self.quit_app)
 
         # Quick topic switcher: a checkable submenu right in the tray, so a set can
         # be toggled in two clicks without opening the management window (or having
         # to "switch user"). Rebuilt on open so added/deleted topics stay in sync.
-        self.topics_menu = QMenu("📚 Темы")
+        self.topics_menu = QMenu(tr('tray_topics'))
         self.topics_menu.aboutToShow.connect(self._rebuild_topics_menu)
 
         # Menu
@@ -475,8 +482,8 @@ class FlashcardApp:
         self.vocabulary.shuffle_deck(self.stats_manager, active_topics if active_topics else None)
 
         self.tray_icon.showMessage(
-            "Колода перемешана",
-            f"Новая сессия из {len(self.vocabulary.deck)} карт!",
+            tr('deck_shuffled'),
+            tr('deck_shuffled_msg', n=len(self.vocabulary.deck)),
             QSystemTrayIcon.MessageIcon.Information,
             2000
         )
@@ -499,13 +506,13 @@ class FlashcardApp:
         all_active = not active            # empty list = every topic is active
         selected = set(active)
 
-        select_all = QAction("✅ Выбрать все", menu)
+        select_all = QAction(tr('tray_select_all'), menu)
         select_all.triggered.connect(self._select_all_topics)
         menu.addAction(select_all)
         menu.addSeparator()
 
         if not all_topics:
-            empty = QAction("(нет тем)", menu)
+            empty = QAction(tr('tray_no_topics'), menu)
             empty.setEnabled(False)
             menu.addAction(empty)
             return
@@ -557,8 +564,8 @@ class FlashcardApp:
         count = len(active) if active else len(self.vocabulary.get_all_topics())
         if self.config_manager.get('show_notifications', True):
             self.tray_icon.showMessage(
-                "Темы обновлены",
-                f"Активно тем: {count} · карт в колоде: {len(self.vocabulary.deck)}",
+                tr('topics_updated'),
+                tr('topics_updated_msg', count=count, deck=len(self.vocabulary.deck)),
                 QSystemTrayIcon.MessageIcon.Information,
                 1800,
             )

@@ -6,6 +6,8 @@ from PyQt6.QtWidgets import (
 from PyQt6.QtCore import Qt, pyqtSignal, QTimer, QPoint
 from PyQt6.QtGui import QPainter
 
+from i18n import tr
+
 
 # --- Color themes per study mode ---
 MODE_THEMES = {
@@ -381,7 +383,7 @@ class FlashcardWidget(QFrame):
         main_layout.setContentsMargins(0, 0, 0, 0)
         main_layout.setSpacing(0)
 
-        self.drag_bar = QLabel("⋮⋮ Перетащи меня ⋮⋮")
+        self.drag_bar = QLabel(tr('drag_me'))
         self.drag_bar.setObjectName("dragBar")
         self.drag_bar.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.drag_bar.setFixedHeight(28)
@@ -411,7 +413,7 @@ class FlashcardWidget(QFrame):
         self.hint_button.setCursor(Qt.CursorShape.PointingHandCursor)
         self.hint_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.hint_button.setFixedSize(32, 32)
-        self.hint_button.setToolTip("Подсказка")
+        self.hint_button.setToolTip(tr('hint_tooltip'))
         self.hint_button.clicked.connect(self.toggle_hint)
         # Styled via apply_stylesheet (#hintButton), exactly like #deleteButton.
         # A per-widget stylesheet here would miss the generic QPushButton padding
@@ -444,7 +446,7 @@ class FlashcardWidget(QFrame):
         else:
             self.setup_text_input_ui(content_layout)
 
-        self.check_button = QPushButton("Check Answer")
+        self.check_button = QPushButton(tr('check_answer'))
         self.check_button.clicked.connect(self.check_answer)
         self.check_button.setDefault(True)
         content_layout.addWidget(self.check_button)
@@ -483,7 +485,7 @@ class FlashcardWidget(QFrame):
         delete_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         delete_button.setObjectName("deleteButton")
         delete_button.setFixedSize(32, 32)
-        delete_button.setToolTip("Удалить эту карточку навсегда")
+        delete_button.setToolTip(tr('delete_card_tooltip'))
         delete_button.clicked.connect(self.request_delete)
         return delete_button
 
@@ -597,7 +599,10 @@ class FlashcardWidget(QFrame):
         base_mode = self.study_mode.split('_')[0]
         theme = MODE_THEMES.get(base_mode, MODE_THEMES['translation'])
         self.answer_input = GrabOnClickLineEdit(self._engage_for_typing)
-        self.answer_input.setPlaceholderText(theme['placeholder'])
+        _ph = {'translation': tr('ph_translation'),
+               'definition': tr('ph_definition'),
+               'synonym': tr('ph_synonym')}.get(base_mode, tr('ph_translation'))
+        self.answer_input.setPlaceholderText(_ph)
         self.answer_input.returnPressed.connect(self.check_answer)
         layout.addWidget(self.answer_input)
         # NOTE: intentionally NOT calling setFocus() here — that would grab the
@@ -702,21 +707,21 @@ class FlashcardWidget(QFrame):
 
         if self.study_mode.startswith('definition'):
             self.question_label.setText(
-                f"Define: <b>{english_prompt}</b>"
+                f"{tr('prompt_define')} <b>{english_prompt}</b>"
             )
         elif self.study_mode.startswith('synonym'):
             self.question_label.setText(
-                f"Synonym for: <b>{english_prompt}</b>"
+                f"{tr('prompt_synonym')} <b>{english_prompt}</b>"
             )
         elif self.is_transition_card:
             question_text = english_prompt if self.question_lang == 'english' else self.card.get(self.question_lang, word)
             self.question_label.setText(
-                f"Transition: <b>{question_text}</b>"
+                f"{tr('prompt_transition')} <b>{question_text}</b>"
             )
         else:
             question_text = english_prompt if self.question_lang == 'english' else self.card.get(self.question_lang, word)
             self.question_label.setText(
-                f"Translate: <b>{question_text}</b>"
+                f"{tr('prompt_translate')} <b>{question_text}</b>"
             )
 
     def check_answer(self):

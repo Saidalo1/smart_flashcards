@@ -24,7 +24,9 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "dist\SmartFlashcards\SmartFlashcards.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "dist\SmartFlashcards\_internal\*"; DestDir: "{app}\_internal"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "dist\SmartFlashcards\data\*"; DestDir: "{app}\data"; Flags: ignoreversion recursesubdirs createallsubdirs
+; NOTE: user data (vocabulary, profiles, config, logs) is intentionally NOT shipped.
+; The app creates it per-user in %APPDATA%\SmartFlashcards on first run, so each
+; user starts with their own empty vocabulary and their data survives uninstall.
 
 [Icons]
 Name: "{group}\Smart Flashcards"; Filename: "{app}\SmartFlashcards.exe"

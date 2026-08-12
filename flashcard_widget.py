@@ -1,10 +1,10 @@
 import random
-from PyQt6.QtWidgets import (
+from PySide6.QtWidgets import (
     QFrame, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton,
     QGroupBox, QRadioButton, QStyle, QStyleOption, QButtonGroup, QLayout
 )
-from PyQt6.QtCore import Qt, pyqtSignal, QTimer, QPoint
-from PyQt6.QtGui import QPainter
+from PySide6.QtCore import Qt, Signal, QTimer, QPoint
+from PySide6.QtGui import QPainter
 
 from i18n import tr
 
@@ -94,7 +94,7 @@ class PremiumOptionWidget(QFrame):
 
     Handles long definition texts gracefully without clipping.
     """
-    clicked = pyqtSignal()
+    clicked = Signal()
 
     def __init__(self, text, parent=None):
         super().__init__(parent)
@@ -222,8 +222,8 @@ class GrabOnClickLineEdit(QLineEdit):
 
 class FlashcardWidget(QFrame):
     """A widget to display a flashcard question and handle user input."""
-    closed = pyqtSignal()
-    card_delete_requested = pyqtSignal(dict)
+    closed = Signal()
+    card_delete_requested = Signal(dict)
 
     def __init__(self, card, stats_manager, vocabulary, similarity_checker,
                  is_multiple_choice=False, config_manager=None,
@@ -249,7 +249,7 @@ class FlashcardWidget(QFrame):
         self._x11_overlay = False
         try:
             import sys as _sys
-            from PyQt6.QtWidgets import QApplication as _QA
+            from PySide6.QtWidgets import QApplication as _QA
             _app = _QA.instance()
             self._x11_overlay = (
                 _sys.platform.startswith('linux')

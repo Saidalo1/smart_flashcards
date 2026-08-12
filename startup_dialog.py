@@ -3,13 +3,13 @@ Startup dialog for selecting user profile and initial setup.
 """
 
 import re
-from PyQt6.QtWidgets import (
+from PySide6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QLabel, QPushButton,
     QListWidget, QListWidgetItem, QLineEdit, QMessageBox,
     QFrame, QWidget, QTreeWidget, QTreeWidgetItem, QComboBox
 )
-from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QFont
+from PySide6.QtCore import Qt
+from PySide6.QtGui import QFont
 
 import profile_manager
 from i18n import tr, set_language, get_language, LANGUAGES
@@ -286,7 +286,7 @@ class WordDetailsDialog(QDialog):
 
     def __init__(self, english="", data=None, parent=None):
         super().__init__(parent)
-        from PyQt6.QtWidgets import QListWidget
+        from PySide6.QtWidgets import QListWidget
         data = data or {}
         self.setWindowTitle(tr('word_details'))
         self.setMinimumWidth(460)
@@ -384,7 +384,7 @@ class AddTopicDialog(QDialog):
         self._build_ui()
 
     def _build_ui(self):
-        from PyQt6.QtWidgets import QTableWidget, QHeaderView, QComboBox, QTableWidgetItem
+        from PySide6.QtWidgets import QTableWidget, QHeaderView, QComboBox, QTableWidgetItem
 
         layout = QVBoxLayout(self)
         layout.setContentsMargins(24, 24, 24, 24)
@@ -474,7 +474,7 @@ class AddTopicDialog(QDialog):
         self.table.setCellWidget(row, 3, btn)
 
     def _open_details(self):
-        from PyQt6.QtWidgets import QTableWidgetItem
+        from PySide6.QtWidgets import QTableWidgetItem
         btn = self.sender()
         row = next((r for r in range(self.table.rowCount())
                     if self.table.cellWidget(r, 3) is btn), -1)

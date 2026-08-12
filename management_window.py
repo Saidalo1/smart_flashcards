@@ -4,14 +4,14 @@ Modern management window with vocabulary, statistics, and settings tabs.
 """
 
 import re
-from PyQt6.QtWidgets import (
+from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QPushButton, QTableWidget, QTableWidgetItem, 
     QHeaderView, QAbstractItemView, QDialog, QLineEdit, QDialogButtonBox, 
     QMessageBox, QTabWidget, QHBoxLayout, QLabel, QSlider, QSpinBox,
     QFrame, QGraphicsDropShadowEffect, QTreeWidget, QTreeWidgetItem, QCheckBox
 )
-from PyQt6.QtCore import Qt
-from PyQt6.QtGui import QColor, QFont
+from PySide6.QtCore import Qt
+from PySide6.QtGui import QColor, QFont
 
 from i18n import tr
 
@@ -417,7 +417,7 @@ class ManagementWindow(QDialog):
 
     def setup_settings_tab(self):
         """Sets up the settings tab with a modern UI and a scroll area to prevent distortion."""
-        from PyQt6.QtWidgets import QScrollArea
+        from PySide6.QtWidgets import QScrollArea
 
         # Main layout for the tab
         main_tab_layout = QVBoxLayout(self.settings_tab)
@@ -456,7 +456,7 @@ class ManagementWindow(QDialog):
         mode_desc.setWordWrap(True)
         mode_card_layout.addWidget(mode_desc)
 
-        from PyQt6.QtWidgets import QComboBox
+        from PySide6.QtWidgets import QComboBox
         self.study_mode_combo = QComboBox()
         self.study_mode_options = {
             'adaptive': tr('mode_adaptive'),
@@ -628,7 +628,7 @@ class ManagementWindow(QDialog):
         position_desc = QLabel(tr('set_position_desc2'))
         position_layout.addWidget(position_desc)
 
-        from PyQt6.QtWidgets import QComboBox
+        from PySide6.QtWidgets import QComboBox
         self.position_combo = QComboBox()
         self.position_options = {
             'bottom_right': tr('pos_bottom_right'),
@@ -827,7 +827,7 @@ class ManagementWindow(QDialog):
     def keyPressEvent(self, event):
         """Captures key for hotkey setting with L/R modifier support."""
         if hasattr(self, '_capturing_hotkey') and self._capturing_hotkey:
-            from PyQt6.QtCore import Qt
+            from PySide6.QtCore import Qt
             key = event.key()
             scan_code = event.nativeScanCode()
             modifiers = event.modifiers()
@@ -1048,7 +1048,7 @@ class ManagementWindow(QDialog):
         import os
         import sys
         import subprocess
-        from PyQt6.QtWidgets import QApplication
+        from PySide6.QtWidgets import QApplication
         self.close()
         # See main.FlashcardApp.switch_user: strip _MEIPASS2 and drop argv[0] so the
         # onefile bootloader in the child doesn't fail to start.

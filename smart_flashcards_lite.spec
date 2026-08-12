@@ -5,7 +5,7 @@ FRIENDS build of Smart Flashcards — a SINGLE self-contained .exe (onefile).
 - Excludes the heavy ML stack (torch/sentence-transformers) → RapidFuzz-only
   grading, small size. The app imports sentence-transformers lazily and falls
   back to RapidFuzz when absent, so excluding it is safe.
-- onefile: everything (Python + PyQt6 + rapidfuzz) is packed into ONE .exe.
+- onefile: everything (Python + PySide6 + rapidfuzz) is packed into ONE .exe.
   The friend just double-clicks it — nothing to install, no folder, no archive.
 
 Build:  .venv\\Scripts\\python.exe -m PyInstaller smart_flashcards_lite.spec --noconfirm
@@ -35,6 +35,9 @@ a = Analysis(
         'torch', 'torchvision', 'torchaudio', 'torchgen',
         'sentence_transformers', 'transformers', 'huggingface_hub',
         'tokenizers', 'safetensors', 'scipy', 'sklearn', 'matplotlib',
+        # The app uses PySide6; PyQt6 may also be present in the venv. Exclude the
+        # other Qt bindings so PyInstaller never bundles two Qt stacks.
+        'PyQt6', 'PyQt5', 'PySide2',
     ],
     win_no_prefer_redirects=False,
     win_private_assemblies=False,

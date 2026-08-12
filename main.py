@@ -5,9 +5,9 @@ import signal
 import sys
 from datetime import datetime
 
-from PyQt6.QtCore import QTimer, pyqtSignal, QObject
-from PyQt6.QtGui import QIcon, QPixmap, QAction
-from PyQt6.QtWidgets import QApplication, QSystemTrayIcon, QMenu
+from PySide6.QtCore import QTimer, Signal, QObject
+from PySide6.QtGui import QIcon, QPixmap, QAction
+from PySide6.QtWidgets import QApplication, QSystemTrayIcon, QMenu
 
 from app_paths import get_data_dir
 
@@ -95,7 +95,7 @@ APP_NAME = "Smart Flashcards"
 
 class HotkeySignal(QObject):
     """Signal emitter for global hotkey."""
-    triggered = pyqtSignal()
+    triggered = Signal()
 
 
 class FlashcardApp:
@@ -612,8 +612,8 @@ class FlashcardApp:
 
     def _ask_language_first_run(self):
         """First launch only: a small three-button interface-language picker."""
-        from PyQt6.QtWidgets import QDialog, QVBoxLayout, QLabel, QPushButton
-        from PyQt6.QtCore import Qt
+        from PySide6.QtWidgets import QDialog, QVBoxLayout, QLabel, QPushButton
+        from PySide6.QtCore import Qt
         from i18n import LANGUAGES, set_language
 
         dlg = QDialog()
@@ -706,7 +706,7 @@ class FlashcardApp:
 
     def position_widget(self, widget):
         """Positions widget based on config setting."""
-        from PyQt6.QtGui import QCursor
+        from PySide6.QtGui import QCursor
 
         screen_geometry = QApplication.primaryScreen().availableGeometry()
         widget_size = widget.frameGeometry().size()

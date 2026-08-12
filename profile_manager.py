@@ -53,10 +53,11 @@ def create_profile(username):
     config_file = profile_path / 'config.json'
     if not config_file.exists():
         default_config = {
-            'timer_interval': 30,
-            'hotkey': 'F7',
+            'timer_interval': 10,
+            'hotkey': 'shift_r',
             'active_topics': [],
-            'show_notifications': True
+            'show_notifications': True,
+            'semantic_grading': False,
         }
         config_file.write_text(json.dumps(default_config, indent=2), encoding='utf-8')
     # Create empty stats

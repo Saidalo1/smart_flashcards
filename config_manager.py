@@ -11,8 +11,8 @@ DEFAULT_CONFIG_FILE = DATA_DIR / 'config.json'
 
 # Default settings
 DEFAULT_CONFIG = {
-    'timer_interval': 30,
-    'hotkey': 'F7',
+    'timer_interval': 10,
+    'hotkey': 'shift_r',
     'card_position': 'bottom_right',  # bottom_right, mouse, center, top_right, top_left, bottom_left
     'active_topics': [],
     'topic_weights': {},
@@ -27,8 +27,9 @@ DEFAULT_CONFIG = {
     # forgives typos/case/spacing before any semantic check.
     'fuzz_threshold': 85,
     # Whether to use the semantic model as a fallback (accepts synonyms/paraphrases).
-    # Turn OFF for a strict, lightweight build (RapidFuzz only, no model download).
-    'semantic_grading': True,
+    # OFF by default: strict RapidFuzz-only grading (no false positives like
+    # copper≈rubber, no ~470 MB model download). Turn ON to accept synonyms.
+    'semantic_grading': False,
 }
 
 

@@ -62,12 +62,13 @@ class SimilarityChecker:
                   f"Falling back to RapidFuzz string matching only.")
 
     def _fuzzy_match(self, a, b):
-        """Fast, typo-tolerant string match. True if strings are close enough."""
-        if not RAPIDFUZZ_AVAILABLE:
-            return False
-        a1, b1 = a.lower(), b.lower()
+        """Fast string match. An exact (case/space-insensitive) match always
+        counts; typo tolerance additionally needs RapidFuzz."""
+        a1, b1 = a.strip().lower(), b.strip().lower()
         if a1 == b1:
             return True
+        if not RAPIDFUZZ_AVAILABLE:
+            return False
         score = max(fuzz.ratio(a1, b1), fuzz.token_sort_ratio(a1, b1))
         if score >= self.fuzz_threshold:
             print(f"Fuzzy match: '{a}' ~ '{b}' (score {score:.0f} >= {self.fuzz_threshold})")

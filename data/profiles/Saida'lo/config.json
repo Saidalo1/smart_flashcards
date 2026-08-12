@@ -2,11 +2,14 @@
   "timer_interval": 10,
   "hotkey": "shift_r",
   "active_topics": [
-    "vocab 11 (1-15)"
+    "vocab 2"
   ],
   "show_notifications": true,
   "topic_weights": {},
   "theme": "dark",
   "card_position": "middle_right",
-  "study_mode": "adaptive"
+  "study_mode": "adaptive",
+  "similarity_threshold": 0.6,
+  "fuzz_threshold": 85,
+  "semantic_grading": true
 }

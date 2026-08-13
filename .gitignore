@@ -254,6 +254,8 @@ build/
 dist/
 # Nuitka compiled output
 nuitka_build/
+# Generated cloud-catalog content (belongs in the dist repo, not here)
+content/
 *.build/
 *.dist/
 *.onefile-build/

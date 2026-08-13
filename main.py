@@ -626,6 +626,7 @@ class FlashcardApp:
         self.next_question_is_mc = not self.next_question_is_mc
         self.flashcard_widget.closed.connect(self.on_widget_closed)
         self.flashcard_widget.card_delete_requested.connect(self.handle_card_deletion)
+        self.flashcard_widget.menu_requested.connect(self._show_card_menu)
 
         # --- ИСПРАВЛЕННЫЙ ПОРЯДОК ТУТ ---
         self.flashcard_widget.show()  # 1. Сначала показываем (Qt инициализирует метрики)
@@ -642,6 +643,13 @@ class FlashcardApp:
 
     def on_widget_closed(self):
         self.flashcard_widget = None
+
+    def _show_card_menu(self):
+        """⚙ on the flashcard pops up the same menu as the tray icon, so Manage,
+        Settings, shuffle, etc. are reachable during study without hunting for the
+        system-tray icon."""
+        from PySide6.QtGui import QCursor
+        self.tray_menu.popup(QCursor.pos())
 
     def handle_card_deletion(self, card_to_delete):
         english_word = card_to_delete.get('english') if isinstance(card_to_delete, dict) else card_to_delete

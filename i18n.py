@@ -80,6 +80,14 @@ STRINGS = {
     'catalog_done':       {'ru': 'Готово',                    'uz': 'Tayyor',                             'en': 'Done'},
     'catalog_words_n':    {'ru': '{n} слов',                  'uz': "{n} so'z",                           'en': '{n} words'},
 
+    # ---------------- Manage entry points ----------------
+    'welcome_manage_tooltip': {'ru': 'Управление: словарь, статистика, настройки',
+                               'uz': 'Boshqaruv: lugʻat, statistika, sozlamalar',
+                               'en': 'Manage: vocabulary, statistics, settings'},
+    'select_profile_first':   {'ru': 'Сначала выберите профиль в списке.',
+                               'uz': 'Avval roʻyxatdan profil tanlang.',
+                               'en': 'Select a profile from the list first.'},
+
     # ---------------- Tray menu ----------------
     'tray_manage':        {'ru': '📚 Управление...',          'uz': '📚 Boshqaruv...',                    'en': '📚 Manage...'},
     'tray_shuffle':       {'ru': '🔀 Перемешать колоду',      'uz': "🔀 To'plamni aralashtirish",         'en': '🔀 Shuffle deck'},
@@ -103,6 +111,7 @@ STRINGS = {
     'check_answer':       {'ru': 'Проверить',                 'uz': 'Tekshirish',                         'en': 'Check Answer'},
     'hint_tooltip':       {'ru': 'Подсказка',                 'uz': 'Izoh',                               'en': 'Hint'},
     'delete_card_tooltip':{'ru': 'Удалить эту карточку навсегда', 'uz': "Bu kartani butunlay o'chirish",   'en': 'Delete this card permanently'},
+    'card_menu_tooltip':  {'ru': 'Меню: управление, настройки…', 'uz': 'Menyu: boshqaruv, sozlamalar…',    'en': 'Menu: manage, settings…'},
     'ph_translation':     {'ru': 'Введите перевод...',        'uz': 'Tarjimani kiriting...',              'en': 'Enter the translation...'},
     'ph_definition':      {'ru': 'Что означает это слово?...', 'uz': "Bu so'z nimani anglatadi?...",       'en': 'What does this word mean?...'},
     'ph_synonym':         {'ru': 'Введите синоним...',        'uz': 'Sinonim kiriting...',                'en': 'Enter a synonym...'},

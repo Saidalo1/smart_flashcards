@@ -224,6 +224,7 @@ class FlashcardWidget(QFrame):
     """A widget to display a flashcard question and handle user input."""
     closed = Signal()
     card_delete_requested = Signal(dict)
+    menu_requested = Signal()  # ⚙ on the card → app pops up the menu (Manage, etc.)
 
     def __init__(self, card, stats_manager, vocabulary, similarity_checker,
                  is_multiple_choice=False, config_manager=None,
@@ -421,6 +422,17 @@ class FlashcardWidget(QFrame):
         self.hint_button.hide()
         top_layout.addWidget(self.hint_button, 0, Qt.AlignmentFlag.AlignTop)
 
+        # ⚙ menu — a discoverable way to reach Manage/Settings etc. during study,
+        # instead of hunting for the system-tray icon.
+        self.menu_button = QPushButton("⚙")
+        self.menu_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.menu_button.setObjectName("menuButton")
+        self.menu_button.setFixedSize(32, 32)
+        self.menu_button.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.menu_button.setToolTip(tr('card_menu_tooltip'))
+        self.menu_button.clicked.connect(self.menu_requested.emit)
+        top_layout.addWidget(self.menu_button, 0, Qt.AlignmentFlag.AlignTop)
+
         top_layout.addWidget(self._create_delete_button(), 0, Qt.AlignmentFlag.AlignTop)
         content_layout.addLayout(top_layout)
 
@@ -591,6 +603,19 @@ class FlashcardWidget(QFrame):
 
             QPushButton#hintButton:hover {{
                 background: rgba(241, 196, 15, 0.15);
+                border-radius: 6px;
+            }}
+
+            QPushButton#menuButton {{
+                background: transparent;
+                border: none;
+                font-size: 18px;
+                color: #9fb0c3;
+                padding: 4px;
+            }}
+
+            QPushButton#menuButton:hover {{
+                background: rgba(159, 176, 195, 0.15);
                 border-radius: 6px;
             }}
         """)

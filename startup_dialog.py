@@ -914,9 +914,23 @@ class StartupDialog(QDialog):
 
         # Left spacer the same width as the language box, so the welcome text stays
         # centred in the dialog instead of being pushed left by the selector.
-        left_spacer = QWidget()
-        left_spacer.setFixedWidth(max(lang_widget.sizeHint().width(), 160))
-        header_row.addWidget(left_spacer)
+        # Left side of the header holds a ⚙ "Manage" entry point (so it isn't tray-
+        # only) and doubles as the spacer that keeps the welcome text centred against
+        # the language selector on the right.
+        left_widget = QWidget()
+        left_widget.setFixedWidth(max(lang_widget.sizeHint().width(), 160))
+        left_box = QHBoxLayout(left_widget)
+        left_box.setContentsMargins(0, 0, 0, 0)
+        left_box.setSpacing(6)
+        self.manage_btn = QPushButton("⚙")
+        self.manage_btn.setObjectName("secondaryButton")
+        self.manage_btn.setToolTip(tr('welcome_manage_tooltip'))
+        self.manage_btn.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.manage_btn.setFixedSize(40, 40)
+        self.manage_btn.clicked.connect(self.open_management_from_welcome)
+        left_box.addWidget(self.manage_btn, 0, Qt.AlignmentFlag.AlignBottom)
+        left_box.addStretch()
+        header_row.addWidget(left_widget)
         header_row.addStretch(1)
         header_row.addLayout(welcome_box)
         header_row.addStretch(1)
@@ -1121,6 +1135,33 @@ class StartupDialog(QDialog):
         dialog = CatalogDialog(self.vocabulary, self)
         dialog.exec()
         if dialog.changed:
+            self._build_topics_tree()
+
+    def open_management_from_welcome(self):
+        """⚙ in the welcome window → open Manage (vocabulary / stats / settings) for
+        the selected profile, so it isn't reachable only from the system tray. The
+        vocabulary is shared app-wide; only stats/config are per-profile, so we build
+        those for the chosen profile."""
+        if not self.vocabulary:
+            return
+        current = self.profile_list.currentItem()
+        if current is None:
+            QMessageBox.information(self, tr('welcome_title'), tr('select_profile_first'))
+            return
+        username = current.data(Qt.ItemDataRole.UserRole)
+        try:
+            from config_manager import ConfigManager
+            from stats_manager import StatsManager
+            from management_window import ManagementWindow
+            path = profile_manager.get_profile_path(username)
+            cfg = ConfigManager(config_path=path / 'config.json')
+            stats = StatsManager(stats_path=path / 'stats.json')
+            ManagementWindow(self.vocabulary, stats, cfg).exec()
+        except Exception as e:
+            QMessageBox.warning(self, tr('err_title'), str(e))
+            return
+        # Vocabulary may have changed (words added/removed) — refresh the tree.
+        if hasattr(self, 'topics_tree'):
             self._build_topics_tree()
 
     def _on_topic_item_changed(self, item, column):

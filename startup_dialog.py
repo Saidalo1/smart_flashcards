@@ -9,7 +9,7 @@ from PySide6.QtWidgets import (
     QFrame, QWidget, QTreeWidget, QTreeWidgetItem, QComboBox,
     QStyledItemDelegate, QStyle
 )
-from PySide6.QtCore import Qt, QSize, QRect, QEvent
+from PySide6.QtCore import Qt, QSize, QRect, QEvent, QObject, Signal
 from PySide6.QtGui import QFont, QColor
 
 import profile_manager
@@ -264,6 +264,36 @@ QPushButton#segButton:checked {
     background: qlineargradient(x1:0, y1:0, x2:1, y2:0, stop:0 #667eea, stop:1 #764ba2);
     color: white;
     border-color: transparent;
+}
+"""
+
+
+CATALOG_STYLE = """
+QTreeWidget {
+    background: #1e2235;
+    border: 1px solid #2a2e45;
+    border-radius: 10px;
+    color: #eee;
+    font-size: 14px;
+    outline: none;
+}
+QTreeWidget::item { padding: 6px 4px; }
+QTreeWidget::item:selected { background: transparent; }
+/* Per-row buttons sit in column 1; keep them compact so rows stay tidy. */
+QTreeWidget QPushButton {
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 8px;
+}
+QPushButton#addedButton {
+    background: #1e3a2a;
+    color: #57d98a;
+    border: 1px solid #2c5a3f;
+}
+QPushButton#addedButton:disabled {
+    background: #1e3a2a;
+    color: #57d98a;
 }
 """
 
@@ -570,6 +600,246 @@ class ProfileItemDelegate(QStyledItemDelegate):
         return super().editorEvent(event, model, option, index)
 
 
+class _CatalogSignals(QObject):
+    """Cross-thread signals for the cloud catalog. Network work runs on daemon
+    threads (like the auto-updater); results come back to the UI via these."""
+    catalog_loaded = Signal(object)       # list of categories, or None on error
+    topic_loaded = Signal(str, object)    # topic_id, list of words (or None)
+
+
+class CatalogDialog(QDialog):
+    """Browse curated topic sets from the public content repo and download them
+    straight into the local vocabulary. Read-only cloud → local; nothing is ever
+    uploaded. Fetching is off-thread so the window never freezes; offline is a
+    first-class state with a Retry button."""
+
+    def __init__(self, vocabulary, parent=None):
+        super().__init__(parent)
+        self.vocabulary = vocabulary
+        self.changed = False                 # did we add anything? (parent refreshes if so)
+        self._threads = []                   # keep thread objects alive
+        self._topic_rows = {}                # topic_id → (button, QTreeWidgetItem, name)
+        self._existing_groups = self._current_groups()
+        self.signals = _CatalogSignals()
+        self.signals.catalog_loaded.connect(self._on_catalog_loaded)
+        self.signals.topic_loaded.connect(self._on_topic_loaded)
+        self.setWindowTitle(tr('catalog_title'))
+        self.setMinimumSize(560, 600)
+        self.setStyleSheet(STARTUP_STYLE + CATALOG_STYLE)
+        self._build_ui()
+        self._load_catalog()
+
+    def _current_groups(self):
+        """Group names already present locally (so we can mark topics as added)."""
+        return set(self.vocabulary.get_grouped_topics().keys()) if self.vocabulary else set()
+
+    def _build_ui(self):
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(24, 24, 24, 24)
+        layout.setSpacing(12)
+
+        title = QLabel(tr('catalog_title'))
+        title.setObjectName("titleLabel")
+        title.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(title)
+
+        subtitle = QLabel(tr('catalog_subtitle'))
+        subtitle.setObjectName("subtitleLabel")
+        subtitle.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        subtitle.setWordWrap(True)
+        layout.addWidget(subtitle)
+
+        self.search = QLineEdit()
+        self.search.setPlaceholderText(tr('catalog_search_ph'))
+        self.search.textChanged.connect(self._apply_filter)
+        self.search.setVisible(False)
+        layout.addWidget(self.search)
+
+        # Status line (loading / offline / empty) shown instead of the tree.
+        self.status = QLabel(tr('catalog_loading'))
+        self.status.setObjectName("subtitleLabel")
+        self.status.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.status.setWordWrap(True)
+        layout.addWidget(self.status)
+
+        self.retry_btn = QPushButton(tr('catalog_retry'))
+        self.retry_btn.setObjectName("secondaryButton")
+        self.retry_btn.clicked.connect(self._load_catalog)
+        self.retry_btn.setVisible(False)
+        retry_row = QHBoxLayout()
+        retry_row.addStretch()
+        retry_row.addWidget(self.retry_btn)
+        retry_row.addStretch()
+        layout.addLayout(retry_row)
+
+        self.tree = QTreeWidget()
+        self.tree.setHeaderHidden(True)
+        self.tree.setRootIsDecorated(True)
+        self.tree.setAnimated(True)
+        self.tree.setIndentation(18)
+        self.tree.setColumnCount(2)
+        self.tree.setColumnWidth(1, 140)
+        self.tree.header().setStretchLastSection(False)
+        from PySide6.QtWidgets import QHeaderView
+        self.tree.header().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
+        self.tree.header().setSectionResizeMode(1, QHeaderView.ResizeMode.Fixed)
+        self.tree.setVisible(False)
+        layout.addWidget(self.tree, 1)
+
+        done = QPushButton(tr('catalog_done'))
+        done.clicked.connect(self.accept)
+        layout.addWidget(done)
+
+    # ---- loading ----
+    def _load_catalog(self):
+        import threading
+        self.status.setText(tr('catalog_loading'))
+        self.status.setVisible(True)
+        self.retry_btn.setVisible(False)
+        self.tree.setVisible(False)
+        self.search.setVisible(False)
+
+        def work():
+            try:
+                import catalog
+                cats = catalog.fetch_catalog()
+            except Exception:
+                cats = None
+            self.signals.catalog_loaded.emit(cats)
+
+        t = threading.Thread(target=work, daemon=True)
+        self._threads.append(t)
+        t.start()
+
+    def _on_catalog_loaded(self, cats):
+        if not cats:
+            self.status.setText(tr('catalog_offline'))
+            self.status.setVisible(True)
+            self.retry_btn.setVisible(True)
+            return
+        self._populate(cats)
+
+    def _populate(self, cats):
+        self.tree.clear()
+        self._topic_rows = {}
+        self._existing_groups = self._current_groups()
+        any_topic = False
+        for cat in cats:
+            cat_name = (cat or {}).get('name') or ''
+            topics = (cat or {}).get('topics') or []
+            if not topics:
+                continue
+            parent = QTreeWidgetItem(self.tree)
+            parent.setText(0, f"📁 {cat_name}")
+            f = parent.font(0); f.setBold(True); parent.setFont(0, f)
+            parent.setFirstColumnSpanned(True)
+            parent.setExpanded(True)
+            for topic in topics:
+                tid = topic.get('id')
+                tname = topic.get('name') or tid or ''
+                n = topic.get('words') or 0
+                if not tid:
+                    continue
+                any_topic = True
+                child = QTreeWidgetItem(parent)
+                child.setText(0, f"{tname}  ·  {tr('catalog_words_n', n=n)}")
+                btn = QPushButton()
+                btn.setCursor(Qt.CursorShape.PointingHandCursor)
+                btn.clicked.connect(lambda _=False, i=tid: self._add_topic(i))
+                self.tree.setItemWidget(child, 1, btn)
+                self._topic_rows[tid] = (btn, child, tname)
+                self._refresh_button(tid)
+
+        if not any_topic:
+            self.status.setText(tr('catalog_empty'))
+            self.status.setVisible(True)
+            self.tree.setVisible(False)
+            return
+        self.status.setVisible(False)
+        self.retry_btn.setVisible(False)
+        self.tree.setVisible(True)
+        self.search.setVisible(True)
+        self._apply_filter(self.search.text())
+
+    def _refresh_button(self, tid, downloading=False):
+        entry = self._topic_rows.get(tid)
+        if not entry:
+            return
+        btn, _item, name = entry
+        if downloading:
+            btn.setText(tr('catalog_downloading'))
+            btn.setEnabled(False)
+            btn.setObjectName("secondaryButton")
+        elif name in self._existing_groups:
+            btn.setText(tr('catalog_added'))
+            btn.setEnabled(False)
+            btn.setObjectName("addedButton")
+        else:
+            btn.setText(tr('catalog_add'))
+            btn.setEnabled(True)
+            btn.setObjectName("secondaryButton")
+        btn.style().unpolish(btn); btn.style().polish(btn)
+
+    # ---- adding a topic ----
+    def _add_topic(self, tid):
+        import threading
+        self._refresh_button(tid, downloading=True)
+
+        def work():
+            try:
+                import catalog
+                words = catalog.fetch_topic(tid)
+            except Exception:
+                words = None
+            self.signals.topic_loaded.emit(tid, words)
+
+        t = threading.Thread(target=work, daemon=True)
+        self._threads.append(t)
+        t.start()
+
+    def _on_topic_loaded(self, tid, words):
+        entry = self._topic_rows.get(tid)
+        if not entry:
+            return
+        _btn, _item, name = entry
+        if not words:
+            QMessageBox.warning(self, tr('err_title'), tr('catalog_add_failed'))
+            self._refresh_button(tid)
+            return
+        # Words carry their own sub-category ("… (1-15)"); add each group so the
+        # local tree shows the same parent/child structure. add_words_to_topic
+        # dedups by English, so re-adding is safe.
+        from collections import OrderedDict
+        groups = OrderedDict()
+        for w in words:
+            cat = (w.get('category') or name).strip()
+            groups.setdefault(cat, []).append(w)
+        total_added = 0
+        for cat, rows in groups.items():
+            total_added += self.vocabulary.add_words_to_topic(cat, rows)
+        self.changed = True
+        self._existing_groups = self._current_groups()
+        self._refresh_button(tid)
+        self.status.setText(tr('catalog_added_toast', name=name, n=total_added))
+        self.status.setVisible(True)
+
+    # ---- search ----
+    def _apply_filter(self, text):
+        needle = (text or '').strip().lower()
+        for i in range(self.tree.topLevelItemCount()):
+            parent = self.tree.topLevelItem(i)
+            visible_children = 0
+            for j in range(parent.childCount()):
+                child = parent.child(j)
+                match = needle in child.text(0).lower()
+                child.setHidden(not match)
+                if match:
+                    visible_children += 1
+            parent.setHidden(visible_children == 0)
+            if needle and visible_children:
+                parent.setExpanded(True)
+
+
 class StartupDialog(QDialog):
     """Dialog for selecting or creating a user profile at startup."""
 
@@ -691,6 +961,10 @@ class StartupDialog(QDialog):
             topics_label.setFont(QFont("Segoe UI", 14))
             topics_header.addWidget(topics_label)
             topics_header.addStretch()
+            catalog_btn = QPushButton(tr('catalog_btn'))
+            catalog_btn.setObjectName("secondaryButton")
+            catalog_btn.clicked.connect(self.open_catalog_dialog)
+            topics_header.addWidget(catalog_btn)
             add_topic_btn = QPushButton(tr('add_topic'))
             add_topic_btn.setObjectName("secondaryButton")
             add_topic_btn.clicked.connect(self.open_add_topic_dialog)
@@ -817,6 +1091,15 @@ class StartupDialog(QDialog):
             return
         dialog = AddTopicDialog(self.vocabulary, self)
         if dialog.exec() == QDialog.DialogCode.Accepted:
+            self._build_topics_tree()
+
+    def open_catalog_dialog(self):
+        """Opens the cloud catalog browser; refreshes the tree if topics were added."""
+        if not self.vocabulary:
+            return
+        dialog = CatalogDialog(self.vocabulary, self)
+        dialog.exec()
+        if dialog.changed:
             self._build_topics_tree()
 
     def _on_topic_item_changed(self, item, column):

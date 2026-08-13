@@ -176,6 +176,18 @@ class Vocabulary:
             print(f"Could not find '{english_word_to_delete}' to delete.")
             return False
 
+    def delete_topic(self, category):
+        """Removes every word in a category (topic) and saves. Returns how many
+        words were removed."""
+        before = len(self.words)
+        self.words = [w for w in self.words if w.get('category') != category]
+        self.deck = [c for c in self.deck if c.get('category') != category]
+        removed = before - len(self.words)
+        if removed:
+            self.save_words()
+            print(f"Deleted topic '{category}' ({removed} words).")
+        return removed
+
     def get_all_words(self):
         """Returns the entire list of word pairs."""
         return self.words

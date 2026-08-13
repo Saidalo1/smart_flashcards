@@ -4,8 +4,8 @@
 [Setup]
 AppId={{B7E3A1D4-5F2C-4A8B-9D6E-1C3F5A7B9D2E}
 AppName=Smart Flashcards
-AppVersion=1.0.0
-VersionInfoVersion=1.0.0
+AppVersion=1.0.1
+VersionInfoVersion=1.0.1
 AppPublisher=Smart Flashcards
 DefaultDirName={localappdata}\SmartFlashcards
 ; Always show the "choose install location" page (default was auto-hidden when a

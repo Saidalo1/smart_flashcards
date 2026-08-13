@@ -815,6 +815,14 @@ class FlashcardApp:
             x = screen_geometry.right() - widget_size.width() - padding
             y = screen_geometry.bottom() - widget_size.height() - padding
 
+        # Final clamp for EVERY position: re-measure the widget (a long answer can
+        # make the card wider than first measured) and keep it fully on-screen, so it
+        # never runs off the right/bottom edge when the correct answer is shown.
+        real = widget.frameGeometry().size()
+        x = max(screen_geometry.left() + padding,
+                min(x, screen_geometry.right() - real.width() - padding))
+        y = max(screen_geometry.top() + padding,
+                min(y, screen_geometry.bottom() - real.height() - padding))
         widget.move(x, y)
 
     def quit_app(self, *args):

@@ -14,6 +14,7 @@ from PySide6.QtGui import QFont, QColor
 
 import profile_manager
 from i18n import tr, set_language, get_language, LANGUAGES
+from version import __version__
 
 
 STARTUP_STYLE = """
@@ -707,6 +708,9 @@ class StartupDialog(QDialog):
             # cap, then scroll. Re-fit when groups expand/collapse.
             self.topics_tree.itemExpanded.connect(self._fit_topics_tree_height)
             self.topics_tree.itemCollapsed.connect(self._fit_topics_tree_height)
+            # Right-click a topic (or a whole group) to delete it and all its words.
+            self.topics_tree.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+            self.topics_tree.customContextMenuRequested.connect(self._topic_context_menu)
 
             self._build_topics_tree()
 
@@ -747,6 +751,12 @@ class StartupDialog(QDialog):
         continue_btn = QPushButton(tr('continue'))
         continue_btn.clicked.connect(self.select_and_continue)
         layout.addWidget(continue_btn)
+
+        # Version label (small, muted) — lets you confirm an auto-update actually applied.
+        version_lbl = QLabel(f"v{__version__}")
+        version_lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        version_lbl.setStyleSheet("color:#5a6a85; font-size:11px; background:transparent;")
+        layout.addWidget(version_lbl)
     
     def _build_topics_tree(self):
         """Builds the hierarchical topic tree from vocabulary groups."""
@@ -838,6 +848,36 @@ class StartupDialog(QDialog):
 
         self.topics_tree.blockSignals(False)
     
+    def _topic_context_menu(self, pos):
+        """Right-click a topic (leaf) or a group (parent) to delete it and its words."""
+        from PySide6.QtWidgets import QMenu
+        item = self.topics_tree.itemAt(pos)
+        if not item:
+            return
+        # A leaf sub-category stores its full name in UserRole; a parent group has
+        # none, so collect its children's categories instead.
+        own = item.data(0, Qt.ItemDataRole.UserRole)
+        cats = [own] if own else [
+            item.child(i).data(0, Qt.ItemDataRole.UserRole)
+            for i in range(item.childCount())
+            if item.child(i).data(0, Qt.ItemDataRole.UserRole)
+        ]
+        if not cats:
+            return
+        menu = QMenu(self)
+        act = menu.addAction(tr('del_topic'))
+        if menu.exec(self.topics_tree.viewport().mapToGlobal(pos)) is not act:
+            return
+        reply = QMessageBox.question(
+            self, tr('confirm_title'), tr('del_topic_confirm', name=item.text(0)),
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+            QMessageBox.StandardButton.No,
+        )
+        if reply == QMessageBox.StandardButton.Yes:
+            for c in cats:
+                self.vocabulary.delete_topic(c)
+            self._build_topics_tree()
+
     def _fit_profile_list_height(self):
         """Sizes the profile list to its contents (up to 5 rows) so a couple of
         profiles fit without a scrollbar, and only long lists scroll."""

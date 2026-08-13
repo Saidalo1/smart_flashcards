@@ -155,6 +155,14 @@ class FlashcardApp:
             QComboBox QAbstractItemView::item { min-height: 26px; padding: 4px 8px; }
         """)
 
+        # Check for updates as early as possible — a background thread hits the
+        # releases repo now, so an available update is offered right at the welcome
+        # screen (via _on_update_found), not only after the user enters the app.
+        if is_frozen():
+            self._update_checker = UpdateChecker()
+            self._update_checker.update_found.connect(self._on_update_found)
+            self._update_checker.check_async()
+
         # Load vocabulary first (needed for startup dialog)
         self.vocabulary = Vocabulary()
 
@@ -463,13 +471,6 @@ class FlashcardApp:
         print(f"{APP_NAME} started. Topics: {topics}")
         print(f"Cards every {self.config_manager.timer_interval}s.")
 
-        # Background update check (packaged builds only). If a newer release exists
-        # in the public dist repo, offer to download & run its installer.
-        if is_frozen():
-            self._update_checker = UpdateChecker()
-            self._update_checker.update_found.connect(self._on_update_found)
-            self._update_checker.check_async()
-
         sys.exit(self.app.exec())
 
     def _on_update_found(self, version, url):
@@ -485,11 +486,17 @@ class FlashcardApp:
             return
         from updater import download_installer, run_installer
         path = download_installer(url)
-        if path and run_installer(path):
-            # Quit so the installer can replace the running files.
-            self.quit_app()
-        else:
+        if not (path and run_installer(path)):
             QMessageBox.warning(None, tr('update_title'), tr('update_failed'))
+            return
+        # Save stats if the app is fully up (this can fire at the welcome screen,
+        # before managers exist), then exit hard so the installer can replace files.
+        try:
+            if getattr(self, 'stats_manager', None):
+                self.stats_manager.save_stats()
+        except Exception:
+            pass
+        os._exit(0)
 
     def force_show_flashcard(self):
         """Forces showing next card (closes existing).

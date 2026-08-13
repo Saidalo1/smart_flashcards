@@ -100,7 +100,7 @@ class HotkeySignal(QObject):
 
 class UpdateChecker(QObject):
     """Checks the releases repo off the UI thread; signals back if an update exists."""
-    update_found = Signal(str, str)  # (version, installer_url)
+    update_found = Signal(str, str, str)  # (version, installer_url, sha256)
 
     def check_async(self):
         import threading
@@ -113,7 +113,29 @@ class UpdateChecker(QObject):
         except Exception:
             result = None
         if result:
-            self.update_found.emit(result[0], result[1])
+            self.update_found.emit(result[0], result[1], result[2] if len(result) > 2 else "")
+
+
+class DownloadWorker(QObject):
+    """Downloads the installer off the UI thread, reporting progress back to it."""
+    progress = Signal(int)   # 0-100
+    finished = Signal(str)   # path, or "" on failure
+
+    def __init__(self, url):
+        super().__init__()
+        self._url = url
+
+    def start(self):
+        import threading
+        threading.Thread(target=self._run, daemon=True).start()
+
+    def _run(self):
+        try:
+            from updater import download_installer
+            path = download_installer(self._url, progress_cb=lambda p: self.progress.emit(p))
+        except Exception:
+            path = None
+        self.finished.emit(path or "")
 
 
 class FlashcardApp:
@@ -473,9 +495,11 @@ class FlashcardApp:
 
         sys.exit(self.app.exec())
 
-    def _on_update_found(self, version, url):
-        """A newer release exists — offer to download and run its installer."""
-        from PySide6.QtWidgets import QMessageBox
+    def _on_update_found(self, version, url, sha):
+        """A newer release exists — offer to download it (with a progress bar), verify
+        its SHA-256, then run the installer SILENTLY (no wizard). May fire at the
+        welcome screen (before managers exist), so exit defensively."""
+        from PySide6.QtWidgets import QMessageBox, QProgressDialog
         reply = QMessageBox.question(
             None, tr('update_title'),
             tr('update_available', version=version),
@@ -484,19 +508,33 @@ class FlashcardApp:
         )
         if reply != QMessageBox.StandardButton.Yes:
             return
-        from updater import download_installer, run_installer
-        path = download_installer(url)
-        if not (path and run_installer(path)):
-            QMessageBox.warning(None, tr('update_title'), tr('update_failed'))
-            return
-        # Save stats if the app is fully up (this can fire at the welcome screen,
-        # before managers exist), then exit hard so the installer can replace files.
-        try:
-            if getattr(self, 'stats_manager', None):
-                self.stats_manager.save_stats()
-        except Exception:
-            pass
-        os._exit(0)
+
+        dlg = QProgressDialog(tr('update_downloading'), None, 0, 100, None)
+        dlg.setWindowTitle(tr('update_title'))
+        dlg.setCancelButton(None)
+        dlg.setMinimumDuration(0)
+        dlg.setValue(0)
+        dlg.show()
+
+        worker = DownloadWorker(url)
+        self._dl_worker = worker  # keep a reference so it isn't garbage-collected
+        worker.progress.connect(dlg.setValue)
+
+        def _on_downloaded(path):
+            dlg.close()
+            from updater import verify_sha256, run_installer
+            if not path or not verify_sha256(path, sha) or not run_installer(path):
+                QMessageBox.warning(None, tr('update_title'), tr('update_failed'))
+                return
+            try:
+                if getattr(self, 'stats_manager', None):
+                    self.stats_manager.save_stats()
+            except Exception:
+                pass
+            os._exit(0)  # exit hard so the silent installer can replace the files
+
+        worker.finished.connect(_on_downloaded)
+        worker.start()
 
     def force_show_flashcard(self):
         """Forces showing next card (closes existing).

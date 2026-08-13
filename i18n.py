@@ -53,6 +53,7 @@ STRINGS = {
     'update_failed':      {'ru': 'Не удалось загрузить обновление. Попробуйте позже.',
                            'uz': "Yangilanishni yuklab bo'lmadi. Keyinroq urinib ko'ring.",
                            'en': 'Could not download the update. Please try again later.'},
+    'update_downloading': {'ru': 'Загрузка обновления…',       'uz': 'Yangilanish yuklanmoqda…',           'en': 'Downloading update…'},
 
     # ---------------- Tray menu ----------------
     'tray_manage':        {'ru': '📚 Управление...',          'uz': '📚 Boshqaruv...',                    'en': '📚 Manage...'},

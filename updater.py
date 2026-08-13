@@ -72,35 +72,67 @@ def check_for_update(timeout=8):
         if name.endswith(".exe"):
             url = asset.get("browser_download_url")
             if url:
-                log.info("Update available: %s -> %s", tag, url)
-                return (tag.lstrip("vV"), url)
+                digest = asset.get("digest") or ""  # GitHub gives e.g. "sha256:abcd..."
+                sha = digest.split(":", 1)[1] if digest.startswith("sha256:") else ""
+                log.info("Update available: %s -> %s (sha256=%s)", tag, url, sha or "n/a")
+                return (tag.lstrip("vV"), url, sha)
     log.info("Update check: newer tag %r but no .exe asset attached", tag)
     return None
 
 
-def download_installer(url, timeout=180):
-    """Download the installer to a temp .exe and return its path, or None."""
+def download_installer(url, timeout=180, progress_cb=None):
+    """Download the installer to a temp .exe and return its path, or None. If
+    progress_cb is given, it's called with an int percent (0-100) as data arrives."""
     try:
         req = urllib.request.Request(url, headers=_HEADERS)
         ctx = _ssl_context()
         fd, path = tempfile.mkstemp(prefix="SmartFlashcards_Update_", suffix=".exe")
         with os.fdopen(fd, "wb") as out, \
                 urllib.request.urlopen(req, timeout=timeout, context=ctx) as resp:
+            total = int(resp.headers.get("Content-Length") or 0)
+            got = 0
             while True:
                 chunk = resp.read(65536)
                 if not chunk:
                     break
                 out.write(chunk)
+                got += len(chunk)
+                if progress_cb and total:
+                    try:
+                        progress_cb(int(got * 100 / total))
+                    except Exception:
+                        pass
         return path
     except (URLError, HTTPError, TimeoutError, OSError):
         return None
 
 
-def run_installer(path):
-    """Launch the downloaded installer (detached). The app must quit right after so
-    the installer can replace its files."""
+def verify_sha256(path, expected_hex):
+    """True if the file's SHA-256 matches expected_hex (case-insensitive). If no
+    expected hash is known, returns True (nothing to check against)."""
+    if not expected_hex:
+        return True
+    import hashlib
     try:
-        subprocess.Popen([path], close_fds=True)
+        h = hashlib.sha256()
+        with open(path, "rb") as f:
+            for chunk in iter(lambda: f.read(1 << 20), b""):
+                h.update(chunk)
+        ok = h.hexdigest().lower() == expected_hex.lower()
+        if not ok:
+            log.info("SHA-256 mismatch: got %s, expected %s", h.hexdigest(), expected_hex)
+        return ok
+    except OSError:
+        return False
+
+
+def run_installer(path):
+    """Launch the installer SILENTLY (/VERYSILENT: no wizard, no language prompt). It
+    closes the running app (CloseApplications=yes), replaces files, and relaunches
+    the app. The caller must quit right after so the files are free to replace."""
+    try:
+        subprocess.Popen([path, "/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART"],
+                         close_fds=True)
         return True
     except OSError:
         return False

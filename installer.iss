@@ -17,6 +17,10 @@ OutputBaseFilename=SmartFlashcards_Setup
 Compression=lzma2/ultra64
 SolidCompression=yes
 PrivilegesRequired=lowest
+; Silent auto-update: close the running app before replacing its files, and don't
+; force a reboot. The updater runs this installer with /VERYSILENT (no wizard).
+CloseApplications=yes
+RestartApplications=no
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -38,4 +42,5 @@ Name: "{group}\Uninstall Smart Flashcards"; Filename: "{uninstallexe}"
 Name: "{autodesktop}\Smart Flashcards"; Filename: "{app}\SmartFlashcards.exe"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\SmartFlashcards.exe"; Description: "Launch Smart Flashcards"; Flags: nowait postinstall skipifsilent
+; No 'skipifsilent' — so the app relaunches itself after a silent auto-update too.
+Filename: "{app}\SmartFlashcards.exe"; Description: "Launch Smart Flashcards"; Flags: nowait postinstall

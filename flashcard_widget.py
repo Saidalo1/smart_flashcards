@@ -884,6 +884,25 @@ class FlashcardWidget(QFrame):
         self.activateWindow()
         self.raise_()
 
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+        # The card grows when the correct answer is revealed (a long option widens
+        # it). Positioning happens once at show time, so re-clamp on every resize to
+        # keep the card fully on-screen — it must never run off the right/bottom edge.
+        if not self.isVisible():
+            return
+        try:
+            from PySide6.QtWidgets import QApplication
+            scr = QApplication.primaryScreen().availableGeometry()
+            pad = 20
+            g = self.frameGeometry()
+            x = max(scr.left() + pad, min(self.x(), scr.right() - g.width() - pad))
+            y = max(scr.top() + pad, min(self.y(), scr.bottom() - g.height() - pad))
+            if x != self.x() or y != self.y():
+                self.move(x, y)
+        except Exception:
+            pass
+
     def _engage_for_typing(self):
         """User clicked the answer field — make the card typable.
 

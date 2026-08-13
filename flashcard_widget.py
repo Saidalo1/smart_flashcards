@@ -410,7 +410,7 @@ class FlashcardWidget(QFrame):
 
         # 💡 hint (card action). A QPushButton gets clicks reliably where a QLabel
         # <a> link doesn't on the override-redirect overlay.
-        self.hint_button = QPushButton("💡")
+        self.hint_button = QPushButton("💡", self)
         self.hint_button.setObjectName("hintButton")
         self.hint_button.setCursor(Qt.CursorShape.PointingHandCursor)
         self.hint_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
@@ -420,7 +420,7 @@ class FlashcardWidget(QFrame):
         self.hint_button.hide()
 
         # 🗑 delete this card (card action).
-        self.delete_button = QPushButton("🗑️")
+        self.delete_button = QPushButton("🗑️", self)
         self.delete_button.setObjectName("deleteButton")
         self.delete_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.delete_button.setFixedSize(28, 28)
@@ -458,17 +458,6 @@ class FlashcardWidget(QFrame):
             self.setup_multiple_choice_ui(content_layout)
         else:
             self.setup_text_input_ui(content_layout)
-
-        # Supplemental card actions (💡 hint / 🗑 delete) — a small right-aligned row
-        # ABOVE the primary "check" button, so they stay reachable without crowding
-        # or shoving the centred question. ⚙ (app menu) lives in the drag-bar corner.
-        actions_row = QHBoxLayout()
-        actions_row.setContentsMargins(0, 0, 0, 0)
-        actions_row.setSpacing(4)
-        actions_row.addStretch()
-        actions_row.addWidget(self.hint_button)
-        actions_row.addWidget(self.delete_button)
-        content_layout.addLayout(actions_row)
 
         self.check_button = QPushButton(tr('check_answer'))
         self.check_button.clicked.connect(self.check_answer)
@@ -924,11 +913,19 @@ class FlashcardWidget(QFrame):
 
     def resizeEvent(self, event):
         super().resizeEvent(event)
-        # ⚙ app menu floats in the top-LEFT drag-bar corner (💡/🗑 live in the footer
-        # row, not here). Positioned manually since it isn't in any layout.
+        # Float the action icons in the drag-bar corners: ⚙ app menu top-LEFT;
+        # 🗑 then 💡 (card actions) top-RIGHT — off the centred question entirely.
         if hasattr(self, 'menu_button'):
-            self.menu_button.move(6, 2)
+            m = 6
+            self.menu_button.move(m, 2)
             self.menu_button.raise_()
+            if hasattr(self, 'delete_button'):
+                self.delete_button.move(self.width() - self.delete_button.width() - m, 2)
+                self.delete_button.raise_()
+            if hasattr(self, 'hint_button'):
+                self.hint_button.move(
+                    self.width() - self.delete_button.width() - self.hint_button.width() - m - 4, 2)
+                self.hint_button.raise_()
         # The card grows when the correct answer is revealed (a long option widens
         # it). Positioning happens once at show time, so re-clamp on every resize to
         # keep the card fully on-screen — it must never run off the right/bottom edge.

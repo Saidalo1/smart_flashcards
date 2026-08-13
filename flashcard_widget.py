@@ -384,46 +384,50 @@ class FlashcardWidget(QFrame):
         main_layout.setContentsMargins(0, 0, 0, 0)
         main_layout.setSpacing(0)
 
-        # Top bar as ONE row so nothing overlaps: ⚙ app menu (left) · draggable
-        # title (centre, stretches) · 💡/🗑 card actions tucked in the right corner.
+        # Top bar as ONE row: ⚙ app menu (left) · draggable title (centre, stretches)
+        # · 💡/🗑 card actions pinned to the right — all on the same line.
         self.menu_button = QPushButton("⚙")
         self.menu_button.setObjectName("menuButton")
         self.menu_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
-        self.menu_button.setFixedSize(28, 28)
+        self.menu_button.setFixedSize(30, 30)
         self.menu_button.setCursor(Qt.CursorShape.PointingHandCursor)
         self.menu_button.setToolTip(tr('card_menu_tooltip'))
         self.menu_button.clicked.connect(self.menu_requested.emit)
 
-        self.hint_button = QPushButton("💡")
+        self.hint_button = QPushButton("💡", self)
         self.hint_button.setObjectName("hintButton")
         self.hint_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.hint_button.setCursor(Qt.CursorShape.PointingHandCursor)
-        self.hint_button.setFixedSize(28, 28)
+        self.hint_button.setFixedSize(30, 30)
         self.hint_button.setToolTip(tr('hint_tooltip'))
         self.hint_button.clicked.connect(self.toggle_hint)
         self.hint_button.hide()
 
-        self.delete_button = QPushButton("🗑️")
+        self.delete_button = QPushButton("🗑️", self)
         self.delete_button.setObjectName("deleteButton")
         self.delete_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
-        self.delete_button.setFixedSize(28, 28)
+        self.delete_button.setFixedSize(30, 30)
         self.delete_button.setToolTip(tr('delete_card_tooltip'))
         self.delete_button.clicked.connect(self.request_delete)
 
         self.drag_bar = QLabel(tr('drag_me'))
         self.drag_bar.setObjectName("dragBar")
         self.drag_bar.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.drag_bar.setFixedHeight(28)
         self.drag_bar.setCursor(Qt.CursorShape.SizeAllCursor)
 
-        drag_row = QHBoxLayout()
-        drag_row.setContentsMargins(6, 2, 6, 2)
+        # Top bar strip: ONLY the ⚙ app menu (left) + the draggable title (centre).
+        # The card-action icons 💡/🗑 live below, in the card body (see actions_row).
+        top_bar = QFrame()
+        top_bar.setObjectName("topBar")
+        top_bar.setFixedHeight(34)
+        drag_row = QHBoxLayout(top_bar)
+        drag_row.setContentsMargins(8, 0, 8, 0)
         drag_row.setSpacing(4)
         drag_row.addWidget(self.menu_button)
         drag_row.addWidget(self.drag_bar, 1)
-        drag_row.addWidget(self.hint_button)
-        drag_row.addWidget(self.delete_button)
-        main_layout.addLayout(drag_row)
+        # Right-side spacer the same width as ⚙ so the title stays optically centred.
+        drag_row.addSpacing(30)
+        main_layout.addWidget(top_bar)
 
         content_layout = QVBoxLayout()
         content_layout.setContentsMargins(20, 15, 20, 12)
@@ -433,8 +437,9 @@ class FlashcardWidget(QFrame):
         base_mode = self.study_mode.split('_')[0]
         theme = MODE_THEMES.get(base_mode, MODE_THEMES['translation'])
 
-        # Question — centred and full width; all action icons live in the top bar
-        # row above, so they never crowd or shove the question.
+        # Question — centred and full width. 💡/🗑 float in the top-right corner of
+        # the card body (positioned in resizeEvent), so they take NO layout row and
+        # never push the question down or shove it aside.
         self.question_label = QLabel()
         self.question_label.setObjectName("questionLabel")
         self.question_label.setWordWrap(True)
@@ -525,19 +530,21 @@ class FlashcardWidget(QFrame):
                 color: #ecf0f1;
             }}
 
-            QLabel#dragBar {{
+            QFrame#topBar {{
                 background: #222740;
                 border: none;
                 border-top-left-radius: 18px;
                 border-top-right-radius: 18px;
+            }}
+            QLabel#dragBar {{
+                background: transparent;
+                border: none;
                 color: #666;
                 font-size: 12px;
                 font-weight: normal;
-                padding: 4px;
+                padding: 0;
             }}
-
             QLabel#dragBar:hover {{
-                background: #2a3050;
                 color: #999;
             }}
 
@@ -590,7 +597,7 @@ class FlashcardWidget(QFrame):
             QPushButton#deleteButton {{
                 background: transparent;
                 border: none;
-                font-size: 15px;
+                font-size: 20px;
                 color: #c0392b;
                 padding: 0;
             }}
@@ -602,7 +609,7 @@ class FlashcardWidget(QFrame):
             QPushButton#hintButton {{
                 background: transparent;
                 border: none;
-                font-size: 15px;
+                font-size: 20px;
                 padding: 0;
             }}
 
@@ -917,6 +924,16 @@ class FlashcardWidget(QFrame):
 
     def resizeEvent(self, event):
         super().resizeEvent(event)
+        # Float 💡/🗑 in the top-right corner of the card body, just under the 34px
+        # top bar. As overlay children they take NO layout row, so the question keeps
+        # its natural height and is never pushed down or shoved aside.
+        if hasattr(self, 'delete_button') and hasattr(self, 'hint_button'):
+            m, top = 10, 40
+            self.delete_button.move(self.width() - self.delete_button.width() - m, top)
+            self.delete_button.raise_()
+            self.hint_button.move(
+                self.width() - self.delete_button.width() - self.hint_button.width() - m - 6, top)
+            self.hint_button.raise_()
         # The card grows when the correct answer is revealed (a long option widens
         # it). Positioning happens once at show time, so re-clamp on every resize to
         # keep the card fully on-screen — it must never run off the right/bottom edge.

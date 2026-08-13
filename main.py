@@ -39,7 +39,14 @@ def setup_logging():
     logging.info("=" * 60)
     logging.info(f"Smart Flashcards started at {datetime.now()}")
     logging.info(f"Data directory: {log_dir}")
-    logging.info(f"Frozen: {getattr(sys, 'frozen', False)}")
+    # Log the REAL frozen state (is_frozen also detects Nuitka via __compiled__);
+    # sys.frozen alone is always False under Nuitka and was misleading in logs.
+    logging.info(f"Frozen: {is_frozen()}")
+    try:
+        from version import __version__ as _v
+        logging.info(f"Version: {_v}")
+    except Exception:
+        pass
     logging.info(f"Python: {sys.version}")
     logging.info(f"OS: {os.name} / {sys.platform}")
     logging.info("=" * 60)

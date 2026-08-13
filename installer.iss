@@ -1,12 +1,20 @@
 ; Inno Setup Script for Smart Flashcards
 ; Creates a proper Windows installer with desktop shortcut
+; Version comes from build.py (ISCC /DAppVer=x.y.z); the fallback below keeps a
+; manual Ctrl+F9 compile working too. build.py is the recommended one-shot build.
+#ifndef AppVer
+  #define AppVer "1.0.2"
+#endif
 
 [Setup]
 AppId={{B7E3A1D4-5F2C-4A8B-9D6E-1C3F5A7B9D2E}
 AppName=Smart Flashcards
-AppVersion=1.0.2
-VersionInfoVersion=1.0.2
+AppVersion={#AppVer}
+VersionInfoVersion={#AppVer}
 AppPublisher=Smart Flashcards
+; Icon shown on the Setup.exe itself and in Add/Remove Programs.
+SetupIconFile=app_icon.ico
+UninstallDisplayIcon={app}\SmartFlashcards.exe
 DefaultDirName={localappdata}\SmartFlashcards
 ; Always show the "choose install location" page (default was auto-hidden when a
 ; previous install was detected, which silently reused the old D: folder).

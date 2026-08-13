@@ -422,16 +422,16 @@ class FlashcardWidget(QFrame):
         self.hint_button.hide()
         top_layout.addWidget(self.hint_button, 0, Qt.AlignmentFlag.AlignTop)
 
-        # ⚙ menu — a discoverable way to reach Manage/Settings etc. during study,
-        # instead of hunting for the system-tray icon.
-        self.menu_button = QPushButton("⚙")
+        # ⚙ menu is an APP-LEVEL action (Manage/Settings), so it sits in the top
+        # drag-bar corner as a floating child — kept apart from the card-specific
+        # 💡/🗑 below so it never crowds a long question. Positioned in resizeEvent.
+        self.menu_button = QPushButton("⚙", self)
         self.menu_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.menu_button.setObjectName("menuButton")
-        self.menu_button.setFixedSize(32, 32)
+        self.menu_button.setFixedSize(24, 24)
         self.menu_button.setCursor(Qt.CursorShape.PointingHandCursor)
         self.menu_button.setToolTip(tr('card_menu_tooltip'))
         self.menu_button.clicked.connect(self.menu_requested.emit)
-        top_layout.addWidget(self.menu_button, 0, Qt.AlignmentFlag.AlignTop)
 
         top_layout.addWidget(self._create_delete_button(), 0, Qt.AlignmentFlag.AlignTop)
         content_layout.addLayout(top_layout)
@@ -609,14 +609,15 @@ class FlashcardWidget(QFrame):
             QPushButton#menuButton {{
                 background: transparent;
                 border: none;
-                font-size: 18px;
-                color: #9fb0c3;
-                padding: 4px;
+                font-size: 14px;
+                color: #8a97ac;
+                padding: 0;
             }}
 
             QPushButton#menuButton:hover {{
-                background: rgba(159, 176, 195, 0.15);
+                background: rgba(159, 176, 195, 0.18);
                 border-radius: 6px;
+                color: #cfd6e6;
             }}
         """)
 
@@ -911,6 +912,10 @@ class FlashcardWidget(QFrame):
 
     def resizeEvent(self, event):
         super().resizeEvent(event)
+        # Park the ⚙ menu button in the top-right corner of the drag bar.
+        if hasattr(self, 'menu_button'):
+            self.menu_button.move(self.width() - self.menu_button.width() - 8, 2)
+            self.menu_button.raise_()
         # The card grows when the correct answer is revealed (a long option widens
         # it). Positioning happens once at show time, so re-clamp on every resize to
         # keep the card fully on-screen — it must never run off the right/bottom edge.

@@ -92,6 +92,22 @@ QPushButton#secondaryButton:hover {
     background: #2a3050;
 }
 
+/* Square icon-only button (e.g. the ⚙ gear). padding:0 is essential — the generic
+   QPushButton padding above would push the glyph out of a small fixed-size button. */
+QPushButton#iconButton {
+    background: #252a40;
+    color: #cfd6e6;
+    border: none;
+    border-radius: 10px;
+    padding: 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+QPushButton#iconButton:hover {
+    background: #2a3050;
+    color: #ffffff;
+}
+
 QLineEdit {
     background: #1e2235;
     border: 2px solid #2a2e45;

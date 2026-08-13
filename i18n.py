@@ -107,7 +107,7 @@ STRINGS = {
     'prompt_define':      {'ru': 'Определи:',                 'uz': "Ta'rifla:",                          'en': 'Define:'},
     'prompt_synonym':     {'ru': 'Синоним к:',                'uz': 'Sinonim:',                           'en': 'Synonym for:'},
     'prompt_transition':  {'ru': 'Новое слово:',              'uz': "Yangi so'z:",                        'en': 'Transition:'},
-    'prompt_translate':   {'ru': 'Переведи:',                 'uz': 'Tarjima qil:',                       'en': 'Translate:'},
+    'prompt_translate':   {'ru': 'Перевод:',                  'uz': 'Tarjima:',                           'en': 'Translate:'},
     'check_answer':       {'ru': 'Проверить',                 'uz': 'Tekshirish',                         'en': 'Check Answer'},
     'hint_tooltip':       {'ru': 'Подсказка',                 'uz': 'Izoh',                               'en': 'Hint'},
     'delete_card_tooltip':{'ru': 'Удалить эту карточку навсегда', 'uz': "Bu kartani butunlay o'chirish",   'en': 'Delete this card permanently'},

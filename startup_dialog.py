@@ -939,7 +939,7 @@ class StartupDialog(QDialog):
         left_box.setContentsMargins(0, 0, 0, 0)
         left_box.setSpacing(6)
         self.manage_btn = QPushButton("⚙")
-        self.manage_btn.setObjectName("secondaryButton")
+        self.manage_btn.setObjectName("iconButton")
         self.manage_btn.setToolTip(tr('welcome_manage_tooltip'))
         self.manage_btn.setCursor(Qt.CursorShape.PointingHandCursor)
         self.manage_btn.setFixedSize(40, 40)

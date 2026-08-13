@@ -281,7 +281,7 @@ QTreeWidget::item { padding: 6px 4px; }
 QTreeWidget::item:selected { background: transparent; }
 /* Per-row buttons sit in column 1; keep them compact so rows stay tidy. */
 QTreeWidget QPushButton {
-    padding: 6px 10px;
+    padding: 0 12px;
     font-size: 13px;
     font-weight: 600;
     border-radius: 8px;
@@ -678,7 +678,7 @@ class CatalogDialog(QDialog):
         self.tree.setAnimated(True)
         self.tree.setIndentation(18)
         self.tree.setColumnCount(2)
-        self.tree.setColumnWidth(1, 140)
+        self.tree.setColumnWidth(1, 160)
         self.tree.header().setStretchLastSection(False)
         from PySide6.QtWidgets import QHeaderView
         self.tree.header().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
@@ -745,8 +745,17 @@ class CatalogDialog(QDialog):
                 child.setText(0, f"{tname}  ·  {tr('catalog_words_n', n=n)}")
                 btn = QPushButton()
                 btn.setCursor(Qt.CursorShape.PointingHandCursor)
+                btn.setFixedHeight(30)
+                btn.setMinimumWidth(120)
                 btn.clicked.connect(lambda _=False, i=tid: self._add_topic(i))
-                self.tree.setItemWidget(child, 1, btn)
+                # Wrap the button so it's vertically centred in the row and kept off
+                # the scrollbar, instead of stretching to fill the whole cell.
+                cell = QWidget()
+                cell_lay = QHBoxLayout(cell)
+                cell_lay.setContentsMargins(0, 3, 12, 3)
+                cell_lay.addStretch()
+                cell_lay.addWidget(btn)
+                self.tree.setItemWidget(child, 1, cell)
                 self._topic_rows[tid] = (btn, child, tname)
                 self._refresh_button(tid)
 

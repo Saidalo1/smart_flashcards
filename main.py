@@ -5,8 +5,8 @@ import signal
 import sys
 from datetime import datetime
 
-from PySide6.QtCore import QTimer, Signal, QObject
-from PySide6.QtGui import QIcon, QPixmap, QAction
+from PySide6.QtCore import QTimer, Signal, QObject, Qt
+from PySide6.QtGui import QIcon, QPixmap, QAction, QPalette, QColor
 from PySide6.QtWidgets import QApplication, QSystemTrayIcon, QMenu
 
 from app_paths import get_data_dir, is_frozen
@@ -148,6 +148,31 @@ class DownloadWorker(QObject):
 class FlashcardApp:
     """Main application class."""
 
+    @staticmethod
+    def _dark_palette():
+        """A dark QPalette so Fusion (light by default) doesn't leak white through
+        anything our QSS doesn't explicitly paint."""
+        pal = QPalette()
+        C = QColor
+        pal.setColor(QPalette.ColorRole.Window, C("#1a1d2e"))
+        pal.setColor(QPalette.ColorRole.WindowText, C("#e8e8e8"))
+        pal.setColor(QPalette.ColorRole.Base, C("#1c1f33"))
+        pal.setColor(QPalette.ColorRole.AlternateBase, C("#20243a"))
+        pal.setColor(QPalette.ColorRole.Text, C("#e8e8e8"))
+        pal.setColor(QPalette.ColorRole.Button, C("#1e2235"))
+        pal.setColor(QPalette.ColorRole.ButtonText, C("#e8e8e8"))
+        pal.setColor(QPalette.ColorRole.ToolTipBase, C("#1e2235"))
+        pal.setColor(QPalette.ColorRole.ToolTipText, C("#e8e8e8"))
+        pal.setColor(QPalette.ColorRole.PlaceholderText, C("#6b7a99"))
+        pal.setColor(QPalette.ColorRole.Highlight, C("#1a4a5a"))
+        pal.setColor(QPalette.ColorRole.HighlightedText, C("#ffffff"))
+        pal.setColor(QPalette.ColorRole.Link, C("#00d9ff"))
+        disabled = QPalette.ColorGroup.Disabled
+        pal.setColor(disabled, QPalette.ColorRole.Text, C("#6b7a99"))
+        pal.setColor(disabled, QPalette.ColorRole.ButtonText, C("#6b7a99"))
+        pal.setColor(disabled, QPalette.ColorRole.WindowText, C("#6b7a99"))
+        return pal
+
     def __init__(self):
         # Windows shows the taskbar icon per "AppUserModelID". Without our own id the
         # button inherits pythonw's (blank) icon even though the tray icon is fine.
@@ -160,6 +185,11 @@ class FlashcardApp:
 
         self.app = QApplication(sys.argv)
         self.app.setStyle("Fusion")  # Required: WindowsVista style breaks border-radius rendering
+        # Fusion ships a LIGHT default palette, so any widget/sub-control our QSS
+        # doesn't cover (table corner button, scrollbar corners, native dialogs)
+        # bleeds through WHITE — and worse on a light Windows theme. A dark palette
+        # makes everything QSS misses fall back to dark instead of white.
+        self.app.setPalette(self._dark_palette())
         self.app.setQuitOnLastWindowClosed(False)
 
         # Build the app icon once and set it app-wide so every window (and the taskbar
@@ -520,8 +550,19 @@ class FlashcardApp:
         dlg.setWindowTitle(tr('update_title'))
         dlg.setCancelButton(None)
         dlg.setMinimumDuration(0)
+        # Float ABOVE everything, including the always-on-top flashcard overlay, and
+        # keep a title bar (so it can be dragged) while dropping the close/min/max
+        # buttons (there's nothing safe to cancel mid-download).
+        dlg.setWindowFlags(
+            Qt.WindowType.Dialog
+            | Qt.WindowType.CustomizeWindowHint
+            | Qt.WindowType.WindowTitleHint
+            | Qt.WindowType.WindowStaysOnTopHint
+        )
         dlg.setValue(0)
         dlg.show()
+        dlg.raise_()
+        dlg.activateWindow()
 
         worker = DownloadWorker(url)
         self._dl_worker = worker  # keep a reference so it isn't garbage-collected

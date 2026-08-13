@@ -90,6 +90,21 @@ QHeaderView::section {
     font-size: 13px;
 }
 
+/* Row-number column: subtle, tighter padding so the numbers aren't clipped. */
+QHeaderView::section:vertical {
+    color: #6b7a99;
+    padding: 4px 6px;
+    font-weight: 500;
+    font-size: 11px;
+}
+
+/* The little box where the two headers meet — unstyled by default, so the light
+   Windows theme showed through it as a white square. Paint it like the header. */
+QTableCornerButton::section {
+    background: #1e2235;
+    border: none;
+}
+
 /* Buttons */
 QPushButton {
     background: qlineargradient(x1:0, y1:0, x2:1, y2:0,
@@ -357,6 +372,10 @@ class ManagementWindow(QDialog):
         self.table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.table.setAlternatingRowColors(True)
+        # Centre the row numbers and give the column enough width so 2-3 digits fit.
+        _vh = self.table.verticalHeader()
+        _vh.setDefaultAlignment(Qt.AlignmentFlag.AlignCenter)
+        _vh.setMinimumWidth(34)
         layout.addWidget(self.table)
 
         # Buttons

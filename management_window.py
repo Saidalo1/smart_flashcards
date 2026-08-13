@@ -1049,15 +1049,15 @@ class ManagementWindow(QDialog):
         import sys
         import subprocess
         from PySide6.QtWidgets import QApplication
+        from app_paths import is_frozen
         self.close()
-        # See main.FlashcardApp.switch_user: strip _MEIPASS2 and drop argv[0] so the
-        # onefile bootloader in the child doesn't fail to start.
+        # See main.FlashcardApp.switch_user for the reasoning.
         env = os.environ.copy()
-        # Strip PyInstaller onefile bootstrap vars (see main.FlashcardApp.switch_user).
         for _k in [k for k in env if k.startswith('_MEIPASS') or k.startswith('_PYI')]:
             env.pop(_k, None)
-        if getattr(sys, 'frozen', False):
-            args = [sys.executable] + sys.argv[1:]
+        if is_frozen():
+            exe = sys.executable if (sys.executable and os.path.exists(sys.executable)) else os.path.abspath(sys.argv[0])
+            args = [exe]
         else:
             args = [sys.executable] + sys.argv
         subprocess.Popen(args, env=env, close_fds=True)

@@ -9,7 +9,7 @@ from PySide6.QtCore import QTimer, Signal, QObject
 from PySide6.QtGui import QIcon, QPixmap, QAction
 from PySide6.QtWidgets import QApplication, QSystemTrayIcon, QMenu
 
-from app_paths import get_data_dir
+from app_paths import get_data_dir, is_frozen
 
 
 def setup_logging():
@@ -701,8 +701,11 @@ class FlashcardApp:
         # to bootstrap. Strip them all so the relaunched exe extracts cleanly.
         for _k in [k for k in env if k.startswith('_MEIPASS') or k.startswith('_PYI')]:
             env.pop(_k, None)
-        if getattr(sys, 'frozen', False):
-            args = [sys.executable] + sys.argv[1:]
+        if is_frozen():
+            # Packaged build (PyInstaller OR Nuitka): relaunch the exe itself.
+            # sys.executable can be empty/wrong under Nuitka, so fall back to argv[0].
+            exe = sys.executable if (sys.executable and os.path.exists(sys.executable)) else os.path.abspath(sys.argv[0])
+            args = [exe]
         else:
             args = [sys.executable] + sys.argv
         subprocess.Popen(args, env=env, close_fds=True)

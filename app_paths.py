@@ -16,7 +16,16 @@ APP_FOLDER = 'SmartFlashcards'
 
 
 def _is_frozen():
-    return getattr(sys, 'frozen', False)
+    # PyInstaller sets sys.frozen; Nuitka does NOT — it defines a module-level
+    # __compiled__ instead. Check both, otherwise a Nuitka build wrongly runs in
+    # "dev" mode: data/logs land next to the exe (e.g. inside the install folder)
+    # and the self-relaunch (Main menu / hotkey change) breaks.
+    return getattr(sys, 'frozen', False) or ('__compiled__' in globals())
+
+
+# Public alias — other modules (e.g. the self-relaunch in main.py) need this too.
+def is_frozen():
+    return _is_frozen()
 
 
 def get_app_dir():

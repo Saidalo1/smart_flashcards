@@ -252,6 +252,11 @@ installer_output/
 # build artifacts & runtime
 build/
 dist/
+# Nuitka compiled output
+nuitka_build/
+*.build/
+*.dist/
+*.onefile-build/
 *.log
 data/language.txt
 

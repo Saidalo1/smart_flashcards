@@ -384,12 +384,46 @@ class FlashcardWidget(QFrame):
         main_layout.setContentsMargins(0, 0, 0, 0)
         main_layout.setSpacing(0)
 
+        # Top bar as ONE row so nothing overlaps: ⚙ app menu (left) · draggable
+        # title (centre, stretches) · 💡/🗑 card actions tucked in the right corner.
+        self.menu_button = QPushButton("⚙")
+        self.menu_button.setObjectName("menuButton")
+        self.menu_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.menu_button.setFixedSize(28, 28)
+        self.menu_button.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.menu_button.setToolTip(tr('card_menu_tooltip'))
+        self.menu_button.clicked.connect(self.menu_requested.emit)
+
+        self.hint_button = QPushButton("💡")
+        self.hint_button.setObjectName("hintButton")
+        self.hint_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.hint_button.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.hint_button.setFixedSize(28, 28)
+        self.hint_button.setToolTip(tr('hint_tooltip'))
+        self.hint_button.clicked.connect(self.toggle_hint)
+        self.hint_button.hide()
+
+        self.delete_button = QPushButton("🗑️")
+        self.delete_button.setObjectName("deleteButton")
+        self.delete_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.delete_button.setFixedSize(28, 28)
+        self.delete_button.setToolTip(tr('delete_card_tooltip'))
+        self.delete_button.clicked.connect(self.request_delete)
+
         self.drag_bar = QLabel(tr('drag_me'))
         self.drag_bar.setObjectName("dragBar")
         self.drag_bar.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.drag_bar.setFixedHeight(28)
         self.drag_bar.setCursor(Qt.CursorShape.SizeAllCursor)
-        main_layout.addWidget(self.drag_bar)
+
+        drag_row = QHBoxLayout()
+        drag_row.setContentsMargins(6, 2, 6, 2)
+        drag_row.setSpacing(4)
+        drag_row.addWidget(self.menu_button)
+        drag_row.addWidget(self.drag_bar, 1)
+        drag_row.addWidget(self.hint_button)
+        drag_row.addWidget(self.delete_button)
+        main_layout.addLayout(drag_row)
 
         content_layout = QVBoxLayout()
         content_layout.setContentsMargins(20, 15, 20, 12)
@@ -399,43 +433,13 @@ class FlashcardWidget(QFrame):
         base_mode = self.study_mode.split('_')[0]
         theme = MODE_THEMES.get(base_mode, MODE_THEMES['translation'])
 
-        # Question — centred and full width. Every action icon floats in a drag-bar
-        # corner (positioned in resizeEvent) so it never crowds or shoves the
-        # question: ⚙ app menu top-LEFT; 💡/🗑 card actions top-RIGHT.
+        # Question — centred and full width; all action icons live in the top bar
+        # row above, so they never crowd or shove the question.
         self.question_label = QLabel()
         self.question_label.setObjectName("questionLabel")
         self.question_label.setWordWrap(True)
         self.question_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         content_layout.addWidget(self.question_label)
-
-        # 💡 hint (card action). A QPushButton gets clicks reliably where a QLabel
-        # <a> link doesn't on the override-redirect overlay.
-        self.hint_button = QPushButton("💡", self)
-        self.hint_button.setObjectName("hintButton")
-        self.hint_button.setCursor(Qt.CursorShape.PointingHandCursor)
-        self.hint_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
-        self.hint_button.setFixedSize(28, 28)
-        self.hint_button.setToolTip(tr('hint_tooltip'))
-        self.hint_button.clicked.connect(self.toggle_hint)
-        self.hint_button.hide()
-
-        # 🗑 delete this card (card action).
-        self.delete_button = QPushButton("🗑️", self)
-        self.delete_button.setObjectName("deleteButton")
-        self.delete_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
-        self.delete_button.setFixedSize(28, 28)
-        self.delete_button.setToolTip(tr('delete_card_tooltip'))
-        self.delete_button.clicked.connect(self.request_delete)
-
-        # ⚙ app menu (Manage/Settings) — top-LEFT, away from where users instinctively
-        # look for a close control on the right.
-        self.menu_button = QPushButton("⚙", self)
-        self.menu_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
-        self.menu_button.setObjectName("menuButton")
-        self.menu_button.setFixedSize(28, 28)
-        self.menu_button.setCursor(Qt.CursorShape.PointingHandCursor)
-        self.menu_button.setToolTip(tr('card_menu_tooltip'))
-        self.menu_button.clicked.connect(self.menu_requested.emit)
 
         # Hint shown as a floating overlay: a child of the window that is NOT in
         # any layout, so it paints ABOVE the options without reflowing them, and
@@ -913,19 +917,6 @@ class FlashcardWidget(QFrame):
 
     def resizeEvent(self, event):
         super().resizeEvent(event)
-        # Float the action icons in the drag-bar corners: ⚙ app menu top-LEFT;
-        # 🗑 then 💡 (card actions) top-RIGHT — off the centred question entirely.
-        if hasattr(self, 'menu_button'):
-            m = 6
-            self.menu_button.move(m, 2)
-            self.menu_button.raise_()
-            if hasattr(self, 'delete_button'):
-                self.delete_button.move(self.width() - self.delete_button.width() - m, 2)
-                self.delete_button.raise_()
-            if hasattr(self, 'hint_button'):
-                self.hint_button.move(
-                    self.width() - self.delete_button.width() - self.hint_button.width() - m - 4, 2)
-                self.hint_button.raise_()
         # The card grows when the correct answer is revealed (a long option widens
         # it). Positioning happens once at show time, so re-clamp on every resize to
         # keep the card fully on-screen — it must never run off the right/bottom edge.

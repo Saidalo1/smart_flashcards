@@ -994,9 +994,6 @@ class StartupDialog(QDialog):
             topics_frame = QFrame()
             topics_frame.setObjectName("card")
             self._topics_frame = topics_frame
-            # This card is the one block that grows with the window; it soaks up the
-            # spare vertical space (so there's no gap under the version label).
-            topics_frame.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
             topics_layout = QVBoxLayout(topics_frame)
             topics_layout.setSpacing(12)
             
@@ -1021,11 +1018,6 @@ class StartupDialog(QDialog):
             self.topics_tree.setRootIsDecorated(True)
             self.topics_tree.setAnimated(True)
             self.topics_tree.setIndentation(24)
-            # Fill the available vertical space (grows with the window) and scroll when
-            # the topics — with any expanded sub-groups — overflow. A sensible minimum
-            # so it still shows a good few rows in the default window size.
-            self.topics_tree.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
-            self.topics_tree.setMinimumHeight(230)
             self.topics_tree.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
             self.topics_tree.itemChanged.connect(self._on_topic_item_changed)
             # Adaptive height (like the profile list): grow to the visible rows up to a
@@ -1082,11 +1074,9 @@ class StartupDialog(QDialog):
         version_lbl.setStyleSheet("color:#5a6a85; font-size:11px; background:transparent;")
         layout.addWidget(version_lbl)
 
-        # All blocks are content-sized (fixed heights), so the layout's minimum equals
-        # its content — the dialog fits snugly (no empty gap below the version label)
-        # and grows when a topic is expanded. SetMinimumSize (not SetFixedSize) keeps
-        # a sane width; height tracks the content.
-        layout.setSizeConstraint(layout.SizeConstraint.SetMinimumSize)
+        # _rebalance_lists sizes the lists to their content and calls adjustSize, so
+        # the dialog hugs its content exactly (no empty gap, no wasted space) and grows
+        # when a topic is expanded — up to a screen-based cap, after which it scrolls.
         QTimer.singleShot(0, self._rebalance_lists)
     
     def _build_topics_tree(self):
@@ -1266,16 +1256,32 @@ class StartupDialog(QDialog):
         return rows
 
     def _rebalance_lists(self, *args):
-        """Keep the profile list at its content height (a few rows, then it scrolls).
-        The topics tree is NOT fixed here — it has an Expanding size policy, so it
-        fills whatever vertical space the window gives it and shows its own scrollbar
-        when the (possibly expanded) topics overflow. Bigger window ⇒ more rows."""
+        """Size the profile list and the topics tree to their content, then let the
+        dialog hug that content. Height = min(content, screen-based cap): with few
+        topics the tree stays small (no wasted space); with many — or when a topic is
+        expanded to reveal its sub-groups — it grows up to the cap, then scrolls."""
         if hasattr(self, 'profile_list'):
             p_row = self.profile_list.sizeHintForRow(0) if self.profile_list.count() else 0
             p_row = p_row if p_row > 0 else 40
             vis = min(max(self.profile_list.count(), 1), 5)  # up to 5 profiles, then scroll
             self.profile_list.setFixedHeight(
                 p_row * vis + 2 * self.profile_list.frameWidth() + 6)
+        if hasattr(self, 'topics_tree') and getattr(self, '_topics_frame', None) is not None:
+            t_row = max(self.topics_tree.sizeHintForRow(0),
+                        self.topics_tree.fontMetrics().height() + 16)
+            rows = max(self._visible_tree_rows(), 1)
+            content_h = rows * t_row + 2 * self.topics_tree.frameWidth() + 8
+            # Cap so the whole dialog still fits the screen (~450px is the rest of the
+            # dialog: header, profile, new-profile, mode, continue, margins).
+            try:
+                from PySide6.QtWidgets import QApplication
+                scr_h = QApplication.primaryScreen().availableGeometry().height()
+            except Exception:
+                scr_h = 900
+            cap = max(150, scr_h - 470)
+            self.topics_tree.setFixedHeight(min(content_h, cap))
+        # Hug the content: shrink/grow the dialog to fit (no empty gap, no clipping).
+        self.adjustSize()
 
     def resizeEvent(self, event):
         super().resizeEvent(event)

@@ -98,6 +98,24 @@ class HotkeySignal(QObject):
     triggered = Signal()
 
 
+class UpdateChecker(QObject):
+    """Checks the releases repo off the UI thread; signals back if an update exists."""
+    update_found = Signal(str, str)  # (version, installer_url)
+
+    def check_async(self):
+        import threading
+        threading.Thread(target=self._run, daemon=True).start()
+
+    def _run(self):
+        try:
+            from updater import check_for_update
+            result = check_for_update()
+        except Exception:
+            result = None
+        if result:
+            self.update_found.emit(result[0], result[1])
+
+
 class FlashcardApp:
     """Main application class."""
 
@@ -444,7 +462,34 @@ class FlashcardApp:
         topics = self.vocabulary.get_all_topics()
         print(f"{APP_NAME} started. Topics: {topics}")
         print(f"Cards every {self.config_manager.timer_interval}s.")
+
+        # Background update check (packaged builds only). If a newer release exists
+        # in the public dist repo, offer to download & run its installer.
+        if is_frozen():
+            self._update_checker = UpdateChecker()
+            self._update_checker.update_found.connect(self._on_update_found)
+            self._update_checker.check_async()
+
         sys.exit(self.app.exec())
+
+    def _on_update_found(self, version, url):
+        """A newer release exists — offer to download and run its installer."""
+        from PySide6.QtWidgets import QMessageBox
+        reply = QMessageBox.question(
+            None, tr('update_title'),
+            tr('update_available', version=version),
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+            QMessageBox.StandardButton.Yes,
+        )
+        if reply != QMessageBox.StandardButton.Yes:
+            return
+        from updater import download_installer, run_installer
+        path = download_installer(url)
+        if path and run_installer(path):
+            # Quit so the installer can replace the running files.
+            self.quit_app()
+        else:
+            QMessageBox.warning(None, tr('update_title'), tr('update_failed'))
 
     def force_show_flashcard(self):
         """Forces showing next card (closes existing).

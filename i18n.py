@@ -42,6 +42,13 @@ STRINGS = {
     'del_profile_confirm':{'ru': "Удалить профиль '<b>{name}</b>' и все его данные?",
                            'uz': "'<b>{name}</b>' profili va barcha ma'lumotlari o'chirilsinmi?",
                            'en': "Delete profile '<b>{name}</b>' and all its data?"},
+    'update_title':       {'ru': 'Обновление',                 'uz': 'Yangilanish',                        'en': 'Update'},
+    'update_available':   {'ru': 'Доступна новая версия {version}. Обновить сейчас?',
+                           'uz': 'Yangi versiya {version} mavjud. Hozir yangilansinmi?',
+                           'en': 'A new version {version} is available. Update now?'},
+    'update_failed':      {'ru': 'Не удалось загрузить обновление. Попробуйте позже.',
+                           'uz': "Yangilanishni yuklab bo'lmadi. Keyinroq urinib ko'ring.",
+                           'en': 'Could not download the update. Please try again later.'},
 
     # ---------------- Tray menu ----------------
     'tray_manage':        {'ru': '📚 Управление...',          'uz': '📚 Boshqaruv...',                    'en': '📚 Manage...'},

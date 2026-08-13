@@ -962,7 +962,6 @@ class StartupDialog(QDialog):
         self.profile_list.setItemDelegate(ProfileItemDelegate(self))
         self.profile_list.itemDoubleClicked.connect(self.select_and_continue)
         self.profile_list.currentItemChanged.connect(self._on_profile_selection_changed)
-        self.profile_list.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
         layout.addWidget(self.profile_list)
 
         # New profile section
@@ -995,6 +994,8 @@ class StartupDialog(QDialog):
             topics_frame = QFrame()
             topics_frame.setObjectName("card")
             self._topics_frame = topics_frame
+            # This card is the one block that grows with the window; it soaks up the
+            # spare vertical space (so there's no gap under the version label).
             topics_frame.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
             topics_layout = QVBoxLayout(topics_frame)
             topics_layout.setSpacing(12)
@@ -1020,7 +1021,11 @@ class StartupDialog(QDialog):
             self.topics_tree.setRootIsDecorated(True)
             self.topics_tree.setAnimated(True)
             self.topics_tree.setIndentation(24)
+            # Fill the available vertical space (grows with the window) and scroll when
+            # the topics — with any expanded sub-groups — overflow. A sensible minimum
+            # so it still shows a good few rows in the default window size.
             self.topics_tree.setSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Expanding)
+            self.topics_tree.setMinimumHeight(230)
             self.topics_tree.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
             self.topics_tree.itemChanged.connect(self._on_topic_item_changed)
             # Adaptive height (like the profile list): grow to the visible rows up to a
@@ -1077,10 +1082,11 @@ class StartupDialog(QDialog):
         version_lbl.setStyleSheet("color:#5a6a85; font-size:11px; background:transparent;")
         layout.addWidget(version_lbl)
 
-        # Soaks up any space left once the two lists reach their content height, so
-        # they grow with the window (splitting it by row count) but never stretch
-        # past their content into an empty box.
-        layout.addStretch(0)
+        # All blocks are content-sized (fixed heights), so the layout's minimum equals
+        # its content — the dialog fits snugly (no empty gap below the version label)
+        # and grows when a topic is expanded. SetMinimumSize (not SetFixedSize) keeps
+        # a sane width; height tracks the content.
+        layout.setSizeConstraint(layout.SizeConstraint.SetMinimumSize)
         QTimer.singleShot(0, self._rebalance_lists)
     
     def _build_topics_tree(self):
@@ -1260,42 +1266,16 @@ class StartupDialog(QDialog):
         return rows
 
     def _rebalance_lists(self, *args):
-        """Share the vertical space between the profile list and the topics tree in
-        proportion to how many rows each has, so the bigger one gets more room. They
-        grow with the window (the layout stretch factors do the split) but are capped
-        at their own content height, so neither becomes an empty box; a trailing
-        stretch soaks up whatever is left over."""
-        if not hasattr(self, 'profile_list'):
-            return
-        lay = self.layout()
-        if lay is None:
-            return
-        # Profile list
-        p_row = self.profile_list.sizeHintForRow(0) if self.profile_list.count() else 0
-        p_row = p_row if p_row > 0 else 40
-        Np = max(self.profile_list.count(), 1)
-        p_frame = 2 * self.profile_list.frameWidth() + 6
-        p_nat = Np * p_row + p_frame
-        self.profile_list.setMaximumHeight(p_nat)
-        self.profile_list.setMinimumHeight(min(p_nat, 2 * p_row + p_frame))
-        lay.setStretchFactor(self.profile_list, Np)
-        # Topics tree (lives inside its card)
-        frame = getattr(self, '_topics_frame', None)
-        if frame is not None and hasattr(self, 'topics_tree'):
-            t_row = max(self.topics_tree.sizeHintForRow(0),
-                        self.topics_tree.fontMetrics().height() + 16)
-            Nt = max(self._visible_tree_rows(), 1)
-            t_frame = 2 * self.topics_tree.frameWidth() + 8
-            t_nat = Nt * t_row + t_frame
-            self.topics_tree.setMaximumHeight(t_nat)
-            self.topics_tree.setMinimumHeight(min(t_nat, 2 * t_row + t_frame))
-            # Card chrome = header + margins around the tree. Measured once the card
-            # is realized; a sane fallback before the first show.
-            chrome = frame.height() - self.topics_tree.height()
-            if chrome <= 0:
-                chrome = 96
-            frame.setMaximumHeight(t_nat + chrome)
-            lay.setStretchFactor(frame, Nt)
+        """Keep the profile list at its content height (a few rows, then it scrolls).
+        The topics tree is NOT fixed here — it has an Expanding size policy, so it
+        fills whatever vertical space the window gives it and shows its own scrollbar
+        when the (possibly expanded) topics overflow. Bigger window ⇒ more rows."""
+        if hasattr(self, 'profile_list'):
+            p_row = self.profile_list.sizeHintForRow(0) if self.profile_list.count() else 0
+            p_row = p_row if p_row > 0 else 40
+            vis = min(max(self.profile_list.count(), 1), 5)  # up to 5 profiles, then scroll
+            self.profile_list.setFixedHeight(
+                p_row * vis + 2 * self.profile_list.frameWidth() + 6)
 
     def resizeEvent(self, event):
         super().resizeEvent(event)

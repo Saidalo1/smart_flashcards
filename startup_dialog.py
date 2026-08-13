@@ -6,10 +6,11 @@ import re
 from PySide6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QLabel, QPushButton,
     QListWidget, QListWidgetItem, QLineEdit, QMessageBox,
-    QFrame, QWidget, QTreeWidget, QTreeWidgetItem, QComboBox
+    QFrame, QWidget, QTreeWidget, QTreeWidgetItem, QComboBox,
+    QStyledItemDelegate, QStyle
 )
-from PySide6.QtCore import Qt
-from PySide6.QtGui import QFont
+from PySide6.QtCore import Qt, QSize, QRect, QEvent
+from PySide6.QtGui import QFont, QColor
 
 import profile_manager
 from i18n import tr, set_language, get_language, LANGUAGES
@@ -534,6 +535,40 @@ class AddTopicDialog(QDialog):
         self.accept()
 
 
+class ProfileItemDelegate(QStyledItemDelegate):
+    """Renders profile rows natively (so text and selection just work) and paints a
+    trash icon on the right of each row. A click inside that icon's area deletes the
+    profile. This avoids setItemWidget's pitfalls (collapsed rows, clicks that don't
+    select the item)."""
+
+    ICON_W = 36
+
+    def __init__(self, owner):
+        super().__init__(owner)
+        self._owner = owner
+
+    def _icon_rect(self, option):
+        r = option.rect
+        return QRect(r.right() - self.ICON_W, r.top(), self.ICON_W, r.height())
+
+    def paint(self, painter, option, index):
+        super().paint(painter, option, index)  # native text + selection highlight
+        hovered = bool(option.state & QStyle.StateFlag.State_MouseOver)
+        painter.save()
+        painter.setPen(QColor("#ff6b81") if hovered else QColor("#b7808c"))
+        painter.drawText(self._icon_rect(option), Qt.AlignmentFlag.AlignCenter, "🗑")
+        painter.restore()
+
+    def editorEvent(self, event, model, option, index):
+        if event.type() == QEvent.Type.MouseButtonRelease:
+            if self._icon_rect(option).contains(event.position().toPoint()):
+                name = index.data(Qt.ItemDataRole.UserRole)
+                if name:
+                    self._owner._delete_profile_by_name(name)
+                return True
+        return super().editorEvent(event, model, option, index)
+
+
 class StartupDialog(QDialog):
     """Dialog for selecting or creating a user profile at startup."""
 
@@ -546,7 +581,7 @@ class StartupDialog(QDialog):
         self.selected_topics = []
 
         self.setWindowTitle("Smart Flashcards")
-        self.setMinimumSize(500, 640)
+        self.setMinimumSize(500, 420)
         self.setStyleSheet(STARTUP_STYLE)
 
         self.init_ui()
@@ -563,49 +598,59 @@ class StartupDialog(QDialog):
         layout.setSpacing(20)
         layout.setContentsMargins(32, 32, 32, 32)
 
-        # Language selector (top-right). Changing it re-opens the dialog localized.
-        lang_row = QHBoxLayout()
-        lang_row.addStretch()
-        lang_lbl = QLabel(f"🌍 {tr('language')}:")
-        lang_lbl.setStyleSheet("color:#cfd6e6; font-size:14px;")
-        lang_row.addWidget(lang_lbl)
+        # Header: the welcome text and the language selector sit on the SAME row —
+        # the selector is bottom-aligned to the subtitle, so the top doesn't waste a
+        # whole extra row on the language picker.
+        header_row = QHBoxLayout()
+        header_row.setSpacing(12)
+
+        welcome_box = QVBoxLayout()
+        welcome_box.setSpacing(2)
+        title = QLabel(tr('welcome_title'))
+        title.setObjectName("titleLabel")
+        title.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        welcome_box.addWidget(title)
+        subtitle = QLabel(tr('welcome_subtitle'))
+        subtitle.setObjectName("subtitleLabel")
+        subtitle.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        welcome_box.addWidget(subtitle)
+
         self.lang_combo = QComboBox()
         for code, name in LANGUAGES.items():
             self.lang_combo.addItem(name, code)
         codes = list(LANGUAGES.keys())
         self.lang_combo.setCurrentIndex(codes.index(get_language()) if get_language() in codes else 0)
-        self.lang_combo.setFixedWidth(150)
+        self.lang_combo.setFixedWidth(140)
         self.lang_combo.currentIndexChanged.connect(self._on_language_changed)
-        lang_row.addWidget(self.lang_combo)
-        layout.addLayout(lang_row)
+        lang_lbl = QLabel(f"🌍 {tr('language')}:")
+        lang_lbl.setStyleSheet("color:#cfd6e6; font-size:14px; background:transparent;")
+        lang_widget = QWidget()
+        lang_box = QHBoxLayout(lang_widget)
+        lang_box.setContentsMargins(0, 0, 0, 0)
+        lang_box.setSpacing(6)
+        lang_box.addWidget(lang_lbl)
+        lang_box.addWidget(self.lang_combo)
 
-        # Title
-        title = QLabel(tr('welcome_title'))
-        title.setObjectName("titleLabel")
-        title.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        layout.addWidget(title)
+        # Left spacer the same width as the language box, so the welcome text stays
+        # centred in the dialog instead of being pushed left by the selector.
+        left_spacer = QWidget()
+        left_spacer.setFixedWidth(max(lang_widget.sizeHint().width(), 160))
+        header_row.addWidget(left_spacer)
+        header_row.addStretch(1)
+        header_row.addLayout(welcome_box)
+        header_row.addStretch(1)
+        header_row.addWidget(lang_widget, 0, Qt.AlignmentFlag.AlignBottom)
+        layout.addLayout(header_row)
 
-        subtitle = QLabel(tr('welcome_subtitle'))
-        subtitle.setObjectName("subtitleLabel")
-        subtitle.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        layout.addWidget(subtitle)
-        
         # Profile list. Its height is fitted to the number of profiles (see
         # _fit_profile_list_height) so 2 profiles don't get a scrollbar while 1 topic
         # leaves a huge gap — the two areas stay visually balanced.
         self.profile_list = QListWidget()
+        self.profile_list.setMouseTracking(True)  # so the trash icon highlights on hover
+        self.profile_list.setItemDelegate(ProfileItemDelegate(self))
         self.profile_list.itemDoubleClicked.connect(self.select_and_continue)
         self.profile_list.currentItemChanged.connect(self._on_profile_selection_changed)
         layout.addWidget(self.profile_list)
-
-        # Delete-profile button (acts on the selected profile, with confirmation).
-        del_row = QHBoxLayout()
-        del_row.addStretch()
-        self.delete_profile_btn = QPushButton(tr('del_profile_btn'))
-        self.delete_profile_btn.setObjectName("secondaryButton")
-        self.delete_profile_btn.clicked.connect(self._delete_selected_profile)
-        del_row.addWidget(self.delete_profile_btn)
-        layout.addLayout(del_row)
 
         # New profile section
         new_profile_frame = QFrame()
@@ -656,12 +701,16 @@ class StartupDialog(QDialog):
             self.topics_tree.setRootIsDecorated(True)
             self.topics_tree.setAnimated(True)
             self.topics_tree.setIndentation(24)
-            self.topics_tree.setMinimumHeight(160)
+            self.topics_tree.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
             self.topics_tree.itemChanged.connect(self._on_topic_item_changed)
+            # Adaptive height (like the profile list): grow to the visible rows up to a
+            # cap, then scroll. Re-fit when groups expand/collapse.
+            self.topics_tree.itemExpanded.connect(self._fit_topics_tree_height)
+            self.topics_tree.itemCollapsed.connect(self._fit_topics_tree_height)
 
             self._build_topics_tree()
 
-            topics_layout.addWidget(self.topics_tree, 1)
+            topics_layout.addWidget(self.topics_tree)
 
             self.empty_topics_label = QLabel(tr('empty_topics'))
             self.empty_topics_label.setObjectName("subtitleLabel")
@@ -669,7 +718,7 @@ class StartupDialog(QDialog):
             topics_layout.addWidget(self.empty_topics_label)
 
             self._update_empty_state()
-            layout.addWidget(topics_frame, 1)   # topics get the extra vertical space
+            layout.addWidget(topics_frame)
 
         # Study mode selector
         mode_frame = QFrame()
@@ -742,6 +791,7 @@ class StartupDialog(QDialog):
 
         self.topics_tree.blockSignals(False)
         self._update_empty_state()
+        self._fit_topics_tree_height()
 
     def _update_empty_state(self):
         """Shows guidance instead of an empty tree when there are no topics yet."""
@@ -799,13 +849,30 @@ class StartupDialog(QDialog):
         frame = 2 * self.profile_list.frameWidth() + 6
         self.profile_list.setFixedHeight(row_h * visible + frame)
 
-    def _delete_selected_profile(self):
-        """Deletes the currently selected profile after confirmation."""
-        item = self.profile_list.currentItem()
-        if not item:
-            QMessageBox.warning(self, tr('err_title'), tr('err_select_profile'))
+    def _fit_topics_tree_height(self, *args):
+        """Size the topics tree to its visible rows (up to a cap), then scroll —
+        adaptive like the profile list, so it neither crowds the profiles nor leaves
+        a big empty gap. Recomputed when groups expand/collapse."""
+        if not hasattr(self, 'topics_tree'):
             return
-        name = item.data(Qt.ItemDataRole.UserRole)
+        rows = self.topics_tree.topLevelItemCount()
+        if rows == 0:
+            return
+        for i in range(self.topics_tree.topLevelItemCount()):
+            it = self.topics_tree.topLevelItem(i)
+            if it.isExpanded():
+                rows += it.childCount()
+        # sizeHintForRow under-reports before the widget is shown (it misses the
+        # stylesheet padding), which squashed the tree to ~3 rows. Floor it to a
+        # realistic per-row height so the cap actually shows ~6 rows.
+        row_h = max(self.topics_tree.sizeHintForRow(0),
+                    self.topics_tree.fontMetrics().height() + 16)
+        visible = min(max(rows, 3), 6)  # show 3..6 rows, then scroll inside the tree
+        frame = 2 * self.topics_tree.frameWidth() + 8
+        self.topics_tree.setFixedHeight(row_h * visible + frame)
+
+    def _delete_profile_by_name(self, name):
+        """Deletes a profile (invoked from its row's trash button) after confirmation."""
         reply = QMessageBox.question(
             self, tr('confirm_title'), tr('del_profile_confirm', name=name),
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
@@ -816,7 +883,8 @@ class StartupDialog(QDialog):
             self.load_profiles()
 
     def load_profiles(self):
-        """Loads existing profiles into the list."""
+        """Loads existing profiles. Rows render natively (reliable text + selection);
+        the per-row trash icon is drawn by ProfileItemDelegate."""
         self.profile_list.clear()
         profiles = profile_manager.get_all_profiles()
         last_user = profile_manager.get_last_user()

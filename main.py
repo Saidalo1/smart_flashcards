@@ -696,7 +696,11 @@ class FlashcardApp:
         # exe path as an argument.
         import subprocess
         env = os.environ.copy()
-        env.pop('_MEIPASS2', None)
+        # PyInstaller 6.x points a re-exec'd process at the parent's temp dir via
+        # _MEIPASS2 AND several _PYI_* vars; a child that inherits any of them fails
+        # to bootstrap. Strip them all so the relaunched exe extracts cleanly.
+        for _k in [k for k in env if k.startswith('_MEIPASS') or k.startswith('_PYI')]:
+            env.pop(_k, None)
         if getattr(sys, 'frozen', False):
             args = [sys.executable] + sys.argv[1:]
         else:

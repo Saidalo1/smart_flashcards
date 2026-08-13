@@ -1053,7 +1053,9 @@ class ManagementWindow(QDialog):
         # See main.FlashcardApp.switch_user: strip _MEIPASS2 and drop argv[0] so the
         # onefile bootloader in the child doesn't fail to start.
         env = os.environ.copy()
-        env.pop('_MEIPASS2', None)
+        # Strip PyInstaller onefile bootstrap vars (see main.FlashcardApp.switch_user).
+        for _k in [k for k in env if k.startswith('_MEIPASS') or k.startswith('_PYI')]:
+            env.pop(_k, None)
         if getattr(sys, 'frozen', False):
             args = [sys.executable] + sys.argv[1:]
         else:

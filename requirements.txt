@@ -1,19 +1,33 @@
-# Core dependencies with pinned versions for reproducibility
-PyQt6==6.10.1
-rapidfuzz==3.14.5  # fast, typo-tolerant string grading (first pass)
-# sentence-transformers + torch power the semantic (synonym) grading fallback.
-# They are optional at runtime: with semantic_grading=False the app never imports
-# them, so a strict/lightweight build can drop torch entirely.
-sentence-transformers==5.1.2
-torch==2.8.0
-pyinstaller==6.17.0
-pynput==1.7.7
-evdev==1.9.2  # kernel-level global hotkeys on Linux/Wayland (needs 'input' group)
+# Smart Flashcards — runtime dependencies (pinned to the tested versions).
+# Install with:  pip install -r requirements.txt
 
-# Main transitive dependencies (pinned for stability)
-transformers==4.57.3
-huggingface-hub==0.36.0
-tokenizers==0.22.1
-numpy==2.0.2
-scikit-learn==1.6.1
-scipy==1.13.1
+# --- GUI ---
+PySide6==6.10.3            # Qt bindings (the app was migrated from PyQt6 to PySide6)
+
+# --- Core runtime ---
+rapidfuzz==3.13.0          # fast, typo-tolerant answer grading
+Pillow==11.3.0             # tray / app icon generation
+openpyxl==3.1.5            # import/export vocabulary as .xlsx
+pydub==0.25.1              # audio playback helper
+sounddevice==0.5.3         # microphone / PortAudio playback (pulls numpy)
+numpy==2.0.2               # required by sounddevice (and icon rendering)
+keyboard==0.13.5           # global hotkey (Windows)
+certifi==2025.11.12        # CA bundle for TLS in frozen builds (auto-update + cloud catalog)
+
+# --- Linux only: kernel-level global hotkeys (needs the 'input' group) ---
+evdev==1.9.2 ; sys_platform == "linux"
+
+# --- Build tooling (not needed to run from source) ---
+# Nuitka compiles the standalone .exe; Inno Setup (ISCC) wraps the installer.
+Nuitka==4.1.3
+
+# --- Optional: semantic (synonym) grading fallback ---
+# Imported lazily and only when semantic_grading=True. The default build excludes
+# them (RapidFuzz-only), so they are NOT installed by default. Uncomment to enable.
+# sentence-transformers==5.1.2
+# torch==2.8.0
+# transformers==4.57.3
+# huggingface-hub==0.36.0
+# tokenizers==0.22.1
+# scikit-learn==1.6.1
+# scipy==1.13.1

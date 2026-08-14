@@ -893,7 +893,9 @@ class StartupDialog(QDialog):
     def init_ui(self):
         layout = QVBoxLayout(self)
         layout.setSpacing(20)
-        layout.setContentsMargins(32, 32, 32, 32)
+        # Slim bottom margin so the version label sits snug at the bottom instead of
+        # floating above a wide empty strip.
+        layout.setContentsMargins(32, 32, 32, 10)
 
         # Header: the welcome text and the language selector sit on the SAME row —
         # the selector is bottom-aligned to the subtitle, so the top doesn't waste a
@@ -1063,20 +1065,26 @@ class StartupDialog(QDialog):
         mode_layout.addWidget(self.study_mode_combo)
         layout.addWidget(mode_frame)
 
-        # Continue button
+        # Continue button + version label sit in a tight sub-box (small gap between
+        # them), so the version tucks right under the button instead of floating a
+        # full 20px card-gap below it.
+        bottom_box = QVBoxLayout()
+        bottom_box.setContentsMargins(0, 0, 0, 0)
+        bottom_box.setSpacing(6)
         continue_btn = QPushButton(tr('continue'))
         continue_btn.clicked.connect(self.select_and_continue)
-        layout.addWidget(continue_btn)
+        bottom_box.addWidget(continue_btn)
 
         # Version label (small, muted) — lets you confirm an auto-update actually applied.
         version_lbl = QLabel(f"v{__version__}")
         version_lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
         version_lbl.setStyleSheet("color:#5a6a85; font-size:11px; background:transparent;")
-        layout.addWidget(version_lbl)
+        bottom_box.addWidget(version_lbl)
+        layout.addLayout(bottom_box)
 
-        # _rebalance_lists sizes the lists to their content and calls adjustSize, so
-        # the dialog hugs its content exactly (no empty gap, no wasted space) and grows
-        # when a topic is expanded — up to a screen-based cap, after which it scrolls.
+        # _rebalance_lists sizes the lists to their content and fixes the dialog height
+        # to fit exactly (grows on expand, shrinks on collapse — no gap below the
+        # version). Past a ~9-row cap the tree scrolls instead of growing further.
         QTimer.singleShot(0, self._rebalance_lists)
     
     def _build_topics_tree(self):
@@ -1269,19 +1277,34 @@ class StartupDialog(QDialog):
         if hasattr(self, 'topics_tree') and getattr(self, '_topics_frame', None) is not None:
             t_row = max(self.topics_tree.sizeHintForRow(0),
                         self.topics_tree.fontMetrics().height() + 16)
+            fr = 2 * self.topics_tree.frameWidth() + 8
             rows = max(self._visible_tree_rows(), 1)
-            content_h = rows * t_row + 2 * self.topics_tree.frameWidth() + 8
-            # Cap so the whole dialog still fits the screen (~450px is the rest of the
-            # dialog: header, profile, new-profile, mode, continue, margins).
+            content_h = rows * t_row + fr
+            # Grow to content, but never past ~9 rows — then it SCROLLS instead of
+            # ballooning the window. Also bounded by the screen on small displays.
+            cap = 9 * t_row + fr
             try:
                 from PySide6.QtWidgets import QApplication
                 scr_h = QApplication.primaryScreen().availableGeometry().height()
+                cap = min(cap, max(150, scr_h - 470))
             except Exception:
-                scr_h = 900
-            cap = max(150, scr_h - 470)
+                pass
             self.topics_tree.setFixedHeight(min(content_h, cap))
-        # Hug the content: shrink/grow the dialog to fit (no empty gap, no clipping).
-        self.adjustSize()
+        # Fit the dialog height to the content on the NEXT tick — after the layout has
+        # recomputed with the new row heights (reading it inline lags by one step).
+        QTimer.singleShot(0, self._fit_dialog_height)
+
+    def _fit_dialog_height(self):
+        """Fix the dialog height to exactly what its (fixed-height) blocks need, so it
+        grows when a topic is expanded and shrinks back on collapse — never leaving an
+        empty gap below the version label. Width stays free to resize."""
+        lay = self.layout()
+        if lay is None:
+            return
+        lay.activate()
+        target_h = lay.minimumSize().height()
+        if target_h > 0 and self.height() != target_h:
+            self.setFixedHeight(target_h)
 
     def resizeEvent(self, event):
         super().resizeEvent(event)

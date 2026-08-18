@@ -13,7 +13,7 @@ from PySide6.QtWidgets import (
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QColor, QFont
 
-from i18n import tr
+from .i18n import tr
 
 
 # ============================================================================
@@ -1068,7 +1068,7 @@ class ManagementWindow(QDialog):
         import sys
         import subprocess
         from PySide6.QtWidgets import QApplication
-        from app_paths import is_frozen
+        from .app_paths import is_frozen
         self.close()
         # See main.FlashcardApp.switch_user for the reasoning.
         env = os.environ.copy()

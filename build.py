@@ -22,7 +22,7 @@ PY = sys.executable  # the .venv python running this script
 
 # --- version (single source of truth) ---
 sys.path.insert(0, ROOT)
-from version import __version__ as VERSION  # noqa: E402
+from app.version import __version__ as VERSION  # noqa: E402
 
 # Packages no app module imports — excluded purely so an optional/transitive
 # import inside a dependency can never drag them in and bloat the build.

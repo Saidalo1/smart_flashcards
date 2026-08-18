@@ -12,9 +12,9 @@ from PySide6.QtWidgets import (
 from PySide6.QtCore import Qt, QSize, QRect, QEvent, QObject, Signal, QTimer
 from PySide6.QtGui import QFont, QColor
 
-import profile_manager
-from i18n import tr, set_language, get_language, LANGUAGES
-from version import __version__
+from . import profile_manager
+from .i18n import tr, set_language, get_language, LANGUAGES
+from .version import __version__
 
 
 STARTUP_STYLE = """
@@ -717,7 +717,7 @@ class CatalogDialog(QDialog):
 
         def work():
             try:
-                import catalog
+                from . import catalog
                 cats = catalog.fetch_catalog()
             except Exception:
                 cats = None
@@ -813,7 +813,7 @@ class CatalogDialog(QDialog):
 
         def work():
             try:
-                import catalog
+                from . import catalog
                 words = catalog.fetch_topic(tid)
             except Exception:
                 words = None
@@ -1170,9 +1170,9 @@ class StartupDialog(QDialog):
             return
         username = current.data(Qt.ItemDataRole.UserRole)
         try:
-            from config_manager import ConfigManager
-            from stats_manager import StatsManager
-            from management_window import ManagementWindow
+            from .config_manager import ConfigManager
+            from .stats_manager import StatsManager
+            from .management_window import ManagementWindow
             path = profile_manager.get_profile_path(username)
             cfg = ConfigManager(config_path=path / 'config.json')
             stats = StatsManager(stats_path=path / 'stats.json')

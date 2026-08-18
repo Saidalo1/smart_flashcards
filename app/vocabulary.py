@@ -2,7 +2,7 @@ import json
 import random
 import uuid
 from pathlib import Path
-from app_paths import get_data_dir
+from .app_paths import get_data_dir
 
 DATA_PATH = get_data_dir() / "vocabulary.json"
 # --- Adaptive Session Deck Constants ---

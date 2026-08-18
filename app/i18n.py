@@ -5,7 +5,7 @@ dir, so the very first screen (profile picker) can already be localized before
 any profile is selected. Use tr('key', **fmt) everywhere a user-facing string
 is shown; missing keys fall back to Russian, then to the key itself.
 """
-from app_paths import get_data_dir
+from .app_paths import get_data_dir
 
 LANGUAGES = {'ru': 'Русский', 'uz': "O'zbekcha", 'en': 'English'}
 DEFAULT_LANG = 'ru'

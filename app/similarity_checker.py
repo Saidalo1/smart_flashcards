@@ -40,7 +40,7 @@ class SimilarityChecker:
             return
 
         try:
-            from app_paths import get_cache_dir
+            from .app_paths import get_cache_dir
             from sentence_transformers import SentenceTransformer, util
             self._util = util
 

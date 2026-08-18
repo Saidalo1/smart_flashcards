@@ -9,7 +9,7 @@ from PySide6.QtCore import QTimer, Signal, QObject, Qt
 from PySide6.QtGui import QIcon, QPixmap, QAction, QPalette, QColor
 from PySide6.QtWidgets import QApplication, QSystemTrayIcon, QMenu
 
-from app_paths import get_data_dir, is_frozen
+from app.app_paths import get_data_dir, is_frozen
 
 
 def setup_logging():
@@ -43,7 +43,7 @@ def setup_logging():
     # sys.frozen alone is always False under Nuitka and was misleading in logs.
     logging.info(f"Frozen: {is_frozen()}")
     try:
-        from version import __version__ as _v
+        from app.version import __version__ as _v
         logging.info(f"Version: {_v}")
     except Exception:
         pass
@@ -69,16 +69,16 @@ class LoggerWriter:
             self._original.flush()
 
 
-from vocabulary import Vocabulary
-from flashcard_widget import FlashcardWidget
-from stats_manager import StatsManager
-from config_manager import ConfigManager
-from similarity_checker import SimilarityChecker
-from management_window import ManagementWindow
-from startup_dialog import StartupDialog
-from icon import icon_b64
-import profile_manager
-from i18n import tr
+from app.vocabulary import Vocabulary
+from app.flashcard_widget import FlashcardWidget
+from app.stats_manager import StatsManager
+from app.config_manager import ConfigManager
+from app.similarity_checker import SimilarityChecker
+from app.management_window import ManagementWindow
+from app.startup_dialog import StartupDialog
+from app.icon import icon_b64
+from app import profile_manager
+from app.i18n import tr
 
 # Global hotkey support
 try:
@@ -92,7 +92,7 @@ except ImportError:
 # Kernel-level (evdev) hotkey backend — the only reliable way to get GLOBAL
 # hotkeys under Wayland, where pynput/X11 can't see keys sent to other windows.
 try:
-    from evdev_hotkey import EvdevHotkeyListener, EVDEV_AVAILABLE
+    from app.evdev_hotkey import EvdevHotkeyListener, EVDEV_AVAILABLE
 except ImportError:
     EVDEV_AVAILABLE = False
     EvdevHotkeyListener = None
@@ -115,7 +115,7 @@ class UpdateChecker(QObject):
 
     def _run(self):
         try:
-            from updater import check_for_update
+            from app.updater import check_for_update
             result = check_for_update()
         except Exception:
             result = None
@@ -138,7 +138,7 @@ class DownloadWorker(QObject):
 
     def _run(self):
         try:
-            from updater import download_installer
+            from app.updater import download_installer
             path = download_installer(self._url, progress_cb=lambda p: self.progress.emit(p))
         except Exception:
             path = None
@@ -227,7 +227,7 @@ class FlashcardApp:
 
         # Very first launch only: ask the interface language up front (audience is
         # mostly Uzbek friends), then remember it. Skipped on every later launch.
-        from i18n import is_language_chosen
+        from app.i18n import is_language_chosen
         if not is_language_chosen():
             self._ask_language_first_run()
 
@@ -570,7 +570,7 @@ class FlashcardApp:
 
         def _on_downloaded(path):
             dlg.close()
-            from updater import verify_sha256, run_installer
+            from app.updater import verify_sha256, run_installer
             if not path or not verify_sha256(path, sha) or not run_installer(path):
                 QMessageBox.warning(None, tr('update_title'), tr('update_failed'))
                 return
@@ -760,7 +760,7 @@ class FlashcardApp:
         """First launch only: a small three-button interface-language picker."""
         from PySide6.QtWidgets import QDialog, QVBoxLayout, QLabel, QPushButton
         from PySide6.QtCore import Qt
-        from i18n import LANGUAGES, set_language
+        from app.i18n import LANGUAGES, set_language
 
         dlg = QDialog()
         dlg.setWindowTitle("Til / Язык / Language")

@@ -14,7 +14,7 @@ import tempfile
 import urllib.request
 from urllib.error import URLError, HTTPError
 
-from version import __version__
+from .version import __version__
 
 log = logging.getLogger(__name__)
 

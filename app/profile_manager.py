@@ -4,7 +4,7 @@ Each user has their own config, stats, and active topics.
 """
 import json
 from pathlib import Path
-from app_paths import get_data_dir
+from .app_paths import get_data_dir
 
 DATA_DIR = get_data_dir()
 PROFILES_DIR = DATA_DIR / 'profiles'

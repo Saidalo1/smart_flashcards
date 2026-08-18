@@ -6,7 +6,7 @@ from PySide6.QtWidgets import (
 from PySide6.QtCore import Qt, Signal, QTimer, QPoint
 from PySide6.QtGui import QPainter
 
-from i18n import tr
+from .i18n import tr
 
 
 # --- Color themes per study mode ---
@@ -504,7 +504,7 @@ class FlashcardWidget(QFrame):
 
     def _add_streak_indicator(self, layout):
         """Adds a visual streak progress bar below the check button."""
-        from stats_manager import MASTERY_STREAK_THRESHOLD
+        from .stats_manager import MASTERY_STREAK_THRESHOLD
 
         current_streak = self.stats_manager.get_streak(self.card, self.study_mode)
         capped_streak = min(current_streak, MASTERY_STREAK_THRESHOLD)

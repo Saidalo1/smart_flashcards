@@ -32,7 +32,8 @@ def get_app_dir():
     """Directory the application runs from (the .exe folder, or the source dir)."""
     if _is_frozen():
         return Path(sys.executable).parent
-    return Path(__file__).parent
+    # Dev: the project root is the parent of this `app/` package (data/ lives there).
+    return Path(__file__).resolve().parent.parent
 
 
 def get_data_dir():

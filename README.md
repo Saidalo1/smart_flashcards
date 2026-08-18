@@ -38,7 +38,7 @@ Everything runs locally — the model ships with the app, so grading works offli
 
 ## Install
 
-**Windows:** grab the latest installer from the [Releases](https://github.com/Saidalo1/smart_flashcards/releases)
+**Windows:** grab the latest installer from the [Releases](https://github.com/Saidalo1/smart_flashcards_dist/releases)
 page and run it. After that it keeps itself up to date.
 
 **From source** (Windows or Linux):

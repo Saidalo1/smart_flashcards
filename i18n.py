@@ -108,6 +108,7 @@ STRINGS = {
     'prompt_synonym':     {'ru': 'Синоним к:',                'uz': 'Sinonim:',                           'en': 'Synonym for:'},
     'prompt_transition':  {'ru': 'Новое слово:',              'uz': "Yangi so'z:",                        'en': 'Transition:'},
     'prompt_translate':   {'ru': 'Перевод:',                  'uz': 'Tarjima:',                           'en': 'Translate:'},
+    'prompt_verb_forms':  {'ru': 'Формы:',                    'uz': 'Shakllari:',                         'en': 'Forms:'},
     'check_answer':       {'ru': 'Проверить',                 'uz': 'Tekshirish',                         'en': 'Check Answer'},
     'hint_tooltip':       {'ru': 'Подсказка',                 'uz': 'Izoh',                               'en': 'Hint'},
     'delete_card_tooltip':{'ru': 'Удалить эту карточку навсегда', 'uz': "Bu kartani butunlay o'chirish",   'en': 'Delete this card permanently'},

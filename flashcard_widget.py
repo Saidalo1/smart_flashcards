@@ -220,6 +220,29 @@ class GrabOnClickLineEdit(QLineEdit):
         super().mousePressEvent(event)
 
 
+# Presentation rules per category. To change how a category is asked — its
+# question direction or its prompt label — edit this table; the widget below
+# stays generic and never branches on a category name.
+#   mode:            'exact' or 'prefix' match against the card's category
+#   fixed_direction: always ask prompt-language -> answer-language (never reversed)
+#   prompt:          i18n key for the question label
+CATEGORY_RULES = (
+    {'match': 'SAT Transitions & Grammar', 'mode': 'exact',  'fixed_direction': True, 'prompt': 'prompt_transition'},
+    {'match': 'Irregular Verbs',           'mode': 'prefix', 'fixed_direction': True, 'prompt': 'prompt_verb_forms'},
+)
+
+
+def category_rule(category):
+    """Return the presentation rule for a card's category, or None for default behaviour."""
+    category = category or ''
+    for rule in CATEGORY_RULES:
+        if rule['mode'] == 'exact' and category == rule['match']:
+            return rule
+        if rule['mode'] == 'prefix' and category.startswith(rule['match']):
+            return rule
+    return None
+
+
 class FlashcardWidget(QFrame):
     """A widget to display a flashcard question and handle user input."""
     closed = Signal()
@@ -265,10 +288,9 @@ class FlashcardWidget(QFrame):
         # --- Determine study mode for this card ---
         self.study_mode = self._resolve_study_mode()
 
-        # Check if it's the Transition category (preserve legacy logic)
-        self.is_transition_card = (
-            self.card.get('category') == 'SAT Transitions & Grammar'
-        )
+        # Presentation rule for this card's category (fixed direction + custom
+        # prompt label). None => default translation behaviour.
+        self.card_rule = category_rule(self.card.get('category'))
 
         # --- Set question/answer language based on study mode ---
         if self.study_mode.startswith('definition'):
@@ -282,7 +304,7 @@ class FlashcardWidget(QFrame):
             # pattern is shown inline in the word title (see set_question), so the
             # learner always sees e.g. "avoid doing sth" while still being asked
             # for the meaning.
-            if self.is_transition_card:
+            if self.card_rule and self.card_rule['fixed_direction']:
                 if 'uzbek' in self.card and self.card['uzbek']:
                     self.question_lang, self.answer_lang = 'english', 'uzbek'
                 else:
@@ -751,15 +773,11 @@ class FlashcardWidget(QFrame):
             self.question_label.setText(
                 f"{tr('prompt_synonym')} <b>{english_prompt}</b>"
             )
-        elif self.is_transition_card:
-            question_text = english_prompt if self.question_lang == 'english' else self.card.get(self.question_lang, word)
-            self.question_label.setText(
-                f"{tr('prompt_transition')} <b>{question_text}</b>"
-            )
         else:
             question_text = english_prompt if self.question_lang == 'english' else self.card.get(self.question_lang, word)
+            prompt_key = self.card_rule['prompt'] if self.card_rule else 'prompt_translate'
             self.question_label.setText(
-                f"{tr('prompt_translate')} <b>{question_text}</b>"
+                f"{tr(prompt_key)} <b>{question_text}</b>"
             )
 
     def _translation_answers(self):

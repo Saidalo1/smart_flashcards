@@ -2,14 +2,16 @@
   "timer_interval": 10,
   "hotkey": "shift_r",
   "active_topics": [
-    "vocab 12 (1-15)"
+    "Inter 1A 1B (1-15)",
+    "Inter 1A 1B (16-30)",
+    "Inter 1A 1B (31-32)"
   ],
   "show_notifications": true,
   "topic_weights": {},
   "theme": "dark",
-  "card_position": "middle_right",
+  "card_position": "middle_left",
   "study_mode": "adaptive",
-  "similarity_threshold": 0.6,
+  "similarity_threshold": 0.68,
   "fuzz_threshold": 85,
   "semantic_grading": true
 }

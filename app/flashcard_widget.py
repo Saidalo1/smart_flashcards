@@ -1,7 +1,8 @@
 import random
 from PySide6.QtWidgets import (
     QFrame, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QPushButton,
-    QGroupBox, QRadioButton, QStyle, QStyleOption, QButtonGroup, QLayout
+    QGroupBox, QRadioButton, QStyle, QStyleOption, QButtonGroup, QLayout,
+    QSizePolicy, QWidget
 )
 from PySide6.QtCore import Qt, Signal, QTimer, QPoint
 from PySide6.QtGui import QPainter
@@ -129,11 +130,22 @@ class PremiumOptionWidget(QFrame):
 
         self.label = QLabel(text)
         self.label.setWordWrap(True)
-        self.label.setStyleSheet(
-            "font-size: 15px; color: #eee; font-weight: normal; "
-            "background: transparent; padding: 0; border: none;"
-        )
+        # Reserve the RIGHT height for a wrapped (multi-line) answer. By default a
+        # word-wrapped QLabel's size policy does NOT advertise height-for-width, so
+        # the row is sized for a single line and a long answer gets clipped at the
+        # top (the bug on long options like "Boshqa mamlakatga ko'chib ketmoq").
+        # Enabling it — on the label AND this frame, so it propagates through the
+        # nested layouts up to the card's SetFixedSize pass — makes the row grow to
+        # fit every line.
+        _lp = self.label.sizePolicy()
+        _lp.setHeightForWidth(True)
+        self.label.setSizePolicy(_lp)
         layout.addWidget(self.label, 1)
+
+        _fp = self.sizePolicy()
+        _fp.setVerticalPolicy(QSizePolicy.Policy.Minimum)
+        _fp.setHeightForWidth(True)
+        self.setSizePolicy(_fp)
 
         self._apply_default_style()
 
@@ -497,6 +509,18 @@ class FlashcardWidget(QFrame):
 
         # Streak progress indicator
         self._add_streak_indicator(content_layout)
+
+        # Width strut — ONLY for multiple-choice cards. SetFixedSize shrinks the
+        # card to its word-wrapped content (as narrow as ~220px), which made long
+        # ANSWER OPTIONS (e.g. "Boshqa mamlakatga ko'chib ketmoq") wrap and clip,
+        # while setMinimumWidth() is ignored under SetFixedSize. A zero-height,
+        # fixed-width invisible strut pins MC cards to a readable width so options
+        # fit on one line. Text-input cards have no such content and stay compact.
+        if self.is_multiple_choice:
+            width_strut = QWidget()
+            width_strut.setFixedHeight(0)
+            width_strut.setMinimumWidth(420)
+            content_layout.addWidget(width_strut)
 
         main_layout.setSizeConstraint(QLayout.SizeConstraint.SetFixedSize)
         self.apply_stylesheet()

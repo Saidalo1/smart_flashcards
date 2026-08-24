@@ -332,16 +332,20 @@ class Vocabulary:
         if not same_category_words:
             return []
 
-        correct_answer = correct_card[language]
-        options = {correct_answer}
+        correct_answer = (correct_card.get(language) or '').strip()
+        options = {correct_answer} if correct_answer else set()
 
-        # Get distractors only from the same category
+        # Get distractors — skip words whose answer value is empty. Many words
+        # (e.g. the SAT sets) have english + definition but NO uzbek translation,
+        # and picking one as a distractor produced a blank option like the empty
+        # 4th choice in ['Very big', 'yirtmoq', 'Ketma-ketlik', ''].
         attempts = 0
         while len(options) < 4 and attempts < 50:
             attempts += 1
             random_word = random.choice(same_category_words)
-            if random_word[language] not in options:
-                options.add(random_word[language])
+            value = (random_word.get(language) or '').strip()
+            if value and value not in options:
+                options.add(value)
 
         shuffled_options = list(options)
         random.shuffle(shuffled_options)

@@ -825,13 +825,13 @@ class FlashcardApp:
         print("Management closed. Timer resumed.")
 
     def switch_user(self):
-        """Restarts app to switch user."""
-        print("Switching user...")
+        """Restarts the app to the main menu (profile / topic picker)."""
+        print("Returning to main menu...")
         self.stats_manager.save_stats()
         self.timer.stop()
 
-        # Clear last user to force profile selection
-        profile_manager.set_last_user("")
+        # Keep last_user so the current profile stays pre-selected on the picker —
+        # the user can still switch, but doesn't have to re-pick every time.
 
         # Relaunch the app. In a onefile PyInstaller build the running process sets
         # _MEIPASS2 in the environment; if a freshly spawned copy inherits it, its

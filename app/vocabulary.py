@@ -116,9 +116,14 @@ class Vocabulary:
                 topics.add(word['category'])
 
         def sort_key(topic):
-            """Extracts the first number from category name for numerical sorting."""
-            match = re.search(r'\((\d+)', topic)
-            return int(match.group(1)) if match else 0
+            """Sort by the group prefix (alphabetical) then the sub-range start
+            (numeric) — deterministic across launches. Sorting only by the first
+            number made every '... (1-15)' group tie, so their order came from the
+            set's iteration and shuffled every run."""
+            match = re.match(r'^(.*?)\s*\((\d+)', topic)
+            if match:
+                return (match.group(1).strip().lower(), int(match.group(2)))
+            return (topic.lower(), 0)
 
         return sorted(list(topics), key=sort_key)
 

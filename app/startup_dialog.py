@@ -1027,14 +1027,26 @@ class StartupDialog(QDialog):
 
         self.setWindowTitle("Smart Flashcards")
         self.setMinimumSize(500, 420)
-        # Append the checked-state checkmark image (drawn at runtime, path known now).
+        # Append runtime-drawn images (paths known now): the checked checkbox mark and
+        # the tree's left-column expand/collapse arrows.
         check_icon = self._ensure_check_icon()
         checked_qss = (
             "QCheckBox#hardestFirstCheck::indicator:checked {"
             " border: none; background: transparent;"
             f" image: url({check_icon}); }}"
         ) if check_icon else ""
-        self.setStyleSheet(STARTUP_STYLE + checked_qss)
+        closed_arrow, open_arrow = self._ensure_branch_icons()
+        branch_qss = (
+            "QTreeWidget#topicsTree::branch:has-children:closed,"
+            "QTreeWidget#topicsTree::branch:has-children:!has-siblings:closed,"
+            "QTreeWidget#topicsTree::branch:has-children:has-siblings:closed"
+            f" {{ image: url({closed_arrow}); }}"
+            "QTreeWidget#topicsTree::branch:has-children:open,"
+            "QTreeWidget#topicsTree::branch:has-children:!has-siblings:open,"
+            "QTreeWidget#topicsTree::branch:has-children:has-siblings:open"
+            f" {{ image: url({open_arrow}); }}"
+        ) if closed_arrow and open_arrow else ""
+        self.setStyleSheet(STARTUP_STYLE + checked_qss + branch_qss)
 
         self.init_ui()
         self.load_profiles()
@@ -1171,10 +1183,11 @@ class StartupDialog(QDialog):
             topics_layout.addLayout(topics_header)
 
             self.topics_tree = QTreeWidget()
+            self.topics_tree.setObjectName("topicsTree")
             self.topics_tree.setHeaderHidden(True)
             self.topics_tree.setRootIsDecorated(True)
             self.topics_tree.setAnimated(True)
-            self.topics_tree.setIndentation(24)
+            self.topics_tree.setIndentation(28)
             # Column 0 = checkbox + label (stretches); column 1 = the "want to study"
             # star marker, a fixed narrow lane on the right of each topic row.
             self.topics_tree.setColumnCount(2)
@@ -1301,19 +1314,17 @@ class StartupDialog(QDialog):
                 self.vocabulary.get_word_count_for_topic(cat) for cat in categories
             )
 
-            # Create parent item. Leading ▶ chevron (flips to ▼ when expanded) tells
-            # users the row opens into sub-lists — the native branch arrow is easy to
-            # miss on the dark theme.
+            # Create parent item. The expand arrow is drawn in the tree's left branch
+            # column (see _ensure_branch_icons) where users expect it.
             parent = QTreeWidgetItem(self.topics_tree)
-            parent.setText(0, f"▶  📁 {group_name} ({tr('words_n', n=total_words)})")
+            parent.setText(0, f"📁 {group_name} ({tr('words_n', n=total_words)})")
             parent.setFlags(
                 parent.flags()
                 | Qt.ItemFlag.ItemIsUserCheckable
                 | Qt.ItemFlag.ItemIsAutoTristate
             )
-            # Accent colour + bold so group rows read as clickable section headers.
-            parent.setForeground(0, QColor('#5ad1ff'))
-            pf = parent.font(0); pf.setBold(True); parent.setFont(0, pf)
+            # Discoverability comes from the ▶ chevron, click-to-open row, and the
+            # hover tooltip — no recolouring of the row text.
             parent.setToolTip(0, tr('topic_expand_tt'))
             parent.setExpanded(False)
 
@@ -1436,15 +1447,6 @@ class StartupDialog(QDialog):
         self._apply_star_visual(group_name)
         self._save_starred_for_profile(self._current_profile_username(), self._starred_groups)
 
-    def _set_group_chevron(self, item, expanded):
-        """Flip the leading ▶/▼ chevron on a group row (signals blocked so the text
-        change isn't mistaken for a checkbox toggle)."""
-        t = item.text(0)
-        if t and t[0] in ('▶', '▼'):
-            self.topics_tree.blockSignals(True)
-            item.setText(0, ('▼' if expanded else '▶') + t[1:])
-            self.topics_tree.blockSignals(False)
-
     def _on_topic_row_clicked(self, item, column):
         """Single click on a group row toggles its expansion, so users don't need to
         find the little arrow. Clicks on the checkbox (left zone) are left alone."""
@@ -1459,11 +1461,9 @@ class StartupDialog(QDialog):
         item.setExpanded(not item.isExpanded())
 
     def _on_group_expanded(self, item):
-        self._set_group_chevron(item, True)
         self._fit_topics_tree_height()
 
     def _on_group_collapsed(self, item):
-        self._set_group_chevron(item, False)
         self._fit_topics_tree_height()
 
     def _ensure_check_icon(self):
@@ -1498,6 +1498,40 @@ class StartupDialog(QDialog):
             return icon.as_posix()
         except Exception:
             return ''
+
+    def _ensure_branch_icons(self):
+        """Draw the tree's expand/collapse arrows (a right chevron when closed, a
+        down chevron when open) once and cache them, so a clear control shows in the
+        left branch column. Returns (closed_path, open_path) or ('', '')."""
+        try:
+            from PySide6.QtGui import QPixmap, QPainter, QPen, QColor, QPolygonF
+            from PySide6.QtCore import QPointF
+            base = get_data_dir() / '_ui'
+            base.mkdir(parents=True, exist_ok=True)
+            closed, opened = base / 'branch_closed.png', base / 'branch_open.png'
+            specs = [
+                (closed, [QPointF(6, 4), QPointF(11, 9), QPointF(6, 14)]),   # ›
+                (opened, [QPointF(4, 6), QPointF(9, 11), QPointF(14, 6)]),   # ⌄
+            ]
+            for path, pts in specs:
+                if path.exists():
+                    continue
+                pm = QPixmap(18, 18)
+                pm.fill(Qt.GlobalColor.transparent)
+                p = QPainter(pm)
+                p.setRenderHint(QPainter.RenderHint.Antialiasing)
+                pen = QPen(QColor('#9fb0d0'))
+                pen.setWidth(2)
+                pen.setCapStyle(Qt.PenCapStyle.RoundCap)
+                pen.setJoinStyle(Qt.PenJoinStyle.RoundJoin)
+                p.setPen(pen)
+                p.setBrush(Qt.BrushStyle.NoBrush)
+                p.drawPolyline(QPolygonF(pts))
+                p.end()
+                pm.save(str(path))
+            return closed.as_posix(), opened.as_posix()
+        except Exception:
+            return '', ''
 
     def _update_empty_state(self):
         """Shows guidance instead of an empty tree when there are no topics yet."""

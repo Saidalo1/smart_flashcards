@@ -260,6 +260,7 @@ class FlashcardWidget(QFrame):
     closed = Signal()
     card_delete_requested = Signal(dict)
     menu_requested = Signal()  # ⚙ on the card → app pops up the menu (Manage, etc.)
+    home_requested = Signal()  # 🏠 on the card → app returns straight to the main menu
 
     def __init__(self, card, stats_manager, vocabulary, similarity_checker,
                  is_multiple_choice=False, config_manager=None,
@@ -418,15 +419,17 @@ class FlashcardWidget(QFrame):
         main_layout.setContentsMargins(0, 0, 0, 0)
         main_layout.setSpacing(0)
 
-        # Top bar as ONE row: ⚙ app menu (left) · draggable title (centre, stretches)
-        # · 💡/🗑 card actions pinned to the right — all on the same line.
-        self.menu_button = QPushButton("⚙")
+        # Top bar as ONE row: 🏠 home (left) · draggable title (centre, stretches)
+        # · 💡/🗑 card actions pinned to the right — all on the same line. The 🏠
+        # button returns to the main menu in one click (the old ⚙ menu's other
+        # actions — Manage, shuffle, etc. — remain in the system-tray menu).
+        self.menu_button = QPushButton("🏠")
         self.menu_button.setObjectName("menuButton")
         self.menu_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.menu_button.setFixedSize(30, 30)
         self.menu_button.setCursor(Qt.CursorShape.PointingHandCursor)
-        self.menu_button.setToolTip(tr('card_menu_tooltip'))
-        self.menu_button.clicked.connect(self.menu_requested.emit)
+        self.menu_button.setToolTip(tr('home_tooltip'))
+        self.menu_button.clicked.connect(self.home_requested.emit)
 
         self.hint_button = QPushButton("💡", self)
         self.hint_button.setObjectName("hintButton")

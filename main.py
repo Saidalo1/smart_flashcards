@@ -632,6 +632,8 @@ class FlashcardApp:
         self.flashcard_widget.closed.connect(self.on_widget_closed)
         self.flashcard_widget.card_delete_requested.connect(self.handle_card_deletion)
         self.flashcard_widget.menu_requested.connect(self._show_card_menu)
+        # 🏠 on the card → straight back to the main menu (profile / topic picker).
+        self.flashcard_widget.home_requested.connect(self.switch_user)
 
         # --- ИСПРАВЛЕННЫЙ ПОРЯДОК ТУТ ---
         self.flashcard_widget.show()  # 1. Сначала показываем (Qt инициализирует метрики)

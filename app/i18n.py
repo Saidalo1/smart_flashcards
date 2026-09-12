@@ -127,6 +127,7 @@ STRINGS = {
     'hint_tooltip':       {'ru': 'Подсказка',                 'uz': 'Izoh',                               'en': 'Hint'},
     'delete_card_tooltip':{'ru': 'Удалить эту карточку навсегда', 'uz': "Bu kartani butunlay o'chirish",   'en': 'Delete this card permanently'},
     'card_menu_tooltip':  {'ru': 'Меню: управление, настройки…', 'uz': 'Menyu: boshqaruv, sozlamalar…',    'en': 'Menu: manage, settings…'},
+    'home_tooltip':       {'ru': '🏠 В главное меню',           'uz': '🏠 Bosh menyuga qaytish',            'en': '🏠 Back to main menu'},
     'ph_translation':     {'ru': 'Введите перевод...',        'uz': 'Tarjimani kiriting...',              'en': 'Enter the translation...'},
     'ph_definition':      {'ru': 'Что означает это слово?...', 'uz': "Bu so'z nimani anglatadi?...",       'en': 'What does this word mean?...'},
     'ph_synonym':         {'ru': 'Введите синоним...',        'uz': 'Sinonim kiriting...',                'en': 'Enter a synonym...'},

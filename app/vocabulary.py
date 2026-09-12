@@ -37,14 +37,26 @@ class Vocabulary:
             self.words = []
             print("Vocabulary file not found or corrupted. Starting with an empty list.")
 
-    def shuffle_deck(self, stats_manager=None, active_topics=None):
-        """Creates a shuffled deck using weighted selection, filtered by topic."""
+    def shuffle_deck(self, stats_manager=None, active_topics=None, hardest_first=None):
+        """Creates a shuffled deck, filtered by topic.
+
+        Two selection modes:
+          * default — weighted-random, favouring words answered wrong / never shown.
+          * hardest_first=True — deterministic: worst-remembered (and new) words first.
+
+        The deck is de-duplicated by English word, so a word that lives in several
+        selected topics is studied ONCE per session (its answers are still accepted
+        from any of those topics during grading).
+        """
         # Remember settings for auto-reshuffle
         if stats_manager is not None:
             self._stats_manager = stats_manager
         if active_topics is not None:
             self._active_topics = active_topics
-        
+        if hardest_first is not None:
+            self._hardest_first = hardest_first
+        hardest_first = getattr(self, '_hardest_first', False)
+
         print(f"[SHUFFLE] === SHUFFLE_DECK CALLED ===")
         print(f"[SHUFFLE] Active topics: {self._active_topics}")
         print(f"[SHUFFLE] Total words in vocabulary: {len(self.words)}")
@@ -74,8 +86,28 @@ class Vocabulary:
         clamped_size = max(MIN_SESSION_SIZE, min(MAX_SESSION_SIZE, desired_size))
         session_size = min(clamped_size, total_words)
 
+        def dedup_by_english(cards):
+            """One card per English word — a word shared by several selected topics
+            is studied once (grading still accepts every topic's translation)."""
+            seen, out = set(), []
+            for c in cards:
+                en = (c.get('english') or '').strip().lower()
+                if en and en in seen:
+                    continue
+                seen.add(en)
+                out.append(c)
+            return out
+
+        if hardest_first and self._stats_manager:
+            # Worst-remembered (lowest accuracy) and never-shown come first.
+            def accuracy(word):
+                st = self._stats_manager.get_stats_for_word(word)
+                c = st.get('correct', 0); i = st.get('incorrect', 0); t = c + i
+                return (c / t) if t > 0 else 0.0   # new & all-wrong sort to the top
+            ordered = sorted(filtered_words, key=lambda w: (accuracy(w), random.random()))
+            self.deck = dedup_by_english(ordered)[:session_size]
         # --- Weighted Selection Based on Stats ---
-        if self._stats_manager:
+        elif self._stats_manager:
             weights = []
             for word in filtered_words:
                 stats = self._stats_manager.get_stats_for_word(word)
@@ -88,22 +120,21 @@ class Vocabulary:
                 else:
                     error_rate = incorrect / total
                     weight = 0.5 + (error_rate * 2.0)
-                
+
                 weights.append(weight)
 
-            self.deck = random.choices(filtered_words, weights=weights, k=session_size)
-            # Remove duplicates
-            seen = set()
-            unique_deck = []
-            for card in self.deck:
-                if card['id'] not in seen:
-                    seen.add(card['id'])
-                    unique_deck.append(card)
-            self.deck = unique_deck[:session_size]
+            # Oversample, then keep unique by id AND by English, then trim.
+            picked = random.choices(filtered_words, weights=weights, k=session_size * 3)
+            seen_id, by_id = set(), []
+            for card in picked:
+                if card['id'] not in seen_id:
+                    seen_id.add(card['id'])
+                    by_id.append(card)
+            self.deck = dedup_by_english(by_id)[:session_size]
         else:
-            self.deck = random.sample(filtered_words, session_size)
+            self.deck = dedup_by_english(random.sample(filtered_words, len(filtered_words)))[:session_size]
 
-        print(f"[SHUFFLE] Created session deck with {len(self.deck)} cards:")
+        print(f"[SHUFFLE] Created session deck with {len(self.deck)} cards (hardest_first={hardest_first}):")
         for card in self.deck:
             print(f"[SHUFFLE]   - {card['english']} (category: {card.get('category')})")
 
@@ -217,29 +248,53 @@ class Vocabulary:
         print(f"Added word: {english}")
         return True
 
-    def add_words_to_topic(self, category, pairs, default_complexity=0.5):
+    def add_words_to_topic(self, category, pairs, default_complexity=0.5,
+                           update_existing=False):
         """Adds several words under one topic/category at once.
 
         `pairs` is an iterable of dicts with at least 'english' (and usually
         'uzbek'). Optional per-row keys: 'hint', 'definition', 'grammar_pattern',
-        'synonyms' (a list, or a comma-separated string). Duplicate English words
-        (case-insensitive) are skipped. Saves once. Returns how many were added.
+        'synonyms' (a list, or a comma-separated string).
+
+        Deduplication is PER TOPIC: a word is skipped only if it already exists in
+        THIS SAME category. The same English word may live in several topics (e.g.
+        "Cosy" in both a house topic and a feelings topic) so every topic downloads
+        complete instead of losing words that happen to appear elsewhere.
+
+        With update_existing=True (used when re-downloading a cloud topic), a word
+        already in this category is refreshed in place instead of skipped — its
+        translation/hint/etc. are updated while its id and answer stats are kept —
+        so content fixes in the cloud reach decks that already have it.
+
+        Saves once. Returns how many words were added or updated.
         """
         category = (category or '').strip()
-        existing = {w['english'].lower() for w in self.words}
-        added = 0
+        # Dedup only against words already in THIS topic, not the whole vocabulary.
+        in_category = {w['english'].lower(): w for w in self.words
+                       if (w.get('category') or '').strip() == category}
+        changed = 0
         for row in pairs:
             english = (row.get('english') or '').strip()
-            uzbek = (row.get('uzbek') or '').strip()
-            if not english or english.lower() in existing:
+            if not english:
                 continue
+            uzbek = (row.get('uzbek') or '').strip()
             hint = (row.get('hint') or '').strip() or None
             definition = (row.get('definition') or '').strip() or None
             grammar_pattern = (row.get('grammar_pattern') or '').strip() or None
             synonyms = row.get('synonyms') or []
             if isinstance(synonyms, str):
                 synonyms = [s.strip() for s in synonyms.split(',') if s.strip()]
-            self.words.append({
+            existing_word = in_category.get(english.lower())
+            if existing_word is not None:
+                # Same word, same topic → refresh it (update) or leave it (add).
+                if update_existing:
+                    fields = {'uzbek': uzbek, 'hint': hint, 'definition': definition,
+                              'grammar_pattern': grammar_pattern, 'synonyms': synonyms}
+                    if any(existing_word.get(k) != v for k, v in fields.items()):
+                        existing_word.update(fields)
+                        changed += 1
+                continue  # never duplicate a word within the same topic
+            new_word = {
                 "english": english,
                 "uzbek": uzbek,
                 "category": category,
@@ -252,13 +307,14 @@ class Vocabulary:
                 "definition": definition,
                 "synonyms": synonyms,
                 "hint": hint,
-            })
-            existing.add(english.lower())
-            added += 1
-        if added:
+            }
+            self.words.append(new_word)
+            in_category[english.lower()] = new_word
+            changed += 1
+        if changed:
             self.save_words()
-        print(f"Added {added} word(s) to topic '{category}'.")
-        return added
+        print(f"Added/updated {changed} word(s) in topic '{category}'.")
+        return changed
 
     def update_word(self, old_english, new_english, new_uzbek):
         """Updates an existing word."""
@@ -311,23 +367,29 @@ class Vocabulary:
         return card
 
     def get_options_for_card(self, correct_card, language='uzbek'):
-        """Generates multiple choice options for a given card (from same category only)."""
-        # Filter words by the same category as the correct card
+        """Generates multiple-choice options for a card. Distractors are kept close to
+        the card: first its exact sub-range, then the whole topic (e.g. all of
+        'Inter 4A 4B'), then the topics selected for this session, and only as a last
+        resort every word — so a small topic never pulls options from unrelated ones."""
+        import re
+
+        def group_of(cat):
+            m = re.match(r'^(.*?)\s*\(', cat or '')
+            return (m.group(1).strip() if m else (cat or '')).lower()
+
         card_category = correct_card.get('category')
-        print(f"[OPTIONS] Generating options for: {correct_card['english']}")
-        print(f"[OPTIONS] Card category: {card_category}")
-        
-        if card_category:
-            same_category_words = [w for w in self.words if w.get('category') == card_category]
-            print(f"[OPTIONS] Words in same category: {len(same_category_words)}")
-        else:
-            same_category_words = self.words
-            print(f"[OPTIONS] No category - using all {len(same_category_words)} words")
-        
+        card_group = group_of(card_category)
+        print(f"[OPTIONS] Generating options for: {correct_card['english']} (cat={card_category})")
+
+        # 1) exact sub-range → 2) whole topic → 3) session topics → 4) everything.
+        same_category_words = [w for w in self.words if w.get('category') == card_category]
         if len(same_category_words) < 4:
-            # Widen the distractor pool to all words. If there still aren't 4,
-            # show whatever options exist (even a single one) rather than nothing.
-            print(f"[OPTIONS] Few words in category — widening to all words.")
+            same_category_words = [w for w in self.words
+                                   if group_of(w.get('category')) == card_group]
+        if len(same_category_words) < 4 and self._active_topics:
+            same_category_words = [w for w in self.words
+                                   if w.get('category') in self._active_topics]
+        if len(same_category_words) < 4:
             same_category_words = self.words
         if not same_category_words:
             return []

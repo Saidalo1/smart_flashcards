@@ -11,9 +11,9 @@ from urllib.error import URLError, HTTPError
 
 log = logging.getLogger(__name__)
 
-# jsDelivr serves the content repo's files from a global CDN (fast + cached, no auth).
+# Fetch directly from GitHub raw to get instant updates upon commit (bypassing CDN caching).
 # catalog.json lives at the repo root; each topic's words at topics/<id>.json.
-CDN_BASE = "https://cdn.jsdelivr.net/gh/Saidalo1/smart_flashcards_dist@main"
+CDN_BASE = "https://raw.githubusercontent.com/Saidalo1/smart_flashcards_dist/main"
 _HEADERS = {"User-Agent": "SmartFlashcards-Catalog"}
 
 

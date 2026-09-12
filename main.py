@@ -242,7 +242,7 @@ class FlashcardApp:
                 sys.exit(0)
             break
 
-        username, selected_topics, study_mode = startup.get_result()
+        username, selected_topics, study_mode, hardest_first = startup.get_result()
         self.current_user = username
         print(f"User profile: {username}")
 
@@ -260,13 +260,18 @@ class FlashcardApp:
         if study_mode:
             self.config_manager.study_mode = study_mode
 
+        # Save "worst-remembered first" preference
+        self.config_manager.hardest_first = hardest_first
+
         # Set active topics from startup if provided
         if selected_topics:
             self.config_manager.active_topics = selected_topics
 
         # Create initial deck with topic filtering
         active_topics = self.config_manager.active_topics
-        self.vocabulary.shuffle_deck(self.stats_manager, active_topics if active_topics else None)
+        self.vocabulary.shuffle_deck(self.stats_manager,
+                                     active_topics if active_topics else None,
+                                     hardest_first=self.config_manager.hardest_first)
 
         self.flashcard_widget = None
         self.management_window = None

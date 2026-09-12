@@ -15,10 +15,15 @@ DEFAULT_CONFIG = {
     'hotkey': 'shift_r',
     'card_position': 'bottom_right',  # bottom_right, mouse, center, top_right, top_left, bottom_left
     'active_topics': [],
+    # Topics the user marked with a star as "want to study" — a personal reminder,
+    # independent of active_topics (which is what a session actually shuffles).
+    'starred_topics': [],
     'topic_weights': {},
     'show_notifications': True,
     'theme': 'dark',
     'study_mode': 'adaptive',
+    # Order the session so the worst-remembered (and never-shown) words come first.
+    'hardest_first': False,
     # How close a typed answer must be to count as correct (0..1). Higher = stricter.
     # You (watching the logs) can keep it low; a build for friends should be stricter
     # so a wrong-but-related word isn't accepted.
@@ -165,5 +170,15 @@ class ConfigManager:
             print(f"Invalid study mode '{value}', defaulting to 'adaptive'")
             value = 'adaptive'
         self.config['study_mode'] = value
+        self.save_config()
+
+    @property
+    def hardest_first(self):
+        """Whether to order sessions worst-remembered first."""
+        return bool(self.config.get('hardest_first', False))
+
+    @hardest_first.setter
+    def hardest_first(self, value):
+        self.config['hardest_first'] = bool(value)
         self.save_config()
 

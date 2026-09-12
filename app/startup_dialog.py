@@ -7,12 +7,13 @@ from PySide6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QLabel, QPushButton,
     QListWidget, QListWidgetItem, QLineEdit, QMessageBox,
     QFrame, QWidget, QTreeWidget, QTreeWidgetItem, QComboBox,
-    QStyledItemDelegate, QStyle, QSizePolicy
+    QStyledItemDelegate, QStyle, QSizePolicy, QToolButton, QHeaderView, QCheckBox
 )
 from PySide6.QtCore import Qt, QSize, QRect, QEvent, QObject, Signal, QTimer
 from PySide6.QtGui import QFont, QColor
 
 from . import profile_manager
+from .app_paths import get_data_dir
 from .i18n import tr, set_language, get_language, LANGUAGES
 from .version import __version__
 
@@ -106,6 +107,22 @@ QPushButton#iconButton {
 QPushButton#iconButton:hover {
     background: #2a3050;
     color: #ffffff;
+}
+
+/* Per-topic "want to study" star marker (right of each topic row). Flat, no box;
+   grey outline when off, gold when marked. Independent of the study checkbox. */
+QToolButton#starButton {
+    background: transparent;
+    border: none;
+    padding: 0;
+    font-size: 17px;
+    color: #5b627a;
+}
+QToolButton#starButton:hover {
+    color: #ffd24a;
+}
+QToolButton#starButton[starred="true"] {
+    color: #ffc531;
 }
 
 QLineEdit {
@@ -310,6 +327,44 @@ QPushButton#addedButton {
 QPushButton#addedButton:disabled {
     background: #1e3a2a;
     color: #57d98a;
+}
+/* "Worst-remembered first" toggle — off = amber outline, on = solid gold, so its
+   state reads at a glance without a checkbox glyph. */
+QPushButton#hardestFirstToggle {
+    background: transparent;
+    color: #c79a44;
+    border: 1px solid #6a5320;
+    border-radius: 9px;
+    padding: 7px 14px;
+    font-size: 14px;
+    font-weight: 600;
+}
+QPushButton#hardestFirstToggle:hover {
+    border-color: #a07a28;
+    color: #ffd76b;
+}
+QPushButton#hardestFirstToggle:checked {
+    background: #ffc531;
+    color: #2a2010;
+    border-color: #ffc531;
+}
+QPushButton#hardestFirstToggle:checked:hover {
+    background: #ffd357;
+    color: #2a2010;
+}
+/* "Update available" button — amber so a topic with newer cloud content stands
+   out from the green "up to date" state and the neutral "add" state. */
+QPushButton#updateButton {
+    background: #4a3410;
+    color: #ffc531;
+    border: 1px solid #7a5a1c;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 0 14px;
+}
+QPushButton#updateButton:hover {
+    background: #5c4114;
+    color: #ffd76b;
 }
 """
 
@@ -635,6 +690,8 @@ class CatalogDialog(QDialog):
         self.changed = False                 # did we add anything? (parent refreshes if so)
         self._threads = []                   # keep thread objects alive
         self._topic_rows = {}                # topic_id → (button, QTreeWidgetItem, name)
+        self._topic_versions = {}            # topic_id → catalog content version (or None)
+        self._local_versions = self._load_topic_versions()  # group name → last-downloaded version
         self._existing_groups = self._current_groups()
         self.signals = _CatalogSignals()
         self.signals.catalog_loaded.connect(self._on_catalog_loaded)
@@ -665,11 +722,22 @@ class CatalogDialog(QDialog):
         subtitle.setWordWrap(True)
         layout.addWidget(subtitle)
 
+        search_row = QHBoxLayout()
+        search_row.setSpacing(8)
         self.search = QLineEdit()
         self.search.setPlaceholderText(tr('catalog_search_ph'))
         self.search.textChanged.connect(self._apply_filter)
         self.search.setVisible(False)
-        layout.addWidget(self.search)
+        search_row.addWidget(self.search, 1)
+        # "Update all" — appears only when some downloaded topic has newer content.
+        self.update_all_btn = QPushButton(tr('catalog_update_all'))
+        self.update_all_btn.setObjectName("updateButton")
+        self.update_all_btn.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.update_all_btn.setFixedHeight(38)
+        self.update_all_btn.clicked.connect(self._update_all)
+        self.update_all_btn.setVisible(False)
+        search_row.addWidget(self.update_all_btn)
+        layout.addLayout(search_row)
 
         # Status line (loading / offline / empty) shown instead of the tree.
         self.status = QLabel(tr('catalog_loading'))
@@ -694,7 +762,8 @@ class CatalogDialog(QDialog):
         self.tree.setAnimated(True)
         self.tree.setIndentation(18)
         self.tree.setColumnCount(2)
-        self.tree.setColumnWidth(1, 184)
+        # Wide enough for the "✓ Qo'shildi" state plus the round ↻ update button.
+        self.tree.setColumnWidth(1, 224)
         self.tree.header().setStretchLastSection(False)
         from PySide6.QtWidgets import QHeaderView
         self.tree.header().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
@@ -759,11 +828,12 @@ class CatalogDialog(QDialog):
                 any_topic = True
                 child = QTreeWidgetItem(parent)
                 child.setText(0, f"{tname}  ·  {tr('catalog_words_n', n=n)}")
+                self._topic_versions[tid] = topic.get('version')
                 btn = QPushButton()
                 btn.setCursor(Qt.CursorShape.PointingHandCursor)
                 btn.setFixedHeight(32)
-                # Wide enough that neither "➕ Qo'shish" nor "✓ Qo'shildi" is clipped.
-                btn.setMinimumWidth(140)
+                # Wide enough for the longest state label.
+                btn.setMinimumWidth(150)
                 btn.clicked.connect(lambda _=False, i=tid: self._add_topic(i))
                 # Wrap the button so it's vertically centred in the row and kept off
                 # the scrollbar, instead of stretching to fill the whole cell.
@@ -786,6 +856,18 @@ class CatalogDialog(QDialog):
         self.tree.setVisible(True)
         self.search.setVisible(True)
         self._apply_filter(self.search.text())
+        self._refresh_update_all_btn()
+
+    def _topic_state(self, name, tid):
+        """One of 'new' (not in deck), 'update' (in deck, cloud content differs or
+        unknown), 'uptodate' (in deck, matches the cloud version we last pulled)."""
+        if name not in self._existing_groups:
+            return 'new'
+        cver = self._topic_versions.get(tid)
+        lver = self._local_versions.get(name)
+        if cver and lver == cver:
+            return 'uptodate'
+        return 'update'
 
     def _refresh_button(self, tid, downloading=False):
         entry = self._topic_rows.get(tid)
@@ -796,14 +878,22 @@ class CatalogDialog(QDialog):
             btn.setText(tr('catalog_downloading'))
             btn.setEnabled(False)
             btn.setObjectName("secondaryButton")
-        elif name in self._existing_groups:
-            btn.setText(tr('catalog_added'))
-            btn.setEnabled(False)
-            btn.setObjectName("addedButton")
-        else:
+            btn.style().unpolish(btn); btn.style().polish(btn)
+            return
+        state = self._topic_state(name, tid)
+        if state == 'new':
             btn.setText(tr('catalog_add'))
             btn.setEnabled(True)
             btn.setObjectName("secondaryButton")
+        elif state == 'update':
+            # Already in the deck but the cloud has newer content — invite an update.
+            btn.setText(tr('catalog_update'))
+            btn.setEnabled(True)
+            btn.setObjectName("updateButton")
+        else:  # uptodate
+            btn.setText(tr('catalog_uptodate'))
+            btn.setEnabled(False)
+            btn.setObjectName("addedButton")
         btn.style().unpolish(btn); btn.style().polish(btn)
 
     # ---- adding a topic ----
@@ -828,6 +918,7 @@ class CatalogDialog(QDialog):
         if not entry:
             return
         _btn, _item, name = entry
+        was_added = name in self._existing_groups   # already in the deck → this is an update
         if not words:
             QMessageBox.warning(self, tr('err_title'), tr('catalog_add_failed'))
             self._refresh_button(tid)
@@ -842,12 +933,73 @@ class CatalogDialog(QDialog):
             groups.setdefault(cat, []).append(w)
         total_added = 0
         for cat, rows in groups.items():
-            total_added += self.vocabulary.add_words_to_topic(cat, rows)
+            # update_existing=True: re-downloading a topic refreshes words already in
+            # it (new cloud translations/hints reach an existing deck), not just adds.
+            total_added += self.vocabulary.add_words_to_topic(cat, rows, update_existing=True)
         self.changed = True
         self._existing_groups = self._current_groups()
+        # Record the cloud version we just pulled so the button flips to "up to date".
+        ver = self._topic_versions.get(tid)
+        if ver:
+            self._local_versions[name] = ver
+            self._save_topic_versions()
         self._refresh_button(tid)
-        self.status.setText(tr('catalog_added_toast', name=name, n=total_added))
+        self._refresh_update_all_btn()
+        if was_added and total_added == 0:
+            toast = 'catalog_uptodate_toast'   # nothing changed — already current
+        elif was_added:
+            toast = 'catalog_updated_toast'
+        else:
+            toast = 'catalog_added_toast'
+        self.status.setText(tr(toast, name=name, n=total_added))
         self.status.setVisible(True)
+
+    # ---- downloaded-topic versions (global; content is shared app-wide) ----
+    def _topic_versions_path(self):
+        return get_data_dir() / 'topic_versions.json'
+
+    def _load_topic_versions(self):
+        try:
+            import json
+            p = self._topic_versions_path()
+            if p.exists():
+                with open(p, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                return data if isinstance(data, dict) else {}
+        except Exception:
+            pass
+        return {}
+
+    def _save_topic_versions(self):
+        try:
+            import json
+            p = self._topic_versions_path()
+            p.parent.mkdir(parents=True, exist_ok=True)
+            with open(p, 'w', encoding='utf-8') as f:
+                json.dump(self._local_versions, f, ensure_ascii=False, indent=2)
+        except Exception:
+            pass
+
+    # ---- update every downloaded topic that has newer cloud content ----
+    def _update_all(self):
+        pending = [tid for tid, (_b, _i, name) in self._topic_rows.items()
+                   if self._topic_state(name, tid) == 'update']
+        if not pending:
+            self.status.setText(tr('catalog_all_uptodate'))
+            self.status.setVisible(True)
+            return
+        for tid in pending:
+            self._add_topic(tid)
+
+    def _refresh_update_all_btn(self):
+        """Show the 'update all' button only when something can actually be updated."""
+        if not hasattr(self, 'update_all_btn'):
+            return
+        has_updates = any(
+            self._topic_state(name, tid) == 'update'
+            for tid, (_b, _i, name) in self._topic_rows.items()
+        )
+        self.update_all_btn.setVisible(has_updates)
 
     # ---- search ----
     def _apply_filter(self, text):
@@ -1020,6 +1172,16 @@ class StartupDialog(QDialog):
             self.topics_tree.setRootIsDecorated(True)
             self.topics_tree.setAnimated(True)
             self.topics_tree.setIndentation(24)
+            # Column 0 = checkbox + label (stretches); column 1 = the "want to study"
+            # star marker, a fixed narrow lane on the right of each topic row.
+            self.topics_tree.setColumnCount(2)
+            _hdr = self.topics_tree.header()
+            _hdr.setStretchLastSection(False)
+            _hdr.setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
+            _hdr.setSectionResizeMode(1, QHeaderView.ResizeMode.Fixed)
+            self.topics_tree.setColumnWidth(1, 34)
+            self._starred_groups = set()   # group names the user marked (per profile)
+            self._star_buttons = {}        # group name → its QToolButton
             self.topics_tree.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
             self.topics_tree.itemChanged.connect(self._on_topic_item_changed)
             # Adaptive height (like the profile list): grow to the visible rows up to a
@@ -1038,6 +1200,21 @@ class StartupDialog(QDialog):
             self.empty_topics_label.setObjectName("subtitleLabel")
             self.empty_topics_label.setWordWrap(True)
             topics_layout.addWidget(self.empty_topics_label)
+
+            # "Worst-remembered first" belongs with topic selection (it decides the
+            # order of the words from the topics you pick). A checkable pill toggle
+            # (like the app's other buttons) instead of a QCheckBox, whose custom
+            # indicator can't draw a checkmark without a shipped image: off = amber
+            # outline, on = solid gold. Right-aligned so it sits under the list.
+            self.hardest_first_cb = QPushButton(tr('hardest_first'))
+            self.hardest_first_cb.setObjectName("hardestFirstToggle")
+            self.hardest_first_cb.setCheckable(True)
+            self.hardest_first_cb.setCursor(Qt.CursorShape.PointingHandCursor)
+            hf_row = QHBoxLayout()
+            hf_row.setContentsMargins(0, 0, 0, 0)
+            hf_row.addStretch()
+            hf_row.addWidget(self.hardest_first_cb)
+            topics_layout.addLayout(hf_row)
 
             self._update_empty_state()
             layout.addWidget(topics_frame)
@@ -1088,10 +1265,28 @@ class StartupDialog(QDialog):
         QTimer.singleShot(0, self._rebalance_lists)
     
     def _build_topics_tree(self):
-        """Builds the hierarchical topic tree from vocabulary groups."""
+        """Builds the hierarchical topic tree from vocabulary groups.
+
+        Preserves the user's current selection across a rebuild (e.g. after adding
+        a topic from the cloud catalog) instead of re-checking everything — that
+        auto-selecting-all was confusing. Only topics brand-new to the tree default
+        to checked, so a freshly downloaded topic is ready to study while previously
+        unselected topics stay unselected.
+        """
         self.topics_tree.blockSignals(True)
+
+        # Snapshot the selection before we clear, so the rebuild can restore it.
+        prev_known = set(getattr(self, '_topic_items', {}))
+        prev_checked = {
+            cat for cat, item in getattr(self, '_topic_items', {}).items()
+            if item.checkState(0) == Qt.CheckState.Checked
+        }
+
         self.topics_tree.clear()
         self._topic_items = {}  # Maps full category name → QTreeWidgetItem
+        self._star_buttons = {}  # group name → star QToolButton (rebuilt with the tree)
+        # Load this profile's "want to study" marks so the stars reflect the selection.
+        self._starred_groups = self._load_starred_for_profile(self._current_profile_username())
 
         grouped = self.vocabulary.get_grouped_topics()
 
@@ -1109,10 +1304,13 @@ class StartupDialog(QDialog):
                 | Qt.ItemFlag.ItemIsUserCheckable
                 | Qt.ItemFlag.ItemIsAutoTristate
             )
-            parent.setCheckState(0, Qt.CheckState.Checked)
             parent.setExpanded(False)
 
+            # "Want to study" star marker on the right of the topic row (column 1).
+            self._attach_star_button(parent, group_name)
+
             # Create child items for each sub-category
+            checked_children = 0
             for cat in categories:
                 word_count = self.vocabulary.get_word_count_for_topic(cat)
                 # Extract the range part from "SAT Vocabulary (1-15)" → "1-15"
@@ -1124,13 +1322,108 @@ class StartupDialog(QDialog):
                 child.setFlags(
                     child.flags() | Qt.ItemFlag.ItemIsUserCheckable
                 )
-                child.setCheckState(0, Qt.CheckState.Checked)
+                # New topics start checked; previously seen ones keep their state.
+                is_checked = (cat not in prev_known) or (cat in prev_checked)
+                child.setCheckState(
+                    0, Qt.CheckState.Checked if is_checked else Qt.CheckState.Unchecked
+                )
                 child.setData(0, Qt.ItemDataRole.UserRole, cat)  # Store full category name
                 self._topic_items[cat] = child
+                if is_checked:
+                    checked_children += 1
+
+            # Parent reflects its children (checked / unchecked / partial).
+            if checked_children == parent.childCount():
+                parent.setCheckState(0, Qt.CheckState.Checked)
+            elif checked_children == 0:
+                parent.setCheckState(0, Qt.CheckState.Unchecked)
+            else:
+                parent.setCheckState(0, Qt.CheckState.PartiallyChecked)
 
         self.topics_tree.blockSignals(False)
         self._update_empty_state()
         self._fit_topics_tree_height()
+
+    # --- "Want to study" star marker (per topic, per profile) -----------------
+    # A lightweight personal reminder, kept separate from the study checkbox: the
+    # checkbox decides what this session shuffles; the star just says "I want to
+    # study this" so it's easy to spot later. Persisted per profile in config.json.
+
+    def _current_profile_username(self):
+        """The username of the selected profile, or None if none is selected yet."""
+        if not hasattr(self, 'profile_list'):
+            return None
+        item = self.profile_list.currentItem()
+        return item.data(Qt.ItemDataRole.UserRole) if item else None
+
+    def _load_starred_for_profile(self, username):
+        """Reads the set of starred group names from a profile's config.json."""
+        if not username:
+            return set()
+        try:
+            import json
+            path = profile_manager.get_profile_path(username) / 'config.json'
+            if path.exists():
+                with open(path, 'r', encoding='utf-8') as f:
+                    return set(json.load(f).get('starred_topics') or [])
+        except Exception:
+            pass
+        return set()
+
+    def _save_starred_for_profile(self, username, starred):
+        """Writes the starred group names into a profile's config.json, preserving
+        every other setting already there."""
+        if not username:
+            return
+        try:
+            import json
+            path = profile_manager.get_profile_path(username) / 'config.json'
+            data = {}
+            if path.exists():
+                with open(path, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+            data['starred_topics'] = sorted(starred)
+            path.parent.mkdir(parents=True, exist_ok=True)
+            with open(path, 'w', encoding='utf-8') as f:
+                json.dump(data, f, indent=2, ensure_ascii=False)
+        except Exception:
+            pass
+
+    def _attach_star_button(self, parent_item, group_name):
+        """Puts a two-state star (☆ off / ★ on) in column 1 of a topic row."""
+        btn = QToolButton()
+        btn.setObjectName("starButton")
+        btn.setCursor(Qt.CursorShape.PointingHandCursor)
+        btn.setToolTip(tr('star_tooltip'))
+        btn.clicked.connect(lambda _=False, g=group_name: self._toggle_star(g))
+        self.topics_tree.setItemWidget(parent_item, 1, btn)
+        self._star_buttons[group_name] = btn
+        self._apply_star_visual(group_name)
+
+    def _apply_star_visual(self, group_name):
+        """Syncs one star button's glyph/colour to whether the group is starred."""
+        btn = self._star_buttons.get(group_name)
+        if btn is None:
+            return
+        on = group_name in self._starred_groups
+        btn.setText("★" if on else "☆")
+        btn.setProperty("starred", "true" if on else "false")
+        # Re-polish so the [starred="true"] stylesheet rule re-applies.
+        btn.style().unpolish(btn)
+        btn.style().polish(btn)
+
+    def _refresh_all_star_visuals(self):
+        for group_name in self._star_buttons:
+            self._apply_star_visual(group_name)
+
+    def _toggle_star(self, group_name):
+        """Flips the star for a topic and saves it immediately for this profile."""
+        if group_name in self._starred_groups:
+            self._starred_groups.discard(group_name)
+        else:
+            self._starred_groups.add(group_name)
+        self._apply_star_visual(group_name)
+        self._save_starred_for_profile(self._current_profile_username(), self._starred_groups)
 
     def _update_empty_state(self):
         """Shows guidance instead of an empty tree when there are no topics yet."""
@@ -1392,6 +1685,7 @@ class StartupDialog(QDialog):
         
         import json
         active_topics = None
+        config = {}
         if config_path.exists():
             try:
                 with open(config_path, 'r', encoding='utf-8') as f:
@@ -1399,6 +1693,16 @@ class StartupDialog(QDialog):
                     active_topics = config.get('active_topics')
             except Exception:
                 pass
+
+        # Restore this profile's study preferences.
+        if hasattr(self, 'hardest_first_cb'):
+            self.hardest_first_cb.setChecked(bool(config.get('hardest_first', False)))
+        if hasattr(self, 'study_mode_combo'):
+            saved_mode = config.get('study_mode')
+            if saved_mode:
+                idx = self.study_mode_combo.findData(saved_mode)
+                if idx >= 0:
+                    self.study_mode_combo.setCurrentIndex(idx)
 
         # Update check states in tree
         self.topics_tree.blockSignals(True)
@@ -1419,12 +1723,19 @@ class StartupDialog(QDialog):
                 parent.setCheckState(0, Qt.CheckState.Unchecked)
             else:
                 parent.setCheckState(0, Qt.CheckState.PartiallyChecked)
-                
+
         self.topics_tree.blockSignals(False)
 
+        # The "want to study" stars are per profile too — refresh them for this one.
+        if hasattr(self, '_star_buttons'):
+            self._starred_groups = self._load_starred_for_profile(username)
+            self._refresh_all_star_visuals()
+
     def get_result(self):
-        """Returns the selected username, topics, and study mode."""
+        """Returns the selected username, topics, study mode, and hardest-first flag."""
         study_mode = 'adaptive'
         if hasattr(self, 'study_mode_combo'):
             study_mode = self.study_mode_combo.currentData() or 'adaptive'
-        return self.selected_username, self.selected_topics, study_mode
+        hardest_first = bool(getattr(self, 'hardest_first_cb', None)
+                             and self.hardest_first_cb.isChecked())
+        return self.selected_username, self.selected_topics, study_mode, hardest_first

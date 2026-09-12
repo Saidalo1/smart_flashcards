@@ -807,14 +807,26 @@ class FlashcardWidget(QFrame):
     def _translation_answers(self):
         """Accepted answers for a typed translation: the full stored string PLUS each
         '/'-separated alternative. Keeping the full string is what lets words with a
-        literal slash (e.g. 'On/off button') still be accepted."""
-        s = self.card.get(self.answer_lang) or ''
+        literal slash (e.g. 'On/off button') still be accepted.
+
+        It also accepts the answer from ANY other card of the same English word — the
+        same word can live in several topics with different translations, so all of
+        them count as correct instead of only the shown card's."""
         out, seen = [], set()
-        for a in [s] + s.split('/'):
-            a = a.strip()
-            if a and a.lower() not in seen:
-                seen.add(a.lower())
-                out.append(a)
+
+        def add(s):
+            for a in [s] + (s.split('/') if s else []):
+                a = a.strip()
+                if a and a.lower() not in seen:
+                    seen.add(a.lower())
+                    out.append(a)
+
+        add(self.card.get(self.answer_lang) or '')
+        eng = (self.card.get('english') or '').strip().lower()
+        if eng and getattr(self, 'vocabulary', None):
+            for w in self.vocabulary.words:
+                if (w.get('english') or '').strip().lower() == eng:
+                    add(w.get(self.answer_lang) or '')
         return out
 
     def check_answer(self):
@@ -848,11 +860,12 @@ class FlashcardWidget(QFrame):
             # Translation / grammar.
             correct_answer_string = self.card[self.answer_lang]
             if self.is_multiple_choice:
-                # The options are exact word strings, so match the FULL answer — never
-                # split on '/', which would wreck words that contain one (e.g.
-                # "On/off button" -> ["On", "off button"], failing the real answer).
-                is_correct = (self._normalize_answer(user_answer)
-                              == self._normalize_answer(correct_answer_string))
+                # Options are exact word strings — match the FULL answer (never split on
+                # '/', which would wreck words like "On/off button"). Accept any accepted
+                # translation, so a valid variant from the same word in another topic
+                # also counts.
+                accepted = {self._normalize_answer(a) for a in self._translation_answers()}
+                is_correct = self._normalize_answer(user_answer) in accepted
             else:
                 # Typed answer: accept the full string or any '/'-separated alternative.
                 is_correct = any(
@@ -878,10 +891,10 @@ class FlashcardWidget(QFrame):
                         self._normalize_answer(s) for s in synonyms
                     ]
                 else:
-                    # Exact match to the full answer (no '/' splitting — see above).
-                    is_this_correct = widget_text == self._normalize_answer(
-                        self.card[self.answer_lang]
-                    )
+                    # Any accepted translation of this word (incl. other topics' variants).
+                    is_this_correct = widget_text in {
+                        self._normalize_answer(a) for a in self._translation_answers()
+                    }
 
                 if is_this_correct:
                     widget.set_result_style(is_correct_option=True)

@@ -36,6 +36,7 @@ STRINGS = {
     'mode_definition':    {'ru': '📝 Только определения',     'uz': "📝 Faqat ta'riflar",                 'en': '📝 Definitions only'},
     'mode_synonym':       {'ru': '🔀 Только синонимы',        'uz': '🔀 Faqat sinonimlar',                'en': '🔀 Synonyms only'},
     'hardest_first':      {'ru': '🔥 Сначала худшо запоминаемые', 'uz': '🔥 Avval yomon eslanadiganlar',  'en': '🔥 Worst-remembered first'},
+    'topic_expand_tt':    {'ru': 'Нажмите, чтобы раскрыть под-темы', 'uz': "Bo'limlarni ochish uchun bosing", 'en': 'Click to expand sub-topics'},
     'err_title':          {'ru': 'Ошибка',                    'uz': 'Xato',                               'en': 'Error'},
     'err_select_profile': {'ru': 'Выберите или создайте профиль!', 'uz': 'Profil tanlang yoki yarating!', 'en': 'Select or create a profile!'},
     'err_enter_name':     {'ru': 'Введите имя профиля!',      'uz': 'Profil nomini kiriting!',            'en': 'Enter a profile name!'},

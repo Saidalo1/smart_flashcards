@@ -1191,6 +1191,9 @@ class StartupDialog(QDialog):
             # cap, then scroll. Re-fit + flip the ▶/▼ chevron when groups toggle.
             self.topics_tree.itemExpanded.connect(self._on_group_expanded)
             self.topics_tree.itemCollapsed.connect(self._on_group_collapsed)
+            # Click a group row (not its checkbox) to open/close it — a big, obvious
+            # target so users don't have to hit the small arrow.
+            self.topics_tree.itemClicked.connect(self._on_topic_row_clicked)
             # Right-click a topic (or a whole group) to delete it and all its words.
             self.topics_tree.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
             self.topics_tree.customContextMenuRequested.connect(self._topic_context_menu)
@@ -1308,6 +1311,10 @@ class StartupDialog(QDialog):
                 | Qt.ItemFlag.ItemIsUserCheckable
                 | Qt.ItemFlag.ItemIsAutoTristate
             )
+            # Accent colour + bold so group rows read as clickable section headers.
+            parent.setForeground(0, QColor('#5ad1ff'))
+            pf = parent.font(0); pf.setBold(True); parent.setFont(0, pf)
+            parent.setToolTip(0, tr('topic_expand_tt'))
             parent.setExpanded(False)
 
             # "Want to study" star marker on the right of the topic row (column 1).
@@ -1437,6 +1444,19 @@ class StartupDialog(QDialog):
             self.topics_tree.blockSignals(True)
             item.setText(0, ('▼' if expanded else '▶') + t[1:])
             self.topics_tree.blockSignals(False)
+
+    def _on_topic_row_clicked(self, item, column):
+        """Single click on a group row toggles its expansion, so users don't need to
+        find the little arrow. Clicks on the checkbox (left zone) are left alone."""
+        if item.parent() is not None:
+            return  # leaf rows: nothing to expand
+        from PySide6.QtGui import QCursor
+        x = self.topics_tree.viewport().mapFromGlobal(QCursor.pos()).x()
+        rect = self.topics_tree.visualItemRect(item)
+        left_zone = rect.left() + self.topics_tree.indentation() + 28  # arrow + checkbox
+        if x <= left_zone:
+            return  # let the checkbox handle its own click
+        item.setExpanded(not item.isExpanded())
 
     def _on_group_expanded(self, item):
         self._set_group_chevron(item, True)

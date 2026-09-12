@@ -230,6 +230,26 @@ QHeaderView::section {
     background: transparent;
     border: none;
 }
+
+/* "Worst-remembered first" checkbox — amber accent + a real drawn checkmark
+   (the checked-state image is injected at runtime, see _ensure_check_icon). */
+QCheckBox#hardestFirstCheck {
+    color: #e8c65a;
+    font-size: 14px;
+    font-weight: 600;
+    spacing: 8px;
+    background: transparent;
+}
+QCheckBox#hardestFirstCheck::indicator {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #a07a28;
+    border-radius: 5px;
+    background: #1e2235;
+}
+QCheckBox#hardestFirstCheck::indicator:hover {
+    border-color: #ffc531;
+}
 """
 
 
@@ -327,30 +347,6 @@ QPushButton#addedButton {
 QPushButton#addedButton:disabled {
     background: #1e3a2a;
     color: #57d98a;
-}
-/* "Worst-remembered first" toggle — off = amber outline, on = solid gold, so its
-   state reads at a glance without a checkbox glyph. */
-QPushButton#hardestFirstToggle {
-    background: transparent;
-    color: #c79a44;
-    border: 1px solid #6a5320;
-    border-radius: 9px;
-    padding: 7px 14px;
-    font-size: 14px;
-    font-weight: 600;
-}
-QPushButton#hardestFirstToggle:hover {
-    border-color: #a07a28;
-    color: #ffd76b;
-}
-QPushButton#hardestFirstToggle:checked {
-    background: #ffc531;
-    color: #2a2010;
-    border-color: #ffc531;
-}
-QPushButton#hardestFirstToggle:checked:hover {
-    background: #ffd357;
-    color: #2a2010;
 }
 /* "Update available" button — amber so a topic with newer cloud content stands
    out from the green "up to date" state and the neutral "add" state. */
@@ -1031,7 +1027,14 @@ class StartupDialog(QDialog):
 
         self.setWindowTitle("Smart Flashcards")
         self.setMinimumSize(500, 420)
-        self.setStyleSheet(STARTUP_STYLE)
+        # Append the checked-state checkmark image (drawn at runtime, path known now).
+        check_icon = self._ensure_check_icon()
+        checked_qss = (
+            "QCheckBox#hardestFirstCheck::indicator:checked {"
+            " border: none; background: transparent;"
+            f" image: url({check_icon}); }}"
+        ) if check_icon else ""
+        self.setStyleSheet(STARTUP_STYLE + checked_qss)
 
         self.init_ui()
         self.load_profiles()
@@ -1202,13 +1205,12 @@ class StartupDialog(QDialog):
             topics_layout.addWidget(self.empty_topics_label)
 
             # "Worst-remembered first" belongs with topic selection (it decides the
-            # order of the words from the topics you pick). A checkable pill toggle
-            # (like the app's other buttons) instead of a QCheckBox, whose custom
-            # indicator can't draw a checkmark without a shipped image: off = amber
-            # outline, on = solid gold. Right-aligned so it sits under the list.
-            self.hardest_first_cb = QPushButton(tr('hardest_first'))
-            self.hardest_first_cb.setObjectName("hardestFirstToggle")
-            self.hardest_first_cb.setCheckable(True)
+            # order of the words from the topics you pick). A plain checkbox, right-
+            # aligned under the list; its indicator gets an amber accent + a real
+            # drawn checkmark (see _ensure_check_icon) so it reads clearly on the dark
+            # card without looking like a button.
+            self.hardest_first_cb = QCheckBox(tr('hardest_first'))
+            self.hardest_first_cb.setObjectName("hardestFirstCheck")
             self.hardest_first_cb.setCursor(Qt.CursorShape.PointingHandCursor)
             hf_row = QHBoxLayout()
             hf_row.setContentsMargins(0, 0, 0, 0)
@@ -1424,6 +1426,39 @@ class StartupDialog(QDialog):
             self._starred_groups.add(group_name)
         self._apply_star_visual(group_name)
         self._save_starred_for_profile(self._current_profile_username(), self._starred_groups)
+
+    def _ensure_check_icon(self):
+        """Draw a checkmark-on-amber icon for the checked checkbox indicator once and
+        cache it (Qt stylesheets can't draw a check without an image). Returns a
+        forward-slash path usable in QSS url(), or '' if drawing failed."""
+        try:
+            icon = get_data_dir() / '_ui' / 'check.png'
+            if not icon.exists():
+                from PySide6.QtGui import QPixmap, QPainter, QPen, QColor, QPolygonF
+                from PySide6.QtCore import QPointF
+                icon.parent.mkdir(parents=True, exist_ok=True)
+                pm = QPixmap(20, 20)
+                pm.fill(Qt.GlobalColor.transparent)
+                p = QPainter(pm)
+                p.setRenderHint(QPainter.RenderHint.Antialiasing)
+                # Amber rounded square...
+                p.setPen(Qt.PenStyle.NoPen)
+                p.setBrush(QColor('#ffc531'))
+                p.drawRoundedRect(0, 0, 20, 20, 5, 5)
+                # ...with a dark checkmark on top.
+                pen = QPen(QColor('#2a2010'))
+                pen.setWidth(3)
+                pen.setCapStyle(Qt.PenCapStyle.RoundCap)
+                pen.setJoinStyle(Qt.PenJoinStyle.RoundJoin)
+                p.setPen(pen)
+                p.setBrush(Qt.BrushStyle.NoBrush)
+                p.drawPolyline(QPolygonF([QPointF(4.5, 10.5), QPointF(8.5, 14.5),
+                                          QPointF(15.5, 5.5)]))
+                p.end()
+                pm.save(str(icon))
+            return icon.as_posix()
+        except Exception:
+            return ''
 
     def _update_empty_state(self):
         """Shows guidance instead of an empty tree when there are no topics yet."""

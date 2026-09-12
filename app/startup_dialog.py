@@ -1188,9 +1188,9 @@ class StartupDialog(QDialog):
             self.topics_tree.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
             self.topics_tree.itemChanged.connect(self._on_topic_item_changed)
             # Adaptive height (like the profile list): grow to the visible rows up to a
-            # cap, then scroll. Re-fit when groups expand/collapse.
-            self.topics_tree.itemExpanded.connect(self._fit_topics_tree_height)
-            self.topics_tree.itemCollapsed.connect(self._fit_topics_tree_height)
+            # cap, then scroll. Re-fit + flip the ▶/▼ chevron when groups toggle.
+            self.topics_tree.itemExpanded.connect(self._on_group_expanded)
+            self.topics_tree.itemCollapsed.connect(self._on_group_collapsed)
             # Right-click a topic (or a whole group) to delete it and all its words.
             self.topics_tree.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
             self.topics_tree.customContextMenuRequested.connect(self._topic_context_menu)
@@ -1298,9 +1298,11 @@ class StartupDialog(QDialog):
                 self.vocabulary.get_word_count_for_topic(cat) for cat in categories
             )
 
-            # Create parent item
+            # Create parent item. Leading ▶ chevron (flips to ▼ when expanded) tells
+            # users the row opens into sub-lists — the native branch arrow is easy to
+            # miss on the dark theme.
             parent = QTreeWidgetItem(self.topics_tree)
-            parent.setText(0, f"📁 {group_name} ({tr('words_n', n=total_words)})")
+            parent.setText(0, f"▶  📁 {group_name} ({tr('words_n', n=total_words)})")
             parent.setFlags(
                 parent.flags()
                 | Qt.ItemFlag.ItemIsUserCheckable
@@ -1426,6 +1428,23 @@ class StartupDialog(QDialog):
             self._starred_groups.add(group_name)
         self._apply_star_visual(group_name)
         self._save_starred_for_profile(self._current_profile_username(), self._starred_groups)
+
+    def _set_group_chevron(self, item, expanded):
+        """Flip the leading ▶/▼ chevron on a group row (signals blocked so the text
+        change isn't mistaken for a checkbox toggle)."""
+        t = item.text(0)
+        if t and t[0] in ('▶', '▼'):
+            self.topics_tree.blockSignals(True)
+            item.setText(0, ('▼' if expanded else '▶') + t[1:])
+            self.topics_tree.blockSignals(False)
+
+    def _on_group_expanded(self, item):
+        self._set_group_chevron(item, True)
+        self._fit_topics_tree_height()
+
+    def _on_group_collapsed(self, item):
+        self._set_group_chevron(item, False)
+        self._fit_topics_tree_height()
 
     def _ensure_check_icon(self):
         """Draw a checkmark-on-amber icon for the checked checkbox indicator once and

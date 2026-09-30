@@ -41,6 +41,23 @@ MODE_THEMES = {
     },
 }
 
+# Key-cap ("kbd") badge — styled like a raised physical key so a keyboard shortcut
+# reads as discoverable secondary metadata next to the control it triggers.
+KBD_CAP_QSS = (
+    "QLabel#kbdCap {"
+    " background: #2a2e45; color: #aeb9d6;"
+    " border: 1px solid #3a3f5a; border-bottom: 2px solid #454b6b;"
+    " border-radius: 5px; font-size: 12px; font-weight: 700; }"
+)
+
+# Tiny corner variant, overlaid on the top-right edge of a 30px icon button.
+KBD_CORNER_QSS = (
+    "QLabel#kbdCorner {"
+    " background: #3a3f5a; color: #eaeefb;"
+    " border: 1px solid #565c7e; border-radius: 4px;"
+    " font-size: 9px; font-weight: 700; }"
+)
+
 
 class HintPopupWindow(QFrame):
     """A floating popover window that displays the word's hint/meaning."""
@@ -97,7 +114,7 @@ class PremiumOptionWidget(QFrame):
     """
     clicked = Signal()
 
-    def __init__(self, text, parent=None):
+    def __init__(self, text, parent=None, key_hint=None):
         super().__init__(parent)
         self.setObjectName("premiumOption")
         self.setCursor(Qt.CursorShape.PointingHandCursor)
@@ -141,6 +158,17 @@ class PremiumOptionWidget(QFrame):
         _lp.setHeightForWidth(True)
         self.label.setSizePolicy(_lp)
         layout.addWidget(self.label, 1)
+
+        # Trailing key-cap badge (1-4) so the keyboard shortcut is discoverable
+        # right on the option — reads as secondary metadata after the answer text.
+        self.key_cap = None
+        if key_hint:
+            self.key_cap = QLabel(str(key_hint))
+            self.key_cap.setObjectName("kbdCap")
+            self.key_cap.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            self.key_cap.setFixedSize(22, 22)
+            self.key_cap.setStyleSheet(KBD_CAP_QSS)
+            layout.addWidget(self.key_cap)
 
         _fp = self.sizePolicy()
         _fp.setVerticalPolicy(QSizePolicy.Policy.Minimum)
@@ -447,6 +475,13 @@ class FlashcardWidget(QFrame):
         self.delete_button.setToolTip(tr('delete_card_tooltip'))
         self.delete_button.clicked.connect(self.request_delete)
 
+        # Tiny corner key-cap badges sitting on the top-right edge of each icon, so
+        # the shortcut reads as attached without covering the glyph. Parented to the
+        # button, so they move/appear/hide with it automatically.
+        self._corner_badge(self.menu_button, "M")   # 🏠 → main menu
+        self._corner_badge(self.hint_button, "H")   # 💡 → hint
+        self._corner_badge(self.delete_button, "D")  # 🗑 → delete
+
         self.drag_bar = QLabel(tr('drag_me'))
         self.drag_bar.setObjectName("dragBar")
         self.drag_bar.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -509,6 +544,14 @@ class FlashcardWidget(QFrame):
         self.check_button.clicked.connect(self.check_answer)
         self.check_button.setDefault(True)
         content_layout.addWidget(self.check_button)
+        # "Enter" key-cap on the right edge of the check button (child → moves with it,
+        # clicks pass through); positioned in resizeEvent, hidden once answered.
+        self.enter_badge = QLabel("Enter", self.check_button)
+        self.enter_badge.setObjectName("kbdCap")
+        self.enter_badge.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.enter_badge.setStyleSheet(KBD_CAP_QSS)
+        self.enter_badge.setFixedSize(44, 20)
+        self.enter_badge.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents, True)
 
         # Streak progress indicator
         self._add_streak_indicator(content_layout)
@@ -712,7 +755,9 @@ class FlashcardWidget(QFrame):
             )
 
         for i, option in enumerate(options):
-            widget = PremiumOptionWidget(option, self)
+            # Show a 1-9 key-cap on the first nine options (keys 1-4 are wired).
+            key_hint = str(i + 1) if i < 9 else None
+            widget = PremiumOptionWidget(option, self, key_hint=key_hint)
             self.button_group.addButton(widget.radio, i)
             self.option_widgets.append(widget)
             layout.addWidget(widget)
@@ -782,7 +827,7 @@ class FlashcardWidget(QFrame):
 
     def set_question(self):
         has_hint = bool((self.card.get('hint') or '').strip())
-        self.hint_button.setVisible(has_hint)
+        self.hint_button.setVisible(has_hint)  # its corner badge is a child → follows it
         self.hint_label.hide()  # collapse any previously opened hint on a new card
         print(f"[HINT] set_question card={self.card.get('english')!r} has_hint={has_hint} -> 💡 button {'shown' if has_hint else 'hidden'}")
         word = self.card.get('english', 'No text')
@@ -845,6 +890,8 @@ class FlashcardWidget(QFrame):
 
         # Disable inputs
         self.check_button.setEnabled(False)
+        if hasattr(self, 'enter_badge'):
+            self.enter_badge.hide()  # button now shows the answer; hint no longer needed
         if not self.is_multiple_choice:
             self.answer_input.setEnabled(False)
         else:
@@ -1006,6 +1053,11 @@ class FlashcardWidget(QFrame):
             self.hint_button.move(
                 self.width() - self.delete_button.width() - self.hint_button.width() - m - 6, top)
             self.hint_button.raise_()
+        if hasattr(self, 'enter_badge') and hasattr(self, 'check_button') and not self.enter_badge.isHidden():
+            b, eb = self.check_button, self.enter_badge
+            if b.width() > 60:
+                eb.move(b.width() - eb.width() - 10, (b.height() - eb.height()) // 2)
+                eb.raise_()
         # The card grows when the correct answer is revealed (a long option widens
         # it). Positioning happens once at show time, so re-clamp on every resize to
         # keep the card fully on-screen — it must never run off the right/bottom edge.
@@ -1061,12 +1113,33 @@ class FlashcardWidget(QFrame):
         self.card_delete_requested.emit(self.card)
         self.close()
 
+    def _corner_badge(self, button, text):
+        """Overlay a tiny key-cap on the top-right edge of an icon button (child of the
+        button, so it moves/shows/hides with it and passes clicks through)."""
+        badge = QLabel(text, button)
+        badge.setObjectName("kbdCorner")
+        badge.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        badge.setStyleSheet(KBD_CORNER_QSS)
+        w = 14 if len(text) == 1 else 20
+        badge.setFixedSize(w, 12)
+        badge.move(button.width() - w + 3, -3)  # top-right, slightly over the edge
+        badge.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents, True)
+        badge.raise_()
+        badge.show()
+        return badge
+
     def keyPressEvent(self, event):
         if event.key() == Qt.Key.Key_Return or event.key() == Qt.Key.Key_Enter:
             if self.check_button.isEnabled():
-                self.check_button.click()
+                self.check_button.animateClick()  # visible press feedback
         elif event.key() == Qt.Key.Key_Escape:
             self.close()
+        elif event.key() == Qt.Key.Key_M:
+            self.menu_button.animateClick()   # 🏠 main menu
+        elif event.key() == Qt.Key.Key_H and self.hint_button.isVisible():
+            self.hint_button.animateClick()
+        elif event.key() in (Qt.Key.Key_D, Qt.Key.Key_Delete) and self.delete_button.isEnabled():
+            self.delete_button.animateClick()
         elif self.is_multiple_choice and event.key() in (Qt.Key.Key_1, Qt.Key.Key_2, Qt.Key.Key_3, Qt.Key.Key_4):
             index = event.key() - Qt.Key.Key_1
             if index < len(self.option_widgets):

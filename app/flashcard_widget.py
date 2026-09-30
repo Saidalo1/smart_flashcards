@@ -1056,7 +1056,7 @@ class FlashcardWidget(QFrame):
         if hasattr(self, 'enter_badge') and hasattr(self, 'check_button') and not self.enter_badge.isHidden():
             b, eb = self.check_button, self.enter_badge
             if b.width() > 60:
-                eb.move(b.width() - eb.width() - 10, (b.height() - eb.height()) // 2)
+                eb.move(b.width() - eb.width() - 6, 4)  # top-right corner, like the icons
                 eb.raise_()
         # The card grows when the correct answer is revealed (a long option widens
         # it). Positioning happens once at show time, so re-clamp on every resize to

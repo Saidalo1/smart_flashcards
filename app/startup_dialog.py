@@ -815,6 +815,8 @@ class CatalogDialog(QDialog):
             f = parent.font(0); f.setBold(True); parent.setFont(0, f)
             parent.setFirstColumnSpanned(True)
             parent.setExpanded(True)
+            # Newest topics first (by add date); stable, so same-date keeps catalog order.
+            topics = sorted(topics, key=lambda t: (t or {}).get('added') or '', reverse=True)
             for topic in topics:
                 tid = topic.get('id')
                 tname = topic.get('name') or tid or ''
@@ -861,9 +863,11 @@ class CatalogDialog(QDialog):
             return 'new'
         cver = self._topic_versions.get(tid)
         lver = self._local_versions.get(name)
-        if cver and lver == cver:
-            return 'uptodate'
-        return 'update'
+        # Only nag when we KNOW the cloud content differs. No catalog version (or we
+        # haven't recorded one yet) → treat as up to date, never a perpetual prompt.
+        if cver and lver and lver != cver:
+            return 'update'
+        return 'uptodate'
 
     def _refresh_button(self, tid, downloading=False):
         entry = self._topic_rows.get(tid)

@@ -447,6 +447,19 @@ class FlashcardWidget(QFrame):
         self.delete_button.setToolTip(tr('delete_card_tooltip'))
         self.delete_button.clicked.connect(self.request_delete)
 
+        # 🔊 Pronounce the English word (cached Google TTS, offline fallback).
+        self.speak_button = QPushButton("🔊", self)
+        self.speak_button.setObjectName("speakButton")
+        self.speak_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.speak_button.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.speak_button.setFixedSize(30, 30)
+        self.speak_button.setToolTip("Произношение / Pronounce")
+        self.speak_button.setStyleSheet(
+            "QPushButton#speakButton { background: transparent; border: none; font-size: 17px; }"
+            "QPushButton#speakButton:hover { background: rgba(255,255,255,0.10); border-radius: 6px; }"
+        )
+        self.speak_button.clicked.connect(self._pronounce_word)
+
         self.drag_bar = QLabel(tr('drag_me'))
         self.drag_bar.setObjectName("dragBar")
         self.drag_bar.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -1001,11 +1014,18 @@ class FlashcardWidget(QFrame):
         # its natural height and is never pushed down or shoved aside.
         if hasattr(self, 'delete_button') and hasattr(self, 'hint_button'):
             m, top = 10, 40
-            self.delete_button.move(self.width() - self.delete_button.width() - m, top)
+            x = self.width() - m
+            x -= self.delete_button.width()
+            self.delete_button.move(x, top)
             self.delete_button.raise_()
-            self.hint_button.move(
-                self.width() - self.delete_button.width() - self.hint_button.width() - m - 6, top)
-            self.hint_button.raise_()
+            if self.hint_button.isVisible():
+                x -= 6 + self.hint_button.width()
+                self.hint_button.move(x, top)
+                self.hint_button.raise_()
+            if hasattr(self, 'speak_button'):
+                x -= 6 + self.speak_button.width()
+                self.speak_button.move(x, top)
+                self.speak_button.raise_()
         # The card grows when the correct answer is revealed (a long option widens
         # it). Positioning happens once at show time, so re-clamp on every resize to
         # keep the card fully on-screen — it must never run off the right/bottom edge.
@@ -1060,6 +1080,14 @@ class FlashcardWidget(QFrame):
         print(f"Delete button clicked for: {self.card['english']}")
         self.card_delete_requested.emit(self.card)
         self.close()
+
+    def _pronounce_word(self):
+        """Say the card's English word out loud (🔊 button)."""
+        try:
+            from .tts import pronounce
+            pronounce(self.card.get('english', ''))
+        except Exception as e:
+            print(f"[TTS] pronounce failed: {e}")
 
     def keyPressEvent(self, event):
         if event.key() == Qt.Key.Key_Return or event.key() == Qt.Key.Key_Enter:

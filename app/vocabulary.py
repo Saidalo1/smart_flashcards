@@ -145,23 +145,16 @@ class Vocabulary:
         return (m.group(1).strip() if m else (category or '')).lower()
 
     def get_all_topics(self):
-        """Returns all topic/category names ordered RECENTLY-ADDED FIRST: the group
-        whose newest word was added most recently comes first, and within a group the
-        sub-ranges stay in numeric order. Falls back to alphabetical for groups with
-        no add dates (older data)."""
+        """Returns all topic/category names in curriculum order: by group name
+        (numeric-aware, so Inter 2 comes before Inter 10 — not Anki's alphabetical
+        bug), then the sub-range start so a group's parts stay 1-15, 16-30, …."""
         import re
         topics = set()
-        group_latest = {}   # group -> max added_at across its words
         for word in self.words:
-            cat = word.get('category')
-            if not cat:
-                continue
-            topics.add(cat)
-            g = self._group_of(cat)
-            group_latest[g] = max(group_latest.get(g, 0.0), word.get('added_at') or 0.0)
+            if word.get('category'):
+                topics.add(word['category'])
 
         def natural(s):
-            # "inter 10a" -> ['inter ', 10, 'a'] so 2 sorts before 10 (not Anki's bug).
             return [int(t) if t.isdigit() else t
                     for t in re.split(r'(\d+)', s.lower())]
 
@@ -169,9 +162,7 @@ class Vocabulary:
             m = re.match(r'^(.*?)\s*\((\d+)', topic)
             grp = (m.group(1).strip() if m else topic)
             num = int(m.group(2)) if m else 0
-            # newest group first (negative); then natural (numeric-aware) by group;
-            # then the sub-range start so a group's parts stay 1-15, 16-30, …
-            return (-group_latest.get(grp.lower(), 0.0), natural(grp), num)
+            return (natural(grp), num)
 
         return sorted(list(topics), key=sort_key)
 

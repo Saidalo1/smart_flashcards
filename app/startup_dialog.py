@@ -815,8 +815,6 @@ class CatalogDialog(QDialog):
             f = parent.font(0); f.setBold(True); parent.setFont(0, f)
             parent.setFirstColumnSpanned(True)
             parent.setExpanded(True)
-            # Newest topics first (by add date); stable, so same-date keeps catalog order.
-            topics = sorted(topics, key=lambda t: (t or {}).get('added') or '', reverse=True)
             for topic in topics:
                 tid = topic.get('id')
                 tname = topic.get('name') or tid or ''

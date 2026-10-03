@@ -454,9 +454,13 @@ class FlashcardWidget(QFrame):
         self.speak_button.setCursor(Qt.CursorShape.PointingHandCursor)
         self.speak_button.setFixedSize(30, 30)
         self.speak_button.setToolTip("Произношение / Pronounce")
+        # Visible cyan chip: the 🔊 speaker glyph is dark and would vanish on the
+        # dark card with a transparent background (unlike the bright 💡/🗑), so give
+        # it a tinted background + accent border — also makes it clearly clickable.
         self.speak_button.setStyleSheet(
-            "QPushButton#speakButton { background: transparent; border: none; font-size: 17px; }"
-            "QPushButton#speakButton:hover { background: rgba(255,255,255,0.10); border-radius: 6px; }"
+            "QPushButton#speakButton { background: rgba(0,217,255,0.14); "
+            "border: 1px solid #00d9ff; border-radius: 8px; font-size: 15px; }"
+            "QPushButton#speakButton:hover { background: rgba(0,217,255,0.32); }"
         )
         self.speak_button.clicked.connect(self._pronounce_word)
 
@@ -1013,19 +1017,21 @@ class FlashcardWidget(QFrame):
         # top bar. As overlay children they take NO layout row, so the question keeps
         # its natural height and is never pushed down or shoved aside.
         if hasattr(self, 'delete_button') and hasattr(self, 'hint_button'):
-            m, top = 10, 40
-            x = self.width() - m
-            x -= self.delete_button.width()
-            self.delete_button.move(x, top)
+            m, top, gap = 10, 40, 6
+            dw = self.delete_button.width()
+            sw = self.speak_button.width() if hasattr(self, 'speak_button') else 0
+            hw = self.hint_button.width()
+            # Fixed slots, positioned UNCONDITIONALLY (isVisible() is unreliable mid
+            # resize, which stranded the hint at 0,0). Order right-to-left:
+            # [💡 hint] [🔊 speak] [🗑 delete]. The hint just stays hidden when the
+            # card has no hint; its slot is reserved so nothing else shifts.
+            self.delete_button.move(self.width() - dw - m, top)
             self.delete_button.raise_()
-            if self.hint_button.isVisible():
-                x -= 6 + self.hint_button.width()
-                self.hint_button.move(x, top)
-                self.hint_button.raise_()
             if hasattr(self, 'speak_button'):
-                x -= 6 + self.speak_button.width()
-                self.speak_button.move(x, top)
+                self.speak_button.move(self.width() - dw - sw - m - gap, top)
                 self.speak_button.raise_()
+            self.hint_button.move(self.width() - dw - sw - hw - m - gap * 2, top)
+            self.hint_button.raise_()
         # The card grows when the correct answer is revealed (a long option widens
         # it). Positioning happens once at show time, so re-clamp on every resize to
         # keep the card fully on-screen — it must never run off the right/bottom edge.

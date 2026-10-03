@@ -4,10 +4,58 @@ from PySide6.QtWidgets import (
     QGroupBox, QRadioButton, QStyle, QStyleOption, QButtonGroup, QLayout,
     QSizePolicy, QWidget
 )
-from PySide6.QtCore import Qt, Signal, QTimer, QPoint
-from PySide6.QtGui import QPainter
+from PySide6.QtCore import Qt, Signal, QTimer, QPoint, QRectF, QSize
+from PySide6.QtGui import QPainter, QPixmap, QPen, QColor, QPainterPath, QIcon
 
 from .i18n import tr
+
+
+def make_speaker_icon(color="#00d9ff", size=22):
+    """Draw a crisp speaker (🔊) icon with QPainter.
+
+    Emoji glyphs don't render reliably inside styled QPushButtons on every
+    system (the 🔊 came out invisible), so we draw a real vector icon that is
+    font-independent and always shows.
+    """
+    pm = QPixmap(size, size)
+    pm.fill(Qt.GlobalColor.transparent)
+    p = QPainter(pm)
+    p.setRenderHint(QPainter.RenderHint.Antialiasing, True)
+    c = QColor(color)
+    s = float(size)
+    # Speaker body: a small box + cone (one filled shape).
+    p.setPen(QPen(c, 1.6))
+    p.setBrush(c)
+    path = QPainterPath()
+    path.addRect(QRectF(s * 0.14, s * 0.40, s * 0.12, s * 0.20))
+    path.moveTo(s * 0.26, s * 0.40)
+    path.lineTo(s * 0.46, s * 0.24)
+    path.lineTo(s * 0.46, s * 0.76)
+    path.lineTo(s * 0.26, s * 0.60)
+    path.closeSubpath()
+    p.drawPath(path)
+    # Two sound-wave arcs (outlined only).
+    p.setBrush(Qt.GlobalColor.transparent)
+    p.setPen(QPen(c, 1.8))
+    p.drawArc(QRectF(s * 0.50, s * 0.32, s * 0.20, s * 0.36), -55 * 16, 110 * 16)
+    p.drawArc(QRectF(s * 0.56, s * 0.22, s * 0.30, s * 0.56), -55 * 16, 110 * 16)
+    p.end()
+    return QIcon(pm)
+
+
+# Key codes captured ONCE at import as plain ints. Accessing ``Qt.Key.*`` inside
+# the keyPressEvent override crashed for some users with
+# "type object 'PySide6.QtCore.Qt' has no attribute 'Key'"; plain ints compared
+# against event.key() are immune to that runtime quirk.
+try:
+    _KEY_RETURN = int(Qt.Key.Key_Return)
+    _KEY_ENTER = int(Qt.Key.Key_Enter)
+    _KEY_ESCAPE = int(Qt.Key.Key_Escape)
+    _KEY_1 = int(Qt.Key.Key_1)
+    _KEY_4 = int(Qt.Key.Key_4)
+except Exception:  # extremely defensive — hard-coded Qt key codes
+    _KEY_RETURN, _KEY_ENTER, _KEY_ESCAPE = 0x01000004, 0x01000005, 0x01000000
+    _KEY_1, _KEY_4 = 0x31, 0x34
 
 
 # --- Color themes per study mode ---
@@ -448,19 +496,19 @@ class FlashcardWidget(QFrame):
         self.delete_button.clicked.connect(self.request_delete)
 
         # 🔊 Pronounce the English word (cached Google TTS, offline fallback).
-        self.speak_button = QPushButton("🔊", self)
+        # Uses a hand-drawn vector icon, not an emoji glyph (the 🔊 emoji rendered
+        # invisible inside the styled button on the user's system).
+        self.speak_button = QPushButton(self)
         self.speak_button.setObjectName("speakButton")
+        self.speak_button.setIcon(make_speaker_icon("#00d9ff", 22))
+        self.speak_button.setIconSize(QSize(22, 22))
         self.speak_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
         self.speak_button.setCursor(Qt.CursorShape.PointingHandCursor)
         self.speak_button.setFixedSize(30, 30)
         self.speak_button.setToolTip("Произношение / Pronounce")
-        # Visible cyan chip: the 🔊 speaker glyph is dark and would vanish on the
-        # dark card with a transparent background (unlike the bright 💡/🗑), so give
-        # it a tinted background + accent border — also makes it clearly clickable.
         self.speak_button.setStyleSheet(
-            "QPushButton#speakButton { background: rgba(0,217,255,0.14); "
-            "border: 1px solid #00d9ff; border-radius: 8px; font-size: 15px; }"
-            "QPushButton#speakButton:hover { background: rgba(0,217,255,0.32); }"
+            "QPushButton#speakButton { background: transparent; border: none; }"
+            "QPushButton#speakButton:hover { background: rgba(0,217,255,0.22); border-radius: 6px; }"
         )
         self.speak_button.clicked.connect(self._pronounce_word)
 
@@ -1096,16 +1144,22 @@ class FlashcardWidget(QFrame):
             print(f"[TTS] pronounce failed: {e}")
 
     def keyPressEvent(self, event):
-        if event.key() == Qt.Key.Key_Return or event.key() == Qt.Key.Key_Enter:
-            if self.check_button.isEnabled():
-                self.check_button.click()
-        elif event.key() == Qt.Key.Key_Escape:
-            self.close()
-        elif self.is_multiple_choice and event.key() in (Qt.Key.Key_1, Qt.Key.Key_2, Qt.Key.Key_3, Qt.Key.Key_4):
-            index = event.key() - Qt.Key.Key_1
-            if index < len(self.option_widgets):
-                self.option_widgets[index].setChecked(True)
-                self.check_answer()
+        # Uses pre-captured int key codes (see top of file) and is wrapped so a
+        # key press can never crash the card.
+        try:
+            key = int(event.key())
+            if key in (_KEY_RETURN, _KEY_ENTER):
+                if self.check_button.isEnabled():
+                    self.check_button.click()
+            elif key == _KEY_ESCAPE:
+                self.close()
+            elif self.is_multiple_choice and _KEY_1 <= key <= _KEY_4:
+                index = key - _KEY_1
+                if index < len(self.option_widgets):
+                    self.option_widgets[index].setChecked(True)
+                    self.check_answer()
+        except Exception as e:
+            print(f"[keyPressEvent] ignored error: {e}")
 
     def mousePressEvent(self, event):
         if event.button() == Qt.MouseButton.LeftButton:

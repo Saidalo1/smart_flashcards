@@ -232,6 +232,52 @@ class Vocabulary:
             print(f"Deleted topic '{category}' ({removed} words).")
         return removed
 
+    def get_words_for_group(self, group_name):
+        """All words belonging to a topic group (ignoring its sub-range), in their
+        stored order. 'Inter 4A 4B' returns words from 4A 4B (1-15), (16-30), …"""
+        g = (group_name or '').strip().lower()
+        return [w for w in self.words if self._group_of(w.get('category')) == g]
+
+    def rename_topic(self, old_group, new_group):
+        """Renames a whole topic group, keeping each word's sub-range suffix."""
+        import re
+        old = (old_group or '').strip().lower()
+        new = (new_group or '').strip()
+        if not new:
+            return 0
+        n = 0
+        for w in self.words:
+            cat = w.get('category') or ''
+            if self._group_of(cat) == old:
+                m = re.search(r'(\([^()]*\))\s*$', cat)      # keep "(1-15)" if present
+                w['category'] = new + (' ' + m.group(1) if m else '')
+                n += 1
+        if n:
+            self.save_words()
+        return n
+
+    def split_topic(self, group_name, size=15):
+        """Re-chunks a topic group into sub-ranges of `size`: a 43-word topic becomes
+        '<name> (1-15)', '(16-30)', '(31-43)'. Pass size <= 0 to MERGE back into one
+        range-less group. Stats/ids are untouched (only the category string changes)."""
+        import re
+        g = (group_name or '').strip().lower()
+        words = [w for w in self.words if self._group_of(w.get('category')) == g]
+        if not words:
+            return 0
+        m = re.match(r'^(.*?)\s*\(', words[0].get('category') or '')
+        base = (m.group(1).strip() if m else (words[0].get('category') or '').strip())
+        total = len(words)
+        for i, w in enumerate(words):
+            if size and size > 0:
+                lo = (i // size) * size + 1
+                hi = min(lo + size - 1, total)
+                w['category'] = f"{base} ({lo}-{hi})"
+            else:
+                w['category'] = base   # merge: single range-less group
+        self.save_words()
+        return total
+
     def get_all_words(self):
         """Returns the entire list of word pairs."""
         return self.words

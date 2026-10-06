@@ -667,6 +667,211 @@ class ProfileItemDelegate(QStyledItemDelegate):
         return super().editorEvent(event, model, option, index)
 
 
+class TopicManagerDialog(QDialog):
+    """Manage ONE topic directly: see/edit/add/delete its words in place, split it
+    into groups of N (e.g. 15), merge back into one, rename or delete the whole topic.
+    Opened from the topic tree's right-click menu. Sets .changed when anything saved."""
+
+    def __init__(self, vocabulary, group_name, parent=None):
+        super().__init__(parent)
+        self.vocabulary = vocabulary
+        self.group_name = group_name
+        self.changed = False
+        self.setWindowTitle(tr('topic_mgr_title', name=group_name))
+        self.setMinimumSize(640, 520)
+        self.setStyleSheet(STARTUP_STYLE)
+        self._build_ui()
+        self._reload()
+
+    def _base_name(self):
+        import re
+        words = self.vocabulary.get_words_for_group(self.group_name)
+        if words:
+            m = re.match(r'^(.*?)\s*\(', words[0].get('category') or '')
+            return (m.group(1).strip() if m else (words[0].get('category') or '').strip())
+        return self.group_name
+
+    def _build_ui(self):
+        from PySide6.QtWidgets import (QTableWidget, QTableWidgetItem, QSpinBox,
+                                       QAbstractItemView)
+        lay = QVBoxLayout(self)
+        lay.setContentsMargins(20, 20, 20, 20)
+        lay.setSpacing(12)
+
+        title = QLabel(tr('topic_mgr_title', name=self.group_name))
+        title.setObjectName("titleLabel")
+        lay.addWidget(title)
+        hint = QLabel(tr('topic_mgr_hint'))
+        hint.setObjectName("subtitleLabel")
+        hint.setWordWrap(True)
+        lay.addWidget(hint)
+
+        self.table = QTableWidget(0, 4)
+        self.table.setHorizontalHeaderLabels(["English", "Tarjima", "Izoh", "Guruh"])
+        self.table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
+        self.table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
+        self.table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.Stretch)
+        self.table.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeMode.ResizeToContents)
+        self.table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+        lay.addWidget(self.table, 1)
+
+        # Word-level actions.
+        row1 = QHBoxLayout()
+        add_btn = QPushButton(tr('topic_mgr_add_word'))
+        add_btn.clicked.connect(self._add_row)
+        del_btn = QPushButton(tr('topic_mgr_del_word'))
+        del_btn.setObjectName("dangerButton")
+        del_btn.clicked.connect(self._del_rows)
+        row1.addWidget(add_btn)
+        row1.addWidget(del_btn)
+        row1.addStretch()
+        lay.addLayout(row1)
+
+        # Topic-level actions: split / merge / rename / delete.
+        row2 = QHBoxLayout()
+        row2.addWidget(QLabel(tr('topic_mgr_split_by')))
+        self.split_spin = QSpinBox()
+        self.split_spin.setRange(1, 200)
+        self.split_spin.setValue(15)
+        self.split_spin.setFixedWidth(70)
+        row2.addWidget(self.split_spin)
+        split_btn = QPushButton(tr('topic_mgr_split'))
+        split_btn.clicked.connect(self._split)
+        merge_btn = QPushButton(tr('topic_mgr_merge'))
+        merge_btn.clicked.connect(self._merge)
+        rename_btn = QPushButton(tr('topic_mgr_rename'))
+        rename_btn.clicked.connect(self._rename)
+        deltopic_btn = QPushButton(tr('topic_mgr_del_topic'))
+        deltopic_btn.setObjectName("dangerButton")
+        deltopic_btn.clicked.connect(self._delete_topic)
+        for w in (split_btn, merge_btn, rename_btn):
+            row2.addWidget(w)
+        row2.addStretch()
+        row2.addWidget(deltopic_btn)
+        lay.addLayout(row2)
+
+        # Save / close.
+        row3 = QHBoxLayout()
+        row3.addStretch()
+        save_btn = QPushButton(tr('topic_mgr_save'))
+        save_btn.setObjectName("primaryButton")
+        save_btn.clicked.connect(self._save_and_close)
+        close_btn = QPushButton(tr('cancel'))
+        close_btn.clicked.connect(self.reject)
+        row3.addWidget(close_btn)
+        row3.addWidget(save_btn)
+        lay.addLayout(row3)
+
+    def _reload(self):
+        from PySide6.QtWidgets import QTableWidgetItem
+        import re
+        self._orig_ids = set()
+        words = self.vocabulary.get_words_for_group(self.group_name)
+        self.table.setRowCount(0)
+        self.table.setRowCount(len(words))
+        for r, w in enumerate(words):
+            if w.get('id'):
+                self._orig_ids.add(w['id'])
+            en = QTableWidgetItem(w.get('english', ''))
+            en.setData(Qt.ItemDataRole.UserRole, w.get('id'))
+            self.table.setItem(r, 0, en)
+            self.table.setItem(r, 1, QTableWidgetItem(w.get('uzbek', '')))
+            self.table.setItem(r, 2, QTableWidgetItem(w.get('hint') or ''))
+            m = re.search(r'(\([^()]*\))\s*$', w.get('category') or '')
+            grp = QTableWidgetItem(m.group(1) if m else '—')
+            grp.setFlags(grp.flags() & ~Qt.ItemFlag.ItemIsEditable)
+            self.table.setItem(r, 3, grp)
+
+    def _add_row(self):
+        from PySide6.QtWidgets import QTableWidgetItem
+        r = self.table.rowCount()
+        self.table.insertRow(r)
+        for c in range(4):
+            self.table.setItem(r, c, QTableWidgetItem(''))
+        self.table.setCurrentCell(r, 0)
+        self.table.editItem(self.table.item(r, 0))
+
+    def _del_rows(self):
+        rows = sorted({i.row() for i in self.table.selectedIndexes()}, reverse=True)
+        for r in rows:
+            self.table.removeRow(r)
+
+    def _commit_table(self):
+        """Write the table's current state back into the vocabulary (edits, additions,
+        deletions), matching existing words by their stored id. Returns True if saved."""
+        import uuid, time
+        base = self._base_name()
+        by_id = {w.get('id'): w for w in self.vocabulary.words if w.get('id')}
+        seen = set()
+        for r in range(self.table.rowCount()):
+            it0 = self.table.item(r, 0)
+            en = (it0.text().strip() if it0 else '')
+            if not en:
+                continue
+            uz = (self.table.item(r, 1).text().strip() if self.table.item(r, 1) else '')
+            hint = (self.table.item(r, 2).text().strip() if self.table.item(r, 2) else '')
+            wid = it0.data(Qt.ItemDataRole.UserRole)
+            if wid and wid in by_id:
+                w = by_id[wid]
+                w['english'], w['uzbek'], w['hint'] = en, uz, (hint or None)
+                seen.add(wid)
+            else:
+                self.vocabulary.words.append({
+                    "english": en, "uzbek": uz, "category": base,
+                    "id": str(uuid.uuid4()), "last_shown": None,
+                    "correct_answers": 0, "total_answers": 0, "complexity": 0.5,
+                    "definition": None, "synonyms": [], "hint": hint or None,
+                    "added_at": time.time(),
+                })
+        removed = self._orig_ids - seen
+        if removed:
+            self.vocabulary.words = [w for w in self.vocabulary.words
+                                     if w.get('id') not in removed]
+        self.vocabulary.save_words()
+        self.changed = True
+        return True
+
+    def _save_and_close(self):
+        self._commit_table()
+        self.accept()
+
+    def _split(self):
+        self._commit_table()
+        n = self.vocabulary.split_topic(self._base_name(), self.split_spin.value())
+        self.changed = True
+        self._reload()
+        QMessageBox.information(self, tr('topic_mgr_title', name=self.group_name),
+                               tr('topic_mgr_split_done', n=n, size=self.split_spin.value()))
+
+    def _merge(self):
+        self._commit_table()
+        self.vocabulary.split_topic(self._base_name(), 0)
+        self.changed = True
+        self._reload()
+
+    def _rename(self):
+        from PySide6.QtWidgets import QInputDialog
+        new, ok = QInputDialog.getText(self, tr('topic_mgr_rename'),
+                                       tr('topic_mgr_rename_prompt'), text=self._base_name())
+        if ok and new.strip():
+            self._commit_table()
+            self.vocabulary.rename_topic(self._base_name(), new.strip())
+            self.group_name = new.strip()
+            self.changed = True
+            self._reload()
+
+    def _delete_topic(self):
+        base = self._base_name()
+        if QMessageBox.question(self, tr('topic_mgr_del_topic'),
+                                tr('del_topic_confirm', name=base)) != QMessageBox.StandardButton.Yes:
+            return
+        for cat in list({w.get('category') for w in self.vocabulary.get_words_for_group(base)}):
+            if cat:
+                self.vocabulary.delete_topic(cat)
+        self.changed = True
+        self.accept()
+
+
 class _CatalogSignals(QObject):
     """Cross-thread signals for the cloud catalog. Network work runs on daemon
     threads (like the auto-updater); results come back to the UI via these."""
@@ -1632,19 +1837,29 @@ class StartupDialog(QDialog):
         ]
         if not cats:
             return
+        import re
+        m = re.match(r'^(.*?)\s*\(', cats[0])
+        group_name = (m.group(1).strip() if m else cats[0]).strip()
+
         menu = QMenu(self)
-        act = menu.addAction(tr('del_topic'))
-        if menu.exec(self.topics_tree.viewport().mapToGlobal(pos)) is not act:
-            return
-        reply = QMessageBox.question(
-            self, tr('confirm_title'), tr('del_topic_confirm', name=item.text(0)),
-            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-            QMessageBox.StandardButton.No,
-        )
-        if reply == QMessageBox.StandardButton.Yes:
-            for c in cats:
-                self.vocabulary.delete_topic(c)
-            self._build_topics_tree()
+        manage_act = menu.addAction(tr('topic_mgr_open'))
+        del_act = menu.addAction(tr('del_topic'))
+        chosen = menu.exec(self.topics_tree.viewport().mapToGlobal(pos))
+        if chosen is manage_act:
+            dlg = TopicManagerDialog(self.vocabulary, group_name, self)
+            dlg.exec()
+            if dlg.changed:
+                self._build_topics_tree()
+        elif chosen is del_act:
+            reply = QMessageBox.question(
+                self, tr('confirm_title'), tr('del_topic_confirm', name=item.text(0)),
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+                QMessageBox.StandardButton.No,
+            )
+            if reply == QMessageBox.StandardButton.Yes:
+                for c in cats:
+                    self.vocabulary.delete_topic(c)
+                self._build_topics_tree()
 
     # Both kept as thin aliases so existing callers (load_profiles, tree expand/
     # collapse) still work — the real work is in _rebalance_lists.

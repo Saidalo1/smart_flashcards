@@ -264,3 +264,6 @@ data/language.txt
 
 # app runtime language pref
 data/language.txt
+
+# TTS pronunciation cache (generated at runtime)
+data/tts_cache/

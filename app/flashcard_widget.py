@@ -4,10 +4,65 @@ from PySide6.QtWidgets import (
     QGroupBox, QRadioButton, QStyle, QStyleOption, QButtonGroup, QLayout,
     QSizePolicy, QWidget
 )
-from PySide6.QtCore import Qt, Signal, QTimer, QPoint
-from PySide6.QtGui import QPainter
+from PySide6.QtCore import Qt, Signal, QTimer, QPoint, QRectF, QSize
+from PySide6.QtGui import QPainter, QPixmap, QPen, QColor, QPainterPath, QIcon
 
 from .i18n import tr
+
+
+def make_speaker_icon(color="#00d9ff", size=22):
+    """Draw a crisp speaker (🔊) icon with QPainter.
+
+    Emoji glyphs don't render reliably inside styled QPushButtons on every
+    system (the 🔊 came out invisible), so we draw a real vector icon that is
+    font-independent and always shows.
+    """
+    pm = QPixmap(size, size)
+    pm.fill(Qt.GlobalColor.transparent)
+    p = QPainter(pm)
+    p.setRenderHint(QPainter.RenderHint.Antialiasing, True)
+    c = QColor(color)
+    s = float(size)
+    # Speaker body: a small box + cone (one filled shape).
+    p.setPen(QPen(c, 1.6))
+    p.setBrush(c)
+    path = QPainterPath()
+    path.addRect(QRectF(s * 0.14, s * 0.40, s * 0.12, s * 0.20))
+    path.moveTo(s * 0.26, s * 0.40)
+    path.lineTo(s * 0.46, s * 0.24)
+    path.lineTo(s * 0.46, s * 0.76)
+    path.lineTo(s * 0.26, s * 0.60)
+    path.closeSubpath()
+    p.drawPath(path)
+    # Two sound-wave arcs (outlined only).
+    p.setBrush(Qt.GlobalColor.transparent)
+    p.setPen(QPen(c, 1.8))
+    p.drawArc(QRectF(s * 0.50, s * 0.32, s * 0.20, s * 0.36), -55 * 16, 110 * 16)
+    p.drawArc(QRectF(s * 0.56, s * 0.22, s * 0.30, s * 0.56), -55 * 16, 110 * 16)
+    p.end()
+    return QIcon(pm)
+
+
+# Key codes captured ONCE at import as plain ints. Accessing ``Qt.Key.*`` inside
+# the keyPressEvent override crashed for some users with
+# "type object 'PySide6.QtCore.Qt' has no attribute 'Key'"; plain ints compared
+# against event.key() are immune to that runtime quirk.
+try:
+    _KEY_RETURN = int(Qt.Key.Key_Return)
+    _KEY_ENTER = int(Qt.Key.Key_Enter)
+    _KEY_ESCAPE = int(Qt.Key.Key_Escape)
+    _KEY_1 = int(Qt.Key.Key_1)
+    _KEY_4 = int(Qt.Key.Key_4)
+    _KEY_M = int(Qt.Key.Key_M)
+    _KEY_H = int(Qt.Key.Key_H)
+    _KEY_D = int(Qt.Key.Key_D)
+    _KEY_S = int(Qt.Key.Key_S)
+    _KEY_DELETE = int(Qt.Key.Key_Delete)
+except Exception:  # extremely defensive — hard-coded Qt key codes
+    _KEY_RETURN, _KEY_ENTER, _KEY_ESCAPE = 0x01000004, 0x01000005, 0x01000000
+    _KEY_1, _KEY_4 = 0x31, 0x34
+    _KEY_M, _KEY_H, _KEY_D, _KEY_S = 0x4D, 0x48, 0x44, 0x53
+    _KEY_DELETE = 0x01000007
 
 
 # --- Color themes per study mode ---
@@ -475,12 +530,30 @@ class FlashcardWidget(QFrame):
         self.delete_button.setToolTip(tr('delete_card_tooltip'))
         self.delete_button.clicked.connect(self.request_delete)
 
+        # 🔊 Pronounce the English word (cached Google TTS, offline fallback).
+        # Uses a hand-drawn vector icon, not an emoji glyph (the 🔊 emoji rendered
+        # invisible inside the styled button on the user's system).
+        self.speak_button = QPushButton(self)
+        self.speak_button.setObjectName("speakButton")
+        self.speak_button.setIcon(make_speaker_icon("#00d9ff", 22))
+        self.speak_button.setIconSize(QSize(22, 22))
+        self.speak_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.speak_button.setCursor(Qt.CursorShape.PointingHandCursor)
+        self.speak_button.setFixedSize(30, 30)
+        self.speak_button.setToolTip("Произношение / Pronounce (S)")
+        self.speak_button.setStyleSheet(
+            "QPushButton#speakButton { background: transparent; border: none; }"
+            "QPushButton#speakButton:hover { background: rgba(0,217,255,0.22); border-radius: 6px; }"
+        )
+        self.speak_button.clicked.connect(self._pronounce_word)
+
         # Tiny corner key-cap badges sitting on the top-right edge of each icon, so
         # the shortcut reads as attached without covering the glyph. Parented to the
         # button, so they move/appear/hide with it automatically.
-        self._corner_badge(self.menu_button, "M")   # 🏠 → main menu
-        self._corner_badge(self.hint_button, "H")   # 💡 → hint
+        self._corner_badge(self.menu_button, "M")    # 🏠 → main menu
+        self._corner_badge(self.hint_button, "H")    # 💡 → hint
         self._corner_badge(self.delete_button, "D")  # 🗑 → delete
+        self._corner_badge(self.speak_button, "S")   # 🔊 → pronounce
 
         self.drag_bar = QLabel(tr('drag_me'))
         self.drag_bar.setObjectName("dragBar")
@@ -1047,11 +1120,20 @@ class FlashcardWidget(QFrame):
         # top bar. As overlay children they take NO layout row, so the question keeps
         # its natural height and is never pushed down or shoved aside.
         if hasattr(self, 'delete_button') and hasattr(self, 'hint_button'):
-            m, top = 10, 40
-            self.delete_button.move(self.width() - self.delete_button.width() - m, top)
+            m, top, gap = 10, 40, 6
+            dw = self.delete_button.width()
+            sw = self.speak_button.width() if hasattr(self, 'speak_button') else 0
+            hw = self.hint_button.width()
+            # Fixed slots, positioned UNCONDITIONALLY (isVisible() is unreliable mid
+            # resize, which stranded the hint at 0,0). Order right-to-left:
+            # [💡 hint] [🔊 speak] [🗑 delete]. The hint just stays hidden when the
+            # card has no hint; its slot is reserved so nothing else shifts.
+            self.delete_button.move(self.width() - dw - m, top)
             self.delete_button.raise_()
-            self.hint_button.move(
-                self.width() - self.delete_button.width() - self.hint_button.width() - m - 6, top)
+            if hasattr(self, 'speak_button'):
+                self.speak_button.move(self.width() - dw - sw - m - gap, top)
+                self.speak_button.raise_()
+            self.hint_button.move(self.width() - dw - sw - hw - m - gap * 2, top)
             self.hint_button.raise_()
         if hasattr(self, 'enter_badge') and hasattr(self, 'check_button') and not self.enter_badge.isHidden():
             b, eb = self.check_button, self.enter_badge
@@ -1128,23 +1210,39 @@ class FlashcardWidget(QFrame):
         badge.show()
         return badge
 
+    def _pronounce_word(self):
+        """Say the card's English word out loud (🔊 button)."""
+        try:
+            from .tts import pronounce
+            pronounce(self.card.get('english', ''))
+        except Exception as e:
+            print(f"[TTS] pronounce failed: {e}")
+
     def keyPressEvent(self, event):
-        if event.key() == Qt.Key.Key_Return or event.key() == Qt.Key.Key_Enter:
-            if self.check_button.isEnabled():
-                self.check_button.animateClick()  # visible press feedback
-        elif event.key() == Qt.Key.Key_Escape:
-            self.close()
-        elif event.key() == Qt.Key.Key_M:
-            self.menu_button.animateClick()   # 🏠 main menu
-        elif event.key() == Qt.Key.Key_H and self.hint_button.isVisible():
-            self.hint_button.animateClick()
-        elif event.key() in (Qt.Key.Key_D, Qt.Key.Key_Delete) and self.delete_button.isEnabled():
-            self.delete_button.animateClick()
-        elif self.is_multiple_choice and event.key() in (Qt.Key.Key_1, Qt.Key.Key_2, Qt.Key.Key_3, Qt.Key.Key_4):
-            index = event.key() - Qt.Key.Key_1
-            if index < len(self.option_widgets):
-                self.option_widgets[index].setChecked(True)
-                self.check_answer()
+        # Pre-captured int key codes (see top of file) + a try/except so a key press
+        # can never crash the card. animateClick() gives visible press feedback.
+        try:
+            key = int(event.key())
+            if key in (_KEY_RETURN, _KEY_ENTER):
+                if self.check_button.isEnabled():
+                    self.check_button.animateClick()
+            elif key == _KEY_ESCAPE:
+                self.close()
+            elif key == _KEY_M:
+                self.menu_button.animateClick()   # 🏠 main menu
+            elif key == _KEY_H and self.hint_button.isVisible():
+                self.hint_button.animateClick()
+            elif key == _KEY_S:
+                self.speak_button.animateClick()  # 🔊 pronounce
+            elif key in (_KEY_D, _KEY_DELETE) and self.delete_button.isEnabled():
+                self.delete_button.animateClick()
+            elif self.is_multiple_choice and _KEY_1 <= key <= _KEY_4:
+                index = key - _KEY_1
+                if index < len(self.option_widgets):
+                    self.option_widgets[index].setChecked(True)
+                    self.check_answer()
+        except Exception as e:
+            print(f"[keyPressEvent] ignored error: {e}")
 
     def mousePressEvent(self, event):
         if event.button() == Qt.MouseButton.LeftButton:

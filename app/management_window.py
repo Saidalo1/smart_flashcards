@@ -364,11 +364,16 @@ class ManagementWindow(QDialog):
 
         # Table
         self.table = QTableWidget()
-        self.table.setColumnCount(3)
-        self.table.setHorizontalHeaderLabels(["🇬🇧 English", "🇺🇿 Uzbek", tr('th_level')])
+        self.table.setColumnCount(5)
+        self.table.setHorizontalHeaderLabels(
+            ["🇬🇧 English", "🇺🇿 Uzbek", "📂 Тема", tr('th_level'), "🔊"])
         self.table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
         self.table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.Stretch)
         self.table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents)
+        self.table.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeMode.ResizeToContents)
+        self.table.horizontalHeader().setSectionResizeMode(4, QHeaderView.ResizeMode.ResizeToContents)
+        # Click the 🔊 cell to hear the word.
+        self.table.cellClicked.connect(self._on_vocab_cell_clicked)
         self.table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.table.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self.table.setAlternatingRowColors(True)
@@ -1097,9 +1102,17 @@ class ManagementWindow(QDialog):
                 QMessageBox.warning(self, tr('err_title'), tr('err_both_fields'))
 
     def load_vocabulary_data(self):
-        """Loads words into the table with mastery level icons."""
+        """Loads words into the table with theme + mastery level icons.
+
+        Order: FIRST by theme (category), THEN alphabetically by the English word —
+        so words are grouped by topic instead of appearing in a random file order.
+        """
         self.table.setRowCount(0)
-        words = self.vocabulary.get_all_words()
+        words = list(self.vocabulary.get_all_words())
+        words.sort(key=lambda w: (
+            (w.get('category') or '￿').lower(),   # by theme; untagged words last
+            (w.get('english') or '').lower(),          # then alphabetically
+        ))
         self.table.setRowCount(len(words))
 
         mastery_icons = {
@@ -1111,13 +1124,31 @@ class ManagementWindow(QDialog):
         for row, word_pair in enumerate(words):
             self.table.setItem(row, 0, QTableWidgetItem(word_pair['english']))
             self.table.setItem(row, 1, QTableWidgetItem(word_pair.get('uzbek', '')))
+            self.table.setItem(row, 2, QTableWidgetItem(word_pair.get('category', '')))
 
             level = self.stats_manager.get_mastery_level(word_pair)
             base_level = level.split('_')[0]
             icon = mastery_icons.get(base_level, '🌐')
             level_item = QTableWidgetItem(icon)
             level_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
-            self.table.setItem(row, 2, level_item)
+            self.table.setItem(row, 3, level_item)
+
+            speak_item = QTableWidgetItem("🔊")
+            speak_item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+            speak_item.setToolTip("Нажми, чтобы услышать / Click to hear")
+            self.table.setItem(row, 4, speak_item)
+
+    def _on_vocab_cell_clicked(self, row, column):
+        """Click the 🔊 column to pronounce that row's English word."""
+        if column != 4:
+            return
+        item = self.table.item(row, 0)
+        if item and item.text():
+            try:
+                from .tts import pronounce
+                pronounce(item.text())
+            except Exception as e:
+                print(f"[TTS] pronounce failed: {e}")
 
     def load_stats_data(self):
         """Loads statistics into the stats table."""

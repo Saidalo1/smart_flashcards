@@ -233,12 +233,15 @@ class Vocabulary:
         return removed
 
     def active_word_count(self):
-        """How many words are in the current study scope (the selected topics), for
-        the '(N words)' shown in the card title. All words when no topic filter."""
-        if self._active_topics:
-            scope = set(self._active_topics)
-            return sum(1 for w in self.words if w.get('category') in scope)
-        return len(self.words)
+        """Total words across ALL selected topics (whole topic groups, not just the
+        current session batch or sub-range) — for the '(N words)' shown on the card.
+        All words when no topic filter is active."""
+        if not self._active_topics:
+            return len(self.words)
+        # Expand each selected sub-range to its whole topic group, then count every
+        # word in those groups (so selecting 'Inter 9E 9F' counts all 50, not 15).
+        groups = {self._group_of(c) for c in self._active_topics}
+        return sum(1 for w in self.words if self._group_of(w.get('category')) in groups)
 
     def get_words_for_group(self, group_name):
         """All words belonging to a topic group (ignoring its sub-range), in their

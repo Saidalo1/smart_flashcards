@@ -910,28 +910,27 @@ class FlashcardWidget(QFrame):
         # for is still the meaning.
         english_prompt = self.card.get('grammar_pattern') or word
 
-        # Dim "(N words)" suffix in the title: how many words are in the selected
-        # topic(s), so the count is visible while studying.
+        # Word count of ALL selected topics, shown in the top drag bar (not the title).
         try:
             n = self.vocabulary.active_word_count()
-            count = (f"  <span style=\"color:#7f8aa3; font-size:12px; font-weight:400\">"
-                     f"({tr('words_n', n=n)})</span>") if n else ""
+            if n and hasattr(self, 'drag_bar'):
+                self.drag_bar.setText(f"{tr('drag_me')}   ·   {tr('words_n', n=n)}")
         except Exception:
-            count = ""
+            pass
 
         if self.study_mode.startswith('definition'):
             self.question_label.setText(
-                f"{tr('prompt_define')} <b>{english_prompt}</b>{count}"
+                f"{tr('prompt_define')} <b>{english_prompt}</b>"
             )
         elif self.study_mode.startswith('synonym'):
             self.question_label.setText(
-                f"{tr('prompt_synonym')} <b>{english_prompt}</b>{count}"
+                f"{tr('prompt_synonym')} <b>{english_prompt}</b>"
             )
         else:
             question_text = english_prompt if self.question_lang == 'english' else self.card.get(self.question_lang, word)
             prompt_key = self.card_rule['prompt'] if self.card_rule else 'prompt_translate'
             self.question_label.setText(
-                f"{tr(prompt_key)} <b>{question_text}</b>{count}"
+                f"{tr(prompt_key)} <b>{question_text}</b>"
             )
 
     def _translation_answers(self):

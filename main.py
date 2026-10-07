@@ -183,6 +183,18 @@ class FlashcardApp:
             except Exception:
                 pass
 
+        # High-DPI: scale SMOOTHLY with the OS scale factor (125% / 150% …) instead of
+        # Qt's default integer ROUNDING. On the friend's 150%-scaled Win11, Round bumped
+        # the scale to 200%, inflating the flashcard until its right edge ran off-screen
+        # (it was fine on our 100% display and on Linux). PassThrough honours the user's
+        # exact scaling and keeps proportions right. MUST be set before QApplication.
+        try:
+            from PySide6.QtGui import QGuiApplication
+            QGuiApplication.setHighDpiScaleFactorRoundingPolicy(
+                Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
+        except Exception:
+            pass
+
         self.app = QApplication(sys.argv)
         self.app.setStyle("Fusion")  # Required: WindowsVista style breaks border-radius rendering
         # Fusion ships a LIGHT default palette, so any widget/sub-control our QSS

@@ -679,7 +679,15 @@ class TopicManagerDialog(QDialog):
         self.changed = False
         self.setWindowTitle(tr('topic_mgr_title', name=group_name))
         self.setMinimumSize(640, 520)
-        self.setStyleSheet(STARTUP_STYLE)
+        # Compact toolbar buttons so the window isn't dominated by big buttons.
+        self.setStyleSheet(STARTUP_STYLE + """
+            QPushButton#tmBtn, QToolButton#tmMenu {
+                font-size: 13px; font-weight: 500; padding: 6px 12px;
+                border-radius: 8px; background: #252a40; color: #cfd6e6; border: none;
+            }
+            QPushButton#tmBtn:hover, QToolButton#tmMenu:hover { background: #2f3550; }
+            QToolButton#tmMenu::menu-indicator { width: 0; }
+        """)
         self._build_ui()
         self._reload()
 
@@ -715,49 +723,48 @@ class TopicManagerDialog(QDialog):
         self.table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         lay.addWidget(self.table, 1)
 
-        # Word-level actions.
-        row1 = QHBoxLayout()
-        add_btn = QPushButton(tr('topic_mgr_add_word'))
+        from PySide6.QtWidgets import QToolButton, QMenu
+        # ONE compact action bar: word ops on the left, the common "split" on the
+        # right, and the rare topic ops (merge / rename / delete) tucked into a
+        # "⚙ More ▾" menu — so the window isn't a wall of big equal buttons.
+        bar = QHBoxLayout()
+        bar.setSpacing(8)
+        add_btn = QPushButton(tr('topic_mgr_add_word')); add_btn.setObjectName("tmBtn")
         add_btn.clicked.connect(self._add_row)
-        del_btn = QPushButton(tr('topic_mgr_del_word'))
-        del_btn.setObjectName("dangerButton")
+        del_btn = QPushButton(tr('topic_mgr_del_word')); del_btn.setObjectName("tmBtn")
         del_btn.clicked.connect(self._del_rows)
-        row1.addWidget(add_btn)
-        row1.addWidget(del_btn)
-        row1.addStretch()
-        lay.addLayout(row1)
-
-        # Topic-level actions: split / merge / rename / delete.
-        row2 = QHBoxLayout()
-        row2.addWidget(QLabel(tr('topic_mgr_split_by')))
+        bar.addWidget(add_btn)
+        bar.addWidget(del_btn)
+        bar.addStretch()
+        bar.addWidget(QLabel(tr('topic_mgr_split_by')))
         self.split_spin = QSpinBox()
         self.split_spin.setRange(1, 200)
         self.split_spin.setValue(15)
-        self.split_spin.setFixedWidth(70)
-        row2.addWidget(self.split_spin)
-        split_btn = QPushButton(tr('topic_mgr_split'))
+        self.split_spin.setFixedWidth(60)
+        bar.addWidget(self.split_spin)
+        split_btn = QPushButton(tr('topic_mgr_split')); split_btn.setObjectName("tmBtn")
         split_btn.clicked.connect(self._split)
-        merge_btn = QPushButton(tr('topic_mgr_merge'))
-        merge_btn.clicked.connect(self._merge)
-        rename_btn = QPushButton(tr('topic_mgr_rename'))
-        rename_btn.clicked.connect(self._rename)
-        deltopic_btn = QPushButton(tr('topic_mgr_del_topic'))
-        deltopic_btn.setObjectName("dangerButton")
-        deltopic_btn.clicked.connect(self._delete_topic)
-        for w in (split_btn, merge_btn, rename_btn):
-            row2.addWidget(w)
-        row2.addStretch()
-        row2.addWidget(deltopic_btn)
-        lay.addLayout(row2)
+        bar.addWidget(split_btn)
+        more = QToolButton(); more.setObjectName("tmMenu")
+        more.setText(tr('topic_mgr_more'))
+        more.setPopupMode(QToolButton.ToolButtonPopupMode.InstantPopup)
+        mm = QMenu(more)
+        mm.addAction(tr('topic_mgr_merge'), self._merge)
+        mm.addAction(tr('topic_mgr_rename'), self._rename)
+        mm.addSeparator()
+        mm.addAction(tr('topic_mgr_del_topic'), self._delete_topic)
+        more.setMenu(mm)
+        bar.addWidget(more)
+        lay.addLayout(bar)
 
-        # Save / close.
+        # Bottom bar: only Cancel + the primary Save.
         row3 = QHBoxLayout()
         row3.addStretch()
+        close_btn = QPushButton(tr('cancel')); close_btn.setObjectName("tmBtn")
+        close_btn.clicked.connect(self.reject)
         save_btn = QPushButton(tr('topic_mgr_save'))
         save_btn.setObjectName("primaryButton")
         save_btn.clicked.connect(self._save_and_close)
-        close_btn = QPushButton(tr('cancel'))
-        close_btn.clicked.connect(self.reject)
         row3.addWidget(close_btn)
         row3.addWidget(save_btn)
         lay.addLayout(row3)

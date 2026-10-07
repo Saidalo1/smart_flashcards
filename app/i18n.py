@@ -55,6 +55,7 @@ STRINGS = {
     'topic_mgr_del_word': {'ru': '🗑 Удалить выбранные',       'uz': "🗑 Tanlanganni o'chirish",           'en': '🗑 Delete selected'},
     'topic_mgr_split_by': {'ru': 'По',                         'uz': 'Nechtadan:',                         'en': 'Size:'},
     'topic_mgr_split':    {'ru': '✂ Разбить на группы',        'uz': "✂ Guruhlarga bo'lish",               'en': '✂ Split into groups'},
+    'topic_mgr_more':     {'ru': '⚙ Ещё ▾',                   'uz': "⚙ Ko'proq ▾",                        'en': '⚙ More ▾'},
     'topic_mgr_merge':    {'ru': '🔗 Объединить в одну',       'uz': '🔗 Bittaga birlashtirish',           'en': '🔗 Merge into one'},
     'topic_mgr_rename':   {'ru': '✏ Переименовать',            'uz': "✏ Nomini o'zgartirish",              'en': '✏ Rename'},
     'topic_mgr_del_topic':{'ru': '🗑 Удалить тему',            'uz': "🗑 Mavzuni o'chirish",               'en': '🗑 Delete topic'},

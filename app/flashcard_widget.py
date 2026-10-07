@@ -1146,14 +1146,20 @@ class FlashcardWidget(QFrame):
         if not self.isVisible():
             return
         try:
-            from PySide6.QtWidgets import QApplication
-            scr = QApplication.primaryScreen().availableGeometry()
-            pad = 20
+            from PySide6.QtGui import QGuiApplication
             g = self.frameGeometry()
-            x = max(scr.left() + pad, min(self.x(), scr.right() - g.width() - pad))
-            y = max(scr.top() + pad, min(self.y(), scr.bottom() - g.height() - pad))
+            scr = QGuiApplication.screenAt(g.center()) or QGuiApplication.primaryScreen()
+            wa = scr.availableGeometry()
+            pad = 20
+            # Clamp onto the card's OWN screen. If it's wider/taller than the screen
+            # (high-DPI scaling can inflate it), pin the top-left inside the work area
+            # so the start stays visible instead of the right edge running off.
+            max_x = wa.right() - g.width() - pad
+            max_y = wa.bottom() - g.height() - pad
+            x = min(max_x, max(wa.left() + pad, self.x())) if max_x >= wa.left() + pad else wa.left() + pad
+            y = min(max_y, max(wa.top() + pad, self.y())) if max_y >= wa.top() + pad else wa.top() + pad
             if x != self.x() or y != self.y():
-                self.move(x, y)
+                self.move(int(x), int(y))
         except Exception:
             pass
 

@@ -639,6 +639,11 @@ class FlashcardApp:
         self.flashcard_widget.show()  # 1. Сначала показываем (Qt инициализирует метрики)
         self.flashcard_widget.adjustSize()  # 2. Подгоняем размер под реальный текст
         self.position_widget(self.flashcard_widget)  # 3. Двигаем в нужный угол экрана
+        # 4. Re-clamp AFTER the event loop settles the final geometry — on a high-DPI
+        #    screen (e.g. a friend's 150%-scaled Win11) the card can end up wider than
+        #    first measured, so a one-shot re-position guarantees it stays on-screen.
+        _w = self.flashcard_widget
+        QTimer.singleShot(0, lambda: self.position_widget(_w) if _w and _w.isVisible() else None)
 
         # Always float above other windows...
         self.flashcard_widget.raise_()
@@ -923,15 +928,21 @@ class FlashcardApp:
             x = screen_geometry.right() - widget_size.width() - padding
             y = screen_geometry.bottom() - widget_size.height() - padding
 
-        # Final clamp for EVERY position: re-measure the widget (a long answer can
-        # make the card wider than first measured) and keep it fully on-screen, so it
-        # never runs off the right/bottom edge when the correct answer is shown.
+        # Final clamp for EVERY position. Re-measure the widget (a long answer or a
+        # high-DPI scale can make it wider than first measured) and keep it fully on
+        # the screen it's actually on. If the card is somehow wider/taller than the
+        # screen, pin its TOP-LEFT inside the work area so the start of the text stays
+        # visible instead of the right/bottom running off (the friend's-PC bug).
+        from PySide6.QtGui import QGuiApplication
+        from PySide6.QtCore import QPoint
         real = widget.frameGeometry().size()
-        x = max(screen_geometry.left() + padding,
-                min(x, screen_geometry.right() - real.width() - padding))
-        y = max(screen_geometry.top() + padding,
-                min(y, screen_geometry.bottom() - real.height() - padding))
-        widget.move(x, y)
+        scr = QGuiApplication.screenAt(QPoint(int(x), int(y)))
+        wa = (scr.availableGeometry() if scr else screen_geometry)
+        max_x = wa.right() - real.width() - padding
+        max_y = wa.bottom() - real.height() - padding
+        x = min(max_x, max(wa.left() + padding, x)) if max_x >= wa.left() + padding else wa.left() + padding
+        y = min(max_y, max(wa.top() + padding, y)) if max_y >= wa.top() + padding else wa.top() + padding
+        widget.move(int(x), int(y))
 
     def quit_app(self, *args):
         print("Saving and quitting...")

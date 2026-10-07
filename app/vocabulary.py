@@ -20,7 +20,6 @@ class Vocabulary:
         """Initializes the vocabulary and loads words."""
         self.words = []
         self.deck = []
-        self.session_total = 0   # cards in the current session deck (for "X / Y" progress)
         self.data_path = data_path
         self._stats_manager = None
         self._active_topics = None
@@ -135,7 +134,6 @@ class Vocabulary:
         else:
             self.deck = dedup_by_english(random.sample(filtered_words, len(filtered_words)))[:session_size]
 
-        self.session_total = len(self.deck)   # for the "X / Y" session progress on cards
         print(f"[SHUFFLE] Created session deck with {len(self.deck)} cards (hardest_first={hardest_first}):")
         for card in self.deck:
             print(f"[SHUFFLE]   - {card['english']} (category: {card.get('category')})")
@@ -233,6 +231,14 @@ class Vocabulary:
             self.save_words()
             print(f"Deleted topic '{category}' ({removed} words).")
         return removed
+
+    def active_word_count(self):
+        """How many words are in the current study scope (the selected topics), for
+        the '(N words)' shown in the card title. All words when no topic filter."""
+        if self._active_topics:
+            scope = set(self._active_topics)
+            return sum(1 for w in self.words if w.get('category') in scope)
+        return len(self.words)
 
     def get_words_for_group(self, group_name):
         """All words belonging to a topic group (ignoring its sub-range), in their

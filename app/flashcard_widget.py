@@ -626,8 +626,7 @@ class FlashcardWidget(QFrame):
         self.enter_badge.setFixedSize(44, 20)
         self.enter_badge.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents, True)
 
-        # Session progress ("X / Y" of this session's deck) + the per-word streak.
-        self._add_session_progress(content_layout)
+        # Streak progress indicator
         self._add_streak_indicator(content_layout)
 
         # Width strut — ONLY for multiple-choice cards. SetFixedSize shrinks the
@@ -645,31 +644,6 @@ class FlashcardWidget(QFrame):
         main_layout.setSizeConstraint(QLayout.SizeConstraint.SetFixedSize)
         self.apply_stylesheet()
         self.setLayout(main_layout)
-
-    def _add_session_progress(self, layout):
-        """Shows how far through the current session deck you are: 'X / Y' + a thin
-        bar, so the count/progress is visible WHILE studying (not only in the topic
-        list). Covers one or several topics studied together."""
-        from PySide6.QtWidgets import QProgressBar
-        total = getattr(self.vocabulary, 'session_total', 0) or 0
-        if total <= 0:
-            return
-        remaining = len(getattr(self.vocabulary, 'deck', []) or [])
-        pos = min(total, max(1, total - remaining))  # current card is already popped
-        lbl = QLabel(tr('session_progress', pos=pos, total=total))
-        lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        lbl.setStyleSheet("font-size: 11px; color: #9fb0d0; background: transparent;"
-                          " border: none; padding: 1px;")
-        layout.addWidget(lbl)
-        bar = QProgressBar()
-        bar.setRange(0, total)
-        bar.setValue(pos)
-        bar.setTextVisible(False)
-        bar.setFixedHeight(4)
-        bar.setStyleSheet(
-            "QProgressBar { background: #2a2e45; border: none; border-radius: 2px; }"
-            "QProgressBar::chunk { background: #00d9ff; border-radius: 2px; }")
-        layout.addWidget(bar)
 
     def _add_streak_indicator(self, layout):
         """Adds a visual streak progress bar below the check button."""
@@ -936,19 +910,28 @@ class FlashcardWidget(QFrame):
         # for is still the meaning.
         english_prompt = self.card.get('grammar_pattern') or word
 
+        # Dim "(N words)" suffix in the title: how many words are in the selected
+        # topic(s), so the count is visible while studying.
+        try:
+            n = self.vocabulary.active_word_count()
+            count = (f"  <span style=\"color:#7f8aa3; font-size:12px; font-weight:400\">"
+                     f"({tr('words_n', n=n)})</span>") if n else ""
+        except Exception:
+            count = ""
+
         if self.study_mode.startswith('definition'):
             self.question_label.setText(
-                f"{tr('prompt_define')} <b>{english_prompt}</b>"
+                f"{tr('prompt_define')} <b>{english_prompt}</b>{count}"
             )
         elif self.study_mode.startswith('synonym'):
             self.question_label.setText(
-                f"{tr('prompt_synonym')} <b>{english_prompt}</b>"
+                f"{tr('prompt_synonym')} <b>{english_prompt}</b>{count}"
             )
         else:
             question_text = english_prompt if self.question_lang == 'english' else self.card.get(self.question_lang, word)
             prompt_key = self.card_rule['prompt'] if self.card_rule else 'prompt_translate'
             self.question_label.setText(
-                f"{tr(prompt_key)} <b>{question_text}</b>"
+                f"{tr(prompt_key)} <b>{question_text}</b>{count}"
             )
 
     def _translation_answers(self):

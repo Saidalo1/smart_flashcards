@@ -100,17 +100,17 @@ MODE_THEMES = {
 # reads as discoverable secondary metadata next to the control it triggers.
 KBD_CAP_QSS = (
     "QLabel#kbdCap {"
-    " background: #2a2e45; color: #aeb9d6;"
-    " border: 1px solid #3a3f5a; border-bottom: 2px solid #454b6b;"
-    " border-radius: 5px; font-size: 12px; font-weight: 700; }"
+    " background: rgba(42,46,69,0.6); color: #7f8aa3;"
+    " border: 1px solid #343954; border-radius: 4px;"
+    " font-size: 10px; font-weight: 600; }"
 )
 
 # Tiny corner variant, overlaid on the top-right edge of a 30px icon button.
 KBD_CORNER_QSS = (
     "QLabel#kbdCorner {"
-    " background: #3a3f5a; color: #eaeefb;"
-    " border: 1px solid #565c7e; border-radius: 4px;"
-    " font-size: 9px; font-weight: 700; }"
+    " background: rgba(58,63,90,0.75); color: #aab3cc;"
+    " border: 1px solid #454b6b; border-radius: 3px;"
+    " font-size: 8px; font-weight: 600; }"
 )
 
 
@@ -221,7 +221,7 @@ class PremiumOptionWidget(QFrame):
             self.key_cap = QLabel(str(key_hint))
             self.key_cap.setObjectName("kbdCap")
             self.key_cap.setAlignment(Qt.AlignmentFlag.AlignCenter)
-            self.key_cap.setFixedSize(22, 22)
+            self.key_cap.setFixedSize(18, 18)
             self.key_cap.setStyleSheet(KBD_CAP_QSS)
             layout.addWidget(self.key_cap)
 
@@ -623,7 +623,7 @@ class FlashcardWidget(QFrame):
         self.enter_badge.setObjectName("kbdCap")
         self.enter_badge.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.enter_badge.setStyleSheet(KBD_CAP_QSS)
-        self.enter_badge.setFixedSize(44, 20)
+        self.enter_badge.setFixedSize(38, 16)
         self.enter_badge.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents, True)
 
         # Streak progress indicator
@@ -1216,9 +1216,9 @@ class FlashcardWidget(QFrame):
         badge.setObjectName("kbdCorner")
         badge.setAlignment(Qt.AlignmentFlag.AlignCenter)
         badge.setStyleSheet(KBD_CORNER_QSS)
-        w = 14 if len(text) == 1 else 20
-        badge.setFixedSize(w, 12)
-        badge.move(button.width() - w + 3, -3)  # top-right, slightly over the edge
+        w = 12 if len(text) == 1 else 16
+        badge.setFixedSize(w, 10)
+        badge.move(button.width() - w + 3, -2)  # top-right, slightly over the edge
         badge.setAttribute(Qt.WidgetAttribute.WA_TransparentForMouseEvents, True)
         badge.raise_()
         badge.show()

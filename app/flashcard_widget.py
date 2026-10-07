@@ -54,14 +54,14 @@ try:
     _KEY_1 = int(Qt.Key.Key_1)
     _KEY_4 = int(Qt.Key.Key_4)
     _KEY_M = int(Qt.Key.Key_M)
-    _KEY_H = int(Qt.Key.Key_H)
+    _KEY_L = int(Qt.Key.Key_L)
     _KEY_D = int(Qt.Key.Key_D)
     _KEY_S = int(Qt.Key.Key_S)
     _KEY_DELETE = int(Qt.Key.Key_Delete)
 except Exception:  # extremely defensive — hard-coded Qt key codes
     _KEY_RETURN, _KEY_ENTER, _KEY_ESCAPE = 0x01000004, 0x01000005, 0x01000000
     _KEY_1, _KEY_4 = 0x31, 0x34
-    _KEY_M, _KEY_H, _KEY_D, _KEY_S = 0x4D, 0x48, 0x44, 0x53
+    _KEY_M, _KEY_L, _KEY_D, _KEY_S = 0x4D, 0x4C, 0x44, 0x53
     _KEY_DELETE = 0x01000007
 
 
@@ -551,7 +551,7 @@ class FlashcardWidget(QFrame):
         # the shortcut reads as attached without covering the glyph. Parented to the
         # button, so they move/appear/hide with it automatically.
         self._corner_badge(self.menu_button, "M")    # 🏠 → main menu
-        self._corner_badge(self.hint_button, "H")    # 💡 → hint
+        self._corner_badge(self.hint_button, "L")    # 💡 → hint (L = lampa)
         self._corner_badge(self.delete_button, "D")  # 🗑 → delete
         self._corner_badge(self.speak_button, "S")   # 🔊 → pronounce
 
@@ -1244,7 +1244,7 @@ class FlashcardWidget(QFrame):
                 self.close()
             elif key == _KEY_M:
                 self.menu_button.animateClick()   # 🏠 main menu
-            elif key == _KEY_H and self.hint_button.isVisible():
+            elif key == _KEY_L and self.hint_button.isVisible():
                 self.hint_button.animateClick()
             elif key == _KEY_S:
                 self.speak_button.animateClick()  # 🔊 pronounce

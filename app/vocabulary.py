@@ -20,6 +20,7 @@ class Vocabulary:
         """Initializes the vocabulary and loads words."""
         self.words = []
         self.deck = []
+        self.session_total = 0   # cards in the current session deck (for "X / Y" progress)
         self.data_path = data_path
         self._stats_manager = None
         self._active_topics = None
@@ -134,6 +135,7 @@ class Vocabulary:
         else:
             self.deck = dedup_by_english(random.sample(filtered_words, len(filtered_words)))[:session_size]
 
+        self.session_total = len(self.deck)   # for the "X / Y" session progress on cards
         print(f"[SHUFFLE] Created session deck with {len(self.deck)} cards (hardest_first={hardest_first}):")
         for card in self.deck:
             print(f"[SHUFFLE]   - {card['english']} (category: {card.get('category')})")

@@ -1049,7 +1049,22 @@ class FlashcardWidget(QFrame):
             self.check_button.setText(correct_display)
             self.check_button.setStyleSheet("background-color: #e74c3c;")
 
+        # Auto-reveal the example (hint) a beat after the answer, while the card still
+        # lingers — seeing the word in context right after a retrieval attempt helps it
+        # stick (retrieval + feedback / elaborative encoding). Skipped if the learner
+        # already opened the hint or there is none.
+        if (self.card.get('hint') or '').strip():
+            QTimer.singleShot(800, self._auto_show_hint)
+
         QTimer.singleShot(4000, self.close)
+
+    def _auto_show_hint(self):
+        try:
+            if (self.isVisible() and self.hint_button.isVisible()
+                    and not self.hint_label.isVisible()):
+                self.toggle_hint()
+        except Exception:
+            pass
 
     def _check_definition_answer(self, user_answer):
         """Checks if user's answer matches the definition using similarity."""

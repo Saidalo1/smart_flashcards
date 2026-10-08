@@ -182,6 +182,25 @@ class FlashcardApp:
                 ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID('SmartFlashcards.App.1')
             except Exception:
                 pass
+            # Declare the process Per-Monitor-DPI-Aware v2 BEFORE Qt starts. A frozen
+            # Nuitka .exe can end up DPI-UNAWARE (no/overridden manifest), so Windows
+            # bitmap-stretches the whole window on a scaled display (125%/150%) — the
+            # window looked wrong-sized/blurry on a friend's PC and no Qt-level setting
+            # could fix it, because the damage happens before Qt runs. Setting it here
+            # via the Win32 API wins regardless of the manifest.
+            try:
+                import ctypes
+                # DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2 = -4 (Win10 1703+).
+                if not ctypes.windll.user32.SetProcessDpiAwarenessContext(ctypes.c_void_p(-4)):
+                    raise OSError
+            except Exception:
+                try:
+                    ctypes.windll.shcore.SetProcessDpiAwareness(2)   # per-monitor (Win8.1+)
+                except Exception:
+                    try:
+                        ctypes.windll.user32.SetProcessDPIAware()    # system-aware (legacy)
+                    except Exception:
+                        pass
 
         # High-DPI: scale SMOOTHLY with the OS scale factor (125% / 150% …) instead of
         # Qt's default integer ROUNDING. On the friend's 150%-scaled Win11, Round bumped

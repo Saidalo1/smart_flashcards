@@ -41,6 +41,11 @@ NUITKA = [
     "--standalone",
     "--assume-yes-for-downloads",
     "--enable-plugin=pyside6",
+    # Nuitka's pyside6 plugin only bundles a core set of Qt plugins by default
+    # (platforms/styles/imageformats/tls…). Word pronunciation needs the MULTIMEDIA
+    # backend (QMediaPlayer) and the TEXTTOSPEECH plugin (offline voice) — without
+    # these the 🔊 button is silent on a clean machine. Bundle them explicitly.
+    "--include-qt-plugins=multimedia,texttospeech",
     "--windows-console-mode=disable",
     "--windows-icon-from-ico=app_icon.ico",
     "--company-name=Smart Flashcards",

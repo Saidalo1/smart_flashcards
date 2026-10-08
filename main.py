@@ -947,14 +947,28 @@ class FlashcardApp:
         # visible instead of the right/bottom running off (the friend's-PC bug).
         from PySide6.QtGui import QGuiApplication
         from PySide6.QtCore import QPoint
+        scr = QGuiApplication.screenAt(QPoint(int(x), int(y))) or QApplication.primaryScreen()
+        wa = scr.availableGeometry() if scr else screen_geometry
+        # Never let the card be wider/taller than the screen work area — cap it so a
+        # long option or a high-DPI scale makes the content wrap instead of running
+        # off the edge. Re-measure after the cap.
+        widget.setMaximumWidth(max(320, wa.width() - 2 * padding))
+        widget.setMaximumHeight(max(320, wa.height() - 2 * padding))
+        widget.adjustSize()
         real = widget.frameGeometry().size()
-        scr = QGuiApplication.screenAt(QPoint(int(x), int(y)))
-        wa = (scr.availableGeometry() if scr else screen_geometry)
         max_x = wa.right() - real.width() - padding
         max_y = wa.bottom() - real.height() - padding
         x = min(max_x, max(wa.left() + padding, x)) if max_x >= wa.left() + padding else wa.left() + padding
         y = min(max_y, max(wa.top() + padding, y)) if max_y >= wa.top() + padding else wa.top() + padding
         widget.move(int(x), int(y))
+        # Diagnostics (shows up in the user's log) so a remote 'off-screen' report can
+        # be pinned down: screen size, pixel ratio/DPI, and the card's measured size.
+        try:
+            print(f"[POS] screen={wa.width()}x{wa.height()}@({wa.left()},{wa.top()}) "
+                  f"dpr={scr.devicePixelRatio():.2f} dpi={scr.logicalDotsPerInch():.0f} "
+                  f"card={real.width()}x{real.height()} pos=({int(x)},{int(y)}) mode={position}")
+        except Exception:
+            pass
 
     def quit_app(self, *args):
         print("Saving and quitting...")

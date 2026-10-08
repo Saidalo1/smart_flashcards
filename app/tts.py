@@ -44,6 +44,8 @@ class _Pronouncer(QObject):
         self._player = None   # created lazily on first use (GUI thread)
         self._audio = None
         self._tts = None      # offline QtTextToSpeech fallback, lazy
+        self._text_for_file = {}   # mp3 path -> word (so a playback error can speak it)
+        self._last_file_text = ""
         self._ready.connect(self._on_ready)
 
     # ---- public ----
@@ -52,6 +54,7 @@ class _Pronouncer(QObject):
         if not text:
             return
         path = self._cache_dir / (hashlib.md5(text.lower().encode("utf-8")).hexdigest() + ".mp3")
+        self._text_for_file[str(path)] = text
         if path.exists() and path.stat().st_size > 512:
             self._on_ready(str(path))
             return
@@ -81,6 +84,7 @@ class _Pronouncer(QObject):
         if payload.startswith(_OFFLINE):
             self._speak_offline(payload[len(_OFFLINE):])
             return
+        self._last_file_text = self._text_for_file.get(payload, "")
         try:
             if self._player is None:
                 from PySide6.QtMultimedia import QMediaPlayer, QAudioOutput
@@ -88,23 +92,59 @@ class _Pronouncer(QObject):
                 self._audio.setVolume(1.0)
                 self._player = QMediaPlayer()
                 self._player.setAudioOutput(self._audio)
+                # If Qt Multimedia can't play (backend/plugin missing in a frozen
+                # build), speak the word with the OS engine so the button still works.
                 self._player.errorOccurred.connect(
-                    lambda *a: print(f"[TTS] player error: {a}")
+                    lambda *a: (print(f"[TTS] player error: {a}"),
+                                self._speak_offline(self._last_file_text))
                 )
             self._player.stop()
             self._player.setSource(QUrl.fromLocalFile(payload))
             self._player.play()
         except Exception as e:
-            print(f"[TTS] playback failed: {e}")
+            print(f"[TTS] playback failed ({e}); using OS engine")
+            self._speak_offline(self._last_file_text)
 
     def _speak_offline(self, text):
+        # 1) Qt's speech engine (needs the QtTextToSpeech plugin — may be absent in a
+        #    frozen build). 2) On Windows, fall back to the built-in SAPI voice via
+        #    PowerShell, which needs NO bundled plugin and always works offline.
         try:
             if self._tts is None:
                 from PySide6.QtTextToSpeech import QTextToSpeech
                 self._tts = QTextToSpeech()
+            # If no engine/voice is available, QtTextToSpeech is silent — detect and
+            # fall through to the OS engine instead of doing nothing.
+            from PySide6.QtTextToSpeech import QTextToSpeech as _QTTS
+            if self._tts.state() == _QTTS.State.Error or not self._tts.availableEngines():
+                raise RuntimeError("QtTextToSpeech has no engine")
             self._tts.say(text)
+            return
         except Exception as e:
-            print(f"[TTS] offline fallback failed: {e}")
+            print(f"[TTS] Qt offline engine unavailable ({e}); trying OS SAPI")
+        self._speak_windows_sapi(text)
+
+    def _speak_windows_sapi(self, text):
+        """Last-resort offline speech on Windows via the built-in SAPI voice (no Qt
+        plugin, no network). Runs detached so it never blocks the UI."""
+        import sys
+        if sys.platform != 'win32':
+            print("[TTS] no offline speech backend on this OS")
+            return
+        try:
+            import subprocess
+            safe = text.replace("'", "''")
+            ps = ("Add-Type -AssemblyName System.Speech; "
+                  "$s = New-Object System.Speech.Synthesis.SpeechSynthesizer; "
+                  f"$s.Speak('{safe}')")
+            CREATE_NO_WINDOW = 0x08000000
+            subprocess.Popen(
+                ["powershell", "-NoProfile", "-NonInteractive", "-Command", ps],
+                creationflags=CREATE_NO_WINDOW,
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+            )
+        except Exception as e:
+            print(f"[TTS] Windows SAPI fallback failed: {e}")
 
 
 _instance = None

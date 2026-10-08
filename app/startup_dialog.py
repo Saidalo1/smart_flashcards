@@ -1241,6 +1241,11 @@ class StartupDialog(QDialog):
 
         self.setWindowTitle("Smart Flashcards")
         self.setMinimumSize(500, 420)
+        # A QDialog shows only a close button by default. Give the main window the
+        # usual minimize + maximize (full-screen square) buttons like a normal app.
+        self.setWindowFlags(self.windowFlags()
+                            | Qt.WindowMinimizeButtonHint
+                            | Qt.WindowMaximizeButtonHint)
         # Append runtime-drawn images (paths known now): the checked checkbox mark and
         # the tree's left-column expand/collapse arrows.
         check_icon = self._ensure_check_icon()

@@ -320,6 +320,10 @@ class ManagementWindow(QDialog):
 
         self.setWindowTitle(tr('mgmt_title'))
         self.setMinimumSize(900, 650)
+        # Normal minimize + maximize buttons (a QDialog hides them by default).
+        self.setWindowFlags(self.windowFlags()
+                            | Qt.WindowMinimizeButtonHint
+                            | Qt.WindowMaximizeButtonHint)
         self.setStyleSheet(MODERN_STYLE)
 
         # Main Layout
